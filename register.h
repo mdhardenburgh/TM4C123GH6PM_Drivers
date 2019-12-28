@@ -1,14 +1,27 @@
 #ifndef REGISTER_H
 #define REGISTER_H
 
-#include <stddef.h>
-#include <stdint-gcc.h>
+//#include <stddef.h>
+#include <cstdint>
+
+using std::uint32_t;
+
+enum setORClear
+{
+    clear = 0u,
+    set = 1u
+};
+
+enum bitFieldPermission
+{
+    RW, RO, WO, RW1C
+};
 
 typedef struct registerBitField
 {
     uint32_t bit; //bit place
-    uint32_t size; //field size in bit width.
-    char* permission; //permission (RW, RO, WO) of the bit/field
+    uint32_t bitWidth; //field size in bit width.
+    bitFieldPermission permission; //permission (RW, RO, WO) of the bit/field
 
 } bitField;
 
@@ -19,11 +32,10 @@ class Register
         Register(volatile uint32_t* address);
         ~Register();
 
-        uint32_t getRegisterBitFieldStatus(uint32_t startBit, uint32_t size, char* permission);
+        uint32_t getRegisterBitFieldStatus(bitField myBitField);
 
-        void setRegisterBitFieldStatus(uint32_t value, uint32_t startBit, uint32_t size, char* permission);
+        void setRegisterBitFieldStatus(bitField myBitField, uint32_t value);
     
-
     protected:
         volatile uint32_t* address;
 };

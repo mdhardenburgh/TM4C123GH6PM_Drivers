@@ -15,12 +15,12 @@ Register::~Register()
 
 }
 
-uint32_t Register::getRegisterBitFieldStatus(uint32_t startBit, uint32_t size, char* permission)
+uint32_t Register::getRegisterBitFieldStatus(bitField myBitField)
 {
-    if((permission == (char*)"RW") || (permission == (char*)"RO") || (permission == (char*)"RW1C"))
+    if((myBitField.permission == RW) || (myBitField.permission == RO) || (myBitField.permission == RW1C))
     {
-        uint32_t select = ((((0xFFFFFFFF >> (32 - size)))) << startBit);
-        return(((*address) & select) >> startBit);
+        uint32_t select = ((((0xFFFFFFFF >> (32 - myBitField.bitWidth)))) << myBitField.bit);
+        return(((*address) & select) >> myBitField.bit);
     }
 
     else
@@ -30,22 +30,22 @@ uint32_t Register::getRegisterBitFieldStatus(uint32_t startBit, uint32_t size, c
     
 }
 
-void Register::setRegisterBitFieldStatus(uint32_t value, uint32_t startBit, uint32_t size, char* permission)
+void Register::setRegisterBitFieldStatus(bitField myBitField, uint32_t value)
 {
-    if((permission == (char*)"RW1C") && (value != 1))
+    if((myBitField.permission == RW1C) && (value != 1))
     {
         return;
     }
     
-    else if((permission == (char*)"RW") || (permission == (char*)"WO") || (permission == (char*)"RW1C"))
+    else if((myBitField.permission == RW) || (myBitField.permission == WO) || (myBitField.permission == RW1C))
     {
-        uint32_t maxValue = (0xFFFFFFFF >> (32 - size));
+        uint32_t maxValue = (0xFFFFFFFF >> (32 - myBitField.bitWidth));
 
         if((value <= maxValue))
         {
-            uint32_t clear = (~(maxValue << startBit));
-            value = value << startBit;
-
+            uint32_t clear = (~(maxValue << myBitField.bit));
+            value = value << myBitField.bit;
+    
             (*address) &= clear;
             (*address) |= value;
         }

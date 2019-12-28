@@ -207,7 +207,7 @@ class Nvic
             ACTIVE0, ACTIVE1, ACTIVE2, ACTIVE3, ACTIVE4
         };
 
-        bitField INT{0, 1, (char*)"RW"}; //bit place isn't being used. Renaming 1 to INT.size to eliminate magic numbers
+        bitField INT{0, 1, RW}; //bit place isn't being used. Renaming 1 to INT.bitWidth to eliminate magic numbers
 
 
         /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
@@ -259,7 +259,7 @@ class Nvic
             PRI30, PRI31, PRI32, PRI33, PRI34
         };
 
-        bitField INT_PRIORITY{5, 3, (char*)"RW"}; //bit place isn't being used. Renaming 3 to INT_PRIORITY.size to eliminate magic numbers
+        bitField INT_PRIORITY{5, 3, RW}; //bit place isn't being used. Renaming 3 to INT_PRIORITY.size to eliminate magic numbers
 
         /**
          * Register 64: Software Trigger Interrupt (SWTRIG), offset 0xF00
@@ -283,7 +283,7 @@ class Nvic
          * This field holds the interrupt ID of the required SGI. For example, 
          * a value of 0x3 generates an interrupt on IRQ3.
          */
-        bitField INTID{0, 8, (char*)"WO"}; //bit place and field size
+        bitField INTID{0, 8, WO}; //bit place and field size
 
         uint32_t getInterruptRegisterSettingStatus(interrupt myInterrupt, registerGroup group);
         void setInterruptRegisterSetting(interrupt myInterrupt, registerGroup group);

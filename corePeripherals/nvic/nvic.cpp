@@ -61,9 +61,10 @@ Nvic::~Nvic()
 
 uint32_t Nvic::getInterruptRegisterSettingStatus(interrupt myInterrupt, registerGroup group)
 {
+    //return(registerTable[(myInterrupt / 32) + group].getRegisterBitFieldStatus((myInterrupt % 32), INT.bitWidth, INT.permission));
+    INT.bit = myInterrupt % 32;
+    return(registerTable[(myInterrupt / 32) + group].getRegisterBitFieldStatus(INT));
 
-    return(registerTable[(myInterrupt / 32) + group].getRegisterBitFieldStatus((myInterrupt % 32), INT.size, INT.permission));
-    
 }
 
 
@@ -71,7 +72,8 @@ void Nvic::setInterruptRegisterSetting(interrupt myInterrupt, registerGroup grou
 {
     if(group != ACTIVE)
     {
-        registerTable[(myInterrupt / 32) + group].setRegisterBitFieldStatus(1, (myInterrupt % 32), INT.size, INT.permission);
+        INT.bit = myInterrupt % 32;
+        registerTable[(myInterrupt / 32) + group].setRegisterBitFieldStatus(INT, set);
     }
 
     else
@@ -86,8 +88,8 @@ uint32_t Nvic::getInterruptPriorityStatus(interrupt interruptNumber)
 {
     if((interruptNumber < 139))
     {
-        uint32_t offset = (((interruptNumber % 4) * 8) + 5);
-        return(priorityRegisters[interruptNumber/4].getRegisterBitFieldStatus(offset, INT_PRIORITY.size, INT_PRIORITY.permission));
+        INT.bit = (((interruptNumber % 4) * 8) + 5);
+        return(priorityRegisters[interruptNumber/4].getRegisterBitFieldStatus(INT));
     }
 
 
@@ -101,8 +103,8 @@ void Nvic::setInterruptPriority(interrupt interruptNumber, uint32_t priority)
 {
     if((interruptNumber < 139) && (priority < 8))
     {
-        uint32_t offset = ((interruptNumber % 4) * 8) + 5;
-        priorityRegisters[interruptNumber/4].setRegisterBitFieldStatus(priority, offset, INT_PRIORITY.size, INT_PRIORITY.permission);
+        INT.bit = ((interruptNumber % 4) * 8) + 5;
+        priorityRegisters[interruptNumber/4].setRegisterBitFieldStatus(INT, priority);
     }
 
     else

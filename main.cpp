@@ -27,28 +27,30 @@ along with this program.  If not, see <https://www.gnu.org/licenses/.
  * @date 11/04/2019
  */
 
+#include "register.h"
 #include "corePeripherals/systick/systick.h"
 #include "corePeripherals/nvic/nvic.h"
 #include "corePeripherals/sbc/sbc.h"
+#include "systemControl/systemControl.h"
+#include "systemControl/systemClock.h"
+#include "gpio/gpioControl.h"
+#include "gpio/gpio.h"
 
-/**
-  * @brief system intialization function. Called before main.
-  * @param none
-  * @return none
-  */
-void SystemInit(void)
-{
-    
-}
 
 int main(void)
 {
     Systick mySistick();
     Nvic myNvic();
     Sbc mySbc();
+    SystemClock myClock();
+    Gpio blueLed(PF2, output);
+    Gpio redLed(PF1, output);
+
+    blueLed.gpioWrite(set);
+    redLed.gpioWrite(set);
 
     while(1)
     {
-    
+        //blueLed.gpioWrite(set);
     }
 }

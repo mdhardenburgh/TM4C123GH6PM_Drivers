@@ -29,8 +29,8 @@
  * Tiva C ARM4F microcontroller, TM4C123GH6PM. 
  * 
  * System Timer (SysTick) Register Descriptions
- * 
- * 
+ * This section lists and describes the System Timer registers, in numerical 
+ * order by address offset.
  */
 
 #include "systick.h"

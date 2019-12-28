@@ -75,7 +75,7 @@ class Systick
          * Debug Interface V5 Architecture Specification for more information on
          * MasterType.
          */
-        bitField STCTRL_COUNT{16, 1, (char*)"RO"};
+        bitField STCTRL_COUNT{16, 1, RO};
 
         /**
          * Description: Clock Source
@@ -85,7 +85,7 @@ class Systick
          * 
          * 1_____System clock
          */
-        bitField STCTRL_CLK_SRC{2, 1, (char*)"RW"};
+        bitField STCTRL_CLK_SRC{2, 1, RW};
 
         /**
          * Description: Interrupt Enable
@@ -96,7 +96,7 @@ class Systick
          * 
          * 1_____An interrupt is generated to the NVIC when SysTick counts to 0.
          */
-        bitField STCTRL_INTEN{1, 1, (char*)"RW"};
+        bitField STCTRL_INTEN{1, 1, RW};
 
         /**
          * Description: Enable
@@ -110,7 +110,7 @@ class Systick
          * _______if enabled by INTEN. The counter then loads the RELOAD value 
          * _______again and begins counting.
          */
-        bitField STCTRL_ENABLE{0, 1, (char*)"RW"};
+        bitField STCTRL_ENABLE{0, 1, RW};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -141,7 +141,7 @@ class Systick
          * Value to load into the SysTick Current Value (STCURRENT) register 
          * when the counter reaches 0.
          */
-        bitField STRELOAD_RELOAD{0, 24, (char*)"RW"};
+        bitField STRELOAD_RELOAD{0, 24, RW};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -164,7 +164,7 @@ class Systick
          * register. Clearing this register also clears the COUNT bit of the 
          * STCTRL register.
          */
-        bitField STCURRENT_CURRENT{0, 24, (char*)"RW"};
+        bitField STCURRENT_CURRENT{0, 24, RW};
 
 };
 

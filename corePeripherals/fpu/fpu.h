@@ -50,7 +50,7 @@ class Fpu
          * Cortex-M4 Peripheral SysTick, NVIC, MPU, FPU and SCB registers.
          * These register definitions begin on page 134 of the TM4C123GH6PM Datasheet.
          */
-        long corePeripheralBase = 0xE000E000;
+        const uint32_t corePeripheralBase = 0xE000E000;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -76,7 +76,7 @@ class Fpu
          * 
          * 0x3____Full Access
          */
-        bitField CPAC_CP11{22, 2, (char*)"RW"};
+        bitField CPAC_CP11{22, 2, RW};
 
         /**
          * Description: CP10 Coprocessor Access Privilege
@@ -93,7 +93,7 @@ class Fpu
          * 
          * 0x3____Full Access
          */
-        bitField CPAC_CP10{20, 2, (char*)"RW"};
+        bitField CPAC_CP10{20, 2, RW};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -105,7 +105,7 @@ class Fpu
         Register FPCC{(volatile uint32_t*)(corePeripheralBase + 0xF34)};
 
         /**
-         * Description: Automatic State Preservation Enabl
+         * Description: Automatic State Preservation Enable
          * 
          * When set, enables the use of the FRACTV bit in the CONTROL register
          * on execution of a floating-point instruction. This results in 
@@ -120,7 +120,7 @@ class Fpu
          * _____________________________________________________________________
          * 
          */
-        bitField FPCC_ASPEN{31, 1, (char*)"RW"};
+        bitField FPCC_ASPEN{31, 1, RW};
 
         /**
          * Description: Lazy State Preservation Enable
@@ -128,7 +128,7 @@ class Fpu
          * When set, enables automatic lazy state preservation for 
          * floating-point context.
          */
-        bitField FPCC_LSPEN{30, 1, (char*)"RW"};
+        bitField FPCC_LSPEN{30, 1, RW};
 
         /**
          * Description: Monitor Ready
@@ -136,7 +136,7 @@ class Fpu
          * When set, DebugMonitor is enabled and priority permits setting
          * MON_PEND when the floating-point stack frame was allocated.
          */
-        bitField FPCC_MONRDY{8, 1, (char*)"RW"};
+        bitField FPCC_MONRDY{8, 1, RW};
 
         /**
          * Description: Bus Fault Ready
@@ -145,7 +145,7 @@ class Fpu
          * BusFault handler to the pending state when the floating-point stack 
          * frame was allocated.
          */
-        bitField FPCC_BFRDY{6, 1, (char*)"RW"};
+        bitField FPCC_BFRDY{6, 1, RW};
 
         /**
          * Description: Memory Management Fault Ready
@@ -154,7 +154,7 @@ class Fpu
          * MemManage handler to the pending state when the floating-point stack
          * frame was allocated.
          */
-        bitField FPCC_MMRDY{5, 1, (char*)"RW"};
+        bitField FPCC_MMRDY{5, 1, RW};
 
         /**
          * Description: Hard Fault Ready
@@ -162,7 +162,7 @@ class Fpu
          * When set, priority permitted setting the HardFault handler to the 
          * pending state when the floating-point stack frame was allocated.
          */
-        bitField FPCC_HFRDY{4, 1, (char*)"RW"};
+        bitField FPCC_HFRDY{4, 1, RW};
 
         /**
          * Description: Thread Mode
@@ -170,7 +170,7 @@ class Fpu
          * When set, mode was Thread Mode when the floating-point stack frame
          * was allocated.
          */
-        bitField FPCC_THREAD{3, 1, (char*)"RW"};
+        bitField FPCC_THREAD{3, 1, RW};
 
         /**
          * Description: User Privilege Level
@@ -178,7 +178,7 @@ class Fpu
          * When set, privilege level was user when the floating-point stack 
          * frame was allocated.
          */
-        bitField FPCC_USER{1, 1, (char*)"RW"};
+        bitField FPCC_USER{1, 1, RW};
 
         /**
          * Description: Lazy State Preservation Active
@@ -186,7 +186,7 @@ class Fpu
          * When set, Lazy State preservation is active. Floating-point stack 
          * frame has been allocated but saving state to it has been deferred.
          */
-        bitField FPCC_LSPACT{0, 1, (char*)"RW"};
+        bitField FPCC_LSPACT{0, 1, RW};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -204,7 +204,7 @@ class Fpu
          * The location of the unpopulated floating-point register space 
          * allocated on an exception stack frame.
          */
-        bitField FPCA_ADDRESS{3, 29, (char*)"RW"};
+        bitField FPCA_ADDRESS{3, 29, RW};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -221,21 +221,21 @@ class Fpu
          * 
          * This bit holds the default value for the AHP bit in the FPSC register.
          */
-        bitField FPDSC_AHP{26, 1, (char*)"RW"};
+        bitField FPDSC_AHP{26, 1, RW};
 
         /**
          * Description: DN Bit Default
          * 
          * This bit holds the default value for the DN bit in the FPSC register.
          */
-        bitField FPDSC_DN{25, 1, (char*)"RW"};
+        bitField FPDSC_DN{25, 1, RW};
 
         /**
          * Description: FZ Bit Default
          * 
          * This bit holds the default value for the FZ bit in the FPSC register.
          */
-        bitField FPDSC_FZ{24, 1, (char*)"RW"};
+        bitField FPDSC_FZ{24, 1, RW};
 
         /**
          * Description: RMODE Bit Default
@@ -252,7 +252,7 @@ class Fpu
          * 
          * 0x3___Round towards Zero (RZ) mode
          */
-        bitField FPDSC_RMODE{22, 2, (char*)"RW"};
+        bitField FPDSC_RMODE{22, 2, RW};
                 
 };
 

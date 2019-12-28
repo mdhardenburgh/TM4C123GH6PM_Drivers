@@ -74,7 +74,7 @@ class Mpu
          * This field always contains 0x00. The MPU memory map is unified and
          * is described by the DREGION field.
          */
-        bitField MPUTYPE_IREGION{16, 8, (char*)"RO"};
+        bitField MPUTYPE_IREGION{16, 8, RO};
 
         /**
          * Description: Number of D Regions
@@ -82,7 +82,7 @@ class Mpu
          * Value Description
          * 0x08__Indicates there are eight supported MPU data regions.
          */
-        bitField MPUTYPE_DREGION{8, 8, (char*)"RO"};
+        bitField MPUTYPE_DREGION{8, 8, RO};
 
         /**
          * Description: Separate or Unified MPU
@@ -90,7 +90,7 @@ class Mpu
          * Value Description
          * 0_____Indicates the MPU is unified.
          */
-        bitField MPUTYPE_SEPARATE{0, 1, (char*)"RO"};
+        bitField MPUTYPE_SEPARATE{0, 1, RO};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -159,7 +159,7 @@ class Mpu
          * 
          * If the MPU is disabled, the processor ignores this bit.
          */
-        bitField MPUCTRL_PRIVDEFEN{2, 1, (char*)"RW"};
+        bitField MPUCTRL_PRIVDEFEN{2, 1, RW};
 
         /**
          * Description: MPU Enabled During Faults
@@ -177,7 +177,7 @@ class Mpu
          * When the MPU is disabled and this bit is set, the resulting behavior 
          * is unpredictable.
          */
-        bitField MPUCTRL_HFNMIENA{1, 1, (char*)"RW"};
+        bitField MPUCTRL_HFNMIENA{1, 1, RW};
 
         /**
          * Description: MPU Enable
@@ -190,7 +190,7 @@ class Mpu
          * When the MPU is disabled and the HFNMIENA bit is set, the resulting
          * behavior is unpredictable.
          */
-        bitField MPUCTRL_ENABLE{0, 1, (char*)"RW"};
+        bitField MPUCTRL_ENABLE{0, 1, RW};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -215,7 +215,7 @@ class Mpu
          * This field indicates the MPU region referenced by the MPUBASE and
          * MPUATTR registers. The MPU supports eight memory regions.
          */
-        bitField MPUNUMBER_NUMBER{0, 3, (char*)"RW"};
+        bitField MPUNUMBER_NUMBER{0, 3, RW};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -262,7 +262,7 @@ class Mpu
          * compatibility with future products, the value of a reserved bit 
          * should be preserved across a read-modify-write operation.
          */
-        bitField MPUBASE_ADDR{5, 27, (char*)"RW"};
+        bitField MPUBASE_ADDR{5, 27, RW};
 
         /**
          * Description: Region Number Valid
@@ -278,7 +278,7 @@ class Mpu
          * 
          * This bit is always read as 0.
          */
-        bitField MPUBASE_VALID{4, 1, (char*)"WO"};
+        bitField MPUBASE_VALID{4, 1, WO};
 
         /**
          * Description: Region Number
@@ -286,7 +286,7 @@ class Mpu
          * On a write, contains the value to be written to the MPUNUMBER register.
          * On a read, returns the current region number in the MPUNUMBER register.
          */
-        bitField MPUBASE_REGION{0, 3, (char*)"RW"};
+        bitField MPUBASE_REGION{0, 3, RW};
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -355,42 +355,42 @@ class Mpu
          * 
          * 1_____Instruction fetches are disabled.
          */
-        bitField MPUATTR_XN{28, 1, (char*)"RW"};
+        bitField MPUATTR_XN{28, 1, RW};
 
         /**
          * Description: Access Privilege
          * 
          * For information on using this bit field, see Table 3-5 on page 129.
          */
-        bitField MPUATTR_AP{24, 3, (char*)"RW"};
+        bitField MPUATTR_AP{24, 3, RW};
 
         /**
          * Description: Type Extension Mask
          * 
          * For information on using this bit field, see Table 3-3 on page 128.
          */
-        bitField MPUATTR_TEX{19, 3, (char*)"RW"};
+        bitField MPUATTR_TEX{19, 3, RW};
 
         /**
          * Description: Shareable
          * 
          * For information on using this bit, see Table 3-3 on page 128.
          */
-        bitField MPUATTR_S{18, 1, (char*)"RW"};
+        bitField MPUATTR_S{18, 1, RW};
 
         /**
          * Description: Cacheable
          * 
          * For information on using this bit, see Table 3-3 on page 128.
          */
-        bitField MPUATTR_C{17, 1,(char*) "RW"};
+        bitField MPUATTR_C{17, 1, RW};
 
         /**
          * Description: Bufferable
          * 
          * For information on using this bit, see Table 3-3 on page 128.
          */
-        bitField MPUATTR_B{16, 1, (char*)"RW"};
+        bitField MPUATTR_B{16, 1, RW};
 
         /**
          * Description: Subregion Disable Bits
@@ -405,7 +405,7 @@ class Mpu
          * 0x00. See the section called “Subregions” on page 128 for more 
          * information.
          */
-        bitField MPUATTR_SRD{8, 8, (char*)"RW"};
+        bitField MPUATTR_SRD{8, 8, RW};
 
         /**
          * Description: Region Size Mask
@@ -414,7 +414,7 @@ class Mpu
          * the MPUNUMBER register. Refer to Table 3-10 on page 192 for more
          * information.
          */
-        bitField MPUATTR_SIZE{1, 5, (char*)"RW"};
+        bitField MPUATTR_SIZE{1, 5, RW};
 
         /**
          * Description: Region Enable
@@ -424,7 +424,7 @@ class Mpu
          * 
          * 1_____The region is enabled.
          */
-        bitField MPUATTR_ENABLE{0, 1, (char*)"RW"};
+        bitField MPUATTR_ENABLE{0, 1, RW};
 
 };
 
