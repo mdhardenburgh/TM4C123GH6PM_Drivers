@@ -37,21 +37,33 @@ Gpio::Gpio()
 
 Gpio::Gpio(GPIO_Port_Pins gpio, direction dir)
 {   
-
-
     (*this).gpio = gpio;
-    uint32_t gpioPort = (*this).gpio/8;
-    uint32_t gpioPin = (((*this).gpio % 8));
+    (*this).gpioBaseAddress = GPIO_PORT_AHB[((*this).gpio)/8];
+    (*this).gpioPin = (((*this).gpio % 8));
 
+    GPIO_Port_GPIOAFSEL.setRegisterAddress((volatile uint32_t*)(gpioBaseAddress + GPIOAFSEl));
+    GPIO_Port_GPIOPUR.setRegisterAddress((volatile uint32_t*)(gpioBaseAddress + GPIOPUR));
+    GPIO_Port_GPIODEN.setRegisterAddress((volatile uint32_t*)(gpioBaseAddress + GPIODEN));
+    GPIO_Port_GPIOLOCK.setRegisterAddress((volatile uint32_t*)(gpioBaseAddress + GPIOLOCK));
+    GPIO_Port_GPIOCR.setRegisterAddress((volatile uint32_t*)(gpioBaseAddress + GPIOCR));
+    GPIO_Port_GPIOAMSEL.setRegisterAddress((volatile uint32_t*)(gpioBaseAddress + GPIOAMSEL));
+    GPIO_Port_GPIOPCTL.setRegisterAddress((volatile uint32_t*)(gpioBaseAddress + GPIOPCTL));
+    GPIO_Port_GPIODIR.setRegisterAddress((volatile uint32_t*)(gpioBaseAddress + GPIODIR));
+    GPIO_Port_GPIODATA.setRegisterAddress((volatile uint32_t*)(gpioBaseAddress + GPIODATA));
+
+
+    GPIOPUR_PUE.bit = gpioPin;
+    GPIODATA_DATA.bit = gpioPin;
     GPIODIR_DIR.bit = gpioPin;
+    
     GPIOCR_CR.bit = gpioPin;
     GPIOAFSEL_AFSEL.bit = gpioPin;
     GPIODEN_DEN.bit = gpioPin;
     GPIOAMSEL_GPIOAMSEL.bit = gpioPin;
 
 
-    RCGCGPIO.setRegisterBitFieldStatus(RCGCGPIO_REG[gpioPort], set);
-    while(PRGPIO.getRegisterBitFieldStatus(PRGPIO_REG[gpioPort]) == 0)
+    RCGCGPIO.setRegisterBitFieldStatus(RCGCGPIO_REG[((*this).gpio)/8], set);
+    while(PRGPIO.getRegisterBitFieldStatus(PRGPIO_REG[((*this).gpio)/8]) == 0)
     {
         //Ready?
     }
@@ -59,14 +71,19 @@ Gpio::Gpio(GPIO_Port_Pins gpio, direction dir)
     //Unlock NMI for use.
     if(gpio == PF0)
     {
-        GPIOLOCK[gpioPort].setRegisterBitFieldStatus(GPIOLOCK_LOCK, gpioKey);
-        GPIOCR[gpioPort].setRegisterBitFieldStatus(GPIOCR_CR, set);
+        GPIO_Port_GPIOLOCK.setRegisterBitFieldStatus(GPIOLOCK_LOCK, gpioKey);
+        GPIO_Port_GPIOCR.setRegisterBitFieldStatus(GPIOCR_CR, set);
     }
 
-    GPIODIR[gpioPort].setRegisterBitFieldStatus(GPIODIR_DIR, dir);
-    GPIOAFSEl[gpioPort].setRegisterBitFieldStatus(GPIOAFSEL_AFSEL, clear);
-    GPIODEN[gpioPort].setRegisterBitFieldStatus(GPIODEN_DEN, set);
-    GPIOAMSEL[gpioPort].setRegisterBitFieldStatus(GPIOAMSEL_GPIOAMSEL, clear);
+    GPIO_Port_GPIODIR.setRegisterBitFieldStatus(GPIODIR_DIR, dir);
+    if(dir == input)
+    {
+        GPIO_Port_GPIOPUR.setRegisterBitFieldStatus(GPIOPUR_PUE, set);
+    }
+
+    GPIO_Port_GPIOAFSEL.setRegisterBitFieldStatus(GPIOAFSEL_AFSEL, clear);
+    GPIO_Port_GPIODEN.setRegisterBitFieldStatus(GPIODEN_DEN, set);
+    GPIO_Port_GPIOAMSEL.setRegisterBitFieldStatus(GPIOAMSEL_GPIOAMSEL, clear);
     
 
 }
@@ -80,12 +97,11 @@ void Gpio::gpioWrite(setORClear value)
 {
     if((value == 0x0) || (value == 0x1))
     {
-        GPIODATA_DATA.bit = (gpio % 8);
-        GPIODATA[gpio/8].setRegisterBitFieldStatus(GPIODATA_DATA, value);
+        GPIO_Port_GPIODATA.setRegisterBitFieldStatus(GPIODATA_DATA, value);
     }
 }
 
 uint32_t Gpio::gpioRead(void)
 {
-    return 0;
+    return(GPIO_Port_GPIODATA.getRegisterBitFieldStatus(GPIODATA_DATA));
 }

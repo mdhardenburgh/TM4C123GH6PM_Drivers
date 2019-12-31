@@ -5,18 +5,20 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 startup_ARMCM4.o
  .data          0x0000000000000000        0x0 main.o
  .bss           0x0000000000000000        0x0 main.o
+ .rodata._ZL17systemControlBase
+                0x0000000000000000        0x4 main.o
  .data          0x0000000000000000        0x0 register.o
  .bss           0x0000000000000000        0x0 register.o
  .text          0x0000000000000000       0xf0 systick.o
  .data          0x0000000000000000        0x0 systick.o
  .bss           0x0000000000000000        0x0 systick.o
  .rodata        0x0000000000000000       0x24 systick.o
- .debug_info    0x0000000000000000      0x685 systick.o
+ .debug_info    0x0000000000000000      0x6c4 systick.o
  .debug_abbrev  0x0000000000000000      0x1b0 systick.o
  .debug_aranges
                 0x0000000000000000       0x20 systick.o
  .debug_line    0x0000000000000000      0x2b5 systick.o
- .debug_str     0x0000000000000000      0x5e8 systick.o
+ .debug_str     0x0000000000000000      0x656 systick.o
  .comment       0x0000000000000000       0x77 systick.o
  .debug_frame   0x0000000000000000       0x58 systick.o
  .ARM.attributes
@@ -25,12 +27,12 @@ Discarded input sections
  .data          0x0000000000000000        0x0 nvic.o
  .bss           0x0000000000000000        0x0 nvic.o
  .rodata        0x0000000000000000       0x18 nvic.o
- .debug_info    0x0000000000000000      0xcb7 nvic.o
+ .debug_info    0x0000000000000000      0xcf6 nvic.o
  .debug_abbrev  0x0000000000000000      0x290 nvic.o
  .debug_aranges
                 0x0000000000000000       0x20 nvic.o
  .debug_line    0x0000000000000000      0x298 nvic.o
- .debug_str     0x0000000000000000      0xef5 nvic.o
+ .debug_str     0x0000000000000000      0xf63 nvic.o
  .comment       0x0000000000000000       0x77 nvic.o
  .debug_frame   0x0000000000000000       0xf0 nvic.o
  .ARM.attributes
@@ -39,12 +41,12 @@ Discarded input sections
  .data          0x0000000000000000        0x0 sbc.o
  .bss           0x0000000000000000        0x0 sbc.o
  .rodata        0x0000000000000000      0x300 sbc.o
- .debug_info    0x0000000000000000      0xaa7 sbc.o
+ .debug_info    0x0000000000000000      0xae6 sbc.o
  .debug_abbrev  0x0000000000000000      0x205 sbc.o
  .debug_aranges
                 0x0000000000000000       0x20 sbc.o
  .debug_line    0x0000000000000000      0x1f7 sbc.o
- .debug_str     0x0000000000000000      0x9c7 sbc.o
+ .debug_str     0x0000000000000000      0xa35 sbc.o
  .comment       0x0000000000000000       0x77 sbc.o
  .debug_frame   0x0000000000000000       0x5c sbc.o
  .ARM.attributes
@@ -53,12 +55,12 @@ Discarded input sections
  .data          0x0000000000000000        0x0 mpu.o
  .bss           0x0000000000000000        0x0 mpu.o
  .rodata        0x0000000000000000       0xb4 mpu.o
- .debug_info    0x0000000000000000     0x2d3b mpu.o
+ .debug_info    0x0000000000000000     0x2d7a mpu.o
  .debug_abbrev  0x0000000000000000      0x3d1 mpu.o
  .debug_aranges
                 0x0000000000000000       0x20 mpu.o
  .debug_line    0x0000000000000000      0x351 mpu.o
- .debug_str     0x0000000000000000     0x13db mpu.o
+ .debug_str     0x0000000000000000     0x1449 mpu.o
  .comment       0x0000000000000000       0x77 mpu.o
  .debug_frame   0x0000000000000000       0x5c mpu.o
  .ARM.attributes
@@ -67,28 +69,40 @@ Discarded input sections
  .data          0x0000000000000000        0x0 fpu.o
  .bss           0x0000000000000000        0x0 fpu.o
  .rodata        0x0000000000000000       0xa8 fpu.o
- .debug_info    0x0000000000000000      0x714 fpu.o
+ .debug_info    0x0000000000000000      0x753 fpu.o
  .debug_abbrev  0x0000000000000000      0x1dc fpu.o
  .debug_aranges
                 0x0000000000000000       0x20 fpu.o
  .debug_line    0x0000000000000000      0x2a8 fpu.o
- .debug_str     0x0000000000000000      0x614 fpu.o
+ .debug_str     0x0000000000000000      0x682 fpu.o
  .comment       0x0000000000000000       0x77 fpu.o
  .debug_frame   0x0000000000000000       0x58 fpu.o
  .ARM.attributes
                 0x0000000000000000       0x34 fpu.o
+ .text          0x0000000000000000      0x8ac systemControl.o
  .data          0x0000000000000000        0x0 systemControl.o
  .bss           0x0000000000000000        0x0 systemControl.o
- .text          0x0000000000000000      0x8f8 systemClock.o
+ .rodata        0x0000000000000000      0x208 systemControl.o
+ .debug_info    0x0000000000000000      0xc3a systemControl.o
+ .debug_abbrev  0x0000000000000000      0x1f6 systemControl.o
+ .debug_aranges
+                0x0000000000000000       0x20 systemControl.o
+ .debug_line    0x0000000000000000      0x2ae systemControl.o
+ .debug_str     0x0000000000000000      0xa29 systemControl.o
+ .comment       0x0000000000000000       0x77 systemControl.o
+ .debug_frame   0x0000000000000000       0x5c systemControl.o
+ .ARM.attributes
+                0x0000000000000000       0x34 systemControl.o
+ .text          0x0000000000000000      0x8b8 systemClock.o
  .data          0x0000000000000000        0x0 systemClock.o
  .bss           0x0000000000000000        0x0 systemClock.o
- .rodata        0x0000000000000000      0x180 systemClock.o
- .debug_info    0x0000000000000000     0x10ec systemClock.o
- .debug_abbrev  0x0000000000000000      0x24c systemClock.o
+ .rodata        0x0000000000000000      0x184 systemClock.o
+ .debug_info    0x0000000000000000     0x10cd systemClock.o
+ .debug_abbrev  0x0000000000000000      0x25d systemClock.o
  .debug_aranges
                 0x0000000000000000       0x20 systemClock.o
- .debug_line    0x0000000000000000      0x2fc systemClock.o
- .debug_str     0x0000000000000000      0xe09 systemClock.o
+ .debug_line    0x0000000000000000      0x2f8 systemClock.o
+ .debug_str     0x0000000000000000      0xe0d systemClock.o
  .comment       0x0000000000000000       0x77 systemClock.o
  .debug_frame   0x0000000000000000       0xac systemClock.o
  .ARM.attributes
@@ -97,6 +111,35 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 gpioControl.o
  .data          0x0000000000000000        0x0 gpio.o
  .bss           0x0000000000000000        0x0 gpio.o
+ .rodata        0x0000000000000000        0x4 gpio.o
+ .text          0x0000000000000000      0x1e0 generalPurposeTimer.o
+ .data          0x0000000000000000        0x0 generalPurposeTimer.o
+ .bss           0x0000000000000000        0x0 generalPurposeTimer.o
+ .rodata        0x0000000000000000       0x30 generalPurposeTimer.o
+ .debug_info    0x0000000000000000      0x7a7 generalPurposeTimer.o
+ .debug_abbrev  0x0000000000000000      0x19a generalPurposeTimer.o
+ .debug_aranges
+                0x0000000000000000       0x20 generalPurposeTimer.o
+ .debug_line    0x0000000000000000      0x2a2 generalPurposeTimer.o
+ .debug_str     0x0000000000000000      0x69d generalPurposeTimer.o
+ .comment       0x0000000000000000       0x77 generalPurposeTimer.o
+ .debug_frame   0x0000000000000000       0x60 generalPurposeTimer.o
+ .ARM.attributes
+                0x0000000000000000       0x34 generalPurposeTimer.o
+ .text          0x0000000000000000      0x398 shortTimer.o
+ .data          0x0000000000000000        0x0 shortTimer.o
+ .bss           0x0000000000000000        0x0 shortTimer.o
+ .rodata        0x0000000000000000       0x88 shortTimer.o
+ .debug_info    0x0000000000000000     0x121c shortTimer.o
+ .debug_abbrev  0x0000000000000000      0x208 shortTimer.o
+ .debug_aranges
+                0x0000000000000000       0x20 shortTimer.o
+ .debug_line    0x0000000000000000      0x2ed shortTimer.o
+ .debug_str     0x0000000000000000      0xf1a shortTimer.o
+ .comment       0x0000000000000000       0x77 shortTimer.o
+ .debug_frame   0x0000000000000000       0x5c shortTimer.o
+ .ARM.attributes
+                0x0000000000000000       0x34 shortTimer.o
 
 Memory Configuration
 
@@ -108,7 +151,7 @@ RAM              0x0000000020000000 0x0000000000008000 xrw
 Linker script and memory map
 
 
-.text           0x0000000000000000     0x5338
+.text           0x0000000000000000     0x1ccc
  *(.isr_vector)
  .isr_vector    0x0000000000000000      0x26c startup_ARMCM4.o
                 0x0000000000000000                __isr_vector
@@ -203,36 +246,33 @@ Linker script and memory map
                 0x00000000000002a8                _32_64_Bit_Timer_1B_Handler
                 0x00000000000002a8                CAN_1_Handler
                 0x00000000000002a8                _16_32_Bit_Timer_4B_Handler
- .text          0x00000000000002ac       0x48 main.o
+ .text          0x00000000000002ac       0xec main.o
                 0x00000000000002ac                main
- .text          0x00000000000002f4      0x130 register.o
-                0x00000000000002f4                Register::Register()
-                0x00000000000002f4                Register::Register()
-                0x000000000000030a                Register::Register(unsigned long volatile*)
-                0x000000000000030a                Register::Register(unsigned long volatile*)
-                0x0000000000000328                Register::~Register()
-                0x0000000000000328                Register::~Register()
-                0x000000000000033e                Register::getRegisterBitFieldStatus(registerBitField)
-                0x0000000000000394                Register::setRegisterBitFieldStatus(registerBitField, unsigned long)
- .text          0x0000000000000424      0xad4 systemControl.o
-                0x0000000000000424                SystemControl::SystemControl()
-                0x0000000000000424                SystemControl::SystemControl()
-                0x0000000000000d54                SystemControl::~SystemControl()
-                0x0000000000000d54                SystemControl::~SystemControl()
- .text          0x0000000000000ef8     0x37f0 gpioControl.o
-                0x0000000000000ef8                GpioControl::GpioControl()
-                0x0000000000000ef8                GpioControl::GpioControl()
-                0x00000000000037a4                GpioControl::~GpioControl()
-                0x00000000000037a4                GpioControl::~GpioControl()
- .text          0x00000000000046e8      0x8e4 gpio.o
-                0x00000000000046e8                Gpio::Gpio()
-                0x00000000000046e8                Gpio::Gpio()
-                0x00000000000049d4                Gpio::Gpio(GPIO_Port_Pins, direction)
-                0x00000000000049d4                Gpio::Gpio(GPIO_Port_Pins, direction)
-                0x0000000000004e3c                Gpio::~Gpio()
-                0x0000000000004e3c                Gpio::~Gpio()
-                0x0000000000004f52                Gpio::gpioWrite(setORClear)
-                0x0000000000004fb4                Gpio::gpioRead()
+ .text          0x0000000000000398      0x164 register.o
+                0x0000000000000398                Register::Register()
+                0x0000000000000398                Register::Register()
+                0x00000000000003ae                Register::Register(unsigned long volatile*)
+                0x00000000000003ae                Register::Register(unsigned long volatile*)
+                0x00000000000003cc                Register::~Register()
+                0x00000000000003cc                Register::~Register()
+                0x00000000000003e2                Register::setRegisterAddress(unsigned long volatile*)
+                0x00000000000003fe                Register::getRegisterAddress()
+                0x0000000000000416                Register::getRegisterBitFieldStatus(registerBitField)
+                0x000000000000046c                Register::setRegisterBitFieldStatus(registerBitField, unsigned long)
+ .text          0x00000000000004fc     0x1278 gpioControl.o
+                0x00000000000004fc                GpioControl::GpioControl()
+                0x00000000000004fc                GpioControl::GpioControl()
+                0x0000000000001590                GpioControl::~GpioControl()
+                0x0000000000001590                GpioControl::~GpioControl()
+ .text          0x0000000000001774      0x44c gpio.o
+                0x0000000000001774                Gpio::Gpio()
+                0x0000000000001774                Gpio::Gpio()
+                0x0000000000001818                Gpio::Gpio(GPIO_Port_Pins, direction)
+                0x0000000000001818                Gpio::Gpio(GPIO_Port_Pins, direction)
+                0x0000000000001b34                Gpio::~Gpio()
+                0x0000000000001b34                Gpio::~Gpio()
+                0x0000000000001b66                Gpio::gpioWrite(setORClear)
+                0x0000000000001b9c                Gpio::gpioRead()
  *(.init)
  *(.fini)
  *crtbegin.o(.ctors)
@@ -246,38 +286,37 @@ Linker script and memory map
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
  *(.rodata*)
- .rodata        0x0000000000004fcc      0x21c systemControl.o
- .rodata        0x00000000000051e8      0x150 gpioControl.o
+ .rodata        0x0000000000001bc0      0x10c gpioControl.o
  *(.eh_frame*)
 
-.glue_7         0x0000000000005338        0x0
- .glue_7        0x0000000000005338        0x0 linker stubs
+.glue_7         0x0000000000001ccc        0x0
+ .glue_7        0x0000000000001ccc        0x0 linker stubs
 
-.glue_7t        0x0000000000005338        0x0
- .glue_7t       0x0000000000005338        0x0 linker stubs
+.glue_7t        0x0000000000001ccc        0x0
+ .glue_7t       0x0000000000001ccc        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000005338        0x0
- .vfp11_veneer  0x0000000000005338        0x0 linker stubs
+.vfp11_veneer   0x0000000000001ccc        0x0
+ .vfp11_veneer  0x0000000000001ccc        0x0 linker stubs
 
-.v4_bx          0x0000000000005338        0x0
- .v4_bx         0x0000000000005338        0x0 linker stubs
+.v4_bx          0x0000000000001ccc        0x0
+ .v4_bx         0x0000000000001ccc        0x0 linker stubs
 
-.iplt           0x0000000000005338        0x0
- .iplt          0x0000000000005338        0x0 startup_ARMCM4.o
+.iplt           0x0000000000001ccc        0x0
+ .iplt          0x0000000000001ccc        0x0 startup_ARMCM4.o
 
-.rel.dyn        0x0000000000005338        0x0
- .rel.iplt      0x0000000000005338        0x0 startup_ARMCM4.o
+.rel.dyn        0x0000000000001ccc        0x0
+ .rel.iplt      0x0000000000001ccc        0x0 startup_ARMCM4.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0000000000005338                __exidx_start = .
+                0x0000000000001ccc                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000000000005338                __exidx_end = .
-                0x0000000000005338                __etext = ALIGN (0x4)
+                0x0000000000001ccc                __exidx_end = .
+                0x0000000000001ccc                __etext = ALIGN (0x4)
 
-.data           0x0000000020000000        0x0 load address 0x0000000000005338
+.data           0x0000000020000000        0x0 load address 0x0000000000001ccc
                 0x0000000020000000                __data_start__ = .
  *(vtable)
  *(.data*)
@@ -336,6 +375,8 @@ LOAD systemControl.o
 LOAD systemClock.o
 LOAD gpioControl.o
 LOAD gpio.o
+LOAD generalPurposeTimer.o
+LOAD shortTimer.o
 OUTPUT(main.elf elf32-littlearm)
 
 .ARM.attributes
@@ -347,45 +388,39 @@ OUTPUT(main.elf elf32-littlearm)
  .ARM.attributes
                 0x0000000000000054       0x34 register.o
  .ARM.attributes
-                0x0000000000000088       0x34 systemControl.o
+                0x0000000000000088       0x34 gpioControl.o
  .ARM.attributes
-                0x00000000000000bc       0x34 gpioControl.o
- .ARM.attributes
-                0x00000000000000f0       0x34 gpio.o
+                0x00000000000000bc       0x34 gpio.o
 
 .comment        0x0000000000000000       0x76
  .comment       0x0000000000000000       0x76 main.o
                                          0x77 (size before relaxing)
  .comment       0x0000000000000076       0x77 register.o
- .comment       0x0000000000000076       0x77 systemControl.o
  .comment       0x0000000000000076       0x77 gpioControl.o
  .comment       0x0000000000000076       0x77 gpio.o
 
-.debug_line     0x0000000000000000     0x12e4
+.debug_line     0x0000000000000000      0xdb5
  .debug_line    0x0000000000000000       0x61 startup_ARMCM4.o
- .debug_line    0x0000000000000061      0x326 main.o
- .debug_line    0x0000000000000387      0x329 register.o
- .debug_line    0x00000000000006b0      0x2b8 systemControl.o
- .debug_line    0x0000000000000968      0x602 gpioControl.o
- .debug_line    0x0000000000000f6a      0x37a gpio.o
+ .debug_line    0x0000000000000061      0x356 main.o
+ .debug_line    0x00000000000003b7      0x337 register.o
+ .debug_line    0x00000000000006ee      0x2db gpioControl.o
+ .debug_line    0x00000000000009c9      0x3ec gpio.o
 
-.debug_info     0x0000000000000000     0x94a6
+.debug_info     0x0000000000000000     0x5b6c
  .debug_info    0x0000000000000000       0x26 startup_ARMCM4.o
- .debug_info    0x0000000000000026     0x373d main.o
- .debug_info    0x0000000000003763      0x6bc register.o
- .debug_info    0x0000000000003e1f      0xc58 systemControl.o
- .debug_info    0x0000000000004a77     0x22cc gpioControl.o
- .debug_info    0x0000000000006d43     0x2763 gpio.o
+ .debug_info    0x0000000000000026     0x2c29 main.o
+ .debug_info    0x0000000000002c4f      0x758 register.o
+ .debug_info    0x00000000000033a7     0x121f gpioControl.o
+ .debug_info    0x00000000000045c6     0x15a6 gpio.o
 
-.debug_abbrev   0x0000000000000000      0xbdc
+.debug_abbrev   0x0000000000000000      0x987
  .debug_abbrev  0x0000000000000000       0x14 startup_ARMCM4.o
  .debug_abbrev  0x0000000000000014      0x2ca main.o
  .debug_abbrev  0x00000000000002de      0x218 register.o
- .debug_abbrev  0x00000000000004f6      0x1f6 systemControl.o
- .debug_abbrev  0x00000000000006ec      0x224 gpioControl.o
- .debug_abbrev  0x0000000000000910      0x2cc gpio.o
+ .debug_abbrev  0x00000000000004f6      0x219 gpioControl.o
+ .debug_abbrev  0x000000000000070f      0x278 gpio.o
 
-.debug_aranges  0x0000000000000000       0xc0
+.debug_aranges  0x0000000000000000       0xa0
  .debug_aranges
                 0x0000000000000000       0x20 startup_ARMCM4.o
  .debug_aranges
@@ -393,31 +428,26 @@ OUTPUT(main.elf elf32-littlearm)
  .debug_aranges
                 0x0000000000000040       0x20 register.o
  .debug_aranges
-                0x0000000000000060       0x20 systemControl.o
+                0x0000000000000060       0x20 gpioControl.o
  .debug_aranges
-                0x0000000000000080       0x20 gpioControl.o
- .debug_aranges
-                0x00000000000000a0       0x20 gpio.o
+                0x0000000000000080       0x20 gpio.o
 
-.debug_str      0x0000000000000000     0x38c8
+.debug_str      0x0000000000000000     0x28bc
  .debug_str     0x0000000000000000       0x3d startup_ARMCM4.o
- .debug_str     0x000000000000003d     0x368a main.o
-                                       0x3a1c (size before relaxing)
- .debug_str     0x00000000000036c7      0x115 register.o
-                                        0x556 (size before relaxing)
- .debug_str     0x00000000000037dc       0x4e systemControl.o
-                                        0xa25 (size before relaxing)
- .debug_str     0x000000000000382a       0x3f gpioControl.o
-                                       0x2442 (size before relaxing)
- .debug_str     0x0000000000003869       0x5f gpio.o
-                                       0x2653 (size before relaxing)
+ .debug_str     0x000000000000003d     0x26dd main.o
+                                       0x2a6f (size before relaxing)
+ .debug_str     0x000000000000271a      0x115 register.o
+                                        0x5c4 (size before relaxing)
+ .debug_str     0x000000000000282f       0x3f gpioControl.o
+                                       0x10d0 (size before relaxing)
+ .debug_str     0x000000000000286e       0x4e gpio.o
+                                       0x1217 (size before relaxing)
 
-.debug_frame    0x0000000000000000      0x29c
- .debug_frame   0x0000000000000000       0x34 main.o
- .debug_frame   0x0000000000000034       0xd8 register.o
- .debug_frame   0x000000000000010c       0x5c systemControl.o
- .debug_frame   0x0000000000000168       0x60 gpioControl.o
- .debug_frame   0x00000000000001c8       0xd4 gpio.o
+.debug_frame    0x0000000000000000      0x27c
+ .debug_frame   0x0000000000000000       0x30 main.o
+ .debug_frame   0x0000000000000030      0x128 register.o
+ .debug_frame   0x0000000000000158       0x5c gpioControl.o
+ .debug_frame   0x00000000000001b4       0xc8 gpio.o
 
 .debug_ranges   0x0000000000000000       0x18
  .debug_ranges  0x0000000000000000       0x18 register.o

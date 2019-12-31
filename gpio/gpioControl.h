@@ -57,16 +57,37 @@ enum GPIO_Port_Pins
 };
 
 
-class GpioControl : SystemControl
+class GpioControl
 {
     public: 
-
-
         GpioControl();
         ~GpioControl();
 
     protected:
 
+
+        //const uint32_t GPIO_Port_A_APB = 0x40004000;
+        const uint32_t GPIO_Port_A_AHB = 0x40058000; 
+        //const uint32_t GPIO_Port_B_APB = 0x40005000;
+        const uint32_t GPIO_Port_B_AHB = 0x40059000;
+        //const uint32_t GPIO_Port_C_APB = 0x40006000;
+        const uint32_t GPIO_Port_C_AHB = 0x4005A000;
+        //const uint32_t GPIO_Port_D_APB = 0x40007000;
+        const uint32_t GPIO_Port_D_AHB = 0x4005B000;
+        //const uint32_t GPIO_Port_E_APB = 0x40024000;
+        const uint32_t GPIO_Port_E_AHB = 0x4005C000;
+        //const uint32_t GPIO_Port_F_APB = 0x40025000;
+        const uint32_t GPIO_Port_F_AHB = 0x4005D000;
+        const uint32_t GPIO_PORT_AHB[6] = {GPIO_Port_A_AHB, GPIO_Port_B_AHB, GPIO_Port_C_AHB, GPIO_Port_D_AHB, GPIO_Port_E_AHB, GPIO_Port_F_AHB};
+
+        const uint32_t GPIOAFSEl = 0x420;
+        const uint32_t GPIOPUR = 0x510;
+        const uint32_t GPIODEN = 0x51C;
+        const uint32_t GPIOLOCK = 0x520;
+        const uint32_t GPIOCR = 0x524;
+        const uint32_t GPIOAMSEL = 0x528;
+        const uint32_t GPIOPCTL = 0x52C;
+        
 
         Register PPGPIO{(volatile uint32_t*)(systemControlBase + 0x308)}; //0x308 PPGPIO RO 0x0000.003F General-Purpose Input/Output Peripheral Present 290
         Register SRGPIO{(volatile uint32_t*)(systemControlBase + 0x508)};//0x508 SRGPIO RW 0x0000.0000 General-Purpose Input/Output Software Reset 314
@@ -77,75 +98,33 @@ class GpioControl : SystemControl
 
 
         //alternate function register here
-        Register GPIO_Port_A_GPIOAFSEL{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x420)}; // 0x420 GPIOAFSEL RW - GPIO Alternate Function Select 671
-        Register GPIO_Port_B_GPIOAFSEL{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x420)}; // 0x420 GPIOAFSEL RW - GPIO Alternate Function Select 671
-        Register GPIO_Port_C_GPIOAFSEL{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x420)}; // 0x420 GPIOAFSEL RW - GPIO Alternate Function Select 671
-        Register GPIO_Port_D_GPIOAFSEL{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x420)}; // 0x420 GPIOAFSEL RW - GPIO Alternate Function Select 671
-        Register GPIO_Port_E_GPIOAFSEL{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x420)}; // 0x420 GPIOAFSEL RW - GPIO Alternate Function Select 671
-        Register GPIO_Port_F_GPIOAFSEL{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x420)}; // 0x420 GPIOAFSEL RW - GPIO Alternate Function Select 671
-        Register GPIOAFSEl[6] = {GPIO_Port_A_GPIOAFSEL, GPIO_Port_B_GPIOAFSEL, GPIO_Port_C_GPIOAFSEL, GPIO_Port_D_GPIOAFSEL, GPIO_Port_E_GPIOAFSEL, GPIO_Port_F_GPIOAFSEL};
+        Register GPIO_Port_GPIOAFSEL{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOAFSEl)}; // 0x420 GPIOAFSEL RW - GPIO Alternate Function Select 671
+        Register GPIO_Port_GPIOPUR{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOPUR)}; // 0x510 GPIOPUR RW - GPIO Pull-Up Select 677
+        Register GPIO_Port_GPIODEN{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIODEN)}; // 0x51C GPIODEN RW - GPIO Digital Enable 682
+        Register GPIO_Port_GPIOLOCK{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOLOCK)}; // 0x520 GPIOLOCK RW 0x0000.0001 GPIO Lock 684
+        Register GPIO_Port_GPIOCR{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOCR)}; // 0x524 GPIOCR - - GPIO Commit 685
+        Register GPIO_Port_GPIOAMSEL{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOAMSEL)}; // 0x528 GPIOAMSEL RW 0x0000.0000 GPIO Analog Mode Select 687
+        Register GPIO_Port_GPIOPCTL{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOPCTL)}; // 0x52C GPIOPCTL RW - GPIO Port Control 688
 
-
-        Register GPIO_Port_A_GPIODEN{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x51C)}; // 0x51C GPIODEN RW - GPIO Digital Enable 682
-        Register GPIO_Port_B_GPIODEN{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x51C)}; // 0x51C GPIODEN RW - GPIO Digital Enable 682
-        Register GPIO_Port_C_GPIODEN{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x51C)}; // 0x51C GPIODEN RW - GPIO Digital Enable 682
-        Register GPIO_Port_D_GPIODEN{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x51C)}; // 0x51C GPIODEN RW - GPIO Digital Enable 682
-        Register GPIO_Port_E_GPIODEN{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x51C)}; // 0x51C GPIODEN RW - GPIO Digital Enable 682
-        Register GPIO_Port_F_GPIODEN{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x51C)}; // 0x51C GPIODEN RW - GPIO Digital Enable 682
-        Register GPIODEN[6] = {GPIO_Port_A_GPIODEN, GPIO_Port_B_GPIODEN, GPIO_Port_C_GPIODEN, GPIO_Port_D_GPIODEN, GPIO_Port_E_GPIODEN, GPIO_Port_F_GPIODEN};
-
-        Register GPIO_Port_A_GPIOLOCK{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x520)}; // 0x520 GPIOLOCK RW 0x0000.0001 GPIO Lock 684
-        Register GPIO_Port_B_GPIOLOCK{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x520)}; // 0x520 GPIOLOCK RW 0x0000.0001 GPIO Lock 684
-        Register GPIO_Port_C_GPIOLOCK{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x520)}; // 0x520 GPIOLOCK RW 0x0000.0001 GPIO Lock 684
-        Register GPIO_Port_D_GPIOLOCK{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x520)}; // 0x520 GPIOLOCK RW 0x0000.0001 GPIO Lock 684
-        Register GPIO_Port_E_GPIOLOCK{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x520)}; // 0x520 GPIOLOCK RW 0x0000.0001 GPIO Lock 684
-        Register GPIO_Port_F_GPIOLOCK{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x520)}; // 0x520 GPIOLOCK RW 0x0000.0001 GPIO Lock 684
-        Register GPIOLOCK[6] = {GPIO_Port_A_GPIOLOCK, GPIO_Port_B_GPIOLOCK, GPIO_Port_C_GPIOLOCK, GPIO_Port_D_GPIOLOCK, GPIO_Port_E_GPIOLOCK, GPIO_Port_F_GPIOLOCK};
-
-        Register GPIO_Port_A_GPIOCR{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x524)}; // 0x524 GPIOCR - - GPIO Commit 685
-        Register GPIO_Port_B_GPIOCR{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x524)}; // 0x524 GPIOCR - - GPIO Commit 685
-        Register GPIO_Port_C_GPIOCR{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x524)}; // 0x524 GPIOCR - - GPIO Commit 685
-        Register GPIO_Port_D_GPIOCR{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x524)}; // 0x524 GPIOCR - - GPIO Commit 685
-        Register GPIO_Port_E_GPIOCR{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x524)}; // 0x524 GPIOCR - - GPIO Commit 685
-        Register GPIO_Port_F_GPIOCR{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x524)}; // 0x524 GPIOCR - - GPIO Commit 685
-        Register GPIOCR[6] = {GPIO_Port_A_GPIOCR, GPIO_Port_B_GPIOCR, GPIO_Port_C_GPIOCR, GPIO_Port_D_GPIOCR, GPIO_Port_E_GPIOCR, GPIO_Port_F_GPIOCR};
-
-        Register GPIO_Port_A_GPIOAMSEL{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x528)}; // 0x528 GPIOAMSEL RW 0x0000.0000 GPIO Analog Mode Select 687
-        Register GPIO_Port_B_GPIOAMSEL{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x528)}; // 0x528 GPIOAMSEL RW 0x0000.0000 GPIO Analog Mode Select 687
-        Register GPIO_Port_C_GPIOAMSEL{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x528)}; // 0x528 GPIOAMSEL RW 0x0000.0000 GPIO Analog Mode Select 687
-        Register GPIO_Port_D_GPIOAMSEL{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x528)}; // 0x528 GPIOAMSEL RW 0x0000.0000 GPIO Analog Mode Select 687
-        Register GPIO_Port_E_GPIOAMSEL{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x528)}; // 0x528 GPIOAMSEL RW 0x0000.0000 GPIO Analog Mode Select 687
-        Register GPIO_Port_F_GPIOAMSEL{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x528)}; // 0x528 GPIOAMSEL RW 0x0000.0000 GPIO Analog Mode Select 687
-        Register GPIOAMSEL[6] = {GPIO_Port_A_GPIOAMSEL, GPIO_Port_B_GPIOAMSEL, GPIO_Port_C_GPIOAMSEL, GPIO_Port_D_GPIOAMSEL, GPIO_Port_E_GPIOAMSEL, GPIO_Port_F_GPIOAMSEL};
-
-        Register GPIO_Port_A_GPIOPCTL{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x52C)}; // 0x52C GPIOPCTL RW - GPIO Port Control 688
-        Register GPIO_Port_B_GPIOPCTL{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x52C)}; // 0x52C GPIOPCTL RW - GPIO Port Control 688
-        Register GPIO_Port_C_GPIOPCTL{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x52C)}; // 0x52C GPIOPCTL RW - GPIO Port Control 688
-        Register GPIO_Port_D_GPIOPCTL{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x52C)}; // 0x52C GPIOPCTL RW - GPIO Port Control 688
-        Register GPIO_Port_E_GPIOPCTL{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x52C)}; // 0x52C GPIOPCTL RW - GPIO Port Control 688
-        Register GPIO_Port_F_GPIOPCTL{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x52C)}; // 0x52C GPIOPCTL RW - GPIO Port Control 688
-        Register GPIOPCTL[6] = {GPIO_Port_A_GPIOPCTL, GPIO_Port_B_GPIOPCTL, GPIO_Port_C_GPIOPCTL, GPIO_Port_D_GPIOPCTL, GPIO_Port_E_GPIOPCTL, GPIO_Port_F_GPIOPCTL};
-        
-
+   
         /**************************System Control BitFields****************************/
 
-        bitField PPGPIO_P14{14, 1, RO}; //GPIO Port Q Present
-        bitField PPGPIO_P13{13, 1, RO}; //GPIO Port P Present
-        bitField PPGPIO_P12{12, 1, RO}; //GPIO Port N Present
-        bitField PPGPIO_P11{11, 1, RO}; //GPIO Port M Present
-        bitField PPGPIO_P10{10, 1, RO}; //GPIO Port L Present
-        bitField PPGPIO_P9{9, 1, RO}; //GPIO Port K Present
-        bitField PPGPIO_P8{8, 1, RO}; //GPIO Port J Present
-        bitField PPGPIO_P7{7, 1, RO}; //GPIO Port H Present
-        bitField PPGPIO_P6{6, 1, RO}; //GPIO Port G Present
+        // bitField PPGPIO_P14{14, 1, RO}; //GPIO Port Q Present
+        // bitField PPGPIO_P13{13, 1, RO}; //GPIO Port P Present
+        // bitField PPGPIO_P12{12, 1, RO}; //GPIO Port N Present
+        // bitField PPGPIO_P11{11, 1, RO}; //GPIO Port M Present
+        // bitField PPGPIO_P10{10, 1, RO}; //GPIO Port L Present
+        // bitField PPGPIO_P9{9, 1, RO}; //GPIO Port K Present
+        // bitField PPGPIO_P8{8, 1, RO}; //GPIO Port J Present
+        // bitField PPGPIO_P7{7, 1, RO}; //GPIO Port H Present
+        // bitField PPGPIO_P6{6, 1, RO}; //GPIO Port G Present
         bitField PPGPIO_P5{5, 1, RO}; //GPIO Port F Present
         bitField PPGPIO_P4{4, 1, RO}; //GPIO Port E Present
         bitField PPGPIO_P3{3, 1, RO}; //GPIO Port D Present
         bitField PPGPIO_P2{2, 1, RO}; //GPIO Port C Present
         bitField PPGPIO_P1{1, 1, RO}; //GPIO Port B Present
         bitField PPGPIO_P0{0, 1, RO}; //GPIO Port A Present
-        bitField PPGPIO_PRESENT[15] = {PPGPIO_P0, PPGPIO_P1, PPGPIO_P2, PPGPIO_P3, PPGPIO_P4, PPGPIO_P5, PPGPIO_P6, PPGPIO_P7, PPGPIO_P8, 
-                                       PPGPIO_P9, PPGPIO_P10, PPGPIO_P11, PPGPIO_P12, PPGPIO_P13, PPGPIO_P14};
+        bitField PPGPIO_PRESENT[6] = {PPGPIO_P0, PPGPIO_P1, PPGPIO_P2, PPGPIO_P3, PPGPIO_P4, PPGPIO_P5};
 
         bitField SRGPIO_R5{5, 1, RW}; //GPIO Port F Software Reset
         bitField SRGPIO_R4{4, 1, RW}; //GPIO Port E Software Reset
@@ -187,6 +166,8 @@ class GpioControl : SystemControl
         bitField PRGPIO_R0{0, 1, RO}; //GPIO Port A Peripheral Ready
         bitField PRGPIO_REG[6] = {PRGPIO_R0, PRGPIO_R1, PRGPIO_R2, PRGPIO_R3, PRGPIO_R4, PRGPIO_R5};
 
+
+
         bitField GPIOAFSEL_AFSEL{0, 1, RW}; //GPIO Alternate Function Select
 
         bitField GPIOLOCK_LOCK{0, 32, RW}; //GPIO Lock. A write of the value 0x4C4F.434B unlocks the GPIO Commit (GPIOCR) register for write access.
@@ -197,6 +178,9 @@ class GpioControl : SystemControl
 
         bitField GPIOAMSEL_GPIOAMSEL{0, 1, RW}; //GPIO Analog Mode Select
 
+        bitField GPIOPUR_PUE{0, 1, RW}; //Pad Weak Pull-Up Enable
+
+
     private:
         /**
          * Each GPIO port can be accessed through one of two bus apertures. The 
@@ -206,244 +190,71 @@ class GpioControl : SystemControl
          * provides better back-to-back access performance than the APB bus.
          */
 
-        //const uint32_t GPIO_Port_A_APB = 0x40004000;
-        const uint32_t GPIO_Port_A_AHB = 0x40058000; 
-        //const uint32_t GPIO_Port_B_APB = 0x40005000;
-        const uint32_t GPIO_Port_B_AHB = 0x40059000;
-        //const uint32_t GPIO_Port_C_APB = 0x40006000;
-        const uint32_t GPIO_Port_C_AHB = 0x4005A000;
-        //const uint32_t GPIO_Port_D_APB = 0x40007000;
-        const uint32_t GPIO_Port_D_AHB = 0x4005B000;
-        //const uint32_t GPIO_Port_E_APB = 0x40024000;
-        const uint32_t GPIO_Port_E_AHB = 0x4005C000;
-        //const uint32_t GPIO_Port_F_APB = 0x40025000;
-        const uint32_t GPIO_Port_F_AHB = 0x4005D000;
+        const uint32_t GPIOIS = 0x404;
+        const uint32_t GPIOIBE = 0x408;
+        const uint32_t GPIOIEV = 0x40C;
+        const uint32_t GPIOIM = 0x410;
+        const uint32_t GPIORIS = 0x414;
+        const uint32_t GPIOMIS = 0x418;
+        const uint32_t GPIOICR = 0x41C;
+        const uint32_t GPIODR2R = 0x500;
+        const uint32_t GPIODR4R = 0x504;
+        const uint32_t GPIODR8R = 0x508;
+        const uint32_t GPIOODR = 0x50C;
+        const uint32_t GPIOPDR = 0x514;
+        const uint32_t GPIOSLR = 0x518;
+        const uint32_t GPIOADCCTL = 0x530;
+        const uint32_t GPIODMACTL = 0x534;
+        const uint32_t GPIOPeriphID4 = 0xFD0;
+        const uint32_t GPIOPeriphID5 = 0xFD4;
+        const uint32_t GPIOPeriphID6 = 0xFD8;
+        const uint32_t GPIOPeriphID7 = 0xFDC;
+        const uint32_t GPIOPeriphID0 = 0xFE0;
+        const uint32_t GPIOPeriphID1 = 0xFE4;
+        const uint32_t GPIOPeriphID2 = 0xFE8;
+        const uint32_t GPIOPeriphID3 = 0xFEC;
+        const uint32_t GPIOPCellID0 = 0xFF0;
+        const uint32_t GPIOPCellID1 = 0xFF4;
+        const uint32_t GPIOPCellID2 = 0xFF8;
+        const uint32_t GPIOPCellID3 = 0xFFC;
 
+        Register GPIOHBCTL{(volatile uint32_t*)(systemControlBase + 0x06C)}; 
 
-        Register GPIO_Port_A_GPIOIS{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x404)};// 0x404 GPIOIS RW 0x0000.0000 GPIO Interrupt Sense 664
-        Register GPIO_Port_B_GPIOIS{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x404)};// 0x404 GPIOIS RW 0x0000.0000 GPIO Interrupt Sense 664
-        Register GPIO_Port_C_GPIOIS{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x404)};// 0x404 GPIOIS RW 0x0000.0000 GPIO Interrupt Sense 664
-        Register GPIO_Port_D_GPIOIS{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x404)};// 0x404 GPIOIS RW 0x0000.0000 GPIO Interrupt Sense 664
-        Register GPIO_Port_E_GPIOIS{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x404)};// 0x404 GPIOIS RW 0x0000.0000 GPIO Interrupt Sense 664
-        Register GPIO_Port_F_GPIOIS{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x404)};// 0x404 GPIOIS RW 0x0000.0000 GPIO Interrupt Sense 664
-        Register GPIOIS[6] = {GPIO_Port_A_GPIOIS, GPIO_Port_B_GPIOIS, GPIO_Port_C_GPIOIS, GPIO_Port_D_GPIOIS, GPIO_Port_E_GPIOIS, GPIO_Port_F_GPIOIS};
+        Register GPIO_Port_GPIOIS{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOIS)}; // 0x404 GPIOIS RW 0x0000.0000 GPIO Interrupt Sense 664
+        Register GPIO_Port_GPIOIBE{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOIBE)}; // 0x408 GPIOIBE RW 0x0000.0000 GPIO Interrupt Both Edges 665
+        Register GPIO_Port_GPIOIEV{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOIEV)}; // 0x40C GPIOIEV RW 0x0000.0000 GPIO Interrupt Event 666
+        Register GPIO_Port_GPIOIM{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOIM)}; // 0x410 GPIOIM RW 0x0000.0000 GPIO Interrupt Mask 667
+        Register GPIO_Port_GPIORIS{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIORIS)}; // 0x414 GPIORIS RO 0x0000.0000 GPIO Raw Interrupt Status 668
+        Register GPIO_Port_GPIOMIS{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOMIS)}; // 0x418 GPIOMIS RO 0x0000.0000 GPIO Masked Interrupt Status 669
+        Register GPIO_Port_GPIOICR{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOICR)}; // 0x41C GPIOICR W1C 0x0000.0000 GPIO Interrupt Clear 670
+        Register GPIO_Port_GPIODR2R{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIODR2R)}; // 0x500 GPIODR2R RW 0x0000.00FF GPIO 2-mA Drive Select 673
+        Register GPIO_Port_GPIODR4R{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIODR4R)}; // 0x504 GPIODR4R RW 0x0000.0000 GPIO 4-mA Drive Select 674
+        Register GPIO_Port_GPIODR48R{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIODR8R)}; // 0x508 GPIODR8R RW 0x0000.0000 GPIO 8-mA Drive Select 675
+        Register GPIO_Port_GPIOODR{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOODR)}; // 0x50C GPIOODR RW 0x0000.0000 GPIO Open Drain Select 676
+        Register GPIO_Port_GPIOPDR{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOPDR)}; // 0x514 GPIOPDR RW 0x0000.0000 GPIO Pull-Down Select 679
+        Register GPIO_Port_GPIOSLR{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOSLR)}; // 0x518 GPIOSLR RW 0x0000.0000 GPIO Slew Rate Control Select 681
+        Register GPIO_Port_GPIOADCCTL{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOADCCTL)}; // 0x530 GPIOADCCTL RW 0x0000.0000 GPIO ADC Control 690
+        Register GPIO_Port_GPIODMACTL{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIODMACTL)}; // 0x534 GPIODMACTL RW 0x0000.0000 GPIO DMA Control 691
+        Register GPIO_Port_GPIOPeriphID4{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOPeriphID4)}; // 0xFD0 GPIOPeriphID4 RO 0x0000.0000 GPIO Peripheral Identification 4 692
+        Register GPIO_Port_GPIOPeriphID5{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOPeriphID5)}; // 0xFD4 GPIOPeriphID5 RO 0x0000.0000 GPIO Peripheral Identification 5 693
+        Register GPIO_Port_GPIOPeriphID6{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOPeriphID6)}; // 0xFD8 GPIOPeriphID6 RO 0x0000.0000 GPIO Peripheral Identification 6 694
+        Register GPIO_Port_GPIOPeriphID7{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOPeriphID7)}; // 0xFDC GPIOPeriphID7 RO 0x0000.0000 GPIO Peripheral Identification 7 695
+        Register GPIO_Port_GPIOPeriphID0{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOPeriphID0)}; // 0xFE0 GPIOPeriphID0 RO 0x0000.0061 GPIO Peripheral Identification 0 696
+        Register GPIO_Port_GPIOPeriphID1{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOPeriphID1)}; // 0xFE4 GPIOPeriphID1 RO 0x0000.0000 GPIO Peripheral Identification 1 697
+        Register GPIO_Port_GPIOPeriphID2{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOPeriphID2)}; // 0xFE8 GPIOPeriphID2 RO 0x0000.0018 GPIO Peripheral Identification 2 698
+        Register GPIO_Port_GPIOPeriphID3{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOPeriphID3)}; // 0xFEC GPIOPeriphID3 RO 0x0000.0001 GPIO Peripheral Identification 3 699    
+        Register GPIO_Port_GPIOPCellID0{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOPCellID0)}; // 0xFF0 GPIOPCellID0 RO 0x0000.000D GPIO PrimeCell Identification 0 700
+        Register GPIO_Port_GPIOPCellID1{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOPCellID1)}; // 0xFF4 GPIOPCellID1 RO 0x0000.00F0 GPIO PrimeCell Identification 1 701
+        Register GPIO_Port_GPIOPCellID2{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOPCellID2)}; // 0xFF8 GPIOPCellID2 RO 0x0000.0005 GPIO PrimeCell Identification 2 702
+        Register GPIO_Port_GPIOPCellID3{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIOPCellID2)}; // 0xFFC GPIOPCellID3 RO 0x0000.00B1 GPIO PrimeCell Identification 3 703
 
-        Register GPIO_Port_A_GPIOIBE{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x408)}; // 0x408 GPIOIBE RW 0x0000.0000 GPIO Interrupt Both Edges 665
-        Register GPIO_Port_B_GPIOIBE{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x408)}; // 0x408 GPIOIBE RW 0x0000.0000 GPIO Interrupt Both Edges 665
-        Register GPIO_Port_C_GPIOIBE{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x408)}; // 0x408 GPIOIBE RW 0x0000.0000 GPIO Interrupt Both Edges 665
-        Register GPIO_Port_D_GPIOIBE{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x408)}; // 0x408 GPIOIBE RW 0x0000.0000 GPIO Interrupt Both Edges 665
-        Register GPIO_Port_E_GPIOIBE{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x408)}; // 0x408 GPIOIBE RW 0x0000.0000 GPIO Interrupt Both Edges 665
-        Register GPIO_Port_F_GPIOIBE{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x408)}; // 0x408 GPIOIBE RW 0x0000.0000 GPIO Interrupt Both Edges 665
-        Register GPIOIBE[6] = {GPIO_Port_A_GPIOIBE, GPIO_Port_B_GPIOIBE, GPIO_Port_C_GPIOIBE, GPIO_Port_D_GPIOIBE, GPIO_Port_E_GPIOIBE, GPIO_Port_F_GPIOIBE};
-
-        Register GPIO_Port_A_GPIOIEV{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x40C)}; // 0x40C GPIOIEV RW 0x0000.0000 GPIO Interrupt Event 666
-        Register GPIO_Port_B_GPIOIEV{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x40C)}; // 0x40C GPIOIEV RW 0x0000.0000 GPIO Interrupt Event 666
-        Register GPIO_Port_C_GPIOIEV{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x40C)}; // 0x40C GPIOIEV RW 0x0000.0000 GPIO Interrupt Event 666
-        Register GPIO_Port_D_GPIOIEV{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x40C)}; // 0x40C GPIOIEV RW 0x0000.0000 GPIO Interrupt Event 666
-        Register GPIO_Port_E_GPIOIEV{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x40C)}; // 0x40C GPIOIEV RW 0x0000.0000 GPIO Interrupt Event 666
-        Register GPIO_Port_F_GPIOIEV{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x40C)}; // 0x40C GPIOIEV RW 0x0000.0000 GPIO Interrupt Event 666
-        Register GPIOIEV[6] = {GPIO_Port_A_GPIOIEV, GPIO_Port_B_GPIOIEV, GPIO_Port_C_GPIOIEV, GPIO_Port_D_GPIOIEV, GPIO_Port_E_GPIOIEV, GPIO_Port_F_GPIOIEV};
-
-        Register GPIO_Port_A_GPIOIM{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x410)}; // 0x410 GPIOIM RW 0x0000.0000 GPIO Interrupt Mask 667
-        Register GPIO_Port_B_GPIOIM{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x410)}; // 0x410 GPIOIM RW 0x0000.0000 GPIO Interrupt Mask 667
-        Register GPIO_Port_C_GPIOIM{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x410)}; // 0x410 GPIOIM RW 0x0000.0000 GPIO Interrupt Mask 667
-        Register GPIO_Port_D_GPIOIM{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x410)}; // 0x410 GPIOIM RW 0x0000.0000 GPIO Interrupt Mask 667
-        Register GPIO_Port_E_GPIOIM{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x410)}; // 0x410 GPIOIM RW 0x0000.0000 GPIO Interrupt Mask 667
-        Register GPIO_Port_F_GPIOIM{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x410)}; // 0x410 GPIOIM RW 0x0000.0000 GPIO Interrupt Mask 667
-        Register GPIOIM[6] = {GPIO_Port_A_GPIOIM, GPIO_Port_B_GPIOIM, GPIO_Port_C_GPIOIM};
-
-        Register GPIO_Port_A_GPIORIS{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x414)}; // 0x414 GPIORIS RO 0x0000.0000 GPIO Raw Interrupt Status 668
-        Register GPIO_Port_B_GPIORIS{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x414)}; // 0x414 GPIORIS RO 0x0000.0000 GPIO Raw Interrupt Status 668
-        Register GPIO_Port_C_GPIORIS{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x414)}; // 0x414 GPIORIS RO 0x0000.0000 GPIO Raw Interrupt Status 668
-        Register GPIO_Port_D_GPIORIS{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x414)}; // 0x414 GPIORIS RO 0x0000.0000 GPIO Raw Interrupt Status 668
-        Register GPIO_Port_E_GPIORIS{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x414)}; // 0x414 GPIORIS RO 0x0000.0000 GPIO Raw Interrupt Status 668
-        Register GPIO_Port_F_GPIORIS{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x414)}; // 0x414 GPIORIS RO 0x0000.0000 GPIO Raw Interrupt Status 668
-        Register GPIORIS[6] = {GPIO_Port_A_GPIORIS, GPIO_Port_B_GPIORIS, GPIO_Port_C_GPIORIS, GPIO_Port_D_GPIORIS, GPIO_Port_E_GPIORIS, GPIO_Port_F_GPIORIS};
-
-        Register GPIO_Port_A_GPIOMIS{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x418)}; // 0x418 GPIOMIS RO 0x0000.0000 GPIO Masked Interrupt Status 669
-        Register GPIO_Port_B_GPIOMIS{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x418)}; // 0x418 GPIOMIS RO 0x0000.0000 GPIO Masked Interrupt Status 669
-        Register GPIO_Port_C_GPIOMIS{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x418)}; // 0x418 GPIOMIS RO 0x0000.0000 GPIO Masked Interrupt Status 669
-        Register GPIO_Port_D_GPIOMIS{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x418)}; // 0x418 GPIOMIS RO 0x0000.0000 GPIO Masked Interrupt Status 669
-        Register GPIO_Port_E_GPIOMIS{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x418)}; // 0x418 GPIOMIS RO 0x0000.0000 GPIO Masked Interrupt Status 669
-        Register GPIO_Port_F_GPIOMIS{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x418)}; // 0x418 GPIOMIS RO 0x0000.0000 GPIO Masked Interrupt Status 669
-        Register GPIOMIS[6] = {GPIO_Port_A_GPIOMIS, GPIO_Port_B_GPIOMIS, GPIO_Port_C_GPIOMIS, GPIO_Port_D_GPIOMIS, GPIO_Port_E_GPIOMIS, GPIO_Port_F_GPIOMIS};
-
-        Register GPIO_Port_A_GPIOICR{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x41C)}; // 0x41C GPIOICR W1C 0x0000.0000 GPIO Interrupt Clear 670
-        Register GPIO_Port_B_GPIOICR{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x41C)}; // 0x41C GPIOICR W1C 0x0000.0000 GPIO Interrupt Clear 670
-        Register GPIO_Port_C_GPIOICR{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x41C)}; // 0x41C GPIOICR W1C 0x0000.0000 GPIO Interrupt Clear 670
-        Register GPIO_Port_D_GPIOICR{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x41C)}; // 0x41C GPIOICR W1C 0x0000.0000 GPIO Interrupt Clear 670
-        Register GPIO_Port_E_GPIOICR{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x41C)}; // 0x41C GPIOICR W1C 0x0000.0000 GPIO Interrupt Clear 670
-        Register GPIO_Port_F_GPIOICR{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x41C)}; // 0x41C GPIOICR W1C 0x0000.0000 GPIO Interrupt Clear 670
-        Register GPIOICR[6] = {GPIO_Port_A_GPIOICR, GPIO_Port_B_GPIOICR, GPIO_Port_C_GPIOICR, GPIO_Port_D_GPIOICR, GPIO_Port_E_GPIOICR, GPIO_Port_F_GPIOICR};
-
-        Register GPIO_Port_A_GPIODR2R{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x500)}; // 0x500 GPIODR2R RW 0x0000.00FF GPIO 2-mA Drive Select 673
-        Register GPIO_Port_B_GPIODR2R{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x500)}; // 0x500 GPIODR2R RW 0x0000.00FF GPIO 2-mA Drive Select 673
-        Register GPIO_Port_C_GPIODR2R{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x500)}; // 0x500 GPIODR2R RW 0x0000.00FF GPIO 2-mA Drive Select 673
-        Register GPIO_Port_D_GPIODR2R{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x500)}; // 0x500 GPIODR2R RW 0x0000.00FF GPIO 2-mA Drive Select 673
-        Register GPIO_Port_E_GPIODR2R{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x500)}; // 0x500 GPIODR2R RW 0x0000.00FF GPIO 2-mA Drive Select 673
-        Register GPIO_Port_F_GPIODR2R{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x500)}; // 0x500 GPIODR2R RW 0x0000.00FF GPIO 2-mA Drive Select 673
-        Register GPIODR2R[6] = {GPIO_Port_A_GPIODR2R, GPIO_Port_B_GPIODR2R, GPIO_Port_C_GPIODR2R, GPIO_Port_D_GPIODR2R, GPIO_Port_E_GPIODR2R, GPIO_Port_F_GPIODR2R};
-
-        Register GPIO_Port_A_GPIODR4R{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x504)}; // 0x504 GPIODR4R RW 0x0000.0000 GPIO 4-mA Drive Select 674
-        Register GPIO_Port_B_GPIODR4R{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x504)}; // 0x504 GPIODR4R RW 0x0000.0000 GPIO 4-mA Drive Select 674
-        Register GPIO_Port_C_GPIODR4R{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x504)}; // 0x504 GPIODR4R RW 0x0000.0000 GPIO 4-mA Drive Select 674
-        Register GPIO_Port_D_GPIODR4R{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x504)}; // 0x504 GPIODR4R RW 0x0000.0000 GPIO 4-mA Drive Select 674
-        Register GPIO_Port_E_GPIODR4R{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x504)}; // 0x504 GPIODR4R RW 0x0000.0000 GPIO 4-mA Drive Select 674
-        Register GPIO_Port_F_GPIODR4R{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x504)}; // 0x504 GPIODR4R RW 0x0000.0000 GPIO 4-mA Drive Select 674
-        Register GPIODR4R[6] = {GPIO_Port_A_GPIODR4R, GPIO_Port_B_GPIODR4R, GPIO_Port_C_GPIODR4R, GPIO_Port_D_GPIODR4R, GPIO_Port_E_GPIODR4R, GPIO_Port_F_GPIODR4R};
-
-        Register GPIO_Port_A_GPIODR48R{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x508)}; // 0x508 GPIODR8R RW 0x0000.0000 GPIO 8-mA Drive Select 675
-        Register GPIO_Port_B_GPIODR48R{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x508)}; // 0x508 GPIODR8R RW 0x0000.0000 GPIO 8-mA Drive Select 675
-        Register GPIO_Port_C_GPIODR48R{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x508)}; // 0x508 GPIODR8R RW 0x0000.0000 GPIO 8-mA Drive Select 675
-        Register GPIO_Port_D_GPIODR48R{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x508)}; // 0x508 GPIODR8R RW 0x0000.0000 GPIO 8-mA Drive Select 675
-        Register GPIO_Port_E_GPIODR48R{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x508)}; // 0x508 GPIODR8R RW 0x0000.0000 GPIO 8-mA Drive Select 675
-        Register GPIO_Port_F_GPIODR48R{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x508)}; // 0x508 GPIODR8R RW 0x0000.0000 GPIO 8-mA Drive Select 675
-        Register GPIODR8R[6] = {GPIO_Port_A_GPIODR48R, GPIO_Port_B_GPIODR48R, GPIO_Port_C_GPIODR48R, GPIO_Port_D_GPIODR48R, GPIO_Port_E_GPIODR48R, GPIO_Port_F_GPIODR48R};
-
-        Register GPIO_Port_A_GPIOODR{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x50C)}; // 0x50C GPIOODR RW 0x0000.0000 GPIO Open Drain Select 676
-        Register GPIO_Port_B_GPIOODR{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x50C)}; // 0x50C GPIOODR RW 0x0000.0000 GPIO Open Drain Select 676
-        Register GPIO_Port_C_GPIOODR{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x50C)}; // 0x50C GPIOODR RW 0x0000.0000 GPIO Open Drain Select 676
-        Register GPIO_Port_D_GPIOODR{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x50C)}; // 0x50C GPIOODR RW 0x0000.0000 GPIO Open Drain Select 676
-        Register GPIO_Port_E_GPIOODR{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x50C)}; // 0x50C GPIOODR RW 0x0000.0000 GPIO Open Drain Select 676
-        Register GPIO_Port_F_GPIOODR{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x50C)}; // 0x50C GPIOODR RW 0x0000.0000 GPIO Open Drain Select 676
-        Register GPIOODR[6] = {GPIO_Port_A_GPIOODR, GPIO_Port_B_GPIOODR, GPIO_Port_C_GPIOODR, GPIO_Port_D_GPIOODR, GPIO_Port_E_GPIOODR, GPIO_Port_F_GPIOODR};
-
-        Register GPIO_Port_A_GPIOPUR{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x510)}; // 0x510 GPIOPUR RW - GPIO Pull-Up Select 677
-        Register GPIO_Port_B_GPIOPUR{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x510)}; // 0x510 GPIOPUR RW - GPIO Pull-Up Select 677
-        Register GPIO_Port_C_GPIOPUR{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x510)}; // 0x510 GPIOPUR RW - GPIO Pull-Up Select 677
-        Register GPIO_Port_D_GPIOPUR{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x510)}; // 0x510 GPIOPUR RW - GPIO Pull-Up Select 677
-        Register GPIO_Port_E_GPIOPUR{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x510)}; // 0x510 GPIOPUR RW - GPIO Pull-Up Select 677
-        Register GPIO_Port_F_GPIOPUR{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x510)}; // 0x510 GPIOPUR RW - GPIO Pull-Up Select 677
-        Register GPIOPUR[6] = {GPIO_Port_A_GPIOPUR, GPIO_Port_B_GPIOPUR, GPIO_Port_C_GPIOPUR, GPIO_Port_D_GPIOPUR, GPIO_Port_E_GPIOPUR, GPIO_Port_F_GPIOPUR};
-
-        Register GPIO_Port_A_GPIOPDR{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x514)}; // 0x514 GPIOPDR RW 0x0000.0000 GPIO Pull-Down Select 679
-        Register GPIO_Port_B_GPIOPDR{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x514)}; // 0x514 GPIOPDR RW 0x0000.0000 GPIO Pull-Down Select 679
-        Register GPIO_Port_C_GPIOPDR{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x514)}; // 0x514 GPIOPDR RW 0x0000.0000 GPIO Pull-Down Select 679
-        Register GPIO_Port_D_GPIOPDR{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x514)}; // 0x514 GPIOPDR RW 0x0000.0000 GPIO Pull-Down Select 679
-        Register GPIO_Port_E_GPIOPDR{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x514)}; // 0x514 GPIOPDR RW 0x0000.0000 GPIO Pull-Down Select 679
-        Register GPIO_Port_F_GPIOPDR{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x514)}; // 0x514 GPIOPDR RW 0x0000.0000 GPIO Pull-Down Select 679
-        Register GPIOPDR[6] = {GPIO_Port_A_GPIOPDR, GPIO_Port_B_GPIOPDR, GPIO_Port_C_GPIOPDR, GPIO_Port_D_GPIOPDR, GPIO_Port_E_GPIOPDR, GPIO_Port_F_GPIOPDR};
-
-        Register GPIO_Port_A_GPIOSLR{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x518)}; // 0x518 GPIOSLR RW 0x0000.0000 GPIO Slew Rate Control Select 681
-        Register GPIO_Port_B_GPIOSLR{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x518)}; // 0x518 GPIOSLR RW 0x0000.0000 GPIO Slew Rate Control Select 681
-        Register GPIO_Port_C_GPIOSLR{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x518)}; // 0x518 GPIOSLR RW 0x0000.0000 GPIO Slew Rate Control Select 681
-        Register GPIO_Port_D_GPIOSLR{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x518)}; // 0x518 GPIOSLR RW 0x0000.0000 GPIO Slew Rate Control Select 681
-        Register GPIO_Port_E_GPIOSLR{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x518)}; // 0x518 GPIOSLR RW 0x0000.0000 GPIO Slew Rate Control Select 681
-        Register GPIO_Port_F_GPIOSLR{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x518)}; // 0x518 GPIOSLR RW 0x0000.0000 GPIO Slew Rate Control Select 681
-        Register GPIOSLR[6] = {GPIO_Port_A_GPIOSLR, GPIO_Port_B_GPIOSLR, GPIO_Port_C_GPIOSLR, GPIO_Port_D_GPIOSLR, GPIO_Port_E_GPIOSLR, GPIO_Port_F_GPIOSLR};
-
-        Register GPIO_Port_A_GPIOADCCTL{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x530)}; // 0x530 GPIOADCCTL RW 0x0000.0000 GPIO ADC Control 690
-        Register GPIO_Port_B_GPIOADCCTL{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x530)}; // 0x530 GPIOADCCTL RW 0x0000.0000 GPIO ADC Control 690
-        Register GPIO_Port_C_GPIOADCCTL{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x530)}; // 0x530 GPIOADCCTL RW 0x0000.0000 GPIO ADC Control 690
-        Register GPIO_Port_D_GPIOADCCTL{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x530)}; // 0x530 GPIOADCCTL RW 0x0000.0000 GPIO ADC Control 690
-        Register GPIO_Port_E_GPIOADCCTL{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x530)}; // 0x530 GPIOADCCTL RW 0x0000.0000 GPIO ADC Control 690
-        Register GPIO_Port_F_GPIOADCCTL{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x530)}; // 0x530 GPIOADCCTL RW 0x0000.0000 GPIO ADC Control 690
-        Register GPIOADCCTL[6] = {GPIO_Port_A_GPIOADCCTL, GPIO_Port_B_GPIOADCCTL, GPIO_Port_C_GPIOADCCTL, GPIO_Port_D_GPIOADCCTL, GPIO_Port_E_GPIOADCCTL, GPIO_Port_F_GPIOADCCTL};
-
-        Register GPIO_Port_A_GPIODMACTL{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x534)}; // 0x534 GPIODMACTL RW 0x0000.0000 GPIO DMA Control 691
-        Register GPIO_Port_B_GPIODMACTL{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x534)}; // 0x534 GPIODMACTL RW 0x0000.0000 GPIO DMA Control 691
-        Register GPIO_Port_C_GPIODMACTL{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x534)}; // 0x534 GPIODMACTL RW 0x0000.0000 GPIO DMA Control 691
-        Register GPIO_Port_D_GPIODMACTL{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x534)}; // 0x534 GPIODMACTL RW 0x0000.0000 GPIO DMA Control 691
-        Register GPIO_Port_E_GPIODMACTL{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x534)}; // 0x534 GPIODMACTL RW 0x0000.0000 GPIO DMA Control 691
-        Register GPIO_Port_F_GPIODMACTL{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x534)}; // 0x534 GPIODMACTL RW 0x0000.0000 GPIO DMA Control 691
-        Register GPIODMACTL[6] = {GPIO_Port_A_GPIODMACTL, GPIO_Port_B_GPIODMACTL, GPIO_Port_C_GPIODMACTL, GPIO_Port_D_GPIODMACTL, GPIO_Port_E_GPIODMACTL, GPIO_Port_F_GPIODMACTL};
-
-        Register GPIO_Port_A_GPIOPeriphID4{(volatile uint32_t*)(GPIO_Port_A_AHB + 0xFD0)}; // 0xFD0 GPIOPeriphID4 RO 0x0000.0000 GPIO Peripheral Identification 4 692
-        Register GPIO_Port_B_GPIOPeriphID4{(volatile uint32_t*)(GPIO_Port_B_AHB + 0xFD0)}; // 0xFD0 GPIOPeriphID4 RO 0x0000.0000 GPIO Peripheral Identification 4 692
-        Register GPIO_Port_C_GPIOPeriphID4{(volatile uint32_t*)(GPIO_Port_C_AHB + 0xFD0)}; // 0xFD0 GPIOPeriphID4 RO 0x0000.0000 GPIO Peripheral Identification 4 692
-        Register GPIO_Port_D_GPIOPeriphID4{(volatile uint32_t*)(GPIO_Port_D_AHB + 0xFD0)}; // 0xFD0 GPIOPeriphID4 RO 0x0000.0000 GPIO Peripheral Identification 4 692
-        Register GPIO_Port_E_GPIOPeriphID4{(volatile uint32_t*)(GPIO_Port_E_AHB + 0xFD0)}; // 0xFD0 GPIOPeriphID4 RO 0x0000.0000 GPIO Peripheral Identification 4 692
-        Register GPIO_Port_F_GPIOPeriphID4{(volatile uint32_t*)(GPIO_Port_F_AHB + 0xFD0)}; // 0xFD0 GPIOPeriphID4 RO 0x0000.0000 GPIO Peripheral Identification 4 692
-        Register GPIOPeriphID4[6] = {GPIO_Port_A_GPIOPeriphID4, GPIO_Port_B_GPIOPeriphID4, GPIO_Port_C_GPIOPeriphID4, GPIO_Port_D_GPIOPeriphID4, GPIO_Port_E_GPIOPeriphID4, GPIO_Port_F_GPIOPeriphID4};
-
-        Register GPIO_Port_A_GPIOPeriphID5{(volatile uint32_t*)(GPIO_Port_A_AHB + 0xFD4)}; // 0xFD4 GPIOPeriphID5 RO 0x0000.0000 GPIO Peripheral Identification 5 693
-        Register GPIO_Port_B_GPIOPeriphID5{(volatile uint32_t*)(GPIO_Port_B_AHB + 0xFD4)}; // 0xFD4 GPIOPeriphID5 RO 0x0000.0000 GPIO Peripheral Identification 5 693
-        Register GPIO_Port_C_GPIOPeriphID5{(volatile uint32_t*)(GPIO_Port_C_AHB + 0xFD4)}; // 0xFD4 GPIOPeriphID5 RO 0x0000.0000 GPIO Peripheral Identification 5 693
-        Register GPIO_Port_D_GPIOPeriphID5{(volatile uint32_t*)(GPIO_Port_D_AHB + 0xFD4)}; // 0xFD4 GPIOPeriphID5 RO 0x0000.0000 GPIO Peripheral Identification 5 693
-        Register GPIO_Port_E_GPIOPeriphID5{(volatile uint32_t*)(GPIO_Port_E_AHB + 0xFD4)}; // 0xFD4 GPIOPeriphID5 RO 0x0000.0000 GPIO Peripheral Identification 5 693
-        Register GPIO_Port_F_GPIOPeriphID5{(volatile uint32_t*)(GPIO_Port_F_AHB + 0xFD4)}; // 0xFD4 GPIOPeriphID5 RO 0x0000.0000 GPIO Peripheral Identification 5 693
-        Register GPIOPeriphID5[6] = {GPIO_Port_A_GPIOPeriphID5, GPIO_Port_B_GPIOPeriphID5, GPIO_Port_C_GPIOPeriphID5, GPIO_Port_D_GPIOPeriphID5, GPIO_Port_E_GPIOPeriphID5, GPIO_Port_F_GPIOPeriphID5};
-
-        Register GPIO_Port_A_GPIOPeriphID6{(volatile uint32_t*)(GPIO_Port_A_AHB + 0xFD8)}; // 0xFD8 GPIOPeriphID6 RO 0x0000.0000 GPIO Peripheral Identification 6 694
-        Register GPIO_Port_B_GPIOPeriphID6{(volatile uint32_t*)(GPIO_Port_B_AHB + 0xFD8)}; // 0xFD8 GPIOPeriphID6 RO 0x0000.0000 GPIO Peripheral Identification 6 694
-        Register GPIO_Port_C_GPIOPeriphID6{(volatile uint32_t*)(GPIO_Port_C_AHB + 0xFD8)}; // 0xFD8 GPIOPeriphID6 RO 0x0000.0000 GPIO Peripheral Identification 6 694
-        Register GPIO_Port_D_GPIOPeriphID6{(volatile uint32_t*)(GPIO_Port_D_AHB + 0xFD8)}; // 0xFD8 GPIOPeriphID6 RO 0x0000.0000 GPIO Peripheral Identification 6 694
-        Register GPIO_Port_E_GPIOPeriphID6{(volatile uint32_t*)(GPIO_Port_E_AHB + 0xFD8)}; // 0xFD8 GPIOPeriphID6 RO 0x0000.0000 GPIO Peripheral Identification 6 694
-        Register GPIO_Port_F_GPIOPeriphID6{(volatile uint32_t*)(GPIO_Port_F_AHB + 0xFD8)}; // 0xFD8 GPIOPeriphID6 RO 0x0000.0000 GPIO Peripheral Identification 6 694
-        Register GPIOPeriphID6[6] = {GPIO_Port_A_GPIOPeriphID6, GPIO_Port_B_GPIOPeriphID6, GPIO_Port_C_GPIOPeriphID6, GPIO_Port_D_GPIOPeriphID6, GPIO_Port_E_GPIOPeriphID6, GPIO_Port_F_GPIOPeriphID6};
+        bitField GPIOHBCTL_PORTF{5, 1, RW}; //Port F Advanced High-Performance Bus
+        bitField GPIOHBCTL_PORTE{4, 1, RW}; //Port E Advanced High-Performance Bus
+        bitField GPIOHBCTL_PORTD{3, 1, RW}; //Port D Advanced High-Performance Bus
+        bitField GPIOHBCTL_PORTC{2, 1, RW}; //Port C Advanced High-Performance Bus
+        bitField GPIOHBCTL_PORTB{1, 1, RW}; //Port B Advanced High-Performance Bus
+        bitField GPIOHBCTL_PORTA{0, 1, RW}; //Port A Advanced High-Performance Bus
         
-        Register GPIO_Port_A_GPIOPeriphID7{(volatile uint32_t*)(GPIO_Port_A_AHB + 0xFDC)}; // 0xFDC GPIOPeriphID7 RO 0x0000.0000 GPIO Peripheral Identification 7 695
-        Register GPIO_Port_B_GPIOPeriphID7{(volatile uint32_t*)(GPIO_Port_B_AHB + 0xFDC)}; // 0xFDC GPIOPeriphID7 RO 0x0000.0000 GPIO Peripheral Identification 7 695
-        Register GPIO_Port_C_GPIOPeriphID7{(volatile uint32_t*)(GPIO_Port_C_AHB + 0xFDC)}; // 0xFDC GPIOPeriphID7 RO 0x0000.0000 GPIO Peripheral Identification 7 695
-        Register GPIO_Port_D_GPIOPeriphID7{(volatile uint32_t*)(GPIO_Port_D_AHB + 0xFDC)}; // 0xFDC GPIOPeriphID7 RO 0x0000.0000 GPIO Peripheral Identification 7 695
-        Register GPIO_Port_E_GPIOPeriphID7{(volatile uint32_t*)(GPIO_Port_E_AHB + 0xFDC)}; // 0xFDC GPIOPeriphID7 RO 0x0000.0000 GPIO Peripheral Identification 7 695
-        Register GPIO_Port_F_GPIOPeriphID7{(volatile uint32_t*)(GPIO_Port_F_AHB + 0xFDC)}; // 0xFDC GPIOPeriphID7 RO 0x0000.0000 GPIO Peripheral Identification 7 695
-        Register GPIOPeriphID7[6] = {GPIO_Port_A_GPIOPeriphID7, GPIO_Port_B_GPIOPeriphID7, GPIO_Port_C_GPIOPeriphID7, GPIO_Port_D_GPIOPeriphID7, GPIO_Port_E_GPIOPeriphID7, GPIO_Port_F_GPIOPeriphID7};
-       
-        Register GPIO_Port_A_GPIOPeriphID0{(volatile uint32_t*)(GPIO_Port_A_AHB + 0xFE0)}; // 0xFE0 GPIOPeriphID0 RO 0x0000.0061 GPIO Peripheral Identification 0 696
-        Register GPIO_Port_B_GPIOPeriphID0{(volatile uint32_t*)(GPIO_Port_B_AHB + 0xFE0)}; // 0xFE0 GPIOPeriphID0 RO 0x0000.0061 GPIO Peripheral Identification 0 696
-        Register GPIO_Port_C_GPIOPeriphID0{(volatile uint32_t*)(GPIO_Port_C_AHB + 0xFE0)}; // 0xFE0 GPIOPeriphID0 RO 0x0000.0061 GPIO Peripheral Identification 0 696
-        Register GPIO_Port_D_GPIOPeriphID0{(volatile uint32_t*)(GPIO_Port_D_AHB + 0xFE0)}; // 0xFE0 GPIOPeriphID0 RO 0x0000.0061 GPIO Peripheral Identification 0 696
-        Register GPIO_Port_E_GPIOPeriphID0{(volatile uint32_t*)(GPIO_Port_E_AHB + 0xFE0)}; // 0xFE0 GPIOPeriphID0 RO 0x0000.0061 GPIO Peripheral Identification 0 696
-        Register GPIO_Port_F_GPIOPeriphID0{(volatile uint32_t*)(GPIO_Port_F_AHB + 0xFE0)}; // 0xFE0 GPIOPeriphID0 RO 0x0000.0061 GPIO Peripheral Identification 0 696
-        Register GPIOPeriphID0[6] = {GPIO_Port_A_GPIOPeriphID0, GPIO_Port_B_GPIOPeriphID0, GPIO_Port_C_GPIOPeriphID0, GPIO_Port_D_GPIOPeriphID0, GPIO_Port_E_GPIOPeriphID0, GPIO_Port_F_GPIOPeriphID0};
-        
-        Register GPIO_Port_A_GPIOPeriphID1{(volatile uint32_t*)(GPIO_Port_A_AHB + 0xFE4)}; // 0xFE4 GPIOPeriphID1 RO 0x0000.0000 GPIO Peripheral Identification 1 697
-        Register GPIO_Port_B_GPIOPeriphID1{(volatile uint32_t*)(GPIO_Port_B_AHB + 0xFE4)}; // 0xFE4 GPIOPeriphID1 RO 0x0000.0000 GPIO Peripheral Identification 1 697
-        Register GPIO_Port_C_GPIOPeriphID1{(volatile uint32_t*)(GPIO_Port_C_AHB + 0xFE4)}; // 0xFE4 GPIOPeriphID1 RO 0x0000.0000 GPIO Peripheral Identification 1 697
-        Register GPIO_Port_D_GPIOPeriphID1{(volatile uint32_t*)(GPIO_Port_D_AHB + 0xFE4)}; // 0xFE4 GPIOPeriphID1 RO 0x0000.0000 GPIO Peripheral Identification 1 697
-        Register GPIO_Port_E_GPIOPeriphID1{(volatile uint32_t*)(GPIO_Port_E_AHB + 0xFE4)}; // 0xFE4 GPIOPeriphID1 RO 0x0000.0000 GPIO Peripheral Identification 1 697
-        Register GPIO_Port_F_GPIOPeriphID1{(volatile uint32_t*)(GPIO_Port_F_AHB + 0xFE4)}; // 0xFE4 GPIOPeriphID1 RO 0x0000.0000 GPIO Peripheral Identification 1 697
-        Register GPIOPeriphID1[6] = {GPIO_Port_A_GPIOPeriphID1, GPIO_Port_B_GPIOPeriphID1, GPIO_Port_C_GPIOPeriphID1, GPIO_Port_D_GPIOPeriphID1, GPIO_Port_E_GPIOPeriphID1, GPIO_Port_F_GPIOPeriphID1};
-       
-        Register GPIO_Port_A_GPIOPeriphID2{(volatile uint32_t*)(GPIO_Port_A_AHB + 0xFE8)}; // 0xFE8 GPIOPeriphID2 RO 0x0000.0018 GPIO Peripheral Identification 2 698
-        Register GPIO_Port_B_GPIOPeriphID2{(volatile uint32_t*)(GPIO_Port_B_AHB + 0xFE8)}; // 0xFE8 GPIOPeriphID2 RO 0x0000.0018 GPIO Peripheral Identification 2 698
-        Register GPIO_Port_C_GPIOPeriphID2{(volatile uint32_t*)(GPIO_Port_C_AHB + 0xFE8)}; // 0xFE8 GPIOPeriphID2 RO 0x0000.0018 GPIO Peripheral Identification 2 698
-        Register GPIO_Port_D_GPIOPeriphID2{(volatile uint32_t*)(GPIO_Port_D_AHB + 0xFE8)}; // 0xFE8 GPIOPeriphID2 RO 0x0000.0018 GPIO Peripheral Identification 2 698
-        Register GPIO_Port_E_GPIOPeriphID2{(volatile uint32_t*)(GPIO_Port_E_AHB + 0xFE8)}; // 0xFE8 GPIOPeriphID2 RO 0x0000.0018 GPIO Peripheral Identification 2 698
-        Register GPIO_Port_F_GPIOPeriphID2{(volatile uint32_t*)(GPIO_Port_F_AHB + 0xFE8)}; // 0xFE8 GPIOPeriphID2 RO 0x0000.0018 GPIO Peripheral Identification 2 698
-        Register GPIOPeriphID2[6] = {GPIO_Port_A_GPIOPeriphID2, GPIO_Port_B_GPIOPeriphID2, GPIO_Port_C_GPIOPeriphID2, GPIO_Port_D_GPIOPeriphID2, GPIO_Port_E_GPIOPeriphID2, GPIO_Port_F_GPIOPeriphID2};
-
-        Register GPIO_Port_A_GPIOPeriphID3{(volatile uint32_t*)(GPIO_Port_A_AHB + 0xFEC)}; // 0xFEC GPIOPeriphID3 RO 0x0000.0001 GPIO Peripheral Identification 3 699
-        Register GPIO_Port_B_GPIOPeriphID3{(volatile uint32_t*)(GPIO_Port_B_AHB + 0xFEC)}; // 0xFEC GPIOPeriphID3 RO 0x0000.0001 GPIO Peripheral Identification 3 699
-        Register GPIO_Port_C_GPIOPeriphID3{(volatile uint32_t*)(GPIO_Port_C_AHB + 0xFEC)}; // 0xFEC GPIOPeriphID3 RO 0x0000.0001 GPIO Peripheral Identification 3 699
-        Register GPIO_Port_D_GPIOPeriphID3{(volatile uint32_t*)(GPIO_Port_D_AHB + 0xFEC)}; // 0xFEC GPIOPeriphID3 RO 0x0000.0001 GPIO Peripheral Identification 3 699
-        Register GPIO_Port_E_GPIOPeriphID3{(volatile uint32_t*)(GPIO_Port_E_AHB + 0xFEC)}; // 0xFEC GPIOPeriphID3 RO 0x0000.0001 GPIO Peripheral Identification 3 699
-        Register GPIO_Port_F_GPIOPeriphID3{(volatile uint32_t*)(GPIO_Port_F_AHB + 0xFEC)}; // 0xFEC GPIOPeriphID3 RO 0x0000.0001 GPIO Peripheral Identification 3 699
-        Register GPIOPeriphID3[6] = {GPIO_Port_A_GPIOPeriphID3, GPIO_Port_B_GPIOPeriphID3, GPIO_Port_C_GPIOPeriphID3, GPIO_Port_D_GPIOPeriphID3, GPIO_Port_E_GPIOPeriphID3, GPIO_Port_F_GPIOPeriphID3};
-        
-        Register GPIO_Port_A_GPIOPCellID0{(volatile uint32_t*)(GPIO_Port_A_AHB + 0xFF0)}; // 0xFF0 GPIOPCellID0 RO 0x0000.000D GPIO PrimeCell Identification 0 700
-        Register GPIO_Port_B_GPIOPCellID0{(volatile uint32_t*)(GPIO_Port_B_AHB + 0xFF0)}; // 0xFF0 GPIOPCellID0 RO 0x0000.000D GPIO PrimeCell Identification 0 700
-        Register GPIO_Port_C_GPIOPCellID0{(volatile uint32_t*)(GPIO_Port_C_AHB + 0xFF0)}; // 0xFF0 GPIOPCellID0 RO 0x0000.000D GPIO PrimeCell Identification 0 700
-        Register GPIO_Port_D_GPIOPCellID0{(volatile uint32_t*)(GPIO_Port_D_AHB + 0xFF0)}; // 0xFF0 GPIOPCellID0 RO 0x0000.000D GPIO PrimeCell Identification 0 700
-        Register GPIO_Port_E_GPIOPCellID0{(volatile uint32_t*)(GPIO_Port_E_AHB + 0xFF0)}; // 0xFF0 GPIOPCellID0 RO 0x0000.000D GPIO PrimeCell Identification 0 700
-        Register GPIO_Port_F_GPIOPCellID0{(volatile uint32_t*)(GPIO_Port_F_AHB + 0xFF0)}; // 0xFF0 GPIOPCellID0 RO 0x0000.000D GPIO PrimeCell Identification 0 700
-        Register GPIOPCellID0[6] = {GPIO_Port_A_GPIOPCellID0, GPIO_Port_B_GPIOPCellID0, GPIO_Port_C_GPIOPCellID0, GPIO_Port_D_GPIOPCellID0, GPIO_Port_E_GPIOPCellID0, GPIO_Port_F_GPIOPCellID0};
-        
-        Register GPIO_Port_A_GPIOPCellID1{(volatile uint32_t*)(GPIO_Port_A_AHB + 0xFF4)}; // 0xFF4 GPIOPCellID1 RO 0x0000.00F0 GPIO PrimeCell Identification 1 701
-        Register GPIO_Port_B_GPIOPCellID1{(volatile uint32_t*)(GPIO_Port_B_AHB + 0xFF4)}; // 0xFF4 GPIOPCellID1 RO 0x0000.00F0 GPIO PrimeCell Identification 1 701
-        Register GPIO_Port_C_GPIOPCellID1{(volatile uint32_t*)(GPIO_Port_C_AHB + 0xFF4)}; // 0xFF4 GPIOPCellID1 RO 0x0000.00F0 GPIO PrimeCell Identification 1 701
-        Register GPIO_Port_D_GPIOPCellID1{(volatile uint32_t*)(GPIO_Port_D_AHB + 0xFF4)}; // 0xFF4 GPIOPCellID1 RO 0x0000.00F0 GPIO PrimeCell Identification 1 701
-        Register GPIO_Port_E_GPIOPCellID1{(volatile uint32_t*)(GPIO_Port_E_AHB + 0xFF4)}; // 0xFF4 GPIOPCellID1 RO 0x0000.00F0 GPIO PrimeCell Identification 1 701
-        Register GPIO_Port_F_GPIOPCellID1{(volatile uint32_t*)(GPIO_Port_F_AHB + 0xFF4)}; // 0xFF4 GPIOPCellID1 RO 0x0000.00F0 GPIO PrimeCell Identification 1 701
-        Register GPIOPCellID1[6] = {GPIO_Port_A_GPIOPCellID1, GPIO_Port_B_GPIOPCellID1, GPIO_Port_C_GPIOPCellID1, GPIO_Port_D_GPIOPCellID1, GPIO_Port_E_GPIOPCellID1, GPIO_Port_F_GPIOPCellID1};
-        
-        Register GPIO_Port_A_GPIOPCellID2{(volatile uint32_t*)(GPIO_Port_A_AHB + 0xFF8)}; // 0xFF8 GPIOPCellID2 RO 0x0000.0005 GPIO PrimeCell Identification 2 702
-        Register GPIO_Port_B_GPIOPCellID2{(volatile uint32_t*)(GPIO_Port_B_AHB + 0xFF8)}; // 0xFF8 GPIOPCellID2 RO 0x0000.0005 GPIO PrimeCell Identification 2 702
-        Register GPIO_Port_C_GPIOPCellID2{(volatile uint32_t*)(GPIO_Port_C_AHB + 0xFF8)}; // 0xFF8 GPIOPCellID2 RO 0x0000.0005 GPIO PrimeCell Identification 2 702
-        Register GPIO_Port_D_GPIOPCellID2{(volatile uint32_t*)(GPIO_Port_D_AHB + 0xFF8)}; // 0xFF8 GPIOPCellID2 RO 0x0000.0005 GPIO PrimeCell Identification 2 702
-        Register GPIO_Port_E_GPIOPCellID2{(volatile uint32_t*)(GPIO_Port_E_AHB + 0xFF8)}; // 0xFF8 GPIOPCellID2 RO 0x0000.0005 GPIO PrimeCell Identification 2 702
-        Register GPIO_Port_F_GPIOPCellID2{(volatile uint32_t*)(GPIO_Port_F_AHB + 0xFF8)}; // 0xFF8 GPIOPCellID2 RO 0x0000.0005 GPIO PrimeCell Identification 2 702
-        Register GPIOPCellID2[6] = {GPIO_Port_A_GPIOPCellID2, GPIO_Port_B_GPIOPCellID2, GPIO_Port_C_GPIOPCellID2, GPIO_Port_D_GPIOPCellID2, GPIO_Port_E_GPIOPCellID2, GPIO_Port_F_GPIOPCellID2};
-
-        Register GPIO_Port_A_GPIOPCellID3{(volatile uint32_t*)(GPIO_Port_A_AHB + 0xFFC)}; // 0xFFC GPIOPCellID3 RO 0x0000.00B1 GPIO PrimeCell Identification 3 703
-        Register GPIO_Port_B_GPIOPCellID3{(volatile uint32_t*)(GPIO_Port_B_AHB + 0xFFC)}; // 0xFFC GPIOPCellID3 RO 0x0000.00B1 GPIO PrimeCell Identification 3 703
-        Register GPIO_Port_C_GPIOPCellID3{(volatile uint32_t*)(GPIO_Port_C_AHB + 0xFFC)}; // 0xFFC GPIOPCellID3 RO 0x0000.00B1 GPIO PrimeCell Identification 3 703
-        Register GPIO_Port_D_GPIOPCellID3{(volatile uint32_t*)(GPIO_Port_D_AHB + 0xFFC)}; // 0xFFC GPIOPCellID3 RO 0x0000.00B1 GPIO PrimeCell Identification 3 703
-        Register GPIO_Port_E_GPIOPCellID3{(volatile uint32_t*)(GPIO_Port_E_AHB + 0xFFC)}; // 0xFFC GPIOPCellID3 RO 0x0000.00B1 GPIO PrimeCell Identification 3 703
-        Register GPIO_Port_F_GPIOPCellID3{(volatile uint32_t*)(GPIO_Port_F_AHB + 0xFFC)}; // 0xFFC GPIOPCellID3 RO 0x0000.00B1 GPIO PrimeCell Identification 3 703
-        Register GPIOPCellID3[6] = {GPIO_Port_A_GPIOPCellID3, GPIO_Port_B_GPIOPCellID3, GPIO_Port_C_GPIOPCellID3, GPIO_Port_D_GPIOPCellID3, GPIO_Port_E_GPIOPCellID3, GPIO_Port_F_GPIOPCellID3};
-
         bitField GPIODIR_DIR{0, 1, RW}; //GPIO Data Direction. 
 
         bitField GPIOIS_IS{0, 1, RW}; //GPIO Interrupt Sense. 
@@ -470,7 +281,6 @@ class GpioControl : SystemControl
 
         bitField GPIOODR_ODE{0, 1, RW}; //Output Pad Open Drain Enable
 
-        bitField GPIOPUR_PUE{0, 1, RW}; //Pad Weak Pull-Up Enable
 
         bitField GPIOPDR_PDE{0, 1, RW}; //Pad Weak Pull-Down Enable
 

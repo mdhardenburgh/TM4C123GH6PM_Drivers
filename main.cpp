@@ -35,6 +35,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/.
 #include "systemControl/systemClock.h"
 #include "gpio/gpioControl.h"
 #include "gpio/gpio.h"
+#include "timer/generalPurposeTimer.h"
+#include "timer/shortTimer.h"
 
 
 int main(void)
@@ -45,12 +47,33 @@ int main(void)
     SystemClock myClock();
     Gpio blueLed(PF2, output);
     Gpio redLed(PF1, output);
+    Gpio swtich2(PF0, input);
+    Gpio swtich1(PF4, input);
 
     blueLed.gpioWrite(set);
     redLed.gpioWrite(set);
 
     while(1)
     {
-        //blueLed.gpioWrite(set);
+        
+        if(swtich1.gpioRead() == 1)
+        {
+            redLed.gpioWrite(clear);
+        }
+
+        if(swtich1.gpioRead() == 0)
+        {
+            redLed.gpioWrite(set);
+        }
+
+        if(swtich2.gpioRead() == 1)
+        {
+            blueLed.gpioWrite(set);
+        }
+
+        if(swtich2.gpioRead() == 0)
+        {
+            blueLed.gpioWrite(clear);
+        }
     }
 }

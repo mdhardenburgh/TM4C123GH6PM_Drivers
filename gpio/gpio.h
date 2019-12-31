@@ -93,37 +93,16 @@ class Gpio : GpioControl
     private:
 
         GPIO_Port_Pins gpio = PA0;
-
-        //const uint32_t GPIO_Port_A_APB = 0x40004000;
-        const uint32_t GPIO_Port_A_AHB = 0x40058000; 
-        //const uint32_t GPIO_Port_B_APB = 0x40005000;
-        const uint32_t GPIO_Port_B_AHB = 0x40059000;
-        //const uint32_t GPIO_Port_C_APB = 0x40006000;
-        const uint32_t GPIO_Port_C_AHB = 0x4005A000;
-        //const uint32_t GPIO_Port_D_APB = 0x40007000;
-        const uint32_t GPIO_Port_D_AHB = 0x4005B000;
-        //const uint32_t GPIO_Port_E_APB = 0x40024000;
-        const uint32_t GPIO_Port_E_AHB = 0x4005C000;
-        //const uint32_t GPIO_Port_F_APB = 0x40025000;
-        const uint32_t GPIO_Port_F_AHB = 0x4005D000;
+        uint32_t gpioBaseAddress;
+        uint32_t gpioPin;
 
         uint32_t gpioKey = 0x4C4F434B;
 
-        Register GPIO_Port_A_GPIODATA{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x3FC)}; // 0x000 GPIODATA RW 0x0000.0000 GPIO Data 662
-        Register GPIO_Port_B_GPIODATA{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x3FC)}; // 0x000 GPIODATA RW 0x0000.0000 GPIO Data 662
-        Register GPIO_Port_C_GPIODATA{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x3FC)}; // 0x000 GPIODATA RW 0x0000.0000 GPIO Data 662
-        Register GPIO_Port_D_GPIODATA{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x3FC)}; // 0x000 GPIODATA RW 0x0000.0000 GPIO Data 662
-        Register GPIO_Port_E_GPIODATA{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x3FC)}; // 0x000 GPIODATA RW 0x0000.0000 GPIO Data 662
-        Register GPIO_Port_F_GPIODATA{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x3FC)}; // 0x000 GPIODATA RW 0x0000.0000 GPIO Data 662
-        Register GPIODATA[6] = {GPIO_Port_A_GPIODATA, GPIO_Port_B_GPIODATA, GPIO_Port_C_GPIODATA, GPIO_Port_D_GPIODATA, GPIO_Port_E_GPIODATA, GPIO_Port_F_GPIODATA};
+        const uint32_t GPIODATA = 0x3FC;
+        const uint32_t GPIODIR = 0x400;
 
-        Register GPIO_Port_A_GPIODIR{(volatile uint32_t*)(GPIO_Port_A_AHB + 0x400)}; // 0x400 GPIODIR RW 0x0000.0000 GPIO Direction 663
-        Register GPIO_Port_B_GPIODIR{(volatile uint32_t*)(GPIO_Port_B_AHB + 0x400)}; // 0x400 GPIODIR RW 0x0000.0000 GPIO Direction 663
-        Register GPIO_Port_C_GPIODIR{(volatile uint32_t*)(GPIO_Port_C_AHB + 0x400)}; // 0x400 GPIODIR RW 0x0000.0000 GPIO Direction 663
-        Register GPIO_Port_D_GPIODIR{(volatile uint32_t*)(GPIO_Port_D_AHB + 0x400)}; // 0x400 GPIODIR RW 0x0000.0000 GPIO Direction 663
-        Register GPIO_Port_E_GPIODIR{(volatile uint32_t*)(GPIO_Port_E_AHB + 0x400)}; // 0x400 GPIODIR RW 0x0000.0000 GPIO Direction 663
-        Register GPIO_Port_F_GPIODIR{(volatile uint32_t*)(GPIO_Port_F_AHB + 0x400)}; // 0x400 GPIODIR RW 0x0000.0000 GPIO Direction 663
-        Register GPIODIR[6] = {GPIO_Port_A_GPIODIR, GPIO_Port_B_GPIODIR, GPIO_Port_C_GPIODIR, GPIO_Port_D_GPIODIR, GPIO_Port_E_GPIODIR, GPIO_Port_F_GPIODIR};
+        Register GPIO_Port_GPIODIR{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIODIR)}; // 0x400 GPIODIR RW 0x0000.0000 GPIO Direction 663
+        Register GPIO_Port_GPIODATA{(volatile uint32_t*)(GPIO_Port_A_AHB + GPIODATA)}; // 0x000 GPIODATA RW 0x0000.0000 GPIO Data 662
 
         bitField GPIODATA_DATA{0, 1, RW}; //GPIO Data. 
 

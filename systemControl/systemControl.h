@@ -42,6 +42,8 @@
 
 #include "../register.h"
 
+const uint32_t systemControlBase = 0x400FE000;
+
 class SystemControl
 {
 
@@ -50,7 +52,7 @@ class SystemControl
         ~SystemControl();
 
     protected:
-        const uint32_t systemControlBase = 0x400FE000;
+        // const uint32_t systemControlBase = 0x400FE000;
 
         Register RCC{(volatile uint32_t*)(systemControlBase + 0x060)}; //0x060 RCC RW 0x078E.3AD1 Run-Mode Clock Configuration 254
         Register RCC2{(volatile uint32_t*)(systemControlBase + 0x070)}; //0x070 RCC2 RW 0x07C0.6810 Run-Mode Clock Configuration 2 260
@@ -68,7 +70,7 @@ class SystemControl
         Register IMC{(volatile uint32_t*)(systemControlBase + 0x054)}; //0x054 IMC RW 0x0000.0000 Interrupt Mask Control 247
         Register MISC{(volatile uint32_t*)(systemControlBase + 0x058)}; //0x058 MISC RW1C 0x0000.0000 Masked Interrupt Status and Clear 249
         Register RESC{(volatile uint32_t*)(systemControlBase + 0x05C)}; //0x05C RESC RW - Reset Cause 252
-        Register GPIOHBCTL{(volatile uint32_t*)(systemControlBase + 0x06C)}; 
+        // Register GPIOHBCTL{(volatile uint32_t*)(systemControlBase + 0x06C)}; 
         Register SLPPWRCFG{(volatile uint32_t*)(systemControlBase + 0x188)}; //0x188 SLPPWRCFG RW 0x0000.0000 Sleep Power Configuration 274
         Register DSLPPWRCFG{(volatile uint32_t*)(systemControlBase + 0x18C)}; //0x18C DSLPPWRCFG RW 0x0000.0000 Deep-Sleep Power Configuration 276
         Register LDOSPCTL{(volatile uint32_t*)(systemControlBase + 0x1B4)}; //0x1B4 LDOSPCTL RW 0x0000.0018 LDO Sleep Power Control 278
@@ -145,12 +147,12 @@ class SystemControl
         bitField RESC_POR{1, 1, RW}; //Power-On Reset
         bitField RESC_EXT{0, 1, RW}; //External Reset
 
-        bitField GPIOHBCTL_PORTF{5, 1, RW}; //Port F Advanced High-Performance Bus
-        bitField GPIOHBCTL_PORTE{4, 1, RW}; //Port E Advanced High-Performance Bus
-        bitField GPIOHBCTL_PORTD{3, 1, RW}; //Port D Advanced High-Performance Bus
-        bitField GPIOHBCTL_PORTC{2, 1, RW}; //Port C Advanced High-Performance Bus
-        bitField GPIOHBCTL_PORTB{1, 1, RW}; //Port B Advanced High-Performance Bus
-        bitField GPIOHBCTL_PORTA{0, 1, RW}; //Port A Advanced High-Performance Bus
+        // bitField GPIOHBCTL_PORTF{5, 1, RW}; //Port F Advanced High-Performance Bus
+        // bitField GPIOHBCTL_PORTE{4, 1, RW}; //Port E Advanced High-Performance Bus
+        // bitField GPIOHBCTL_PORTD{3, 1, RW}; //Port D Advanced High-Performance Bus
+        // bitField GPIOHBCTL_PORTC{2, 1, RW}; //Port C Advanced High-Performance Bus
+        // bitField GPIOHBCTL_PORTB{1, 1, RW}; //Port B Advanced High-Performance Bus
+        // bitField GPIOHBCTL_PORTA{0, 1, RW}; //Port A Advanced High-Performance Bus
         // bitField GPIOHBCTL_PORT[6] = {GPIOHBCTL_PORTA, GPIOHBCTL_PORTB, GPIOHBCTL_PORTC, GPIOHBCTL_PORTD, GPIOHBCTL_PORTE, GPIOHBCTL_PORTF};
    
         bitField SYSPROP_SRAMSM{11, 1, RO}; //SRAM Sleep/Deep-Sleep Standby Mode Present

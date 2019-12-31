@@ -44,7 +44,12 @@
 
 GpioControl::GpioControl()
 {
-
+    GPIOHBCTL.setRegisterBitFieldStatus(GPIOHBCTL_PORTA, set);
+    GPIOHBCTL.setRegisterBitFieldStatus(GPIOHBCTL_PORTB, set);
+    GPIOHBCTL.setRegisterBitFieldStatus(GPIOHBCTL_PORTC, set);
+    GPIOHBCTL.setRegisterBitFieldStatus(GPIOHBCTL_PORTD, set);
+    GPIOHBCTL.setRegisterBitFieldStatus(GPIOHBCTL_PORTE, set);
+    GPIOHBCTL.setRegisterBitFieldStatus(GPIOHBCTL_PORTF, set);
 }
 
 

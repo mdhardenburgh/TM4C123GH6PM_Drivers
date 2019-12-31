@@ -32,8 +32,9 @@ class Register
         Register(volatile uint32_t* address);
         ~Register();
 
+        void setRegisterAddress(volatile uint32_t* address);
+        volatile uint32_t* getRegisterAddress(void);
         uint32_t getRegisterBitFieldStatus(bitField myBitField);
-
         void setRegisterBitFieldStatus(bitField myBitField, uint32_t value);
     
     protected:

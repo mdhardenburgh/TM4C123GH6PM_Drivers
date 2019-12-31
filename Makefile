@@ -21,7 +21,7 @@ MAP=-Map=main.map
 main.bin: main.elf
 	$(COMPILER)-objcopy -O binary main.elf main.bin
 
-main.elf: nokeep.ld startup_ARMCM4.o main.o register.o systick.o nvic.o sbc.o mpu.o fpu.o systemControl.o systemClock.o gpioControl.o gpio.o
+main.elf: nokeep.ld startup_ARMCM4.o main.o register.o systick.o nvic.o sbc.o mpu.o fpu.o systemControl.o systemClock.o gpioControl.o gpio.o generalPurposeTimer.o shortTimer.o
 	$(COMPILER)-ld -T $^ -o main.elf $(GC) $(MAP)
  
 startup_ARMCM4.o: startup_ARMCM4.S
@@ -58,6 +58,12 @@ gpioControl.o: gpio/gpioControl.cpp gpio/gpioControl.h register.h
 	$(COMPILER)-g++ $^ $(COMPILE_FLAGS) $(ARCH_FLAGS)
 
 gpio.o: gpio/gpio.cpp gpio/gpio.h register.h
+	$(COMPILER)-g++ $^ $(COMPILE_FLAGS) $(ARCH_FLAGS)
+
+generalPurposeTimer.o: timer/generalPurposeTimer.cpp timer/generalPurposeTimer.h register.h
+	$(COMPILER)-g++ $^ $(COMPILE_FLAGS) $(ARCH_FLAGS)
+
+shortTimer.o: timer/shortTimer.cpp timer/shortTimer.h register.h
 	$(COMPILER)-g++ $^ $(COMPILE_FLAGS) $(ARCH_FLAGS)
 
 clean:

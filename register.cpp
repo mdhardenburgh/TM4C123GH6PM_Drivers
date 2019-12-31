@@ -15,6 +15,16 @@ Register::~Register()
 
 }
 
+void Register::setRegisterAddress(volatile uint32_t* address)
+{
+    (*this).address = address;
+}
+
+volatile uint32_t* Register::getRegisterAddress(void)
+{
+    return(address);
+}
+
 uint32_t Register::getRegisterBitFieldStatus(bitField myBitField)
 {
     if((myBitField.permission == RW) || (myBitField.permission == RO) || (myBitField.permission == RW1C))
