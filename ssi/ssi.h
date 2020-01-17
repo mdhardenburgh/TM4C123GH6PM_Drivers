@@ -57,14 +57,21 @@ class Ssi : SystemControl
         const uint32_t ssi2BaseAddress = 0x4000A000;
         const uint32_t ssi3BaseAddress = 0x4000B000;
 
+        const uint32_t PPSSI_OFFSET = 0x31C;
+        const uint32_t SRSSI_OFFSET = 0x51C;
+        const uint32_t RCGCSSI_OFFSET = 0x61C;
+        const uint32_t SCGCSSI_OFFSET = 0x71C;
+        const uint32_t DCGCSSI_OFFSET = 0x81C;
+        const uint32_t PRSSI_OFFSET = 0xA1C;
+
 /**********************System Control Register Descriptions********************/
 
-        Register PPSSI{(volatile uint32_t*)(systemControlBase + 0x31C)}; //0x31C PPSSI RO 0x0000.000F Synchronous Serial Interface Peripheral Present 297
-        Register SRSSI{(volatile uint32_t*)(systemControlBase + 0x51C)}; //0x51C SRSSI RW 0x0000.0000 Synchronous Serial Interface Software Reset 320
-        Register RCGCSSI{(volatile uint32_t*)(systemControlBase + 0x61C)}; //0x61C RCGCSSI RW 0x0000.0000 Synchronous Serial Interface Run Mode Clock Gating Control 346
-        Register SCGCSSI{(volatile uint32_t*)(systemControlBase + 0x71C)}; //0x71C SCGCSSI RW 0x0000.0000 Synchronous Serial Interface Sleep Mode Clock Gating Control 368
-        Register DCGCSSI{(volatile uint32_t*)(systemControlBase + 0x81C)}; //0x81C DCGCSSI RW 0x0000.0000 Synchronous Serial Interface Deep-Sleep Mode Clock Gating Control 390
-        Register PRSSI{(volatile uint32_t*)(systemControlBase + 0xA1C)}; //0xA1C PRSSI RO 0x0000.0000 Synchronous Serial Interface Peripheral Ready 412
+        Register* PPSSI; //0x31C PPSSI RO 0x0000.000F Synchronous Serial Interface Peripheral Present 297
+        Register* SRSSI; //0x51C SRSSI RW 0x0000.0000 Synchronous Serial Interface Software Reset 320
+        Register* RCGCSSI; //0x61C RCGCSSI RW 0x0000.0000 Synchronous Serial Interface Run Mode Clock Gating Control 346
+        Register* SCGCSSI; //0x71C SCGCSSI RW 0x0000.0000 Synchronous Serial Interface Sleep Mode Clock Gating Control 368
+        Register* DCGCSSI; //0x81C DCGCSSI RW 0x0000.0000 Synchronous Serial Interface Deep-Sleep Mode Clock Gating Control 390
+        Register* PRSSI; //0xA1C PRSSI RO 0x0000.0000 Synchronous Serial Interface Peripheral Ready 412
 
 /**************************System Control BitFields****************************/
 
@@ -97,28 +104,6 @@ class Ssi : SystemControl
         bitField PRSSI_R2{2, 1, RO}; //SSI Module 2 Peripheral Ready
         bitField PRSSI_R1{1, 1, RO}; //SSI Module 1 Peripheral Ready
         bitField PRSSI_R0{0, 1, RO}; //SSI Module 0 Peripheral Ready
-
-/********************System Control Legacy BitField Descriptions***************/
-        /**
-         * Important: Register in this section are provided for legacy software 
-         * support only; registers in “System Control Register Descriptions” on 
-         * page 237 should be used instead.
-         */
-
-        bitField DC2_SSI1{5, 1, RO}; //SSI Module 1 Present. When set, indicates that SSI module 1 is present.
-        bitField DC2_SSI0{4, 1, RO}; //SSI Module 0 Present. When set, indicates that SSI module 0 is present.
-
-        bitField SRCR1_SSI1{5, 1, RO}; //SSI1 Reset Control
-        bitField SRCR1_SSI0{4, 1, RO}; //SSI0 Reset Control
-
-        bitField RCGC1_SSI1{5, 1, RO}; //SSI1 Clock Gating Control
-        bitField RCGC1_SSI0{4, 1, RO}; //SSI0 Clock Gating Control
-
-        bitField SCGC1_SSI1{5, 1, RO}; //SSI1 Clock Gating Control
-        bitField SCGC1_SSI0{4, 1, RO}; //SSI0 Clock Gating Control
-
-        bitField DCGC1_SSI1{5, 1, RO}; //SSI1 Clock Gating Control
-        bitField DCGC1_SSI0{4, 1, RO}; //SSI0 Clock Gating Control
 
 };
 

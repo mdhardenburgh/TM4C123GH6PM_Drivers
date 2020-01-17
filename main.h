@@ -1,0 +1,19 @@
+// #ifndef MAIN_H
+// #define MAIN_H
+
+#include "register.h"
+#include "corePeripherals/systick/systick.h"
+#include "corePeripherals/nvic/nvic.h"
+#include "corePeripherals/sbc/sbc.h"
+#include "systemControl/systemControl.h"
+#include "gpio/gpio.h"
+#include "timer/generalPurposeTimer.h"
+
+// Gpio blueLed;
+// Gpio redLed;
+// Gpio swtich1;
+// Gpio swtich2;
+
+// void GPIO_Port_F_Handler(void);
+
+// #endif //MAIN_H

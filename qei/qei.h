@@ -55,14 +55,21 @@ class Qei : SystemControl
         const uint32_t qei0BaseAddress = 0x4002C000;
         const uint32_t qei1BaseAddress = 0x4002D000;
 
+        const uint32_t PPQEI_OFFSET = 0x344;
+        const uint32_t SRQEI_OFFSET = 0x544;
+        const uint32_t RCGCQEI_OFFSET = 0x644;
+        const uint32_t SCGCQEI_OFFSET = 0x744;
+        const uint32_t DCGCQEI_OFFSET = 0x844;
+        const uint32_t PRQEI_OFFSET = 0xA44;
+
 /**********************System Control Register Descriptions********************/
 
-        Register PPQEI{(volatile uint32_t*)(systemControlBase + 0x344)}; //0x344 PPQEI RO 0x0000.0003 Quadrature Encoder Interface Peripheral Present 306
-        Register SRQEI{(volatile uint32_t*)(systemControlBase + 0x544)}; //0x544 SRQEI RW 0x0000.0000 Quadrature Encoder Interface Software Reset 332
-        Register RCGCQEI{(volatile uint32_t*)(systemControlBase + 0x644)}; //0x644 RCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Run Mode Clock Gating Control 355
-        Register SCGCQEI{(volatile uint32_t*)(systemControlBase + 0x744)}; //0x744 SCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Sleep Mode Clock Gating Control 377
-        Register DCGCQEI{(volatile uint32_t*)(systemControlBase + 0x844)}; //0x844 DCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Deep-Sleep Mode Clock Gating Control 399
-        Register PRQEI{(volatile uint32_t*)(systemControlBase + 0xA44)}; //0xA44 PRQEI RO 0x0000.0000 Quadrature Encoder Interface Peripheral Ready 421
+        Register* PPQEI; //0x344 PPQEI RO 0x0000.0003 Quadrature Encoder Interface Peripheral Present 306
+        Register* SRQEI; //0x544 SRQEI RW 0x0000.0000 Quadrature Encoder Interface Software Reset 332
+        Register* RCGCQEI; //0x644 RCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Run Mode Clock Gating Control 355
+        Register* SCGCQEI; //0x744 SCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Sleep Mode Clock Gating Control 377
+        Register* DCGCQEI; //0x844 DCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Deep-Sleep Mode Clock Gating Control 399
+        Register* PRQEI; //0xA44 PRQEI RO 0x0000.0000 Quadrature Encoder Interface Peripheral Ready 421
 
 /**************************System Control BitFields****************************/
 
@@ -83,28 +90,6 @@ class Qei : SystemControl
 
         bitField PRQEI_R1{1, 1, RO}; //QEI Module 1 Peripheral Ready
         bitField PRQEI_R0{0, 1, RO}; //QEI Module 0 Peripheral Ready
-
-/********************System Control Legacy BitField Descriptions***************/
-        /**
-         * Important: Register in this section are provided for legacy software 
-         * support only; registers in “System Control Register Descriptions” on 
-         * page 237 should be used instead.
-         */
-
-        bitField DC2_QEI1{9, 1, RO}; //QEI Module 1 Present. When set, indicates that QEI module 1 is present.
-        bitField DC2_QEI0{8, 1, RO}; //QEI Module 0 Present. When set, indicates that QEI module 0 is present.
-
-        bitField SRCR1_QEI1{9, 1, RO}; //QEI1 Reset Control
-        bitField SRCR1_QEI0{8, 1, RO}; //QEI0 Reset Control
-
-        bitField RCGC1_QEI1{9, 1, RO}; //QEI1 Clock Gating Control
-        bitField RCGC1_QEI0{8, 1, RO}; //QEI0 Clock Gating Control
-
-        bitField SCGC1_QEI1{9, 1, RO}; //QEI1 Clock Gating Control
-        bitField SCGC1_QEI0{8, 1, RO}; //QEI0 Clock Gating Control
-
-        bitField DCGC1_QEI1{9, 1, RO}; //QEI1 Clock Gating Control
-        bitField DCGC1_QEI0{8, 1, RO}; //QEI0 Clock Gating Control
         
 };
 

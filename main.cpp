@@ -27,53 +27,78 @@ along with this program.  If not, see <https://www.gnu.org/licenses/.
  * @date 11/04/2019
  */
 
-#include "register.h"
-#include "corePeripherals/systick/systick.h"
-#include "corePeripherals/nvic/nvic.h"
-#include "corePeripherals/sbc/sbc.h"
-#include "systemControl/systemControl.h"
-#include "systemControl/systemClock.h"
-#include "gpio/gpioControl.h"
-#include "gpio/gpio.h"
-#include "timer/generalPurposeTimer.h"
-#include "timer/shortTimer.h"
+#include "main.h"
 
+Nvic* myNvic;
+Sbc* mySbc;
+SystemControl* systemController;
+
+Gpio* blueLed;
+Gpio* redLed;
+Gpio* swtich1;
+Gpio* swtich2;
+
+extern "C" void GPIO_Port_F_Handler(void)
+{
+    
+    if((*swtich1).gpioRead() == 1)
+    {
+        (*redLed).gpioWrite(clear);
+        (*swtich1).interruptClear();
+    }
+
+    if((*swtich1).gpioRead() == 0)
+    {
+        (*redLed).gpioWrite(set);
+        (*swtich1).interruptClear();
+    }
+
+    if((*swtich2).gpioRead() == 1)
+    {
+        (*blueLed).gpioWrite(clear);
+        (*swtich2).interruptClear();
+    }
+
+    if((*swtich2).gpioRead() == 0)
+    {
+        (*blueLed).gpioWrite(set);
+        (*swtich2).interruptClear();
+    }
+
+}
+
+extern "C" void SystemInit(void)
+{
+    myNvic = new Nvic();
+    mySbc = new Sbc();
+    systemController = new SystemControl(_80MHz);
+
+    blueLed = new Gpio(PF2, output);
+    redLed = new Gpio(PF1, output);
+}
 
 int main(void)
 {
-    Systick mySistick();
-    Nvic myNvic();
-    Sbc mySbc();
-    SystemClock myClock();
-    Gpio blueLed(PF2, output);
-    Gpio redLed(PF1, output);
-    Gpio swtich2(PF0, input);
-    Gpio swtich1(PF4, input);
+    (*myNvic).disableInterrupts();
+    swtich1 = new Gpio(PF4, input, 3);
+    swtich2 = new Gpio(PF0, input, 3);
+    (*myNvic).enableInterrupts();
 
-    blueLed.gpioWrite(set);
-    redLed.gpioWrite(set);
+    (*blueLed).gpioWrite(set);
+    (*redLed).gpioWrite(set);
+    
+    
 
     while(1)
     {
-        
-        if(swtich1.gpioRead() == 1)
-        {
-            redLed.gpioWrite(clear);
-        }
-
-        if(swtich1.gpioRead() == 0)
-        {
-            redLed.gpioWrite(set);
-        }
-
-        if(swtich2.gpioRead() == 1)
-        {
-            blueLed.gpioWrite(set);
-        }
-
-        if(swtich2.gpioRead() == 0)
-        {
-            blueLed.gpioWrite(clear);
-        }
+        (*myNvic).wfi(); // the -Os flag was causing issues
     }
+
+    delete myNvic;
+    delete mySbc;
+    delete systemController;
+    delete blueLed;
+    delete redLed;
+    delete swtich1;
+    delete swtich2;
 }

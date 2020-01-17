@@ -53,14 +53,21 @@ class Hibernate : SystemControl
     private:
         const uint32_t hibernateBase = 0x400FC000;
 
+        const uint32_t PPHIB_OFFSET = 0x314;
+        const uint32_t SRHIB_OFFSET = 0x514;
+        const uint32_t RCGCHIB_OFFSET = 0x614;
+        const uint32_t SCGCHIB_OFFSET = 0x714;
+        const uint32_t DCGCHIB_OFFSET = 0x814;
+        const uint32_t PRHIB_OFFSET = 0xA14;
+
 /**********************System Control Register Descriptions********************/
 
-        Register PPHIB{(volatile uint32_t*)(systemControlBase + 0x314)}; //0x314 PPHIB RO 0x0000.0001 Hibernation Peripheral Present 294
-        Register SRHIB{(volatile uint32_t*)(systemControlBase + 0x514)}; //0x514 SRHIB RW 0x0000.0000 Hibernation Software Reset 317
-        Register RCGCHIB{(volatile uint32_t*)(systemControlBase + 0x614)}; //0x614 RCGCHIB RW 0x0000.0001 Hibernation Run Mode Clock Gating Control 343
-        Register SCGCHIB{(volatile uint32_t*)(systemControlBase + 0x714)}; //0x714 SCGCHIB RW 0x0000.0001 Hibernation Sleep Mode Clock Gating Control 365
-        Register DCGCHIB{(volatile uint32_t*)(systemControlBase + 0x814)}; //0x814 DCGCHIB RW 0x0000.0001 Hibernation Deep-Sleep Mode Clock Gating Control 387
-        Register PRHIB{(volatile uint32_t*)(systemControlBase + 0xA14)}; //0xA14 PRHIB RO 0x0000.0001 Hibernation Peripheral Ready 409
+        Register* PPHIB; //0x314 PPHIB RO 0x0000.0001 Hibernation Peripheral Present 294
+        Register* SRHIB; //0x514 SRHIB RW 0x0000.0000 Hibernation Software Reset 317
+        Register* RCGCHIB; //0x614 RCGCHIB RW 0x0000.0001 Hibernation Run Mode Clock Gating Control 343
+        Register* SCGCHIB; //0x714 SCGCHIB RW 0x0000.0001 Hibernation Sleep Mode Clock Gating Control 365
+        Register* DCGCHIB; //0x814 DCGCHIB RW 0x0000.0001 Hibernation Deep-Sleep Mode Clock Gating Control 387
+        Register* PRHIB; //0xA14 PRHIB RO 0x0000.0001 Hibernation Peripheral Ready 409
 
 /**************************System Control BitFields****************************/
 
@@ -70,20 +77,6 @@ class Hibernate : SystemControl
         bitField SCGCHIB_S0{0, 1, RW}; //Hibernation Module Sleep Mode Clock Gating Control
         bitField DCGCHIB_D0{0, 1, RW}; //Hibernation Module Deep-Sleep Mode Clock Gating Control
         bitField PRHIB_R0{0, 1, RO}; //Hibernation Module Peripheral Ready
-
-/********************System Control Legacy BitField Descriptions***************/
-        /**
-         * Important: Register in this section are provided for legacy software 
-         * support only; registers in “System Control Register Descriptions” on 
-         * page 237 should be used instead.
-         */
-
-        bitField DC1_HIB{6, 1, RO}; //Hibernation Module Present. When set, indicates that the Hibernation module is present.
-        bitField SRCR0_HIB{6, 1, RO}; //HIB Reset Control
-        bitField RCGC0_HIB{6, 1, RO}; //HIB Clock Gating Control
-        bitField SCGC0_HIB{6, 1, RO}; //HIB Clock Gating Control
-        bitField DCGC0_HIB{6, 1, RO}; //HIB Clock Gating Control
-
 
 };
 

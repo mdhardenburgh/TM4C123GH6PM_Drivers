@@ -62,14 +62,21 @@ class Uart : SystemControl
         const uint32_t uart6BaseAddress = 0x40012000;
         const uint32_t uart6BaseAddress = 0x40013000;
 
+        const uint32_t PPUART_OFFSET = 0x318;
+        const uint32_t SRUART_OFFSET = 0x518;
+        const uint32_t RCGCUART_OFFSET = 0x618;
+        const uint32_t SCGCUART_OFFSET = 0x718;
+        const uint32_t DCGCUART_OFFSET = 0x818;
+        const uint32_t PRUART_OFFSET = 0xA18;
+
 /**********************System Control Register Descriptions********************/
 
-        Register PPUART{(volatile uint32_t*)(systemControlBase + 0x318)}; //0x318 PPUART RO 0x0000.00FF Universal Asynchronous Receiver/Transmitter Peripheral Present 295
-        Register SRUART{(volatile uint32_t*)(systemControlBase + 0x518)}; //0x518 SRUART RW 0x0000.0000 Universal Asynchronous Receiver/Transmitter Software Reset 318
-        Register RCGCUART{(volatile uint32_t*)(systemControlBase + 0x618)}; //0x618 RCGCUART RW 0x0000.0000 Universal Asynchronous Receiver/Transmitter Run Mode Clock Gating Control 344
-        Register SCGCUART{(volatile uint32_t*)(systemControlBase + 0x718)}; //0x718 SCGCUART RW 0x0000.0000 Universal Asynchronous Receiver/Transmitter Sleep Mode Clock Gating Control 366
-        Register DCGCUART{(volatile uint32_t*)(systemControlBase + 0x818)}; //0x818 DCGCUART RW 0x0000.0000 Universal Asynchronous Receiver/Transmitter Deep-Sleep Mode Clock Gating Control 388
-        Register PRUART{(volatile uint32_t*)(systemControlBase + 0xA18)}; //0xA18 PRUART RO 0x0000.0000 Universal Asynchronous Receiver/Transmitter Peripheral Ready 410
+        Register* PPUART; //0x318 PPUART RO 0x0000.00FF Universal Asynchronous Receiver/Transmitter Peripheral Present 295
+        Register* SRUART; //0x518 SRUART RW 0x0000.0000 Universal Asynchronous Receiver/Transmitter Software Reset 318
+        Register* RCGCUART; //0x618 RCGCUART RW 0x0000.0000 Universal Asynchronous Receiver/Transmitter Run Mode Clock Gating Control 344
+        Register* SCGCUART; //0x718 SCGCUART RW 0x0000.0000 Universal Asynchronous Receiver/Transmitter Sleep Mode Clock Gating Control 366
+        Register* DCGCUART; //0x818 DCGCUART RW 0x0000.0000 Universal Asynchronous Receiver/Transmitter Deep-Sleep Mode Clock Gating Control 388
+        Register* PRUART; //0xA18 PRUART RO 0x0000.0000 Universal Asynchronous Receiver/Transmitter Peripheral Ready 410
 
 /**************************System Control BitFields****************************/
 
@@ -126,33 +133,6 @@ class Uart : SystemControl
         bitField PRUART_R2{2, 1, RO}; //UART Module 2 Peripheral Ready
         bitField PRUART_R1{1, 1, RO}; //UART Module 1 Peripheral Ready
         bitField PRUART_R0{0, 1, RO}; //UART Module 0 Peripheral Ready
-
-/********************System Control Legacy BitField Descriptions***************/
-        /**
-         * Important: Register in this section are provided for legacy software 
-         * support only; registers in “System Control Register Descriptions” on 
-         * page 237 should be used instead.
-         */
-
-        bitField DC2_UART2{2, 1, RO}; //UART Module 2 Present. When set, indicates that UART module 2 is present.
-        bitField DC2_UART1{1, 1, RO}; //UART Module 1 Present. When set, indicates that UART module 1 is present.
-        bitField DC2_UART0{0, 1, RO}; //UART Module 0 Present. When set, indicates that UART module 0 is present.
-
-        bitField SRCR1_UART2{2, 1, RO}; //UART2 Reset Control
-        bitField SRCR1_UART1{1, 1, RO}; //UART1 Reset Control
-        bitField SRCR1_UART0{0, 1, RO}; //UART0 Reset Control
-
-        bitField RCGC1_UART2{2, 1, RO}; //UART2 Clock Gating Control
-        bitField RCGC1_UART1{1, 1, RO}; //UART1 Clock Gating Control
-        bitField RCGC1_UART0{0, 1, RO}; //UART0 Clock Gating Control
-
-        bitField SCGC1_UART2{2, 1, RO}; //UART2 Clock Gating Control
-        bitField SCGC1_UART1{1, 1, RO}; //UART1 Clock Gating Control
-        bitField SCGC1_UART0{0, 1, RO}; //UART0 Clock Gating Control
-
-        bitField DCGC1_UART2{2, 1, RO}; //UART2 Clock Gating Control
-        bitField DCGC1_UART1{1, 1, RO}; //UART1 Clock Gating Control
-        bitField DCGC1_UART0{0, 1, RO}; //UART0 Clock Gating Control
 
 };
 

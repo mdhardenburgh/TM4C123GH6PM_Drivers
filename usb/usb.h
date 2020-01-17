@@ -52,14 +52,21 @@ class Usb : SystemControl
     private:
         const uint32_t usbBaseAddress = 0x40050000;
 
+        const uint32_t PPUSB_OFFSET = 0x328;
+        const uint32_t SRUSB_OFFSET = 0x528;
+        const uint32_t RCGCUSB_OFFSET = 0x628;
+        const uint32_t SCGCUSB_OFFSET = 0x728;
+        const uint32_t DCGCUSB_OFFSET = 0x828;
+        const uint32_t PRUSB_OFFSET = 0xA28;
+
 /**********************System Control Register Descriptions********************/
 
-        Register PPUSB{(volatile uint32_t*)(systemControlBase + 0x328)}; //0x328 PPUSB RO 0x0000.0001 Universal Serial Bus Peripheral Present 301
-        Register SRUSB{(volatile uint32_t*)(systemControlBase + 0x528)}; //0x528 SRUSB RW 0x0000.0000 Universal Serial Bus Software Reset 324
-        Register RCGCUSB{(volatile uint32_t*)(systemControlBase + 0x628)}; //0x628 RCGCUSB RW 0x0000.0000 Universal Serial Bus Run Mode Clock Gating Control 350
-        Register SCGCUSB{(volatile uint32_t*)(systemControlBase + 0x728)}; //0x728 SCGCUSB RW 0x0000.0000 Universal Serial Bus Sleep Mode Clock Gating Control 372
-        Register DCGCUSB{(volatile uint32_t*)(systemControlBase + 0x828)}; //0x828 DCGCUSB RW 0x0000.0000 Universal Serial Bus Deep-Sleep Mode Clock Gating Control 394
-        Register PRUSB{(volatile uint32_t*)(systemControlBase + 0xA28)}; //0xA28 PRUSB RO 0x0000.0000 Universal Serial Bus Peripheral Ready 416
+        Register* PPUSB; //0x328 PPUSB RO 0x0000.0001 Universal Serial Bus Peripheral Present 301
+        Register* SRUSB; //0x528 SRUSB RW 0x0000.0000 Universal Serial Bus Software Reset 324
+        Register* RCGCUSB; //0x628 RCGCUSB RW 0x0000.0000 Universal Serial Bus Run Mode Clock Gating Control 350
+        Register* SCGCUSB; //0x728 SCGCUSB RW 0x0000.0000 Universal Serial Bus Sleep Mode Clock Gating Control 372
+        Register* DCGCUSB; //0x828 DCGCUSB RW 0x0000.0000 Universal Serial Bus Deep-Sleep Mode Clock Gating Control 394
+        Register* PRUSB; //0xA28 PRUSB RO 0x0000.0000 Universal Serial Bus Peripheral Ready 416
 
 /**************************System Control BitFields****************************/
 
@@ -77,20 +84,6 @@ class Usb : SystemControl
         bitField SCGCUSB_S0{0, 1, RW}; //USB Module Sleep Mode Clock Gating Control
         bitField DCGCUSB_D0{0, 1, RW}; //USB Module Deep-Sleep Mode Clock Gating Control
         bitField PRUSB_R0{0, 1, RO}; //USB Module Peripheral Ready
-
-/********************System Control Legacy BitField Descriptions***************/
-        /**
-         * Important: Register in this section are provided for legacy software 
-         * support only; registers in “System Control Register Descriptions” on 
-         * page 237 should be used instead.
-         */
-
-        bitField DC6_USB0PHY{4, 1, RO}; //USB Module 0 PHY Present. When set, indicates that the USB module 0 PHY is present.
-        bitField DC6_USB0{0, 2, RO}; //USB Module 0 Present. This field indicates that USB module 0 is present and specifies its capability.
-        bitField SRCR2_USB0{16, 1, RO}; //USB0 Reset Control
-        bitField RCGC2_USB0{16, 1, RO}; //USB0 Clock Gating Control
-        bitField SCGC2_USB0{16, 1, RO}; //USB0 Clock Gating Control
-        bitField DCGC2_USB0{16, 1, RO}; //USB0 Clock Gating Control
 
 };
 

@@ -55,14 +55,21 @@ class I2c : SystemControl
         const uint32_t i2c2BaseAddress = 0x40022000;
         const uint32_t i2c3BaseAddress = 0x40023000;
 
+        const uint32_t PPI2C_OFFSET = 0x320;
+        const uint32_t SRI2C_OFFSET = 0x520;
+        const uint32_t RCGCI2C_OFFSET = 0x620;
+        const uint32_t SCGCI2C_OFFSET = 0x720;
+        const uint32_t DCGCI2C_OFFSET = 0x820;
+        const uint32_t PRI2C_OFFSET = 0xA20;
+
 /**********************System Control Register Descriptions********************/
 
-        Register PPI2C{(volatile uint32_t*)(systemControlBase + 0x320)}; //0x320 PPI2C RO 0x0000.000F Inter-Integrated Circuit Peripheral Present 299
-        Register SRI2C{(volatile uint32_t*)(systemControlBase + 0x520)}; //0x520 SRI2C RW 0x0000.0000 Inter-Integrated Circuit Software Reset 322
-        Register RCGCI2C{(volatile uint32_t*)(systemControlBase + 0x620)}; //0x620 RCGCI2C RW 0x0000.0000 Inter-Integrated Circuit Run Mode Clock Gating Control 348
-        Register SCGCI2C{(volatile uint32_t*)(systemControlBase + 0x720)}; //0x720 SCGCI2C RW 0x0000.0000 Inter-Integrated Circuit Sleep Mode Clock Gating Control 370
-        Register DCGCI2C{(volatile uint32_t*)(systemControlBase + 0x820)}; //0x820 DCGCI2C RW 0x0000.0000 Inter-Integrated Circuit Deep-Sleep Mode Clock Gating Control 392
-        Register PRI2C{(volatile uint32_t*)(systemControlBase + 0xA20)}; //0xA20 PRI2C RO 0x0000.0000 Inter-Integrated Circuit Peripheral Ready 414
+        Register* PPI2C; //0x320 PPI2C RO 0x0000.000F Inter-Integrated Circuit Peripheral Present 299
+        Register* SRI2C; //0x520 SRI2C RW 0x0000.0000 Inter-Integrated Circuit Software Reset 322
+        Register* RCGCI2C; //0x620 RCGCI2C RW 0x0000.0000 Inter-Integrated Circuit Run Mode Clock Gating Control 348
+        Register* SCGCI2C; //0x720 SCGCI2C RW 0x0000.0000 Inter-Integrated Circuit Sleep Mode Clock Gating Control 370
+        Register* DCGCI2C; //0x820 DCGCI2C RW 0x0000.0000 Inter-Integrated Circuit Deep-Sleep Mode Clock Gating Control 392
+        Register* PRI2C; //0xA20 PRI2C RO 0x0000.0000 Inter-Integrated Circuit Peripheral Ready 414
 
 /**************************System Control BitFields****************************/
 
@@ -97,30 +104,6 @@ class I2c : SystemControl
         bitField PRI2C_R2{2, 1, RO}; //I2C Module 2 Peripheral Ready
         bitField PRI2C_R1{1, 1, RO}; //I2C Module 1 Peripheral Ready
         bitField PRI2C_R0{0, 1, RO}; //I2C Module 0 Peripheral Ready
-
-/********************System Control Legacy BitField Descriptions***************/
-        /**
-         * Important: Register in this section are provided for legacy software 
-         * support only; registers in “System Control Register Descriptions” on 
-         * page 237 should be used instead.
-         */
-
-        bitField DC2_I2C1HS{15, 1, RO}; //I2C Module 1 Speed. When set, indicates that I2C module 1 can operate in high-speed mode.
-        bitField DC2_I2C1{14, 1, RO}; //I2C Module 1 Present. When set, indicates that I2C module 1 is present.
-        bitField DC2_I2C0HS{13, 1, RO}; //I2C Module 0 Speed. When set, indicates that I2C module 0 can operate in high-speed mode.
-        bitField DC2_I2C0{12, 1, RO}; //I2C Module 0 Present. When set, indicates that I2C module 0 is present.
-
-        bitField SRCR1_I2C1{14, 1, RO}; //I2C1 Reset Control
-        bitField SRCR1_I2C0{12, 1, RO}; //I2C0 Reset Control
-
-        bitField RCGC1_I2C1{14, 1, RO}; //I2C1 Clock Gating Control
-        bitField RCGC1_I2C0{12, 1, RO}; //I2C0 Clock Gating Control
-
-        bitField SCGC1_I2C1{14, 1, RO}; //I2C1 Clock Gating Control
-        bitField SCGC1_I2C0{12, 1, RO}; //I2C0 Clock Gating Control
-
-        bitField DCGC1_I2C1{14, 1, RO}; //I2C1 Clock Gating Control
-        bitField DCGC1_I2C0{12, 1, RO}; //I2C0 Clock Gating Control
 
 };
 

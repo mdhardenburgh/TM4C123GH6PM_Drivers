@@ -59,7 +59,22 @@ class Sbc
          * Cortex-M4 Peripheral SysTick, NVIC, MPU, FPU and SCB registers.
          * These register definitions begin on page 134 of the TM4C123GH6PM Datasheet.
          */
-        const long corePeripheralBase = 0xE000E000;
+        const uint32_t corePeripheralBase = 0xE000E000;
+        const uint32_t ACTLR_OFFSET = 0x008;
+        const uint32_t CPUID_OFFSET = 0xD00; 
+        const uint32_t INTCTRL_OFFSET = 0xD04;
+        const uint32_t VTABLE_OFFSET = 0xD08;
+        const uint32_t APINT_OFFSET = 0xD0C;
+        const uint32_t SYSCTRL_OFFSET = 0xD10;
+        const uint32_t CFGCTRL_OFFSET = 0xD14;
+        const uint32_t SYSPRI1_OFFSET = 0xD18;
+        const uint32_t SYSPRI2_OFFSET = 0xD1C;
+        const uint32_t SYSPRI3_OFFSET = 0xD20;
+        const uint32_t SYSHNDCTRL_OFFSET = 0xD24;
+        const uint32_t FAULTSTAT_OFFSET = 0xD28;
+        const uint32_t HFAULTSTAT_OFFSET = 0xD2C;
+        const uint32_t MMADDR_OFFSET = 0xD34;
+        const uint32_t FAULTADDR_OFFSET = 0xD38;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 
@@ -74,7 +89,244 @@ class Sbc
          * 
          * Note: This register can only be accessed from privileged mode.
          */
-        Register ACTLR{(volatile uint32_t*)(corePeripheralBase + 0x008)};
+        Register* ACTLR;
+        
+        /**
+         * Register 66: CPU ID Base (CPUID), offset 0xD00 Getters and Setters
+         *   
+         * The CPUID register contains the ARM® CortexTM-M4 processor part 
+         * number, version, and implementation information.
+         * 
+         * Note: This register can only be accessed from privileged mode.
+         */
+        Register* CPUID;
+
+        /**
+         * Register 67: Interrupt Control and State (INTCTRL), offset 0xD04 Getters and Setters
+         *   
+         * The INCTRL register provides a set-pending bit for the NMI exception, 
+         * and set-pending and clear-pending bits for the PendSV and SysTick 
+         * exceptions. In addition, bits in this register indicate the exception 
+         * number of the exception being processed, whether there are preempted 
+         * active exceptions, the exception number of the highest priority 
+         * pending exception, and whether any interrupts are pending.
+         * 
+         * When writing to INCTRL, the effect is unpredictable when writing a 1 
+         * to both the PENDSV and UNPENDSV bits, or writing a 1 to both the 
+         * PENDSTSET and PENDSTCLR bits.
+         * 
+         * Note: This register can only be accessed from privileged mode.
+         */
+        Register* INTCTRL;
+
+        /**
+         * Register 68: Vector Table Offset (VTABLE), offset 0xD08
+         *   
+         * The VTABLE register indicates the offset of the vector table base 
+         * address from memory address 0x0000.0000.
+         * 
+         * Note: This register can only be accessed from privileged mode.
+         */
+        Register* VTABLE;
+
+        /**
+         * Register 69: Application Interrupt and Reset Control (APINT), offset 0xD0C
+         * 
+         * Note: This register can only be accessed from privileged mode.
+         *   
+         * The APINT register provides priority grouping control for the exception 
+         * model, endian status for data accesses, and reset control of the system. To 
+         * write to this register, 0x05FA must be written to the VECTKEY field, 
+         * otherwise the write is ignored.
+         * 
+         * The PRIGROUP field indicates the position of the binary point that splits the 
+         * INTx fields in the Interrupt Priority (PRIx) registers into separate group 
+         * priority and subpriority fields. Table 3-9 on page 164 shows how the PRIGROUP 
+         * value controls this split. The bit numbers in the Group Priority Field and 
+         * Subpriority Field columns in the table refer to the bits in the INTA field. 
+         * For the INTB field, the corresponding bits are 15:13; for INTC, 23:21; and 
+         * for INTD, 31:29.
+         * 
+         * Table 3-9. Interrupt Priority Levels
+         * ____________________________________________________________________________________________________________________
+         * | PRIGROUP Bit Field | Binary Point$ | Group Priority Field | Subpriority Field | Group Priorities | Subpriorities |
+         * | 0x0 - 0x4          | bxxx.         | [7:5]                | None              | 8                | 1             |
+         * | 0x5                | bxx.y         | [7:6]                | [5]               | 4                | 2             |
+         * | 0x6                | bx.yy         | [7]                  | [6:5]             | 2                | 4             |
+         * | 0x7                | b.yyy         | None                 | [7:5]             | 1                | 8             |
+         * |____________________|_______________|______________________|___________________|__________________|_______________|
+         * $ INTx field showing the binary point. An x denotes a group priority field bit, and a y denotes a subpriority field bit.
+         * 
+         * Note: Determining preemption of an exception uses only the group priority field.
+         */
+        Register* APINT;
+
+        /**
+         * Register 70: System Control (SYSCTRL), offset 0xD10
+         * 
+         * Note: This register can only be accessed from privileged mode.
+         * 
+         * The SYSCTRL register controls features of entry to and exit from low-power state.
+         */
+        Register* SYSCTRL;
+
+        /**
+         * Register 71: Configuration and Control (CFGCTRL), offset 0xD14 
+         * 
+         * Note: This register can only be accessed from privileged mode.
+         * 
+         * The CFGCTRL register controls entry to Thread mode and enables: the 
+         * handlers for NMI, hard fault and faults escalated by the FAULTMASK 
+         * register to ignore bus faults; trapping of divide by zero and 
+         * unaligned accesses; and access to the SWTRIG register by unprivileged 
+         * software (see page 156).
+         */
+        Register* CFGCTRL;
+
+        /**
+         * Register 72: System Handler Priority 1 (SYSPRI1), offset 0xD18
+         * 
+         * Note: This register can only be accessed from privileged mode.
+         * 
+         * The SYSPRI1 register configures the priority level, 0 to 7 of the 
+         * usage fault, bus fault, and memory management fault exception 
+         * handlers. This register is byte-accessible.
+         */
+        Register SYSPRI1;
+
+        /**
+         * Register 73: System Handler Priority 2 (SYSPRI2), offset 0xD1C
+         * 
+         * Note: This register can only be accessed from privileged mode.
+         * 
+         * The SYSPRI2 register configures the priority level, 0 to 7 of the 
+         * SVCall handler. This register is byte-accessible.
+         */
+        Register SYSPRI2;
+
+        /**
+         * Register 74: System Handler Priority 3 (SYSPRI3), offset 0xD20
+         * 
+         * Note: This register can only be accessed from privileged mode.
+         * 
+         * The SYSPRI3 register configures the priority level, 0 to 7 of the 
+         * SysTick exception and PendSV handlers. This register is byte-accessible.
+         */
+        Register SYSPRI3;
+
+        /**
+         * Register 75: System Handler Control and State (SYSHNDCTRL), offset 0xD24
+         * 
+         * Note: This register can only be accessed from privileged mode. 
+         * 
+         * The SYSHNDCTRL register enables the system handlers, and indicates the p
+         * ending status of the usage fault, bus fault, memory management fault, and SVC 
+         * exceptions as well as the active status of the system handlers.
+         * 
+         * If a system handler is disabled and the corresponding fault occurs, the 
+         * processor treats the fault as a hard fault.
+         * 
+         * This register can be modified to change the pending or active status of 
+         * system exceptions. An OS kernel can write to the active bits to perform a 
+         * context switch that changes the current exception type.
+         * 
+         * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+         * Caution – Software that changes the value of an active bit in this register 
+         * without correct adjustment to the stacked content can cause the processor to 
+         * generate a fault exception. Ensure software that writes to this register 
+         * retains and subsequently restores the current active status. 
+         * 
+         * If the value of a bit in this register must be modified after 
+         * enabling the system handlers, a read-modify-write procedure must be 
+         * used to ensure that only the required bit is modified.
+         * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+         */
+        Register SYSHNDCTRL;
+
+        /**
+         * Register 76: Configurable Fault Status (FAULTSTAT), offset 0xD28 
+         * 
+         * Note: This register can only be accessed from privileged mode. 
+         * 
+         * The FAULTSTAT register indicates the cause of a memory management fault, bus 
+         * fault, or usage fault. Each of these functions is assigned to a subregister 
+         * as follows:
+         * 
+         *     ■ Usage Fault Status (UFAULTSTAT), bits 31:16
+         *     ■ Bus Fault Status (BFAULTSTAT), bits 15:8
+         *     ■ Memory Management Fault Status (MFAULTSTAT), bits 7:0
+         * 
+         * FAULTSTAT is byte accessible. FAULTSTAT or its subregisters can be accessed 
+         * as follows:
+         * 
+         *     ■ The complete FAULTSTAT register, with a word access to offset 0xD28
+         *     ■ The MFAULTSTAT, with a byte access to offset 0xD28
+         *     ■ The MFAULTSTAT and BFAULTSTAT, with a halfword access to offset 0xD28
+         *     ■ The BFAULTSTAT, with a byte access to offset 0xD29
+         *     ■ The UFAULTSTAT, with a halfword access to offset 0xD2A
+         * 
+         * Bits are cleared by writing a 1 to them.
+         * 
+         * In a fault handler, the true faulting address can be determined by:
+         * 1. Read and save the Memory Management Fault Address (MMADDR) or Bus Fault 
+         *    Address (FAULTADDR) value.
+         * 
+         * 2. Read the MMARV bit in MFAULTSTAT, or the BFARV bit in BFAULTSTAT to 
+         *    determine if the MMADDR or FAULTADDR contents are valid.
+         * 
+         * Software must follow this sequence because another higher priority exception 
+         * might change the MMADDR or FAULTADDR value. For example, if a higher priority 
+         * handler preempts the current fault handler, the other fault might change the 
+         * MMADDR or FAULTADDR value.
+         */
+        Register* FAULTSTAT;
+
+        /**
+         * Register 77: Hard Fault Status (HFAULTSTAT), offset 0xD2C
+         * 
+         * Note: This register can only be accessed from privileged mode. 
+         * 
+         * The HFAULTSTAT register gives information about events that activate the hard 
+         * fault handler.
+         * 
+         * Bits are cleared by writing a 1 to them.
+         */
+        Register* HFAULTSTAT;
+
+        /**
+         * Register 78: Memory Management Fault Address (MMADDR), offset 0xD34 
+         * 
+         * Note: This register can only be accessed from privileged mode. 
+         * 
+         * The MMADDR register contains the address of the location that 
+         * generated a memory management fault. When an unaligned access faults, 
+         * the address in the MMADDR register is the actual address that 
+         * faulted. Because a single read or write instruction can be split into 
+         * multiple aligned accesses, the fault address can be any address in 
+         * the range of the requested access size. Bits in the Memory Management 
+         * Fault Status (MFAULTSTAT) register indicate the cause of the fault 
+         * and whether the value in the MMADDR register is valid (see page 177).
+         */
+        Register* MMADDR;
+
+        /**
+         * Register 79: Bus Fault Address (FAULTADDR), offset 0xD38
+         * 
+         * Note: This register can only be accessed from privileged mode. 
+         * 
+         * The FAULTADDR register contains the address of the location that generated a 
+         * bus fault. When an unaligned access faults, the address in the FAULTADDR 
+         * register is the one requested by the instruction, even if it is not the 
+         * address of the fault. Bits in the Bus Fault Status (BFAULTSTAT) register 
+         * indicate the cause of the fault and whether the value in the FAULTADDR 
+         * register is valid (see page 177).
+         */
+        Register* FAULTADDR;
+
+
+
+
+
 
         /**
          * Description: Disable Out-Of-Order Floating Point
@@ -146,15 +398,7 @@ class Sbc
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 66: CPU ID Base (CPUID), offset 0xD00 Getters and Setters
-         *   
-         * The CPUID register contains the ARM® CortexTM-M4 processor part 
-         * number, version, and implementation information.
-         * 
-         * Note: This register can only be accessed from privileged mode.
-         */
-        Register CPUID{(volatile uint32_t*) (corePeripheralBase + 0xD00)};
+
 
         /**
          * Description: Implementer Code
@@ -201,23 +445,6 @@ class Sbc
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 67: Interrupt Control and State (INTCTRL), offset 0xD04 Getters and Setters
-         *   
-         * The INCTRL register provides a set-pending bit for the NMI exception, 
-         * and set-pending and clear-pending bits for the PendSV and SysTick 
-         * exceptions. In addition, bits in this register indicate the exception 
-         * number of the exception being processed, whether there are preempted 
-         * active exceptions, the exception number of the highest priority 
-         * pending exception, and whether any interrupts are pending.
-         * 
-         * When writing to INCTRL, the effect is unpredictable when writing a 1 
-         * to both the PENDSV and UNPENDSV bits, or writing a 1 to both the 
-         * PENDSTSET and PENDSTCLR bits.
-         * 
-         * Note: This register can only be accessed from privileged mode.
-         */
-        Register INTCTRL{(volatile uint32_t*)(corePeripheralBase + 0xD04)};
 
         /**
          * Description: NMI Set Pending
@@ -377,15 +604,7 @@ class Sbc
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 68: Vector Table Offset (VTABLE), offset 0xD08
-         *   
-         * The VTABLE register indicates the offset of the vector table base 
-         * address from memory address 0x0000.0000.
-         * 
-         * Note: This register can only be accessed from privileged mode.
-         */
-        Register VTABLE{(volatile uint32_t*)(corePeripheralBase + 0xD08)};
+
 
         /**
          * Description: Vector Table Offset
@@ -394,41 +613,11 @@ class Sbc
          * number of exception entries in the vector table. Because there are 
          * 138 interrupts, the offset must be aligned on a 1024-byte boundary.
          */
-        bitField VTABLE_OFFSET{10, 22, RW};
+        bitField VTABLE_FIELD_OFFSET{10, 22, RW};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 69: Application Interrupt and Reset Control (APINT), offset 0xD0C
-         * 
-         * Note: This register can only be accessed from privileged mode.
-         *   
-         * The APINT register provides priority grouping control for the exception 
-         * model, endian status for data accesses, and reset control of the system. To 
-         * write to this register, 0x05FA must be written to the VECTKEY field, 
-         * otherwise the write is ignored.
-         * 
-         * The PRIGROUP field indicates the position of the binary point that splits the 
-         * INTx fields in the Interrupt Priority (PRIx) registers into separate group 
-         * priority and subpriority fields. Table 3-9 on page 164 shows how the PRIGROUP 
-         * value controls this split. The bit numbers in the Group Priority Field and 
-         * Subpriority Field columns in the table refer to the bits in the INTA field. 
-         * For the INTB field, the corresponding bits are 15:13; for INTC, 23:21; and 
-         * for INTD, 31:29.
-         * 
-         * Table 3-9. Interrupt Priority Levels
-         * ____________________________________________________________________________________________________________________
-         * | PRIGROUP Bit Field | Binary Point$ | Group Priority Field | Subpriority Field | Group Priorities | Subpriorities |
-         * | 0x0 - 0x4          | bxxx.         | [7:5]                | None              | 8                | 1             |
-         * | 0x5                | bxx.y         | [7:6]                | [5]               | 4                | 2             |
-         * | 0x6                | bx.yy         | [7]                  | [6:5]             | 2                | 4             |
-         * | 0x7                | b.yyy         | None                 | [7:5]             | 1                | 8             |
-         * |____________________|_______________|______________________|___________________|__________________|_______________|
-         * $ INTx field showing the binary point. An x denotes a group priority field bit, and a y denotes a subpriority field bit.
-         * 
-         * Note: Determining preemption of an exception uses only the group priority field.
-         */
-        Register APINT{(volatile uint32_t*)(corePeripheralBase + 0xD0C)};
+        
 
         /**
          * Description: Register Key
@@ -486,14 +675,7 @@ class Sbc
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 70: System Control (SYSCTRL), offset 0xD10
-         * 
-         * Note: This register can only be accessed from privileged mode.
-         * 
-         * The SYSCTRL register controls features of entry to and exit from low-power state.
-         */
-        Register SYSCTRL{(volatile uint32_t*)(corePeripheralBase + 0xD10)};
+
 
         /**
          * Description: Wake Up on Pending
@@ -541,18 +723,7 @@ class Sbc
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 71: Configuration and Control (CFGCTRL), offset 0xD14 
-         * 
-         * Note: This register can only be accessed from privileged mode.
-         * 
-         * The CFGCTRL register controls entry to Thread mode and enables: the 
-         * handlers for NMI, hard fault and faults escalated by the FAULTMASK 
-         * register to ignore bus faults; trapping of divide by zero and 
-         * unaligned accesses; and access to the SWTRIG register by unprivileged 
-         * software (see page 156).
-         */
-        Register CFGCTRL{(volatile uint32_t*)(corePeripheralBase + 0xD14)};
+
 
         /**
          * Description: Stack Alignment on Exception Entry
@@ -642,16 +813,7 @@ class Sbc
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 72: System Handler Priority 1 (SYSPRI1), offset 0xD18
-         * 
-         * Note: This register can only be accessed from privileged mode.
-         * 
-         * The SYSPRI1 register configures the priority level, 0 to 7 of the 
-         * usage fault, bus fault, and memory management fault exception 
-         * handlers. This register is byte-accessible.
-         */
-        Register SYSPRI1{(volatile uint32_t*)(corePeripheralBase + 0xD18)};
+
 
         /**
          * Description: Usage Fault Priority
@@ -682,15 +844,7 @@ class Sbc
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 73: System Handler Priority 2 (SYSPRI2), offset 0xD1C
-         * 
-         * Note: This register can only be accessed from privileged mode.
-         * 
-         * The SYSPRI2 register configures the priority level, 0 to 7 of the 
-         * SVCall handler. This register is byte-accessible.
-         */
-        Register SYSPRI2{(volatile uint32_t*)(corePeripheralBase + 0xD1C)};
+
 
         /**
          * Description: SVCall Priority
@@ -703,15 +857,7 @@ class Sbc
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 74: System Handler Priority 3 (SYSPRI3), offset 0xD20
-         * 
-         * Note: This register can only be accessed from privileged mode.
-         * 
-         * The SYSPRI3 register configures the priority level, 0 to 7 of the 
-         * SysTick exception and PendSV handlers. This register is byte-accessible.
-         */
-        Register SYSPRI3{(volatile uint32_t*)(corePeripheralBase + 0xD20)};
+
 
         /**
          * Description: SysTick Exception Priority
@@ -742,34 +888,7 @@ class Sbc
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 75: System Handler Control and State (SYSHNDCTRL), offset 0xD24
-         * 
-         * Note: This register can only be accessed from privileged mode. 
-         * 
-         * The SYSHNDCTRL register enables the system handlers, and indicates the p
-         * ending status of the usage fault, bus fault, memory management fault, and SVC 
-         * exceptions as well as the active status of the system handlers.
-         * 
-         * If a system handler is disabled and the corresponding fault occurs, the 
-         * processor treats the fault as a hard fault.
-         * 
-         * This register can be modified to change the pending or active status of 
-         * system exceptions. An OS kernel can write to the active bits to perform a 
-         * context switch that changes the current exception type.
-         * 
-         * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         * Caution – Software that changes the value of an active bit in this register 
-         * without correct adjustment to the stacked content can cause the processor to 
-         * generate a fault exception. Ensure software that writes to this register 
-         * retains and subsequently restores the current active status. 
-         * 
-         * If the value of a bit in this register must be modified after 
-         * enabling the system handlers, a read-modify-write procedure must be 
-         * used to ensure that only the required bit is modified.
-         * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         */
-        Register SYSHNDCTRL{(volatile uint32_t*)(corePeripheralBase + 0xD24)};
+        
 
         /**
          * Description: Usage Fault Enable
@@ -944,43 +1063,7 @@ class Sbc
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 76: Configurable Fault Status (FAULTSTAT), offset 0xD28 
-         * 
-         * Note: This register can only be accessed from privileged mode. 
-         * 
-         * The FAULTSTAT register indicates the cause of a memory management fault, bus 
-         * fault, or usage fault. Each of these functions is assigned to a subregister 
-         * as follows:
-         * 
-         *     ■ Usage Fault Status (UFAULTSTAT), bits 31:16
-         *     ■ Bus Fault Status (BFAULTSTAT), bits 15:8
-         *     ■ Memory Management Fault Status (MFAULTSTAT), bits 7:0
-         * 
-         * FAULTSTAT is byte accessible. FAULTSTAT or its subregisters can be accessed 
-         * as follows:
-         * 
-         *     ■ The complete FAULTSTAT register, with a word access to offset 0xD28
-         *     ■ The MFAULTSTAT, with a byte access to offset 0xD28
-         *     ■ The MFAULTSTAT and BFAULTSTAT, with a halfword access to offset 0xD28
-         *     ■ The BFAULTSTAT, with a byte access to offset 0xD29
-         *     ■ The UFAULTSTAT, with a halfword access to offset 0xD2A
-         * 
-         * Bits are cleared by writing a 1 to them.
-         * 
-         * In a fault handler, the true faulting address can be determined by:
-         * 1. Read and save the Memory Management Fault Address (MMADDR) or Bus Fault 
-         *    Address (FAULTADDR) value.
-         * 
-         * 2. Read the MMARV bit in MFAULTSTAT, or the BFARV bit in BFAULTSTAT to 
-         *    determine if the MMADDR or FAULTADDR contents are valid.
-         * 
-         * Software must follow this sequence because another higher priority exception 
-         * might change the MMADDR or FAULTADDR value. For example, if a higher priority 
-         * handler preempts the current fault handler, the other fault might change the 
-         * MMADDR or FAULTADDR value.
-         */
-        Register FAULTSTAT{(volatile uint32_t*)(corePeripheralBase + 0xD28)};
+        
 
         /**
          * Description: Divide-by-Zero Usage Fault
@@ -1328,17 +1411,7 @@ class Sbc
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 77: Hard Fault Status (HFAULTSTAT), offset 0xD2C
-         * 
-         * Note: This register can only be accessed from privileged mode. 
-         * 
-         * The HFAULTSTAT register gives information about events that activate the hard 
-         * fault handler.
-         * 
-         * Bits are cleared by writing a 1 to them.
-         */
-        Register HFAULTSTAT{(volatile uint32_t*)(corePeripheralBase + 0xD2C)};
+        
 
         /**
          * Description: Debug Event
@@ -1384,21 +1457,7 @@ class Sbc
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 78: Memory Management Fault Address (MMADDR), offset 0xD34 
-         * 
-         * Note: This register can only be accessed from privileged mode. 
-         * 
-         * The MMADDR register contains the address of the location that 
-         * generated a memory management fault. When an unaligned access faults, 
-         * the address in the MMADDR register is the actual address that 
-         * faulted. Because a single read or write instruction can be split into 
-         * multiple aligned accesses, the fault address can be any address in 
-         * the range of the requested access size. Bits in the Memory Management 
-         * Fault Status (MFAULTSTAT) register indicate the cause of the fault 
-         * and whether the value in the MMADDR register is valid (see page 177).
-         */
-        Register MMADDR{(volatile uint32_t*)(corePeripheralBase + 0xD34)};
+        
 
         /**
          * Description: Fault Address
@@ -1410,19 +1469,7 @@ class Sbc
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 79: Bus Fault Address (FAULTADDR), offset 0xD38
-         * 
-         * Note: This register can only be accessed from privileged mode. 
-         * 
-         * The FAULTADDR register contains the address of the location that generated a 
-         * bus fault. When an unaligned access faults, the address in the FAULTADDR 
-         * register is the one requested by the instruction, even if it is not the 
-         * address of the fault. Bits in the Bus Fault Status (BFAULTSTAT) register 
-         * indicate the cause of the fault and whether the value in the FAULTADDR 
-         * register is valid (see page 177).
-         */
-        Register FAULTADDR{(volatile uint32_t*)(corePeripheralBase + 0xD38)};
+        
 
         /**
          * Description: Fault Address

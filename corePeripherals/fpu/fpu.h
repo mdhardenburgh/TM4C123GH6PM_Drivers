@@ -52,6 +52,11 @@ class Fpu
          */
         const uint32_t corePeripheralBase = 0xE000E000;
 
+        const uint32_t CPAC_OFFSET = 0xD88;
+        const uint32_t FPCC_OFFSET = 0xF34;
+        const uint32_t FPCA_OFFSET = 0xF38;
+        const uint32_t FPDSC_OFFSET = 0xF3C;
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /**
@@ -59,7 +64,34 @@ class Fpu
          * 
          * The CPAC register specifies the access privileges for coprocessors.
          */
-        Register CPAC{(volatile uint32_t*)(corePeripheralBase + 0xD88)};
+        Register CPAC;
+
+        /**
+         * Register 92: Floating-Point Context Control (FPCC), offset 0xF34
+         * 
+         * The FPCC register sets or returns FPU control data.
+         */
+        Register FPCC;
+
+        /**
+         * Register 93: Floating-Point Context Address (FPCA), offset 0xF38
+         * 
+         * The FPCA register holds the location of the unpopulated floating-point 
+         * register space allocated on an exception stack frame.
+         */
+        Register FPCA;
+
+        /**
+         * Register 94: Floating-Point Default Status Control (FPDSC), offset 0xF3C
+         * 
+         * The FPDSC register holds the default values for the Floating-Point Status 
+         * Control (FPSC) register.
+         */
+        Register FPDSC;
+
+
+
+
 
         /**
          * Description: CP11 Coprocessor Access Privilege
@@ -97,12 +129,7 @@ class Fpu
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 92: Floating-Point Context Control (FPCC), offset 0xF34
-         * 
-         * The FPCC register sets or returns FPU control data.
-         */
-        Register FPCC{(volatile uint32_t*)(corePeripheralBase + 0xF34)};
+        
 
         /**
          * Description: Automatic State Preservation Enable
@@ -190,13 +217,7 @@ class Fpu
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 93: Floating-Point Context Address (FPCA), offset 0xF38
-         * 
-         * The FPCA register holds the location of the unpopulated floating-point 
-         * register space allocated on an exception stack frame.
-         */
-        Register FPCA{(volatile uint32_t*)(corePeripheralBase + 0xF38)};
+        
 
         /**
          * Description: Address
@@ -208,13 +229,7 @@ class Fpu
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 94: Floating-Point Default Status Control (FPDSC), offset 0xF3C
-         * 
-         * The FPDSC register holds the default values for the Floating-Point Status 
-         * Control (FPSC) register.
-         */
-        Register FPDSC{(volatile uint32_t*)(corePeripheralBase + 0xF3C)};
+        
 
         /**
          * Description: AHP Bit Default

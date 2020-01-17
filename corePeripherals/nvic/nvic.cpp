@@ -59,57 +59,77 @@ Nvic::~Nvic()
 
 }
 
-uint32_t Nvic::getInterruptRegisterSettingStatus(interrupt myInterrupt, registerGroup group)
+void Nvic::activateInterrupt(interrupt myInterrupt, uint32_t priority)
 {
-    //return(registerTable[(myInterrupt / 32) + group].getRegisterBitFieldStatus((myInterrupt % 32), INT.bitWidth, INT.permission));
-    INT.bit = myInterrupt % 32;
-    return(registerTable[(myInterrupt / 32) + group].getRegisterBitFieldStatus(INT));
-
-}
-
-
-void Nvic::setInterruptRegisterSetting(interrupt myInterrupt, registerGroup group)
-{
-    if(group != ACTIVE)
+    if((myInterrupt < 139) && (priority < 8))
     {
+        PRIORITY_INT.bit = ((myInterrupt % nvicRegisterOffset) * 8) + 5;
         INT.bit = myInterrupt % 32;
-        registerTable[(myInterrupt / 32) + group].setRegisterBitFieldStatus(INT, set);
-    }
 
+        PRI = new Register((volatile uint32_t*)(corePeripheralBase + PRI_OFFSET + (nvicRegisterOffset * (myInterrupt / nvicRegisterOffset))));
+        EN = new Register((volatile uint32_t*)(corePeripheralBase + EN_OFFSET + (nvicRegisterOffset * (myInterrupt / 32))));
+
+        (*PRI).setRegisterBitFieldStatus(PRIORITY_INT, priority);
+        (*EN).setRegisterBitFieldStatus(INT, (uint32_t)set);
+
+        delete PRI;
+        delete EN;
+    }
+    
     else
     {
         return;
     }
+}
+
+#pragma GCC push_options
+#pragma GCC optimize("O0")
+uint32_t Nvic::disableInterrupts(void)
+{
+    volatile uint32_t ui32Ret;
+    asm volatile(
+
+        "mrs     r0, PRIMASK\n"
+        "cpsid   i\n"
+        "bx      lr\n"
+        : "=r" (ui32Ret)
+    );
+
+    return(ui32Ret);
+}
+#pragma GCC pop_options
+
+
+#pragma GCC push_options
+#pragma GCC optimize("O0")
+uint32_t Nvic::enableInterrupts(void)
+{
+    volatile uint32_t ui32Ret;
+    asm volatile(
+
+        "mrs     r0, PRIMASK\n"
+        "cpsie   i\n"
+        "bx      lr\n"
+        : "=r" (ui32Ret)
+    );
+
+    return(ui32Ret);
+}
+#pragma GCC pop_options
+
+
+#pragma GCC push_options
+#pragma GCC optimize("O0")
+void Nvic::wfi(void)
+{
+    //
+    // Wait for the next interrupt.
+    //
+    asm volatile(
+
+        "wfi     \n"
+        "bx    lr\n"
+    );
     
 }
-
-
-uint32_t Nvic::getInterruptPriorityStatus(interrupt interruptNumber)
-{
-    if((interruptNumber < 139))
-    {
-        INT.bit = (((interruptNumber % 4) * 8) + 5);
-        return(priorityRegisters[interruptNumber/4].getRegisterBitFieldStatus(INT));
-    }
-
-
-    else
-    {
-        return(INT32_MAX);
-    }
-}
-
-void Nvic::setInterruptPriority(interrupt interruptNumber, uint32_t priority)
-{
-    if((interruptNumber < 139) && (priority < 8))
-    {
-        INT.bit = ((interruptNumber % 4) * 8) + 5;
-        priorityRegisters[interruptNumber/4].setRegisterBitFieldStatus(INT, priority);
-    }
-
-    else
-    {
-        return;
-    }
-    
-}
+#pragma GCC pop_options

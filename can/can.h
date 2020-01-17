@@ -59,14 +59,21 @@ class Can : SystemControl
         const uint32_t can0BaseAddress = 0x40040000;
         const uint32_t can1BaseAddress = 0x40041000;
 
+        const uint32_t PPCAN_OFFSET = 0x334;
+        const uint32_t SRCAN_OFFSET = 0x534;
+        const uint32_t RCGCCAN_OFFSET = 0x634;
+        const uint32_t SCGCCAN_OFFSET = 0x734;
+        const uint32_t DCGCCAN_OFFSET = 0x834;
+        const uint32_t PRCAN_OFFSET = 0xA34;
+
 /**********************System Control Register Descriptions********************/
 
-        Register PPCAN{(volatile uint32_t*)(systemControlBase + 0x334)}; //0x334 PPCAN RO 0x0000.0003 Controller Area Network Peripheral Present 302
-        Register SRCAN{(volatile uint32_t*)(systemControlBase + 0x534)}; //0x534 SRCAN RW 0x0000.0000 Controller Area Network Software Reset 325
-        Register RCGCCAN{(volatile uint32_t*)(systemControlBase + 0x634)}; //0x634 RCGCCAN RW 0x0000.0000 Controller Area Network Run Mode Clock Gating Control 351
-        Register SCGCCAN{(volatile uint32_t*)(systemControlBase + 0x734)}; //0x734 SCGCCAN RW 0x0000.0000 Controller Area Network Sleep Mode Clock Gating Control 373
-        Register DCGCCAN{(volatile uint32_t*)(systemControlBase + 0x834)}; //0x834 DCGCCAN RW 0x0000.0000 Controller Area Network Deep-Sleep Mode Clock Gating Control 395
-        Register PRCAN{(volatile uint32_t*)(systemControlBase + 0xA34)}; //0xA34 PRCAN RO 0x0000.0000 Controller Area Network Peripheral Ready 417
+        Register* PPCAN; //0x334 PPCAN RO 0x0000.0003 Controller Area Network Peripheral Present 302
+        Register* SRCAN; //0x534 SRCAN RW 0x0000.0000 Controller Area Network Software Reset 325
+        Register* RCGCCAN; //0x634 RCGCCAN RW 0x0000.0000 Controller Area Network Run Mode Clock Gating Control 351
+        Register* SCGCCAN; //0x734 SCGCCAN RW 0x0000.0000 Controller Area Network Sleep Mode Clock Gating Control 373
+        Register* DCGCCAN; //0x834 DCGCCAN RW 0x0000.0000 Controller Area Network Deep-Sleep Mode Clock Gating Control 395
+        Register* PRCAN; //0xA34 PRCAN RO 0x0000.0000 Controller Area Network Peripheral Ready 417
 
 /**************************System Control BitFields****************************/
 
@@ -88,24 +95,6 @@ class Can : SystemControl
         bitField PRCAN_R1{1, 1, RO}; //CAN Module 1 Peripheral Ready
         bitField PRCAN_R0{0, 1, RO}; //CAN Module 0 Peripheral Ready
 
-/********************System Control Legacy BitField Descriptions***************/
-        /**
-         * Important: Register in this section are provided for legacy software 
-         * support only; registers in “System Control Register Descriptions” on 
-         * page 237 should be used instead.
-         */
-
-        bitField DC1_CAN1{25, 1, RO}; //CAN Module 1 Present. When set, indicates that CAN unit 1 is present.
-        bitField DC1_CAN0{24, 1, RO}; //CAN Module 0 Present. When set, indicates that CAN unit 0 is present.
-        bitField SRCR0_CAN1{25, 1, RO}; //CAN1 Reset Control
-        bitField SRCR0_CAN0{24, 1, RO}; //CAN0 Reset Control
-        bitField RCGC0_CAN1{25, 1, RO}; //CAN1 Clock Gating Control
-        bitField RCGC0_CAN0{24, 1, RO}; //CAN0 Clock Gating Control
-        bitField SCGC0_CAN1{25, 1, RO}; //CAN1 Clock Gating Control
-        bitField SCGC0_CAN0{24, 1, RO}; //CAN0 Clock Gating Control
-        bitField DCGC0_CAN1{25, 1, RO}; //CAN1 Clock Gating Control
-        bitField DCGC0_CAN0{24, 1, RO}; //CAN0 Clock Gating Control
-        
 
 
 };

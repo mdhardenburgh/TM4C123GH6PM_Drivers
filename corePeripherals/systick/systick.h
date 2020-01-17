@@ -47,6 +47,10 @@ class Systick
     private:
         const uint32_t corePeripheralBase = 0xE000E000;
 
+        const uint32_t STCTRL_OFFSET = 0x010;
+        const uint32_t STRELOAD_OFFSET = 0x014;
+        const uint32_t STCURRENT_OFFSET = 0x018;
+
         /**
          * Register 1: SysTick Control and Status Register (STCTRL), offset 0x010
          * 
@@ -54,7 +58,37 @@ class Systick
          * 
          * The SysTick STCTRL register enables the SysTick features.
          */
-        Register STCTRL{(volatile uint32_t*)(corePeripheralBase + 0x010)};
+        Register* STCTRL;
+
+        /**
+         * Register 2: SysTick Reload Value Register (STRELOAD), offset 0x014
+         * 
+         * Note: This register can only be accessed from privileged mode.
+         * 
+         * The STRELOAD register specifies the start value to load into the 
+         * SysTick Current Value (STCURRENT) register when the counter reaches 0. 
+         * The start value can be between 0x1 and 0x00FF.FFFF. A start value of 
+         * 0 is possible but has no effect because the SysTick interrupt and the
+         * COUNT bit are activated when counting from 1 to 0.
+         * 
+         * SysTick can be configured as a multi-shot timer, repeated over and 
+         * over, firing every N+1 clock pulses, where N is any value from 1 to 
+         * 0x00FF.FFFF. For example, if a tick interrupt is required every 100 
+         * clock pulses, 99 must be written into the RELOAD field.
+         * 
+         * Note that in order to access this register correctly, the system 
+         * clock must be faster than 8 MHz.
+         */
+        Register* STRELOAD;
+
+        /**
+         * Register 3: SysTick Current Value Register (STCURRENT), offset 0x018
+         * 
+         * Note: This register can only be accessed from privileged mode.
+         * 
+         * The STCURRENT register contains the current value of the SysTick counter.
+         */
+        Register* STCURRENT;
 
         /**
          * Description: Count Flag
@@ -114,26 +148,7 @@ class Systick
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 2: SysTick Reload Value Register (STRELOAD), offset 0x014
-         * 
-         * Note: This register can only be accessed from privileged mode.
-         * 
-         * The STRELOAD register specifies the start value to load into the 
-         * SysTick Current Value (STCURRENT) register when the counter reaches 0. 
-         * The start value can be between 0x1 and 0x00FF.FFFF. A start value of 
-         * 0 is possible but has no effect because the SysTick interrupt and the
-         * COUNT bit are activated when counting from 1 to 0.
-         * 
-         * SysTick can be configured as a multi-shot timer, repeated over and 
-         * over, firing every N+1 clock pulses, where N is any value from 1 to 
-         * 0x00FF.FFFF. For example, if a tick interrupt is required every 100 
-         * clock pulses, 99 must be written into the RELOAD field.
-         * 
-         * Note that in order to access this register correctly, the system 
-         * clock must be faster than 8 MHz.
-         */
-        Register STRELOAD{(volatile uint32_t*)(corePeripheralBase + 0x014)};
+        
 
         /**
          * Description: Reload Value
@@ -145,14 +160,7 @@ class Systick
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        /**
-         * Register 3: SysTick Current Value Register (STCURRENT), offset 0x018
-         * 
-         * Note: This register can only be accessed from privileged mode.
-         * 
-         * The STCURRENT register contains the current value of the SysTick counter.
-         */
-        Register STCURRENT{(volatile uint32_t*)(corePeripheralBase + 0x018)};
+        
 
         /**
          * Description: Current Value

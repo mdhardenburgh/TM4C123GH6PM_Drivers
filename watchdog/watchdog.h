@@ -54,14 +54,21 @@ class Watchdog : SystemControl
         const uint32_t watchdog0BaseAddress = 0x40000000;
         const uint32_t watchdog1BaseAddress = 0x40001000;
 
+        const uint32_t PPWD_OFFSET = 0x300;
+        const uint32_t SRWD_OFFSET = 0x500;
+        const uint32_t RCGCWD_OFFSET = 0x600;
+        const uint32_t SCGCWD_OFFSET = 0x700;
+        const uint32_t DCGCWD_OFFSET = 0x800;
+        const uint32_t PRWD_OFFSET = 0xA00;
+
 /**********************System Control Register Descriptions********************/
 
-        Register PPWD{(volatile uint32_t*)(systemControlBase + 0x300)}; //0x300 PPWD RO 0x0000.0003 Watchdog Timer Peripheral Present 287
-        Register SRWD{(volatile uint32_t*)(systemControlBase + 0x500)}; //0x500 SRWD RW 0x0000.0000 Watchdog Timer Software Reset 310
-        Register RCGCWD{(volatile uint32_t*)(systemControlBase + 0x600)}; //0x600 RCGCWD RW 0x0000.0000 Watchdog Timer Run Mode Clock Gating Control 337
-        Register SCGCWD{(volatile uint32_t*)(systemControlBase + 0x700)}; //0x700 SCGCWD RW 0x0000.0000 Watchdog Timer Sleep Mode Clock Gating Control 359
-        Register DCGCWD{(volatile uint32_t*)(systemControlBase + 0x800)}; //0x800 DCGCWD RW 0x0000.0000 Watchdog Timer Deep-Sleep Mode Clock Gating Control 381
-        Register PRWD{(volatile uint32_t*)(systemControlBase + 0xA00)}; //0xA00 PRWD RO 0x0000.0000 Watchdog Timer Peripheral Ready 403
+        Register* PPWD; //0x300 PPWD RO 0x0000.0003 Watchdog Timer Peripheral Present 287
+        Register* SRWD; //0x500 SRWD RW 0x0000.0000 Watchdog Timer Software Reset 310
+        Register* RCGCWD; //0x600 RCGCWD RW 0x0000.0000 Watchdog Timer Run Mode Clock Gating Control 337
+        Register* SCGCWD; //0x700 SCGCWD RW 0x0000.0000 Watchdog Timer Sleep Mode Clock Gating Control 359
+        Register* DCGCWD; //0x800 DCGCWD RW 0x0000.0000 Watchdog Timer Deep-Sleep Mode Clock Gating Control 381
+        Register* PRWD; //0xA00 PRWD RO 0x0000.0000 Watchdog Timer Peripheral Ready 403
 
 /**************************System Control BitFields****************************/
 
@@ -85,24 +92,6 @@ class Watchdog : SystemControl
 
         bitField PRWD_R1{1, 1, RO}; //Watchdog Timer 1 Peripheral Ready
         bitField PRWD_R0{0, 1, RO}; //Watchdog Timer 0 Peripheral Ready
-
-/********************System Control Legacy BitField Descriptions***************/
-        /**
-         * Important: Register in this section are provided for legacy software 
-         * support only; registers in “System Control Register Descriptions” on 
-         * page 237 should be used instead.
-         */
-
-        bitField DC1_WDT1{28, 1, RO}; //Watchdog Timer 1 Present. When set, indicates that watchdog timer 1 is present.
-        bitField DC1_WDT0{3, 1, RO}; //Watchdog Timer 0 Present. When set, indicates that watchdog timer 0 is present.
-        bitField SRCR0_WDT1{28, 1, RO}; //WDT1 Reset Control
-        bitField SRCR0_WDT0{3, 1, RO}; //WDT0 Reset Control
-        bitField RCGC0_WDT1{28, 1, RO}; //WDT1 Clock Gating Control
-        bitField RCGC0_WDT0{3, 1, RO}; //WDT0 Clock Gating Control
-        bitField SCGC0_WDT1{28, 1, RO}; //WDT1 Clock Gating Control
-        bitField SCGC0_WDT0{3, 1, RO}; //WDT0 Clock Gating Control
-        bitField DCGC0_WDT1{28, 1, RO}; //WDT1 Clock Gating Control
-        bitField DCGC0_WDT0{3, 1, RO}; //WDT0 Clock Gating Control
 
 
 };

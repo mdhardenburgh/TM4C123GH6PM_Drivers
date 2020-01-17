@@ -69,6 +69,7 @@ __HeapLimit:
 	.section .isr_vector
 	.align	2
 	.globl	__isr_vector
+	.type   __isr_vector, %object
 __isr_vector:
 	.long	__StackTop            /* Top of Stack */
 	.long	Reset_Handler         /* Reset Handler */
@@ -86,6 +87,8 @@ __isr_vector:
 	.long	0                     /* Reserved */
 	.long	PendSV_Handler        /* Pendable Service (PendSV) Handler */
 	.long	SysTick_Handler       /* SysTick Handler */
+
+	@ .long default_Handler
 
 	/* External interrupts, 139 in total, 0 -> 138 */
 	.long	GPIO_Port_A_Handler				/* Interrupt 0 */
@@ -391,6 +394,8 @@ Default_Handler:
 	def_irq_handler	DebugMon_Handler
 	def_irq_handler	PendSV_Handler
 	def_irq_handler	SysTick_Handler
+	
+	@ def_irq_handler default_Handlder
 
 	def_irq_handler	GPIO_Port_A_Handler
 	def_irq_handler	GPIO_Port_B_Handler
@@ -470,5 +475,37 @@ Default_Handler:
 	def_irq_handler	PWM_1_Generator_2_Handler
 	def_irq_handler	PWM_1_Generator_3_Handler
 	def_irq_handler	PWM_1_Fault_Handler
+
+@ 	.text
+@ 	//.thumb
+@ 	//.thumb_func
+@ 	.align	1
+@ 	.globl	disableInterrupts
+@ 	.type	disableInterrupts, %function
+@ disableInterrupts:
+@ 	mrs     r0, PRIMASK;
+@     cpsid   i;
+@     bx      lr
+@ 	.size	disableInterrupts, . - disableInterrupts
+
+
+@ 	.text
+@ 	//.thumb
+@ 	//.thumb_func
+@ 	.align	1
+@ 	.globl	enableInterrupts
+@ 	.type	enableInterrupts, %function
+@ enableInterrupts:
+@     //
+@     // Read PRIMASK and enable interrupts.
+@     //
+@     mrs     r0, PRIMASK;
+@     cpsie   i;
+@     bx      lr
+@ 	.size	enableInterrupts, . - enableInterrupts
+
+	
+
+
 
 	.end
