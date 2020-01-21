@@ -1,0 +1,1226 @@
+
+main.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <__isr_vector>:
+   0:	00 80 00 20 ad 02 00 00 ed 02 00 00 ed 02 00 00     ... ............
+  10:	ed 02 00 00 ed 02 00 00 ed 02 00 00 00 00 00 00     ................
+	...
+  2c:	ed 02 00 00 ed 02 00 00 00 00 00 00 ed 02 00 00     ................
+  3c:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+  4c:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+  5c:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+  6c:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+  7c:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+  8c:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+  9c:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+  ac:	00 00 00 00 ed 02 00 00 ed 02 00 00 45 09 00 00     ............E...
+	...
+  c4:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+  d4:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+	...
+  ec:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+  fc:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+ 10c:	ed 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00     ................
+	...
+ 124:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+ 134:	ed 02 00 00 ed 02 00 00 ed 02 00 00 00 00 00 00     ................
+	...
+ 150:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+	...
+ 1b0:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+ 1c0:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+ 1d0:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+ 1e0:	ed 02 00 00 ed 02 00 00 ed 02 00 00 00 00 00 00     ................
+	...
+ 258:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+ 268:	ed 02 00 00                                         ....
+
+0000026c <__do_global_dtors_aux>:
+ 26c:	b510      	push	{r4, lr}
+ 26e:	4c05      	ldr	r4, [pc, #20]	; (284 <__do_global_dtors_aux+0x18>)
+ 270:	7823      	ldrb	r3, [r4, #0]
+ 272:	b933      	cbnz	r3, 282 <__do_global_dtors_aux+0x16>
+ 274:	4b04      	ldr	r3, [pc, #16]	; (288 <__do_global_dtors_aux+0x1c>)
+ 276:	b113      	cbz	r3, 27e <__do_global_dtors_aux+0x12>
+ 278:	4804      	ldr	r0, [pc, #16]	; (28c <__do_global_dtors_aux+0x20>)
+ 27a:	f3af 8000 	nop.w
+ 27e:	2301      	movs	r3, #1
+ 280:	7023      	strb	r3, [r4, #0]
+ 282:	bd10      	pop	{r4, pc}
+ 284:	20000070 	.word	0x20000070
+ 288:	00000000 	.word	0x00000000
+ 28c:	00000b94 	.word	0x00000b94
+
+00000290 <frame_dummy>:
+ 290:	b508      	push	{r3, lr}
+ 292:	4b03      	ldr	r3, [pc, #12]	; (2a0 <frame_dummy+0x10>)
+ 294:	b11b      	cbz	r3, 29e <frame_dummy+0xe>
+ 296:	4903      	ldr	r1, [pc, #12]	; (2a4 <frame_dummy+0x14>)
+ 298:	4803      	ldr	r0, [pc, #12]	; (2a8 <frame_dummy+0x18>)
+ 29a:	f3af 8000 	nop.w
+ 29e:	bd08      	pop	{r3, pc}
+ 2a0:	00000000 	.word	0x00000000
+ 2a4:	20000074 	.word	0x20000074
+ 2a8:	00000b94 	.word	0x00000b94
+
+000002ac <Reset_Handler>:
+ *    __data_start__: VMA of start of the section to copy to
+ *    __data_end__: VMA of end of the section to copy to
+ *
+ *  All addresses must be aligned to 4 bytes boundary.
+ */
+	ldr	r1, =__etext
+ 2ac:	490a      	ldr	r1, [pc, #40]	; (2d8 <Reset_Handler+0x2c>)
+	ldr	r2, =__data_start__
+ 2ae:	4a0b      	ldr	r2, [pc, #44]	; (2dc <Reset_Handler+0x30>)
+	ldr	r3, =__data_end__
+ 2b0:	4b0b      	ldr	r3, [pc, #44]	; (2e0 <Reset_Handler+0x34>)
+
+.L_loop1:
+	cmp	r2, r3
+ 2b2:	429a      	cmp	r2, r3
+	ittt	lt
+ 2b4:	bfbe      	ittt	lt
+	ldrlt	r0, [r1], #4
+ 2b6:	f851 0b04 	ldrlt.w	r0, [r1], #4
+	strlt	r0, [r2], #4
+ 2ba:	f842 0b04 	strlt.w	r0, [r2], #4
+	blt	.L_loop1
+ 2be:	e7f8      	blt.n	2b2 <Reset_Handler+0x6>
+ *    __bss_start__: start of the BSS section.
+ *    __bss_end__: end of the BSS section.
+ *
+ *  Both addresses must be aligned to 4 bytes boundary.
+ */
+	ldr	r1, =__bss_start__
+ 2c0:	4908      	ldr	r1, [pc, #32]	; (2e4 <Reset_Handler+0x38>)
+	ldr	r2, =__bss_end__
+ 2c2:	4a09      	ldr	r2, [pc, #36]	; (2e8 <Reset_Handler+0x3c>)
+
+	movs	r0, 0
+ 2c4:	2000      	movs	r0, #0
+.L_loop3:
+	cmp	r1, r2
+ 2c6:	4291      	cmp	r1, r2
+	itt	lt
+ 2c8:	bfbc      	itt	lt
+	strlt	r0, [r1], #4
+ 2ca:	f841 0b04 	strlt.w	r0, [r1], #4
+	blt	.L_loop3
+ 2ce:	e7fa      	blt.n	2c6 <Reset_Handler+0x1a>
+#endif /* __STARTUP_CLEAR_BSS_MULTIPLE || __STARTUP_CLEAR_BSS */
+
+#ifndef __NO_SYSTEM_INIT
+	bl	SystemInit
+ 2d0:	f000 fa6c 	bl	7ac <SystemInit>
+#endif
+
+#ifndef __START
+#define __START _start
+#endif
+	bl	__START
+ 2d4:	f000 fa30 	bl	738 <main>
+	ldr	r1, =__etext
+ 2d8:	00000b98 	.word	0x00000b98
+	ldr	r2, =__data_start__
+ 2dc:	20000000 	.word	0x20000000
+	ldr	r3, =__data_end__
+ 2e0:	20000070 	.word	0x20000070
+	ldr	r1, =__bss_start__
+ 2e4:	20000070 	.word	0x20000070
+	ldr	r2, =__bss_end__
+ 2e8:	200000c0 	.word	0x200000c0
+
+000002ec <ADC_0_Sequence_0_Handler>:
+	.align	1
+	.thumb_func
+	.weak	Default_Handler
+	.type	Default_Handler, %function
+Default_Handler:
+	b	.
+ 2ec:	e7fe      	b.n	2ec <ADC_0_Sequence_0_Handler>
+ 2ee:	bf00      	nop
+
+000002f0 <_ZN4Nvic17disableInterruptsEv>:
+}
+
+#pragma GCC push_options
+#pragma GCC optimize("O0")
+uint32_t Nvic::disableInterrupts(void)
+{
+ 2f0:	b480      	push	{r7}
+ 2f2:	b085      	sub	sp, #20
+ 2f4:	af00      	add	r7, sp, #0
+ 2f6:	6078      	str	r0, [r7, #4]
+
+        "mrs     r0, PRIMASK\n"
+        "cpsid   i\n"
+        "bx      lr\n"
+        : "=r" (ui32Ret)
+    );
+ 2f8:	f3ef 8010 	mrs	r0, PRIMASK
+ 2fc:	b672      	cpsid	i
+ 2fe:	4770      	bx	lr
+ 300:	60fb      	str	r3, [r7, #12]
+
+    return(ui32Ret);
+ 302:	68fb      	ldr	r3, [r7, #12]
+}
+ 304:	4618      	mov	r0, r3
+ 306:	3714      	adds	r7, #20
+ 308:	46bd      	mov	sp, r7
+ 30a:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 30e:	4770      	bx	lr
+
+00000310 <_ZN4Nvic16enableInterruptsEv>:
+
+
+#pragma GCC push_options
+#pragma GCC optimize("O0")
+uint32_t Nvic::enableInterrupts(void)
+{
+ 310:	b480      	push	{r7}
+ 312:	b085      	sub	sp, #20
+ 314:	af00      	add	r7, sp, #0
+ 316:	6078      	str	r0, [r7, #4]
+
+        "mrs     r0, PRIMASK\n"
+        "cpsie   i\n"
+        "bx      lr\n"
+        : "=r" (ui32Ret)
+    );
+ 318:	f3ef 8010 	mrs	r0, PRIMASK
+ 31c:	b662      	cpsie	i
+ 31e:	4770      	bx	lr
+ 320:	60fb      	str	r3, [r7, #12]
+
+    return(ui32Ret);
+ 322:	68fb      	ldr	r3, [r7, #12]
+}
+ 324:	4618      	mov	r0, r3
+ 326:	3714      	adds	r7, #20
+ 328:	46bd      	mov	sp, r7
+ 32a:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 32e:	4770      	bx	lr
+
+00000330 <_ZN4Nvic3wfiEv>:
+
+
+#pragma GCC push_options
+#pragma GCC optimize("O0")
+void Nvic::wfi(void)
+{
+ 330:	b480      	push	{r7}
+ 332:	b083      	sub	sp, #12
+ 334:	af00      	add	r7, sp, #0
+ 336:	6078      	str	r0, [r7, #4]
+    //
+    asm volatile(
+
+        "wfi     \n"
+        "bx    lr\n"
+    );
+ 338:	bf30      	wfi
+ 33a:	4770      	bx	lr
+    
+}
+ 33c:	370c      	adds	r7, #12
+ 33e:	46bd      	mov	sp, r7
+ 340:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 344:	4770      	bx	lr
+
+00000346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>:
+    }
+    
+}
+
+void Register::setRegisterBitFieldStatus(bitField myBitField, uint32_t value)
+{
+ 346:	b510      	push	{r4, lr}
+    if((myBitField.permission == RW1C) && (value != 1))
+ 348:	7a0b      	ldrb	r3, [r1, #8]
+ 34a:	2b03      	cmp	r3, #3
+ 34c:	d115      	bne.n	37a <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm+0x34>
+ 34e:	2a01      	cmp	r2, #1
+ 350:	d116      	bne.n	380 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm+0x3a>
+        return;
+    }
+    
+    else if((myBitField.permission == RW) || (myBitField.permission == WO) || (myBitField.permission == RW1C))
+    {
+        uint32_t maxValue = (0xFFFFFFFF >> (32 - myBitField.bitWidth));
+ 352:	684b      	ldr	r3, [r1, #4]
+ 354:	f1c3 0420 	rsb	r4, r3, #32
+ 358:	f04f 33ff 	mov.w	r3, #4294967295	; 0xffffffff
+ 35c:	40e3      	lsrs	r3, r4
+
+        if((value <= maxValue))
+ 35e:	429a      	cmp	r2, r3
+ 360:	d80e      	bhi.n	380 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm+0x3a>
+        {
+            uint32_t clear = (~(maxValue << myBitField.bit));
+ 362:	680c      	ldr	r4, [r1, #0]
+            value = value << myBitField.bit;
+    
+            (*address) &= clear;
+ 364:	6801      	ldr	r1, [r0, #0]
+ 366:	6808      	ldr	r0, [r1, #0]
+            uint32_t clear = (~(maxValue << myBitField.bit));
+ 368:	40a3      	lsls	r3, r4
+            (*address) &= clear;
+ 36a:	ea20 0303 	bic.w	r3, r0, r3
+ 36e:	600b      	str	r3, [r1, #0]
+            (*address) |= value;
+ 370:	680b      	ldr	r3, [r1, #0]
+            value = value << myBitField.bit;
+ 372:	40a2      	lsls	r2, r4
+            (*address) |= value;
+ 374:	431a      	orrs	r2, r3
+ 376:	600a      	str	r2, [r1, #0]
+ 378:	e002      	b.n	380 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm+0x3a>
+    else if((myBitField.permission == RW) || (myBitField.permission == WO) || (myBitField.permission == RW1C))
+ 37a:	f013 0ffd 	tst.w	r3, #253	; 0xfd
+ 37e:	d0e8      	beq.n	352 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm+0xc>
+    else
+    {
+        return;
+    }
+    
+}
+ 380:	bd10      	pop	{r4, pc}
+
+00000382 <_ZN4Gpio9gpioWriteE10setORClear.part.0>:
+    bitField GPIOICR_IC(gpioPin, 1, RW);
+    Register GPIOICR((volatile uint32_t*)(gpioBaseAddress + GPIOICR_OFFSET));
+    (GPIOICR).setRegisterBitFieldStatus(GPIOICR_IC, set);
+}
+
+void Gpio::gpioWrite(setORClear value)
+ 382:	b51f      	push	{r0, r1, r2, r3, r4, lr}
+{
+    if((value == 0x0) || (value == 0x1))
+    {
+        bitField GPIODATA_DATA(gpioPin, 1, RW);
+        Register GPIO_Port_GPIODATA((volatile uint32_t*)(gpioBaseAddress + GPIODATA_OFFSET));
+ 384:	e9d0 3201 	ldrd	r3, r2, [r0, #4]
+ 388:	6ac0      	ldr	r0, [r0, #44]	; 0x2c
+ 38a:	4403      	add	r3, r0
+
+        (GPIO_Port_GPIODATA).setRegisterBitFieldStatus(GPIODATA_DATA, value);
+ 38c:	e9cd 3200 	strd	r3, r2, [sp]
+ 390:	2301      	movs	r3, #1
+ 392:	9302      	str	r3, [sp, #8]
+ 394:	460a      	mov	r2, r1
+ 396:	2300      	movs	r3, #0
+ 398:	a901      	add	r1, sp, #4
+ 39a:	4668      	mov	r0, sp
+ 39c:	f88d 300c 	strb.w	r3, [sp, #12]
+ 3a0:	f7ff ffd1 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+    }
+}
+ 3a4:	b005      	add	sp, #20
+ 3a6:	f85d fb04 	ldr.w	pc, [sp], #4
+
+000003aa <_ZN4Gpio14interruptClearEv>:
+{
+ 3aa:	b51f      	push	{r0, r1, r2, r3, r4, lr}
+    Register GPIOICR((volatile uint32_t*)(gpioBaseAddress + GPIOICR_OFFSET));
+ 3ac:	e9d0 3201 	ldrd	r3, r2, [r0, #4]
+ 3b0:	6e81      	ldr	r1, [r0, #104]	; 0x68
+ 3b2:	440b      	add	r3, r1
+    (GPIOICR).setRegisterBitFieldStatus(GPIOICR_IC, set);
+ 3b4:	e9cd 3200 	strd	r3, r2, [sp]
+ 3b8:	a901      	add	r1, sp, #4
+ 3ba:	2201      	movs	r2, #1
+ 3bc:	2300      	movs	r3, #0
+ 3be:	4668      	mov	r0, sp
+ 3c0:	9202      	str	r2, [sp, #8]
+ 3c2:	f88d 300c 	strb.w	r3, [sp, #12]
+ 3c6:	f7ff ffbe 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+}
+ 3ca:	b005      	add	sp, #20
+ 3cc:	f85d fb04 	ldr.w	pc, [sp], #4
+
+000003d0 <_ZN8Register25getRegisterBitFieldStatusE8bitField>:
+    if(((myBitField).permission == RW) || ((myBitField).permission == RO) || ((myBitField).permission == RW1C))
+ 3d0:	7a0b      	ldrb	r3, [r1, #8]
+ 3d2:	2b01      	cmp	r3, #1
+{
+ 3d4:	b510      	push	{r4, lr}
+    if(((myBitField).permission == RW) || ((myBitField).permission == RO) || ((myBitField).permission == RW1C))
+ 3d6:	d901      	bls.n	3dc <_ZN8Register25getRegisterBitFieldStatusE8bitField+0xc>
+ 3d8:	2b03      	cmp	r3, #3
+ 3da:	d10c      	bne.n	3f6 <_ZN8Register25getRegisterBitFieldStatusE8bitField+0x26>
+        return(((*address) & select) >> myBitField.bit);
+ 3dc:	6803      	ldr	r3, [r0, #0]
+        uint32_t select = ((((0xFFFFFFFF >> (32 - myBitField.bitWidth)))) << myBitField.bit);
+ 3de:	680a      	ldr	r2, [r1, #0]
+        return(((*address) & select) >> myBitField.bit);
+ 3e0:	681c      	ldr	r4, [r3, #0]
+        uint32_t select = ((((0xFFFFFFFF >> (32 - myBitField.bitWidth)))) << myBitField.bit);
+ 3e2:	684b      	ldr	r3, [r1, #4]
+ 3e4:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
+ 3e8:	f1c3 0320 	rsb	r3, r3, #32
+ 3ec:	40d8      	lsrs	r0, r3
+ 3ee:	4090      	lsls	r0, r2
+        return(((*address) & select) >> myBitField.bit);
+ 3f0:	4020      	ands	r0, r4
+ 3f2:	40d0      	lsrs	r0, r2
+}
+ 3f4:	bd10      	pop	{r4, pc}
+        return(UINT32_MAX);
+ 3f6:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
+ 3fa:	e7fb      	b.n	3f4 <_ZN8Register25getRegisterBitFieldStatusE8bitField+0x24>
+
+000003fc <_ZN4Gpio8gpioReadEv>:
+
+uint32_t Gpio::gpioRead(void)
+{
+ 3fc:	b51f      	push	{r0, r1, r2, r3, r4, lr}
+    bitField GPIODATA_DATA(gpioPin, 1, RW);
+    Register GPIO_Port_GPIODATA((volatile uint32_t*)(gpioBaseAddress + GPIODATA_OFFSET));
+ 3fe:	e9d0 3201 	ldrd	r3, r2, [r0, #4]
+ 402:	6ac1      	ldr	r1, [r0, #44]	; 0x2c
+ 404:	440b      	add	r3, r1
+
+    return((GPIO_Port_GPIODATA).getRegisterBitFieldStatus(GPIODATA_DATA));
+ 406:	e9cd 3200 	strd	r3, r2, [sp]
+ 40a:	2301      	movs	r3, #1
+ 40c:	9302      	str	r3, [sp, #8]
+ 40e:	a901      	add	r1, sp, #4
+ 410:	2300      	movs	r3, #0
+ 412:	4668      	mov	r0, sp
+ 414:	f88d 300c 	strb.w	r3, [sp, #12]
+ 418:	f7ff ffda 	bl	3d0 <_ZN8Register25getRegisterBitFieldStatusE8bitField>
+ 41c:	b005      	add	sp, #20
+ 41e:	f85d fb04 	ldr.w	pc, [sp], #4
+	...
+
+00000424 <_ZN4GpioC1E14GPIO_Port_Pins9direction>:
+Gpio::Gpio(GPIO_Port_Pins gpio, direction dir)
+ 424:	e92d 4f70 	stmdb	sp!, {r4, r5, r6, r8, r9, sl, fp, lr}
+ 428:	4690      	mov	r8, r2
+ 42a:	4a85      	ldr	r2, [pc, #532]	; (640 <_ZN4GpioC1E14GPIO_Port_Pins9direction+0x21c>)
+ 42c:	f44f 7342 	mov.w	r3, #776	; 0x308
+ 430:	e9c0 2303 	strd	r2, r3, [r0, #12]
+ 434:	f44f 63a1 	mov.w	r3, #1288	; 0x508
+ 438:	f44f 62c1 	mov.w	r2, #1544	; 0x608
+ 43c:	e9c0 3205 	strd	r3, r2, [r0, #20]
+ 440:	468b      	mov	fp, r1
+ 442:	f640 0208 	movw	r2, #2056	; 0x808
+ 446:	f44f 61e1 	mov.w	r1, #1800	; 0x708
+ 44a:	e9c0 1207 	strd	r1, r2, [r0, #28]
+ 44e:	4a7d      	ldr	r2, [pc, #500]	; (644 <_ZN4GpioC1E14GPIO_Port_Pins9direction+0x220>)
+ 450:	4604      	mov	r4, r0
+ 452:	f640 2008 	movw	r0, #2568	; 0xa08
+ 456:	e9c4 0209 	strd	r0, r2, [r4, #36]	; 0x24
+ 45a:	f44f 757f 	mov.w	r5, #1020	; 0x3fc
+ 45e:	f44f 6280 	mov.w	r2, #1024	; 0x400
+ 462:	e9c4 520b 	strd	r5, r2, [r4, #44]	; 0x2c
+ 466:	f44f 6684 	mov.w	r6, #1056	; 0x420
+ 46a:	f44f 62a2 	mov.w	r2, #1296	; 0x510
+ 46e:	e9c4 620d 	strd	r6, r2, [r4, #52]	; 0x34
+ 472:	f240 5c1c 	movw	ip, #1308	; 0x51c
+ 476:	f44f 62a4 	mov.w	r2, #1312	; 0x520
+ 47a:	e9c4 c20f 	strd	ip, r2, [r4, #60]	; 0x3c
+ 47e:	f240 5e24 	movw	lr, #1316	; 0x524
+ 482:	f44f 62a5 	mov.w	r2, #1320	; 0x528
+ 486:	e9c4 e211 	strd	lr, r2, [r4, #68]	; 0x44
+ 48a:	f240 592c 	movw	r9, #1324	; 0x52c
+ 48e:	f44f 6282 	mov.w	r2, #1040	; 0x410
+ 492:	e9c4 9213 	strd	r9, r2, [r4, #76]	; 0x4c
+ 496:	f240 4a04 	movw	sl, #1028	; 0x404
+ 49a:	f44f 6281 	mov.w	r2, #1032	; 0x408
+ 49e:	e9c4 a215 	strd	sl, r2, [r4, #84]	; 0x54
+ 4a2:	f240 410c 	movw	r1, #1036	; 0x40c
+ 4a6:	f240 4214 	movw	r2, #1044	; 0x414
+ 4aa:	6763      	str	r3, [r4, #116]	; 0x74
+ 4ac:	f240 560c 	movw	r6, #1292	; 0x50c
+ 4b0:	f240 5314 	movw	r3, #1300	; 0x514
+ 4b4:	e9c4 1217 	strd	r1, r2, [r4, #92]	; 0x5c
+ 4b8:	e9c4 631e 	strd	r6, r3, [r4, #120]	; 0x78
+ 4bc:	f44f 6083 	mov.w	r0, #1048	; 0x418
+ 4c0:	f240 421c 	movw	r2, #1052	; 0x41c
+ 4c4:	f44f 6ca3 	mov.w	ip, #1304	; 0x518
+ 4c8:	f44f 63a6 	mov.w	r3, #1328	; 0x530
+ 4cc:	e9c4 0219 	strd	r0, r2, [r4, #100]	; 0x64
+ 4d0:	e9c4 c320 	strd	ip, r3, [r4, #128]	; 0x80
+ 4d4:	f44f 65a0 	mov.w	r5, #1280	; 0x500
+ 4d8:	f240 5204 	movw	r2, #1284	; 0x504
+ 4dc:	f240 5e34 	movw	lr, #1332	; 0x534
+ 4e0:	f44f 637d 	mov.w	r3, #4048	; 0xfd0
+ 4e4:	e9c4 521b 	strd	r5, r2, [r4, #108]	; 0x6c
+ 4e8:	f640 79d4 	movw	r9, #4052	; 0xfd4
+ 4ec:	e9c4 e322 	strd	lr, r3, [r4, #136]	; 0x88
+ 4f0:	f640 73d8 	movw	r3, #4056	; 0xfd8
+ 4f4:	e9c4 9324 	strd	r9, r3, [r4, #144]	; 0x90
+ 4f8:	f640 7adc 	movw	sl, #4060	; 0xfdc
+ 4fc:	f44f 637e 	mov.w	r3, #4064	; 0xfe0
+ 500:	e9c4 a326 	strd	sl, r3, [r4, #152]	; 0x98
+ 504:	f640 72e4 	movw	r2, #4068	; 0xfe4
+ 508:	f640 73e8 	movw	r3, #4072	; 0xfe8
+ 50c:	e9c4 2328 	strd	r2, r3, [r4, #160]	; 0xa0
+ 510:	f640 71ec 	movw	r1, #4076	; 0xfec
+ 514:	f44f 637f 	mov.w	r3, #4080	; 0xff0
+ 518:	e9c4 132a 	strd	r1, r3, [r4, #168]	; 0xa8
+ 51c:	f640 70f4 	movw	r0, #4084	; 0xff4
+ 520:	f640 73f8 	movw	r3, #4088	; 0xff8
+ 524:	e9c4 032c 	strd	r0, r3, [r4, #176]	; 0xb0
+ 528:	f640 73fc 	movw	r3, #4092	; 0xffc
+ 52c:	f8c4 30b8 	str.w	r3, [r4, #184]	; 0xb8
+    (*this).gpioBaseAddress = GPIO_Port_AHB_BASE + (((*this).gpio)/8) * 0x1000;
+ 530:	4b45      	ldr	r3, [pc, #276]	; (648 <_ZN4GpioC1E14GPIO_Port_Pins9direction+0x224>)
+ 532:	6063      	str	r3, [r4, #4]
+Gpio::Gpio(GPIO_Port_Pins gpio, direction dir)
+ 534:	b08c      	sub	sp, #48	; 0x30
+    (*this).address = address;
+ 536:	f503 2321 	add.w	r3, r3, #659456	; 0xa1000
+ 53a:	f503 63c1 	add.w	r3, r3, #1544	; 0x608
+ 53e:	9308      	str	r3, [sp, #32]
+ 540:	f503 6380 	add.w	r3, r3, #1024	; 0x400
+ 544:	9307      	str	r3, [sp, #28]
+ 546:	f5a3 2321 	sub.w	r3, r3, #659456	; 0xa1000
+ 54a:	f5a3 63bd 	sub.w	r3, r3, #1512	; 0x5e8
+ 54e:	9306      	str	r3, [sp, #24]
+ 550:	33f0      	adds	r3, #240	; 0xf0
+ 552:	9305      	str	r3, [sp, #20]
+ 554:	330c      	adds	r3, #12
+ 556:	9304      	str	r3, [sp, #16]
+ 558:	3304      	adds	r3, #4
+ 55a:	9303      	str	r3, [sp, #12]
+ 55c:	3308      	adds	r3, #8
+    (RCGCGPIO).setRegisterBitFieldStatus(RCGCGPIO_Rn, set);
+ 55e:	f04f 0a01 	mov.w	sl, #1
+ 562:	9302      	str	r3, [sp, #8]
+    (*this).gpioPin = (((*this).gpio % 8));
+ 564:	f00b 0607 	and.w	r6, fp, #7
+ 568:	f5a3 7394 	sub.w	r3, r3, #296	; 0x128
+    (RCGCGPIO).setRegisterBitFieldStatus(RCGCGPIO_Rn, set);
+ 56c:	2505      	movs	r5, #5
+ 56e:	9301      	str	r3, [sp, #4]
+    (*this).gpio = gpio;
+ 570:	f884 b000 	strb.w	fp, [r4]
+    (RCGCGPIO).setRegisterBitFieldStatus(RCGCGPIO_Rn, set);
+ 574:	2300      	movs	r3, #0
+    (*this).gpioPin = (((*this).gpio % 8));
+ 576:	60a6      	str	r6, [r4, #8]
+    (RCGCGPIO).setRegisterBitFieldStatus(RCGCGPIO_Rn, set);
+ 578:	4652      	mov	r2, sl
+ 57a:	a909      	add	r1, sp, #36	; 0x24
+ 57c:	a808      	add	r0, sp, #32
+ 57e:	e9cd 5a09 	strd	r5, sl, [sp, #36]	; 0x24
+ 582:	f88d 302c 	strb.w	r3, [sp, #44]	; 0x2c
+ 586:	f7ff fede 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+    while((PRGPIO).getRegisterBitFieldStatus(PRGPIO_Rn) == 0)
+ 58a:	46a9      	mov	r9, r5
+ 58c:	4655      	mov	r5, sl
+ 58e:	a909      	add	r1, sp, #36	; 0x24
+ 590:	a807      	add	r0, sp, #28
+ 592:	e9cd 9509 	strd	r9, r5, [sp, #36]	; 0x24
+ 596:	f88d 502c 	strb.w	r5, [sp, #44]	; 0x2c
+ 59a:	f7ff ff19 	bl	3d0 <_ZN8Register25getRegisterBitFieldStatusE8bitField>
+ 59e:	2800      	cmp	r0, #0
+ 5a0:	d0f5      	beq.n	58e <_ZN4GpioC1E14GPIO_Port_Pins9direction+0x16a>
+    if(gpio == PF0)
+ 5a2:	f1bb 0f28 	cmp.w	fp, #40	; 0x28
+ 5a6:	d110      	bne.n	5ca <_ZN4GpioC1E14GPIO_Port_Pins9direction+0x1a6>
+        (GPIOLOCK).setRegisterBitFieldStatus(GPIOLOCK_LOCK, gpioKey);
+ 5a8:	2300      	movs	r3, #0
+ 5aa:	2220      	movs	r2, #32
+ 5ac:	e9cd 3209 	strd	r3, r2, [sp, #36]	; 0x24
+ 5b0:	a909      	add	r1, sp, #36	; 0x24
+ 5b2:	68e2      	ldr	r2, [r4, #12]
+ 5b4:	f88d 302c 	strb.w	r3, [sp, #44]	; 0x2c
+ 5b8:	a803      	add	r0, sp, #12
+ 5ba:	f7ff fec4 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+        *((GPIOCR).getRegisterAddress()) |= (0x1 << gpioPin);
+ 5be:	4b23      	ldr	r3, [pc, #140]	; (64c <_ZN4GpioC1E14GPIO_Port_Pins9direction+0x228>)
+ 5c0:	68a1      	ldr	r1, [r4, #8]
+ 5c2:	681a      	ldr	r2, [r3, #0]
+ 5c4:	408d      	lsls	r5, r1
+ 5c6:	4315      	orrs	r5, r2
+ 5c8:	601d      	str	r5, [r3, #0]
+    (GPIODIR).setRegisterBitFieldStatus(GPIODIR_DIR, dir);
+ 5ca:	2501      	movs	r5, #1
+ 5cc:	2300      	movs	r3, #0
+ 5ce:	4642      	mov	r2, r8
+ 5d0:	a909      	add	r1, sp, #36	; 0x24
+ 5d2:	a801      	add	r0, sp, #4
+ 5d4:	9609      	str	r6, [sp, #36]	; 0x24
+ 5d6:	950a      	str	r5, [sp, #40]	; 0x28
+ 5d8:	f88d 302c 	strb.w	r3, [sp, #44]	; 0x2c
+ 5dc:	f7ff feb3 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+    if(dir == input)
+ 5e0:	f1b8 0f00 	cmp.w	r8, #0
+ 5e4:	d108      	bne.n	5f8 <_ZN4GpioC1E14GPIO_Port_Pins9direction+0x1d4>
+        (GPIOPUR).setRegisterBitFieldStatus(GPIOPUR_PUE, set);
+ 5e6:	462a      	mov	r2, r5
+ 5e8:	a909      	add	r1, sp, #36	; 0x24
+ 5ea:	a805      	add	r0, sp, #20
+ 5ec:	e9cd 6509 	strd	r6, r5, [sp, #36]	; 0x24
+ 5f0:	f88d 802c 	strb.w	r8, [sp, #44]	; 0x2c
+ 5f4:	f7ff fea7 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+    (GPIOAFSEL).setRegisterBitFieldStatus(GPIOAFSEL_AFSEL, clear);
+ 5f8:	2500      	movs	r5, #0
+ 5fa:	f04f 0801 	mov.w	r8, #1
+ 5fe:	462a      	mov	r2, r5
+ 600:	a909      	add	r1, sp, #36	; 0x24
+ 602:	a806      	add	r0, sp, #24
+ 604:	9609      	str	r6, [sp, #36]	; 0x24
+ 606:	f8cd 8028 	str.w	r8, [sp, #40]	; 0x28
+ 60a:	f88d 502c 	strb.w	r5, [sp, #44]	; 0x2c
+ 60e:	f7ff fe9a 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+    (GPIODEN).setRegisterBitFieldStatus(GPIODEN_DEN, set);
+ 612:	4642      	mov	r2, r8
+ 614:	a909      	add	r1, sp, #36	; 0x24
+ 616:	a804      	add	r0, sp, #16
+ 618:	e9cd 6809 	strd	r6, r8, [sp, #36]	; 0x24
+ 61c:	f88d 502c 	strb.w	r5, [sp, #44]	; 0x2c
+ 620:	f7ff fe91 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+    (GPIOAMSEL).setRegisterBitFieldStatus(GPIOAMSEL_GPIOAMSEL, clear);
+ 624:	a802      	add	r0, sp, #8
+ 626:	462a      	mov	r2, r5
+ 628:	a909      	add	r1, sp, #36	; 0x24
+ 62a:	e9cd 6809 	strd	r6, r8, [sp, #36]	; 0x24
+ 62e:	f88d 502c 	strb.w	r5, [sp, #44]	; 0x2c
+ 632:	f7ff fe88 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+}
+ 636:	4620      	mov	r0, r4
+ 638:	b00c      	add	sp, #48	; 0x30
+ 63a:	e8bd 8f70 	ldmia.w	sp!, {r4, r5, r6, r8, r9, sl, fp, pc}
+ 63e:	bf00      	nop
+ 640:	4c4f434b 	.word	0x4c4f434b
+ 644:	40058000 	.word	0x40058000
+ 648:	4005d000 	.word	0x4005d000
+ 64c:	4005d524 	.word	0x4005d524
+
+00000650 <_ZN4GpioC2E14GPIO_Port_Pins9directionm.constprop.0>:
+Gpio::Gpio(GPIO_Port_Pins gpio, direction dir, uint32_t interruptPriority) : Gpio(gpio, dir)
+ 650:	e92d 4170 	stmdb	sp!, {r4, r5, r6, r8, lr}
+ 654:	4604      	mov	r4, r0
+ 656:	b08b      	sub	sp, #44	; 0x2c
+ 658:	2200      	movs	r2, #0
+ 65a:	f7ff fee3 	bl	424 <_ZN4GpioC1E14GPIO_Port_Pins9direction>
+    Register GPIOIM((volatile uint32_t*)(gpioBaseAddress + GPIOIM_OFFSET)); 
+ 65e:	6863      	ldr	r3, [r4, #4]
+ 660:	6d22      	ldr	r2, [r4, #80]	; 0x50
+    bitField GPIOIM_IME(gpioPin, 1, RW);
+ 662:	f8d4 8008 	ldr.w	r8, [r4, #8]
+    (GPIOIM).setRegisterBitFieldStatus(GPIOIM_IME, clear);
+ 666:	f8cd 801c 	str.w	r8, [sp, #28]
+    Register GPIOIM((volatile uint32_t*)(gpioBaseAddress + GPIOIM_OFFSET)); 
+ 66a:	441a      	add	r2, r3
+ 66c:	9201      	str	r2, [sp, #4]
+    Register GPIOIS((volatile uint32_t*)(gpioBaseAddress + GPIOIS_OFFSET)); 
+ 66e:	6d62      	ldr	r2, [r4, #84]	; 0x54
+ 670:	441a      	add	r2, r3
+ 672:	9202      	str	r2, [sp, #8]
+    Register GPIOIBE((volatile uint32_t*)(gpioBaseAddress + GPIOIBE_OFFSET)); 
+ 674:	6da2      	ldr	r2, [r4, #88]	; 0x58
+ 676:	441a      	add	r2, r3
+ 678:	9203      	str	r2, [sp, #12]
+    Register GPIOICR((volatile uint32_t*)(gpioBaseAddress + GPIOICR_OFFSET));
+ 67a:	6ea2      	ldr	r2, [r4, #104]	; 0x68
+    (GPIOIM).setRegisterBitFieldStatus(GPIOIM_IME, clear);
+ 67c:	2600      	movs	r6, #0
+ 67e:	2501      	movs	r5, #1
+    Register GPIOICR((volatile uint32_t*)(gpioBaseAddress + GPIOICR_OFFSET));
+ 680:	4413      	add	r3, r2
+    (GPIOIM).setRegisterBitFieldStatus(GPIOIM_IME, clear);
+ 682:	a907      	add	r1, sp, #28
+ 684:	4632      	mov	r2, r6
+ 686:	a801      	add	r0, sp, #4
+ 688:	9304      	str	r3, [sp, #16]
+ 68a:	9508      	str	r5, [sp, #32]
+ 68c:	f88d 6024 	strb.w	r6, [sp, #36]	; 0x24
+ 690:	f7ff fe59 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+    (GPIOIS).setRegisterBitFieldStatus(GPIOIS_IS, clear);
+ 694:	4632      	mov	r2, r6
+ 696:	a907      	add	r1, sp, #28
+ 698:	a802      	add	r0, sp, #8
+ 69a:	e9cd 8507 	strd	r8, r5, [sp, #28]
+ 69e:	f88d 6024 	strb.w	r6, [sp, #36]	; 0x24
+ 6a2:	f7ff fe50 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+    (GPIOIBE).setRegisterBitFieldStatus(GPIOIBE_IBE, set);
+ 6a6:	462a      	mov	r2, r5
+ 6a8:	a907      	add	r1, sp, #28
+ 6aa:	a803      	add	r0, sp, #12
+ 6ac:	e9cd 8507 	strd	r8, r5, [sp, #28]
+ 6b0:	f88d 6024 	strb.w	r6, [sp, #36]	; 0x24
+ 6b4:	f7ff fe47 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+    (GPIOICR).setRegisterBitFieldStatus(GPIOICR_IC, set);
+ 6b8:	462a      	mov	r2, r5
+ 6ba:	a907      	add	r1, sp, #28
+ 6bc:	a804      	add	r0, sp, #16
+ 6be:	e9cd 8507 	strd	r8, r5, [sp, #28]
+ 6c2:	f88d 6024 	strb.w	r6, [sp, #36]	; 0x24
+ 6c6:	f7ff fe3e 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+    (GPIOIM).setRegisterBitFieldStatus(GPIOIM_IME, set);
+ 6ca:	462a      	mov	r2, r5
+ 6cc:	a907      	add	r1, sp, #28
+ 6ce:	a801      	add	r0, sp, #4
+ 6d0:	e9cd 8507 	strd	r8, r5, [sp, #28]
+ 6d4:	f88d 6024 	strb.w	r6, [sp, #36]	; 0x24
+ 6d8:	f7ff fe35 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+    myNvic.activateInterrupt((interrupt)((((((*this).gpio)/8) == 5) ? 30 : (((*this).gpio)/8))), interruptPriority);
+ 6dc:	7825      	ldrb	r5, [r4, #0]
+ 6de:	f1a5 0328 	sub.w	r3, r5, #40	; 0x28
+ 6e2:	2b07      	cmp	r3, #7
+ 6e4:	bf8c      	ite	hi
+ 6e6:	08ed      	lsrhi	r5, r5, #3
+ 6e8:	251e      	movls	r5, #30
+        Register PRI((volatile uint32_t*)(corePeripheralBase + PRI_OFFSET + (nvicRegisterOffset * (myInterrupt / nvicRegisterOffset))));
+ 6ea:	f005 031c 	and.w	r3, r5, #28
+ 6ee:	f103 4360 	add.w	r3, r3, #3758096384	; 0xe0000000
+ 6f2:	f503 4364 	add.w	r3, r3, #58368	; 0xe400
+ 6f6:	9305      	str	r3, [sp, #20]
+ 6f8:	4b0e      	ldr	r3, [pc, #56]	; (734 <_ZN4GpioC2E14GPIO_Port_Pins9directionm.constprop.0+0xe4>)
+ 6fa:	9306      	str	r3, [sp, #24]
+        bitField PRIORITY_INT(((myInterrupt % nvicRegisterOffset) * 8) + 5, 3, RW); //bit place isn't being used. Renaming 3 to INT_PRIORITY.size to eliminate magic numbers
+ 6fc:	f005 0303 	and.w	r3, r5, #3
+ 700:	00db      	lsls	r3, r3, #3
+ 702:	3305      	adds	r3, #5
+        (PRI).setRegisterBitFieldStatus(PRIORITY_INT, priority);
+ 704:	2203      	movs	r2, #3
+ 706:	2600      	movs	r6, #0
+ 708:	a907      	add	r1, sp, #28
+ 70a:	a805      	add	r0, sp, #20
+ 70c:	9307      	str	r3, [sp, #28]
+ 70e:	9208      	str	r2, [sp, #32]
+ 710:	f88d 6024 	strb.w	r6, [sp, #36]	; 0x24
+ 714:	f7ff fe17 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+        (EN).setRegisterBitFieldStatus(INT, (uint32_t)set);
+ 718:	2201      	movs	r2, #1
+ 71a:	a806      	add	r0, sp, #24
+ 71c:	a907      	add	r1, sp, #28
+ 71e:	9507      	str	r5, [sp, #28]
+ 720:	9208      	str	r2, [sp, #32]
+ 722:	f88d 6024 	strb.w	r6, [sp, #36]	; 0x24
+ 726:	f7ff fe0e 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+}
+ 72a:	4620      	mov	r0, r4
+ 72c:	b00b      	add	sp, #44	; 0x2c
+ 72e:	e8bd 8170 	ldmia.w	sp!, {r4, r5, r6, r8, pc}
+ 732:	bf00      	nop
+ 734:	e000e100 	.word	0xe000e100
+
+00000738 <main>:
+
+int main(void)
+{
+
+    
+    (*myNvic).disableInterrupts();
+ 738:	4c16      	ldr	r4, [pc, #88]	; (794 <main+0x5c>)
+{
+ 73a:	b508      	push	{r3, lr}
+    (*myNvic).disableInterrupts();
+ 73c:	6820      	ldr	r0, [r4, #0]
+ 73e:	f7ff fdd7 	bl	2f0 <_ZN4Nvic17disableInterruptsEv>
+
+
+
+void* operator new(size_t size) noexcept 
+{ 
+    return malloc(size); 
+ 742:	20bc      	movs	r0, #188	; 0xbc
+ 744:	f000 f940 	bl	9c8 <malloc>
+    swtich1 = new Gpio(PF4, input, 3);
+ 748:	212c      	movs	r1, #44	; 0x2c
+ 74a:	4605      	mov	r5, r0
+ 74c:	f7ff ff80 	bl	650 <_ZN4GpioC2E14GPIO_Port_Pins9directionm.constprop.0>
+ 750:	4b11      	ldr	r3, [pc, #68]	; (798 <main+0x60>)
+ 752:	20bc      	movs	r0, #188	; 0xbc
+ 754:	601d      	str	r5, [r3, #0]
+ 756:	f000 f937 	bl	9c8 <malloc>
+    swtich2 = new Gpio(PF0, input, 3);
+ 75a:	2128      	movs	r1, #40	; 0x28
+ 75c:	4605      	mov	r5, r0
+ 75e:	f7ff ff77 	bl	650 <_ZN4GpioC2E14GPIO_Port_Pins9directionm.constprop.0>
+ 762:	4b0e      	ldr	r3, [pc, #56]	; (79c <main+0x64>)
+    (*myNvic).enableInterrupts();
+ 764:	6820      	ldr	r0, [r4, #0]
+    swtich2 = new Gpio(PF0, input, 3);
+ 766:	601d      	str	r5, [r3, #0]
+    (*myNvic).enableInterrupts();
+ 768:	f7ff fdd2 	bl	310 <_ZN4Nvic16enableInterruptsEv>
+    if((value == 0x0) || (value == 0x1))
+ 76c:	4b0c      	ldr	r3, [pc, #48]	; (7a0 <main+0x68>)
+ 76e:	2101      	movs	r1, #1
+ 770:	6818      	ldr	r0, [r3, #0]
+ 772:	f7ff fe06 	bl	382 <_ZN4Gpio9gpioWriteE10setORClear.part.0>
+ 776:	4b0b      	ldr	r3, [pc, #44]	; (7a4 <main+0x6c>)
+ 778:	2101      	movs	r1, #1
+ 77a:	6818      	ldr	r0, [r3, #0]
+ 77c:	f7ff fe01 	bl	382 <_ZN4Gpio9gpioWriteE10setORClear.part.0>
+ 780:	4b09      	ldr	r3, [pc, #36]	; (7a8 <main+0x70>)
+ 782:	2101      	movs	r1, #1
+ 784:	6818      	ldr	r0, [r3, #0]
+ 786:	f7ff fdfc 	bl	382 <_ZN4Gpio9gpioWriteE10setORClear.part.0>
+    
+    
+
+    while(1)
+    {
+        (*myNvic).wfi();
+ 78a:	6820      	ldr	r0, [r4, #0]
+ 78c:	f7ff fdd0 	bl	330 <_ZN4Nvic3wfiEv>
+ 790:	e7fb      	b.n	78a <main+0x52>
+ 792:	bf00      	nop
+ 794:	20000094 	.word	0x20000094
+ 798:	2000009c 	.word	0x2000009c
+ 79c:	200000a0 	.word	0x200000a0
+ 7a0:	20000090 	.word	0x20000090
+ 7a4:	2000008c 	.word	0x2000008c
+ 7a8:	20000098 	.word	0x20000098
+
+000007ac <SystemInit>:
+{
+ 7ac:	b570      	push	{r4, r5, r6, lr}
+ 7ae:	b086      	sub	sp, #24
+    (*this).address = address;
+ 7b0:	4b5e      	ldr	r3, [pc, #376]	; (92c <SystemInit+0x180>)
+ 7b2:	9302      	str	r3, [sp, #8]
+    
+    Register GPIOHBCTL((volatile uint32_t*)(systemControlBase + GPIOHBCTL_OFFSET));
+    bitField GPIOHBCTL_PORTn(0, 1, RW); //Port n Advanced High-Performance Bus
+
+
+    for(int i = 0; i < 6; i++)
+ 7b4:	2400      	movs	r4, #0
+    {
+        GPIOHBCTL_PORTn.bit = i;
+        GPIOHBCTL.setRegisterBitFieldStatus(GPIOHBCTL_PORTn, set);
+ 7b6:	2601      	movs	r6, #1
+ 7b8:	4625      	mov	r5, r4
+ 7ba:	e9cd 4603 	strd	r4, r6, [sp, #12]
+ 7be:	2201      	movs	r2, #1
+ 7c0:	a903      	add	r1, sp, #12
+ 7c2:	a802      	add	r0, sp, #8
+    for(int i = 0; i < 6; i++)
+ 7c4:	3401      	adds	r4, #1
+        GPIOHBCTL.setRegisterBitFieldStatus(GPIOHBCTL_PORTn, set);
+ 7c6:	f88d 5014 	strb.w	r5, [sp, #20]
+ 7ca:	f7ff fdbc 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+    for(int i = 0; i < 6; i++)
+ 7ce:	2c06      	cmp	r4, #6
+ 7d0:	d1f3      	bne.n	7ba <SystemInit+0xe>
+ 7d2:	4b57      	ldr	r3, [pc, #348]	; (930 <SystemInit+0x184>)
+ 7d4:	9300      	str	r3, [sp, #0]
+ 7d6:	3310      	adds	r3, #16
+ 7d8:	9301      	str	r3, [sp, #4]
+ 7da:	3b20      	subs	r3, #32
+ 7dc:	9302      	str	r3, [sp, #8]
+	bitField RCC2_SYSDIV2(23, 6, RW); //System Clock Divisor 2
+	bitField RIS_PLLLRIS(6, 1, RO); //PLL Lock Raw Interrupt Status
+
+
+	
+    (RCC2).setRegisterBitFieldStatus(RCC2_USERCC2, set); //0. Use RCC2.
+ 7de:	2201      	movs	r2, #1
+ 7e0:	231f      	movs	r3, #31
+ 7e2:	a903      	add	r1, sp, #12
+ 7e4:	a801      	add	r0, sp, #4
+ 7e6:	e9cd 3603 	strd	r3, r6, [sp, #12]
+ 7ea:	f88d 5014 	strb.w	r5, [sp, #20]
+ 7ee:	f7ff fdaa 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+	(RCC2).setRegisterBitFieldStatus(RCC2_BYPASS2, set); //1. Bypass PLL while initiializing
+ 7f2:	230b      	movs	r3, #11
+ 7f4:	2201      	movs	r2, #1
+ 7f6:	a903      	add	r1, sp, #12
+ 7f8:	a801      	add	r0, sp, #4
+ 7fa:	e9cd 3603 	strd	r3, r6, [sp, #12]
+ 7fe:	f88d 5014 	strb.w	r5, [sp, #20]
+ 802:	f7ff fda0 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+	(RCC).setRegisterBitFieldStatus(RCC_XTAL, _16MHz_XTAL); // 2. Select the crystal value and the oscillator source, configure for 16MHz crystal.
+ 806:	2305      	movs	r3, #5
+ 808:	2215      	movs	r2, #21
+ 80a:	a903      	add	r1, sp, #12
+ 80c:	4668      	mov	r0, sp
+ 80e:	9304      	str	r3, [sp, #16]
+ 810:	f88d 5014 	strb.w	r5, [sp, #20]
+ 814:	9403      	str	r4, [sp, #12]
+ 816:	f7ff fd96 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+	(RCC2).setRegisterBitFieldStatus(RCC2_OSCSRC2, MOSC);  //Confgure for main oscillator source.
+ 81a:	f04f 0c04 	mov.w	ip, #4
+ 81e:	2303      	movs	r3, #3
+ 820:	2200      	movs	r2, #0
+ 822:	a903      	add	r1, sp, #12
+ 824:	a801      	add	r0, sp, #4
+ 826:	e9cd c303 	strd	ip, r3, [sp, #12]
+ 82a:	f88d 5014 	strb.w	r5, [sp, #20]
+ 82e:	f7ff fd8a 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+	(RCC2).setRegisterBitFieldStatus(RCC2_PWRDN2, clear); // 3. Activate PLL by clearing PWRDN.
+ 832:	230d      	movs	r3, #13
+ 834:	2200      	movs	r2, #0
+ 836:	a903      	add	r1, sp, #12
+ 838:	a801      	add	r0, sp, #4
+ 83a:	e9cd 3603 	strd	r3, r6, [sp, #12]
+ 83e:	f88d 5014 	strb.w	r5, [sp, #20]
+ 842:	f7ff fd80 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+
+	/**
+	 * Append the SYSDIV2LSB bit to the SYSDIV2 field to create a 7 bit divisor 
+	 * using the 400 MHz PLL output.
+	 */
+	(RCC2).setRegisterBitFieldStatus(RCC2_DIV400, set);
+ 846:	231e      	movs	r3, #30
+ 848:	2201      	movs	r2, #1
+ 84a:	a903      	add	r1, sp, #12
+ 84c:	a801      	add	r0, sp, #4
+ 84e:	e9cd 3603 	strd	r3, r6, [sp, #12]
+ 852:	f88d 5014 	strb.w	r5, [sp, #20]
+ 856:	f7ff fd76 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+	
+	(RCC2).setRegisterBitFieldStatus(RCC2_SYSDIV2LSB, ((frequency - 1) & 0x01));
+ 85a:	2316      	movs	r3, #22
+ 85c:	2200      	movs	r2, #0
+ 85e:	a903      	add	r1, sp, #12
+ 860:	a801      	add	r0, sp, #4
+ 862:	e9cd 3603 	strd	r3, r6, [sp, #12]
+ 866:	f88d 5014 	strb.w	r5, [sp, #20]
+ 86a:	f7ff fd6c 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+	(RCC2).setRegisterBitFieldStatus(RCC2_SYSDIV2, ((frequency - 1) >> 1));
+ 86e:	2317      	movs	r3, #23
+ 870:	2202      	movs	r2, #2
+ 872:	a903      	add	r1, sp, #12
+ 874:	a801      	add	r0, sp, #4
+ 876:	f88d 5014 	strb.w	r5, [sp, #20]
+ 87a:	e9cd 3403 	strd	r3, r4, [sp, #12]
+ 87e:	f7ff fd62 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+
+	while((RIS).getRegisterBitFieldStatus(RIS_PLLLRIS) == 0)  // 5. Wait for the PLL to lock by polling PLLRIS.
+ 882:	2501      	movs	r5, #1
+ 884:	a903      	add	r1, sp, #12
+ 886:	a802      	add	r0, sp, #8
+ 888:	e9cd 4503 	strd	r4, r5, [sp, #12]
+ 88c:	f88d 5014 	strb.w	r5, [sp, #20]
+ 890:	f7ff fd9e 	bl	3d0 <_ZN8Register25getRegisterBitFieldStatusE8bitField>
+ 894:	2800      	cmp	r0, #0
+ 896:	d0f5      	beq.n	884 <SystemInit+0xd8>
+	{
+
+	}
+	
+	(RCC2).setRegisterBitFieldStatus(RCC2_BYPASS2, clear); // 6. Enable use of the PLL by clearing BYPASS.
+ 898:	230b      	movs	r3, #11
+ 89a:	2200      	movs	r2, #0
+ 89c:	a903      	add	r1, sp, #12
+ 89e:	a801      	add	r0, sp, #4
+ 8a0:	e9cd 3503 	strd	r3, r5, [sp, #12]
+ 8a4:	f88d 2014 	strb.w	r2, [sp, #20]
+ 8a8:	f7ff fd4d 	bl	346 <_ZN8Register25setRegisterBitFieldStatusE8bitFieldm>
+    return malloc(size); 
+ 8ac:	2024      	movs	r0, #36	; 0x24
+ 8ae:	f000 f88b 	bl	9c8 <malloc>
+Nvic::Nvic()
+ 8b2:	f04f 22e0 	mov.w	r2, #3758153728	; 0xe000e000
+ 8b6:	2304      	movs	r3, #4
+ 8b8:	e9c0 2300 	strd	r2, r3, [r0]
+ 8bc:	f44f 7180 	mov.w	r1, #256	; 0x100
+ 8c0:	f44f 73c0 	mov.w	r3, #384	; 0x180
+ 8c4:	e9c0 1302 	strd	r1, r3, [r0, #8]
+ 8c8:	f44f 7400 	mov.w	r4, #512	; 0x200
+ 8cc:	f44f 7320 	mov.w	r3, #640	; 0x280
+ 8d0:	e9c0 4304 	strd	r4, r3, [r0, #16]
+ 8d4:	f44f 7540 	mov.w	r5, #768	; 0x300
+ 8d8:	f44f 6380 	mov.w	r3, #1024	; 0x400
+ 8dc:	e9c0 5306 	strd	r5, r3, [r0, #24]
+ 8e0:	f44f 6370 	mov.w	r3, #3840	; 0xf00
+ 8e4:	6203      	str	r3, [r0, #32]
+    myNvic = new Nvic();
+ 8e6:	4b13      	ldr	r3, [pc, #76]	; (934 <SystemInit+0x188>)
+ 8e8:	6018      	str	r0, [r3, #0]
+ 8ea:	20bc      	movs	r0, #188	; 0xbc
+ 8ec:	f000 f86c 	bl	9c8 <malloc>
+    greenLed = new Gpio(PF3, output);
+ 8f0:	2201      	movs	r2, #1
+ 8f2:	212b      	movs	r1, #43	; 0x2b
+ 8f4:	4604      	mov	r4, r0
+ 8f6:	f7ff fd95 	bl	424 <_ZN4GpioC1E14GPIO_Port_Pins9direction>
+ 8fa:	4b0f      	ldr	r3, [pc, #60]	; (938 <SystemInit+0x18c>)
+ 8fc:	20bc      	movs	r0, #188	; 0xbc
+ 8fe:	601c      	str	r4, [r3, #0]
+ 900:	f000 f862 	bl	9c8 <malloc>
+    blueLed = new Gpio(PF2, output);
+ 904:	2201      	movs	r2, #1
+ 906:	212a      	movs	r1, #42	; 0x2a
+ 908:	4604      	mov	r4, r0
+ 90a:	f7ff fd8b 	bl	424 <_ZN4GpioC1E14GPIO_Port_Pins9direction>
+ 90e:	4b0b      	ldr	r3, [pc, #44]	; (93c <SystemInit+0x190>)
+ 910:	20bc      	movs	r0, #188	; 0xbc
+ 912:	601c      	str	r4, [r3, #0]
+ 914:	f000 f858 	bl	9c8 <malloc>
+    redLed = new Gpio(PF1, output);
+ 918:	2201      	movs	r2, #1
+ 91a:	2129      	movs	r1, #41	; 0x29
+ 91c:	4604      	mov	r4, r0
+ 91e:	f7ff fd81 	bl	424 <_ZN4GpioC1E14GPIO_Port_Pins9direction>
+ 922:	4b07      	ldr	r3, [pc, #28]	; (940 <SystemInit+0x194>)
+ 924:	601c      	str	r4, [r3, #0]
+}
+ 926:	b006      	add	sp, #24
+ 928:	bd70      	pop	{r4, r5, r6, pc}
+ 92a:	bf00      	nop
+ 92c:	400fe06c 	.word	0x400fe06c
+ 930:	400fe060 	.word	0x400fe060
+ 934:	20000094 	.word	0x20000094
+ 938:	20000090 	.word	0x20000090
+ 93c:	2000008c 	.word	0x2000008c
+ 940:	20000098 	.word	0x20000098
+
+00000944 <GPIO_Port_F_Handler>:
+    if((*swtich1).gpioRead() == 1)
+ 944:	4b1c      	ldr	r3, [pc, #112]	; (9b8 <GPIO_Port_F_Handler+0x74>)
+{
+ 946:	b510      	push	{r4, lr}
+    if((*swtich1).gpioRead() == 1)
+ 948:	681c      	ldr	r4, [r3, #0]
+ 94a:	4620      	mov	r0, r4
+ 94c:	f7ff fd56 	bl	3fc <_ZN4Gpio8gpioReadEv>
+ 950:	2801      	cmp	r0, #1
+ 952:	d107      	bne.n	964 <GPIO_Port_F_Handler+0x20>
+ 954:	4b19      	ldr	r3, [pc, #100]	; (9bc <GPIO_Port_F_Handler+0x78>)
+ 956:	2100      	movs	r1, #0
+ 958:	6818      	ldr	r0, [r3, #0]
+ 95a:	f7ff fd12 	bl	382 <_ZN4Gpio9gpioWriteE10setORClear.part.0>
+        (*swtich1).interruptClear();
+ 95e:	4620      	mov	r0, r4
+ 960:	f7ff fd23 	bl	3aa <_ZN4Gpio14interruptClearEv>
+    if((*swtich1).gpioRead() == 0)
+ 964:	4620      	mov	r0, r4
+ 966:	f7ff fd49 	bl	3fc <_ZN4Gpio8gpioReadEv>
+ 96a:	b938      	cbnz	r0, 97c <GPIO_Port_F_Handler+0x38>
+ 96c:	4b13      	ldr	r3, [pc, #76]	; (9bc <GPIO_Port_F_Handler+0x78>)
+ 96e:	2101      	movs	r1, #1
+ 970:	6818      	ldr	r0, [r3, #0]
+ 972:	f7ff fd06 	bl	382 <_ZN4Gpio9gpioWriteE10setORClear.part.0>
+        (*swtich1).interruptClear();
+ 976:	4620      	mov	r0, r4
+ 978:	f7ff fd17 	bl	3aa <_ZN4Gpio14interruptClearEv>
+    if((*swtich2).gpioRead() == 1)
+ 97c:	4b10      	ldr	r3, [pc, #64]	; (9c0 <GPIO_Port_F_Handler+0x7c>)
+ 97e:	681c      	ldr	r4, [r3, #0]
+ 980:	4620      	mov	r0, r4
+ 982:	f7ff fd3b 	bl	3fc <_ZN4Gpio8gpioReadEv>
+ 986:	2801      	cmp	r0, #1
+ 988:	d107      	bne.n	99a <GPIO_Port_F_Handler+0x56>
+ 98a:	4b0e      	ldr	r3, [pc, #56]	; (9c4 <GPIO_Port_F_Handler+0x80>)
+ 98c:	2100      	movs	r1, #0
+ 98e:	6818      	ldr	r0, [r3, #0]
+ 990:	f7ff fcf7 	bl	382 <_ZN4Gpio9gpioWriteE10setORClear.part.0>
+        (*swtich2).interruptClear();
+ 994:	4620      	mov	r0, r4
+ 996:	f7ff fd08 	bl	3aa <_ZN4Gpio14interruptClearEv>
+    if((*swtich2).gpioRead() == 0)
+ 99a:	4620      	mov	r0, r4
+ 99c:	f7ff fd2e 	bl	3fc <_ZN4Gpio8gpioReadEv>
+ 9a0:	b948      	cbnz	r0, 9b6 <GPIO_Port_F_Handler+0x72>
+ 9a2:	4b08      	ldr	r3, [pc, #32]	; (9c4 <GPIO_Port_F_Handler+0x80>)
+ 9a4:	2101      	movs	r1, #1
+ 9a6:	6818      	ldr	r0, [r3, #0]
+ 9a8:	f7ff fceb 	bl	382 <_ZN4Gpio9gpioWriteE10setORClear.part.0>
+        (*swtich2).interruptClear();
+ 9ac:	4620      	mov	r0, r4
+}
+ 9ae:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
+        (*swtich2).interruptClear();
+ 9b2:	f7ff bcfa 	b.w	3aa <_ZN4Gpio14interruptClearEv>
+}
+ 9b6:	bd10      	pop	{r4, pc}
+ 9b8:	2000009c 	.word	0x2000009c
+ 9bc:	20000098 	.word	0x20000098
+ 9c0:	200000a0 	.word	0x200000a0
+ 9c4:	2000008c 	.word	0x2000008c
+
+000009c8 <malloc>:
+ 9c8:	4b02      	ldr	r3, [pc, #8]	; (9d4 <malloc+0xc>)
+ 9ca:	4601      	mov	r1, r0
+ 9cc:	6818      	ldr	r0, [r3, #0]
+ 9ce:	f000 b82f 	b.w	a30 <_malloc_r>
+ 9d2:	bf00      	nop
+ 9d4:	20000000 	.word	0x20000000
+
+000009d8 <_sbrk>:
+ 9d8:	4b0d      	ldr	r3, [pc, #52]	; (a10 <_sbrk+0x38>)
+ 9da:	6819      	ldr	r1, [r3, #0]
+ 9dc:	b510      	push	{r4, lr}
+ 9de:	4602      	mov	r2, r0
+ 9e0:	b909      	cbnz	r1, 9e6 <_sbrk+0xe>
+ 9e2:	490c      	ldr	r1, [pc, #48]	; (a14 <_sbrk+0x3c>)
+ 9e4:	6019      	str	r1, [r3, #0]
+ 9e6:	6818      	ldr	r0, [r3, #0]
+ 9e8:	4669      	mov	r1, sp
+ 9ea:	4402      	add	r2, r0
+ 9ec:	428a      	cmp	r2, r1
+ 9ee:	d806      	bhi.n	9fe <_sbrk+0x26>
+ 9f0:	4909      	ldr	r1, [pc, #36]	; (a18 <_sbrk+0x40>)
+ 9f2:	4c0a      	ldr	r4, [pc, #40]	; (a1c <_sbrk+0x44>)
+ 9f4:	6809      	ldr	r1, [r1, #0]
+ 9f6:	42a1      	cmp	r1, r4
+ 9f8:	d008      	beq.n	a0c <_sbrk+0x34>
+ 9fa:	428a      	cmp	r2, r1
+ 9fc:	d906      	bls.n	a0c <_sbrk+0x34>
+ 9fe:	f000 f80f 	bl	a20 <__errno>
+ a02:	230c      	movs	r3, #12
+ a04:	6003      	str	r3, [r0, #0]
+ a06:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
+ a0a:	bd10      	pop	{r4, pc}
+ a0c:	601a      	str	r2, [r3, #0]
+ a0e:	e7fc      	b.n	a0a <_sbrk+0x32>
+ a10:	200000a4 	.word	0x200000a4
+ a14:	200000c0 	.word	0x200000c0
+ a18:	20000064 	.word	0x20000064
+ a1c:	cafedead 	.word	0xcafedead
+
+00000a20 <__errno>:
+ a20:	4b01      	ldr	r3, [pc, #4]	; (a28 <__errno+0x8>)
+ a22:	6818      	ldr	r0, [r3, #0]
+ a24:	4770      	bx	lr
+ a26:	bf00      	nop
+ a28:	20000000 	.word	0x20000000
+
+00000a2c <__retarget_lock_acquire_recursive>:
+ a2c:	4770      	bx	lr
+
+00000a2e <__retarget_lock_release_recursive>:
+ a2e:	4770      	bx	lr
+
+00000a30 <_malloc_r>:
+ a30:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ a32:	1ccd      	adds	r5, r1, #3
+ a34:	f025 0503 	bic.w	r5, r5, #3
+ a38:	3508      	adds	r5, #8
+ a3a:	2d0c      	cmp	r5, #12
+ a3c:	bf38      	it	cc
+ a3e:	250c      	movcc	r5, #12
+ a40:	2d00      	cmp	r5, #0
+ a42:	4606      	mov	r6, r0
+ a44:	db01      	blt.n	a4a <_malloc_r+0x1a>
+ a46:	42a9      	cmp	r1, r5
+ a48:	d903      	bls.n	a52 <_malloc_r+0x22>
+ a4a:	230c      	movs	r3, #12
+ a4c:	6033      	str	r3, [r6, #0]
+ a4e:	2000      	movs	r0, #0
+ a50:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
+ a52:	f000 f857 	bl	b04 <__malloc_lock>
+ a56:	4921      	ldr	r1, [pc, #132]	; (adc <_malloc_r+0xac>)
+ a58:	680a      	ldr	r2, [r1, #0]
+ a5a:	4614      	mov	r4, r2
+ a5c:	b99c      	cbnz	r4, a86 <_malloc_r+0x56>
+ a5e:	4f20      	ldr	r7, [pc, #128]	; (ae0 <_malloc_r+0xb0>)
+ a60:	683b      	ldr	r3, [r7, #0]
+ a62:	b923      	cbnz	r3, a6e <_malloc_r+0x3e>
+ a64:	4621      	mov	r1, r4
+ a66:	4630      	mov	r0, r6
+ a68:	f000 f83c 	bl	ae4 <_sbrk_r>
+ a6c:	6038      	str	r0, [r7, #0]
+ a6e:	4629      	mov	r1, r5
+ a70:	4630      	mov	r0, r6
+ a72:	f000 f837 	bl	ae4 <_sbrk_r>
+ a76:	1c43      	adds	r3, r0, #1
+ a78:	d123      	bne.n	ac2 <_malloc_r+0x92>
+ a7a:	230c      	movs	r3, #12
+ a7c:	6033      	str	r3, [r6, #0]
+ a7e:	4630      	mov	r0, r6
+ a80:	f000 f846 	bl	b10 <__malloc_unlock>
+ a84:	e7e3      	b.n	a4e <_malloc_r+0x1e>
+ a86:	6823      	ldr	r3, [r4, #0]
+ a88:	1b5b      	subs	r3, r3, r5
+ a8a:	d417      	bmi.n	abc <_malloc_r+0x8c>
+ a8c:	2b0b      	cmp	r3, #11
+ a8e:	d903      	bls.n	a98 <_malloc_r+0x68>
+ a90:	6023      	str	r3, [r4, #0]
+ a92:	441c      	add	r4, r3
+ a94:	6025      	str	r5, [r4, #0]
+ a96:	e004      	b.n	aa2 <_malloc_r+0x72>
+ a98:	6863      	ldr	r3, [r4, #4]
+ a9a:	42a2      	cmp	r2, r4
+ a9c:	bf0c      	ite	eq
+ a9e:	600b      	streq	r3, [r1, #0]
+ aa0:	6053      	strne	r3, [r2, #4]
+ aa2:	4630      	mov	r0, r6
+ aa4:	f000 f834 	bl	b10 <__malloc_unlock>
+ aa8:	f104 000b 	add.w	r0, r4, #11
+ aac:	1d23      	adds	r3, r4, #4
+ aae:	f020 0007 	bic.w	r0, r0, #7
+ ab2:	1ac2      	subs	r2, r0, r3
+ ab4:	d0cc      	beq.n	a50 <_malloc_r+0x20>
+ ab6:	1a1b      	subs	r3, r3, r0
+ ab8:	50a3      	str	r3, [r4, r2]
+ aba:	e7c9      	b.n	a50 <_malloc_r+0x20>
+ abc:	4622      	mov	r2, r4
+ abe:	6864      	ldr	r4, [r4, #4]
+ ac0:	e7cc      	b.n	a5c <_malloc_r+0x2c>
+ ac2:	1cc4      	adds	r4, r0, #3
+ ac4:	f024 0403 	bic.w	r4, r4, #3
+ ac8:	42a0      	cmp	r0, r4
+ aca:	d0e3      	beq.n	a94 <_malloc_r+0x64>
+ acc:	1a21      	subs	r1, r4, r0
+ ace:	4630      	mov	r0, r6
+ ad0:	f000 f808 	bl	ae4 <_sbrk_r>
+ ad4:	3001      	adds	r0, #1
+ ad6:	d1dd      	bne.n	a94 <_malloc_r+0x64>
+ ad8:	e7cf      	b.n	a7a <_malloc_r+0x4a>
+ ada:	bf00      	nop
+ adc:	200000a8 	.word	0x200000a8
+ ae0:	200000ac 	.word	0x200000ac
+
+00000ae4 <_sbrk_r>:
+ ae4:	b538      	push	{r3, r4, r5, lr}
+ ae6:	4c06      	ldr	r4, [pc, #24]	; (b00 <_sbrk_r+0x1c>)
+ ae8:	2300      	movs	r3, #0
+ aea:	4605      	mov	r5, r0
+ aec:	4608      	mov	r0, r1
+ aee:	6023      	str	r3, [r4, #0]
+ af0:	f7ff ff72 	bl	9d8 <_sbrk>
+ af4:	1c43      	adds	r3, r0, #1
+ af6:	d102      	bne.n	afe <_sbrk_r+0x1a>
+ af8:	6823      	ldr	r3, [r4, #0]
+ afa:	b103      	cbz	r3, afe <_sbrk_r+0x1a>
+ afc:	602b      	str	r3, [r5, #0]
+ afe:	bd38      	pop	{r3, r4, r5, pc}
+ b00:	200000bc 	.word	0x200000bc
+
+00000b04 <__malloc_lock>:
+ b04:	4801      	ldr	r0, [pc, #4]	; (b0c <__malloc_lock+0x8>)
+ b06:	f7ff bf91 	b.w	a2c <__retarget_lock_acquire_recursive>
+ b0a:	bf00      	nop
+ b0c:	200000b4 	.word	0x200000b4
+
+00000b10 <__malloc_unlock>:
+ b10:	4801      	ldr	r0, [pc, #4]	; (b18 <__malloc_unlock+0x8>)
+ b12:	f7ff bf8c 	b.w	a2e <__retarget_lock_release_recursive>
+ b16:	bf00      	nop
+ b18:	200000b4 	.word	0x200000b4
+
+00000b1c <_init>:
+ b1c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ b1e:	bf00      	nop
+ b20:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ b22:	bc08      	pop	{r3}
+ b24:	469e      	mov	lr, r3
+ b26:	4770      	bx	lr
+
+00000b28 <_fini>:
+ b28:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ b2a:	bf00      	nop
+ b2c:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ b2e:	bc08      	pop	{r3}
+ b30:	469e      	mov	lr, r3
+ b32:	4770      	bx	lr
+
+00000b34 <__sf_fake_stderr>:
+	...
+
+00000b54 <__sf_fake_stdin>:
+	...
+
+00000b74 <__sf_fake_stdout>:
+	...
+
+00000b94 <__EH_FRAME_BEGIN__>:
+ b94:	0000 0000                                   ....

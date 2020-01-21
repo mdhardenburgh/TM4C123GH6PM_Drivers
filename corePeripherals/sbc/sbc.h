@@ -45,7 +45,7 @@
 
 #include <stdint-gcc.h>
 #include <stddef.h>
-#include "../../register.h"
+#include "../../register/register.h"
 
 class Sbc
 {
@@ -60,23 +60,6 @@ class Sbc
          * These register definitions begin on page 134 of the TM4C123GH6PM Datasheet.
          */
         const uint32_t corePeripheralBase = 0xE000E000;
-        const uint32_t ACTLR_OFFSET = 0x008;
-        const uint32_t CPUID_OFFSET = 0xD00; 
-        const uint32_t INTCTRL_OFFSET = 0xD04;
-        const uint32_t VTABLE_OFFSET = 0xD08;
-        const uint32_t APINT_OFFSET = 0xD0C;
-        const uint32_t SYSCTRL_OFFSET = 0xD10;
-        const uint32_t CFGCTRL_OFFSET = 0xD14;
-        const uint32_t SYSPRI1_OFFSET = 0xD18;
-        const uint32_t SYSPRI2_OFFSET = 0xD1C;
-        const uint32_t SYSPRI3_OFFSET = 0xD20;
-        const uint32_t SYSHNDCTRL_OFFSET = 0xD24;
-        const uint32_t FAULTSTAT_OFFSET = 0xD28;
-        const uint32_t HFAULTSTAT_OFFSET = 0xD2C;
-        const uint32_t MMADDR_OFFSET = 0xD34;
-        const uint32_t FAULTADDR_OFFSET = 0xD38;
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 
         /**
          * Register 65: Auxiliary Control (ACTLR), offset 0x008
@@ -89,8 +72,8 @@ class Sbc
          * 
          * Note: This register can only be accessed from privileged mode.
          */
-        Register* ACTLR;
-        
+        const uint32_t ACTLR_OFFSET = 0x008;
+
         /**
          * Register 66: CPU ID Base (CPUID), offset 0xD00 Getters and Setters
          *   
@@ -99,7 +82,7 @@ class Sbc
          * 
          * Note: This register can only be accessed from privileged mode.
          */
-        Register* CPUID;
+        const uint32_t CPUID_OFFSET = 0xD00; 
 
         /**
          * Register 67: Interrupt Control and State (INTCTRL), offset 0xD04 Getters and Setters
@@ -117,7 +100,7 @@ class Sbc
          * 
          * Note: This register can only be accessed from privileged mode.
          */
-        Register* INTCTRL;
+        const uint32_t INTCTRL_OFFSET = 0xD04;
 
         /**
          * Register 68: Vector Table Offset (VTABLE), offset 0xD08
@@ -127,7 +110,7 @@ class Sbc
          * 
          * Note: This register can only be accessed from privileged mode.
          */
-        Register* VTABLE;
+        const uint32_t VTABLE_OFFSET = 0xD08;
 
         /**
          * Register 69: Application Interrupt and Reset Control (APINT), offset 0xD0C
@@ -159,7 +142,7 @@ class Sbc
          * 
          * Note: Determining preemption of an exception uses only the group priority field.
          */
-        Register* APINT;
+        const uint32_t APINT_OFFSET = 0xD0C;
 
         /**
          * Register 70: System Control (SYSCTRL), offset 0xD10
@@ -168,7 +151,7 @@ class Sbc
          * 
          * The SYSCTRL register controls features of entry to and exit from low-power state.
          */
-        Register* SYSCTRL;
+        const uint32_t SYSCTRL_OFFSET = 0xD10;
 
         /**
          * Register 71: Configuration and Control (CFGCTRL), offset 0xD14 
@@ -181,7 +164,7 @@ class Sbc
          * unaligned accesses; and access to the SWTRIG register by unprivileged 
          * software (see page 156).
          */
-        Register* CFGCTRL;
+        const uint32_t CFGCTRL_OFFSET = 0xD14;
 
         /**
          * Register 72: System Handler Priority 1 (SYSPRI1), offset 0xD18
@@ -192,7 +175,7 @@ class Sbc
          * usage fault, bus fault, and memory management fault exception 
          * handlers. This register is byte-accessible.
          */
-        Register SYSPRI1;
+        const uint32_t SYSPRI1_OFFSET = 0xD18;
 
         /**
          * Register 73: System Handler Priority 2 (SYSPRI2), offset 0xD1C
@@ -202,7 +185,7 @@ class Sbc
          * The SYSPRI2 register configures the priority level, 0 to 7 of the 
          * SVCall handler. This register is byte-accessible.
          */
-        Register SYSPRI2;
+        const uint32_t SYSPRI2_OFFSET = 0xD1C;
 
         /**
          * Register 74: System Handler Priority 3 (SYSPRI3), offset 0xD20
@@ -212,7 +195,7 @@ class Sbc
          * The SYSPRI3 register configures the priority level, 0 to 7 of the 
          * SysTick exception and PendSV handlers. This register is byte-accessible.
          */
-        Register SYSPRI3;
+        const uint32_t SYSPRI3_OFFSET = 0xD20;
 
         /**
          * Register 75: System Handler Control and State (SYSHNDCTRL), offset 0xD24
@@ -241,7 +224,7 @@ class Sbc
          * used to ensure that only the required bit is modified.
          * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
          */
-        Register SYSHNDCTRL;
+        const uint32_t SYSHNDCTRL_OFFSET = 0xD24;
 
         /**
          * Register 76: Configurable Fault Status (FAULTSTAT), offset 0xD28 
@@ -279,7 +262,7 @@ class Sbc
          * handler preempts the current fault handler, the other fault might change the 
          * MMADDR or FAULTADDR value.
          */
-        Register* FAULTSTAT;
+        const uint32_t FAULTSTAT_OFFSET = 0xD28;
 
         /**
          * Register 77: Hard Fault Status (HFAULTSTAT), offset 0xD2C
@@ -291,7 +274,7 @@ class Sbc
          * 
          * Bits are cleared by writing a 1 to them.
          */
-        Register* HFAULTSTAT;
+        const uint32_t HFAULTSTAT_OFFSET = 0xD2C;
 
         /**
          * Register 78: Memory Management Fault Address (MMADDR), offset 0xD34 
@@ -306,8 +289,8 @@ class Sbc
          * the range of the requested access size. Bits in the Memory Management 
          * Fault Status (MFAULTSTAT) register indicate the cause of the fault 
          * and whether the value in the MMADDR register is valid (see page 177).
-         */
-        Register* MMADDR;
+         */        
+        const uint32_t MMADDR_OFFSET = 0xD34;
 
         /**
          * Register 79: Bus Fault Address (FAULTADDR), offset 0xD38
@@ -321,9 +304,9 @@ class Sbc
          * indicate the cause of the fault and whether the value in the FAULTADDR 
          * register is valid (see page 177).
          */
-        Register* FAULTADDR;
+        const uint32_t FAULTADDR_OFFSET = 0xD38;
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
 
 
 
@@ -334,7 +317,7 @@ class Sbc
          * Disables floating-point instructions completing out of order with
          * respect to integer instructions.
          */
-        bitField ACTLR_DISOOFP{9, 1, RW};
+        // bitField ACTLR_DISOOFP{9, 1, RW};
 
         /**
          * Description: Disable CONTROL.FPCA
@@ -346,7 +329,7 @@ class Sbc
          * DISFPCA bit in the Auxiliary Control (ACTLR) register.
          * ____________________________________________________________________
          */
-        bitField ACTLR_DISFPCA{8, 1, RW};
+        // bitField ACTLR_DISFPCA{8, 1, RW};
 
         /**        
          * Description: Disable IT Folding         
@@ -363,7 +346,7 @@ class Sbc
          * task must avoid jitter, set the DISFOLD bit before executing the 
          * task, to disable IT folding.
          */
-        bitField ACTLR_DISFOLD{2, 1, RW};
+        // bitField ACTLR_DISFOLD{2, 1, RW};
 
         /**
          * Description: Disable Write Buffer
@@ -380,7 +363,7 @@ class Sbc
          * Note: This bit only affects write buffers implemented in the
          *       Cortex-M4 processor.
          */
-        bitField ACTLR_DISWBUF{1, 1, RW};
+        // bitField ACTLR_DISWBUF{1, 1, RW};
 
         /**
          * Description: Disable Interrupts of Multiple Cycle Instructions
@@ -394,7 +377,7 @@ class Sbc
          * _______before the processor can stack the current state and enter the
          * _______interrupt handler.
          */
-        bitField ACTLR_DISMCYC{0, 1, RW};
+        // bitField ACTLR_DISMCYC{0, 1, RW};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -406,7 +389,7 @@ class Sbc
          * Value_Description      
          * 0x41__ARM
          */
-        bitField CPUID_IMP{24, 8, RO};
+        // bitField CPUID_IMP{24, 8, RO};
 
         /**
          * Description: Variant Number
@@ -415,7 +398,7 @@ class Sbc
          * 0x0___The rn value in the rnpn product revision identifier, for 
          * ______example, the 0 in r0p0.
          */
-        bitField CPUID_VAR{20, 4, RO};
+        // bitField CPUID_VAR{20, 4, RO};
 
         /**
          * Description: Constant
@@ -423,7 +406,7 @@ class Sbc
          * Value_Description
          * 0xF___Always reads as 0xF.
          */
-        bitField CPUID_CON{16, 4, RO};
+        // bitField CPUID_CON{16, 4, RO};
 
         /**
          * Description: Part Number
@@ -431,7 +414,7 @@ class Sbc
          * Value___Description
          * 0xC24___Cortex-M4 processor.
          */
-        bitField CPUID_PARTNO{4, 12, RO};
+        // bitField CPUID_PARTNO{4, 12, RO};
 
         /**
          * Description: Revision Number
@@ -440,7 +423,7 @@ class Sbc
          * 0x1____The pn value in the rnpn product revision identifier,
          * _______for example, the 1 in r0p1.
          */
-        bitField CPUID_REV{0, 4, RO};
+        // bitField CPUID_REV{0, 4, RO};
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -463,7 +446,7 @@ class Sbc
          * the NMI exception handler returns 1 only if the NMI signal is reasserted 
          * while the processor is executing that handler.
          */
-        bitField INTCTRL_NMISET{31, 1, RW};
+        // bitField INTCTRL_NMISET{31, 1, RW};
 
         /**
          * Description: PendSV Set Pending
@@ -478,7 +461,7 @@ class Sbc
          * Setting this bit is the only way to set the PendSV exception state 
          * to pending. This bit is cleared by writing a 1 to the UNPENDSV bit.
          */
-        bitField INTCTRL_PENDSV{28, 1, RW};
+        // bitField INTCTRL_PENDSV{28, 1, RW};
 
         /**
          * Description: PendSV Clear Pending
@@ -490,7 +473,7 @@ class Sbc
          * 
          * This bit is write only; on a register read, its value is unknown.
          */
-        bitField INTCTRL_UNPENDSV{27, 1, WO};
+        // bitField INTCTRL_UNPENDSV{27, 1, WO};
 
         /**
          * Description: SysTick Set Pending
@@ -504,7 +487,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to the PENDSTCLR bit.
          */
-        bitField INTCTRL_PENDSTSET{26, 1, RW};
+        // bitField INTCTRL_PENDSTSET{26, 1, RW};
 
         /**
          * Description: SysTick Clear Pending
@@ -516,7 +499,7 @@ class Sbc
          * 
          * This bit is write only; on a register read, its value is unknown.
          */
-        bitField INTCTRL_PENDSTCLR{25, 1, WO};
+        // bitField INTCTRL_PENDSTCLR{25, 1, WO};
 
         /**
          * Description: Debug Interrupt Handling
@@ -529,7 +512,7 @@ class Sbc
          * This bit is only meaningful in Debug mode and reads as zero when the
          * processor is not in Debug mode.
          */
-        bitField INTCTRL_ISRPRE{23, 1, RO};
+        // bitField INTCTRL_ISRPRE{23, 1, RO};
 
         /**
          * Description: Interrupt Pending
@@ -541,7 +524,7 @@ class Sbc
          * 
          * This bit provides status for all interrupts excluding NMI and Faults.
          */
-        bitField INTCTRL_ISRPEND{22, 1, RO};
+        // bitField INTCTRL_ISRPEND{22, 1, RO};
 
         /**
          * Description: Interrupt Pending Vector Number
@@ -570,7 +553,7 @@ class Sbc
          * ....________....
          * 0x9A________Interrupt Vector 138
          */
-        bitField INTCTRL_VECPEND{12, 8, RO};
+        // bitField INTCTRL_VECPEND{12, 8, RO};
 
         /**
          * Description: Return to Base
@@ -585,7 +568,7 @@ class Sbc
          * This bit only has meaning if the processor is currently executing an 
          * ISR (the Interrupt Program Status (IPSR) register is non-zero).
          */
-        bitField INTCTRL_RETBASE{11, 1, RO};
+        // bitField INTCTRL_RETBASE{11, 1, RO};
 
         /**
          * Description: Interrupt Pending Vector Number
@@ -600,7 +583,7 @@ class Sbc
          * Interrupt Set Pending (PENDn), Interrupt Clear Pending (UNPENDn),and 
          * Interrupt Priority (PRIn) registers (see page 81).
          */
-        bitField INTCTRL_VECACT{0, 8, RO};
+        // bitField INTCTRL_VECACT{0, 8, RO};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -613,7 +596,7 @@ class Sbc
          * number of exception entries in the vector table. Because there are 
          * 138 interrupts, the offset must be aligned on a 1024-byte boundary.
          */
-        bitField VTABLE_FIELD_OFFSET{10, 22, RW};
+        // bitField VTABLE_FIELD_OFFSET{10, 22, RW};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -626,7 +609,7 @@ class Sbc
          * register. 0x05FA must be written to this field in order to change the 
          * bits in this register. On a read, 0xFA05 is returned.
          */
-        bitField APINT_VECTKEY{16, 16, RW};
+        // bitField APINT_VECTKEY{16, 16, RW};
 
         /**
          * Description: Data Endianess
@@ -634,7 +617,7 @@ class Sbc
          * The TivaTM C Series implementation uses only little-endian mode so
          * this is cleared to 0.
          */
-        bitField APINT_ENDIANESS{15, 1, RO};
+        // bitField APINT_ENDIANESS{15, 1, RO};
 
         /**
          * Description: Interrupt Priority Grouping
@@ -642,7 +625,7 @@ class Sbc
          * This field determines the split of group priority from subpriority 
          * (see Table 3-9 on page 164 for more information).
          */
-        bitField APINT_PRIGROUP{8, 3, RW};
+        // bitField APINT_PRIGROUP{8, 3, RW};
 
         /**
          * Description: System Reset Request
@@ -655,7 +638,7 @@ class Sbc
          * This bit is automatically cleared during the reset of the core and 
          * reads as 0.
          */
-        bitField APINT_SYSRESREQ{2, 1, WO};
+        // bitField APINT_SYSRESREQ{2, 1, WO};
 
         /**
          * Description: Clear Active NMI / Fault
@@ -663,7 +646,7 @@ class Sbc
          * This bit is reserved for Debug use and reads as 0. This bit must be
          * written as a 0, otherwise behavior is unpredictable.
          */
-        bitField APINT_VECTCLRACT{1, 1, WO};
+        // bitField APINT_VECTCLRACT{1, 1, WO};
 
         /**
          * Description: System Reset
@@ -671,7 +654,7 @@ class Sbc
          * This bit is reserved for Debug use and reads as 0. This bit must be
          * written as a 0, otherwise behavior is unpredictable.
          */
-        bitField APINT_VECTRESET{0, 1, WO};
+        // bitField APINT_VECTRESET{0, 1, WO};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -694,7 +677,7 @@ class Sbc
          * The processor also wakes up on execution of a SEV instruction or an 
          * external event.
          */
-        bitField SYSCTRL_SEVONPEND{4, 1, RW};
+        // bitField SYSCTRL_SEVONPEND{4, 1, RW};
 
         /**
          * Description: Deep Sleep Enable
@@ -704,7 +687,7 @@ class Sbc
          * 
          * 1_____Use Deep-sleep mode as the low power mode
          */
-        bitField SYSCTRL_SLEEPDEEP{2, 1, RW};
+        // bitField SYSCTRL_SLEEPDEEP{2, 1, RW};
 
         /**
          * Description: Sleep on ISR Exit
@@ -719,7 +702,7 @@ class Sbc
          * Setting this bit enables an interrupt-driven application to avoid returning
          * to an empty main application.
          */
-        bitField SYSCTRL_SLEEPEXIT{1, 1, RW};
+        // bitField SYSCTRL_SLEEPEXIT{1, 1, RW};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -737,7 +720,7 @@ class Sbc
          * indicate the stack alignment. On return from the exception, it uses 
          * this stacked bit to restore the correct stack alignment.
          */
-        bitField CFGCTRL_STKALIGN{9, 1, RW};
+        // bitField CFGCTRL_STKALIGN{9, 1, RW};
 
         /**
          * Description: Ignore Bus Fault in NMI and Fault
@@ -757,7 +740,7 @@ class Sbc
          * safe memory. The normal use of this bit is to probe system devices 
          * and bridges to detect control path problems and fix them.
          */
-        bitField CFGCTRL_BFHFNMIGN{8, 1, RW};
+        // bitField CFGCTRL_BFHFNMIGN{8, 1, RW};
 
         /**
          * Description: Trap on Divide by 0
@@ -771,7 +754,7 @@ class Sbc
          * 
          * 1_____Trap on divide by 0.
          */
-        bitField CFGCTRL_DIV0{4, 1, RW};
+        // bitField CFGCTRL_DIV0{4, 1, RW};
 
         /**
          * Description: Trap on Unaligned Access
@@ -785,7 +768,7 @@ class Sbc
          * Unaligned LDM, STM, LDRD, and STRD instructions always fault
          * regardless of whether UNALIGNED is set.
          */
-        bitField CFGCTRL_UNALIGNED{3, 1, RW};
+        // bitField CFGCTRL_UNALIGNED{3, 1, RW};
 
         /**
          * Description: Allow Main Interrupt Trigger
@@ -796,7 +779,7 @@ class Sbc
          * 1_____Enables unprivileged software access to the SWTRIG register
          * ______(see page 156).
          */
-        bitField CFGCTRL_MAINPEND{1, 1, RW};
+        // bitField CFGCTRL_MAINPEND{1, 1, RW};
 
         /**
          * Description: Thread State Control
@@ -809,7 +792,7 @@ class Sbc
          * ______control of an EXC_RETURN value (see “Exception Return” on page 
          * ______110 for more information).
          */
-        bitField CFGCTRL_BASETHR{0, 1, RW};
+        // bitField CFGCTRL_BASETHR{0, 1, RW};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -822,7 +805,7 @@ class Sbc
          * Configurable priority values are in the range 0-7, with lower values 
          * having higher priority.
          */
-        bitField SYSPRI1_USAGE{32, 3, RW};
+        // bitField SYSPRI1_USAGE{32, 3, RW};
 
         /**
          * Description: Bus Fault Priority
@@ -831,7 +814,7 @@ class Sbc
          * Configurable priority values are in the range 0-7, with lower values 
          * having higher priority.
          */
-        bitField SYSPRI1_BUS{13, 3, RW};
+        // bitField SYSPRI1_BUS{13, 3, RW};
 
         /**
          * Description: Memory Management Fault Priority
@@ -840,7 +823,7 @@ class Sbc
          * fault. Configurable priority values are in the range 0-7, with lower 
          * values having higher priority.
          */
-        bitField SYSPRI1_MEM{5, 3, RW};
+        // bitField SYSPRI1_MEM{5, 3, RW};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -853,7 +836,7 @@ class Sbc
          * priority values are in the range 0-7, with lower values having higher 
          * priority.
          */
-        bitField SYSPRI2_SVC{29, 3, RW};
+        // bitField SYSPRI2_SVC{29, 3, RW};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -866,7 +849,7 @@ class Sbc
          * Configurable priority values are in the range 0-7, with lower values
          * having higher priority.
          */
-        bitField SYSPRI3_TICK{29, 3, RW};
+        // bitField SYSPRI3_TICK{29, 3, RW};
 
         /**
          * Description: PendSV Priority
@@ -875,7 +858,7 @@ class Sbc
          * priority values are in the range 0-7, with lower values having higher 
          * priority.
          */
-        bitField SYSPRI3_PENDSV{21, 3, RW};
+        // bitField SYSPRI3_PENDSV{21, 3, RW};
 
         /**
          * Description: Debug Priority
@@ -884,7 +867,7 @@ class Sbc
          * priority values are in the range 0-7, with lower values having higher 
          * priority.
          */
-        bitField SYSPRI3_DEBUG{5, 3, RW};
+        // bitField SYSPRI3_DEBUG{5, 3, RW};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -898,7 +881,7 @@ class Sbc
          * 
          * 1_____Enables the usage fault exception.
          */
-        bitField SYSHNDCTRL_USAGE{18, 1, RW};
+        // bitField SYSHNDCTRL_USAGE{18, 1, RW};
 
         /**
          * Description: Bus Fault Enable
@@ -908,7 +891,7 @@ class Sbc
          * 
          * 1_____Enables the bus fault exception.
          */
-        bitField SYSHNDCTRL_BUS{17, 1, RW};
+        // bitField SYSHNDCTRL_BUS{17, 1, RW};
 
         /**
          * Description: Memory Management Fault Enable
@@ -918,7 +901,7 @@ class Sbc
          * 
          * 1_____Enables the memory management fault exception.
          */
-        bitField SYSHNDCTRL_MEM{16, 1, RW};
+        // bitField SYSHNDCTRL_MEM{16, 1, RW};
 
         /**
          * Description: SVC Call Pending
@@ -931,7 +914,7 @@ class Sbc
          * This bit can be modified to change the pending status of the SVC call
          * exception.
          */
-        bitField SYSHNDCTRL_SVC{15, 1, RW};
+        // bitField SYSHNDCTRL_SVC{15, 1, RW};
 
         /**
          * Description: Bus Fault Pending
@@ -944,7 +927,7 @@ class Sbc
          * This bit can be modified to change the pending status of the bus 
          * fault exception.
          */
-        bitField SYSHNDCTRL_BUSP{14, 1, RW};
+        // bitField SYSHNDCTRL_BUSP{14, 1, RW};
 
         /**
          * Description: Memory Management Fault Pending
@@ -957,7 +940,7 @@ class Sbc
          * This bit can be modified to change the pending status of the memory
          * management fault exception.
          */
-        bitField SYSHNDCTRL_MEMP{13, 1, RW};
+        // bitField SYSHNDCTRL_MEMP{13, 1, RW};
 
         /**
          * Description: Usage Fault Pending
@@ -970,7 +953,7 @@ class Sbc
          * This bit can be modified to change the pending status of the usage 
          * fault exception.
          */
-        bitField SYSHNDCTRL_USAGEP{12, 1, RW};
+        // bitField SYSHNDCTRL_USAGEP{12, 1, RW};
 
         /**
          * Description: SysTick Exception Active
@@ -983,7 +966,7 @@ class Sbc
          * This bit can be modified to change the active status of the SysTick
          * exception, however, see the Caution above before setting this bit.
          */
-        bitField SYSHNDCTRL_TICK{11, 1, RW};
+        // bitField SYSHNDCTRL_TICK{11, 1, RW};
 
         /**
          * Description: PendSV Exception Active
@@ -996,7 +979,7 @@ class Sbc
          * This bit can be modified to change the active status of the PendSV
          * exception, however, see the Caution above before setting this bit.
          */
-        bitField SYSHNDCTRL_PNDSV{10, 1, RW};
+        // bitField SYSHNDCTRL_PNDSV{10, 1, RW};
 
         /**
          * Description: Debug Monitor Active
@@ -1006,7 +989,7 @@ class Sbc
          * 
          * 1_____The Debug monitor is active.
          */
-        bitField SYSHNDCTRL_MON{8, 1, RW};
+        // bitField SYSHNDCTRL_MON{8, 1, RW};
 
         /**
          * Description: SVC Call Active
@@ -1019,7 +1002,7 @@ class Sbc
          * This bit can be modified to change the active status of the SVC call
          * exception, however, see the Caution above before setting this bit.
          */
-        bitField SYSHNDCTRL_SVCA{7, 1, RW};
+        // bitField SYSHNDCTRL_SVCA{7, 1, RW};
 
         /**
          * Description: Usage Fault Active
@@ -1032,7 +1015,7 @@ class Sbc
          * This bit can be modified to change the active status of the usage 
          * fault exception, however, see the Caution above before setting this bit.
          */
-        bitField SYSHNDCTRL_USGA{3, 1, RW};
+        // bitField SYSHNDCTRL_USGA{3, 1, RW};
 
         /**
          * Description: Bus Fault Active
@@ -1045,7 +1028,7 @@ class Sbc
          * This bit can be modified to change the active status of the bus fault
          * exception, however, see the Caution above before setting this bit.
          */
-        bitField SYSHNDCTRL_BUSA{1, 1, RW};
+        // bitField SYSHNDCTRL_BUSA{1, 1, RW};
 
         /**
          * Description: Memory Management Fault Active
@@ -1059,7 +1042,7 @@ class Sbc
          * management fault exception, however, see the Caution above before
          * setting this bit.
          */
-        bitField SYSHNDCTRL_MEMA{0, 1, RW};
+        // bitField SYSHNDCTRL_MEMA{0, 1, RW};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1083,7 +1066,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_DIV0{25, 1, RW1C};
+        // bitField FAULTSTAT_DIV0{25, 1, RW1C};
 
         /**
          * Description: Unaligned Access Usage Fault
@@ -1102,7 +1085,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_UNALIGN{24, 1, RW1C};
+        // bitField FAULTSTAT_UNALIGN{24, 1, RW1C};
 
         /**
          * Description: No Coprocessor Usage Fault
@@ -1115,7 +1098,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_NOCP{19, 1, RW1C};
+        // bitField FAULTSTAT_NOCP{19, 1, RW1C};
 
         /**
          * Description: Invalid PC Load Usage Fault
@@ -1134,7 +1117,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_INVPC{18, 1, RW1C};
+        // bitField FAULTSTAT_INVPC{18, 1, RW1C};
 
         /**
          * Description: Invalid State Usage Fault
@@ -1153,7 +1136,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_INVSTAT{17, 1, RW1C};
+        // bitField FAULTSTAT_INVSTAT{17, 1, RW1C};
 
         /**
          * Description: Undefined Instruction Usage Fault
@@ -1171,7 +1154,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_UNDEF{16, 1, RW1C};
+        // bitField FAULTSTAT_UNDEF{16, 1, RW1C};
 
         /**
          * Description: Bus Fault Address Register Valid
@@ -1193,7 +1176,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_BFARV{15, 1, RW1C};
+        // bitField FAULTSTAT_BFARV{15, 1, RW1C};
 
         /**
          * Description: Bus Fault on Floating-Point Lazy State Preservation
@@ -1207,7 +1190,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_BLSPERR{13, 1, RW1C};
+        // bitField FAULTSTAT_BLSPERR{13, 1, RW1C};
 
         /**
          * Description: Stack Bus Fault
@@ -1224,7 +1207,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_BSTKE{12, 1, RW1C};
+        // bitField FAULTSTAT_BSTKE{12, 1, RW1C};
 
         /**
          * Description: Unstack Bus Fault
@@ -1243,7 +1226,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_BUSTKE{11, 1, RW1C};
+        // bitField FAULTSTAT_BUSTKE{11, 1, RW1C};
 
         /**
          * Description: Imprecise Data Bus Error
@@ -1267,7 +1250,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_IMPRE{10, 1, RW1C};
+        // bitField FAULTSTAT_IMPRE{10, 1, RW1C};
 
         /**
          * Description: Precise Data Bus Error
@@ -1282,7 +1265,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_PRECISE{9, 1, RW1C};
+        // bitField FAULTSTAT_PRECISE{9, 1, RW1C};
 
         /**
          * Description: Instruction Bus Error
@@ -1301,7 +1284,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_IBUS{8, 1, RW1C};
+        // bitField FAULTSTAT_IBUS{8, 1, RW1C};
 
         /**
          * Description: Memory Management Fault Address Register Valid
@@ -1320,7 +1303,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_MMARV{7, 1, RW1C};
+        // bitField FAULTSTAT_MMARV{7, 1, RW1C};
 
         /**
          * Description: Memory Management Fault on Floating-Point Lazy State Preservation
@@ -1334,7 +1317,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_MLSPERR{5, 1, RW1C};
+        // bitField FAULTSTAT_MLSPERR{5, 1, RW1C};
 
         /**
          * Description: Stack Access Violation
@@ -1352,7 +1335,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_MSTKE{4, 1, RW1C};
+        // bitField FAULTSTAT_MSTKE{4, 1, RW1C};
         
         /**
          * Description: Unstack Access Violation
@@ -1371,7 +1354,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_MUSTKE{3, 1, RW1C};
+        // bitField FAULTSTAT_MUSTKE{3, 1, RW1C};
 
         /**
          * Description: Data Access Violation
@@ -1388,7 +1371,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_DERR{1, 1, RW1C};
+        // bitField FAULTSTAT_DERR{1, 1, RW1C};
 
         /**
          * Description: Instruction Access Violation
@@ -1407,7 +1390,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField FAULTSTAT_IERR{0, 1, RW1C};
+        // bitField FAULTSTAT_IERR{0, 1, RW1C};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1419,7 +1402,7 @@ class Sbc
          * This bit is reserved for Debug use. This bit must be written as a 0,
          * otherwise behavior is unpredictable.
          */
-        bitField HFAULTSTAT_DBG{31, 1, RW1C};
+        // bitField HFAULTSTAT_DBG{31, 1, RW1C};
 
         /**
          * Description: Forced Hard Fault
@@ -1436,7 +1419,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField HFAULTSTAT_FORCED{30, 1, RW1C};
+        // bitField HFAULTSTAT_FORCED{30, 1, RW1C};
 
         /**
          * Description: Vector Table Read Fault
@@ -1453,7 +1436,7 @@ class Sbc
          * 
          * This bit is cleared by writing a 1 to it.
          */
-        bitField HFAULTSTAT_VECT{1, 1, RW1C};
+        // bitField HFAULTSTAT_VECT{1, 1, RW1C};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1465,7 +1448,7 @@ class Sbc
          * When the MMARV bit of MFAULTSTAT is set, this field holds the address
          * of the location that generated the memory management fault.
          */
-        bitField MMADDR_ADDR{0, 32, RW};
+        // bitField MMADDR_ADDR{0, 32, RW};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1477,7 +1460,7 @@ class Sbc
          * When the FAULTADDRV bit of BFAULTSTAT is set, this field holds the
          * address of the location that generated the bus fault.
          */
-        bitField FAULTADDR_ADDR{0, 32, RW};
+        // bitField FAULTADDR_ADDR{0, 32, RW};
 
 };
 

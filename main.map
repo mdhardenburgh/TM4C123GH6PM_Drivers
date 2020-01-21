@@ -1,43 +1,17 @@
 Archive member included to satisfy reference by file (symbol)
 
-/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_op.o)
-                              main.o (symbol from plugin) (operator new(unsigned int))
-/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(del_op.o)
-                              nvic.o (symbol from plugin) (operator delete(void*))
-/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_handler.o)
-                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_op.o) (std::get_new_handler())
-/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-abort.o)
-                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_op.o) (abort)
 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-exit.o)
                               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/rdimon-crt0.o (exit)
 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-impure.o)
                               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-exit.o) (_global_impure_ptr)
 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-init.o)
                               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/rdimon-crt0.o (__libc_init_array)
-/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
-                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_op.o) (malloc)
 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-memset.o)
                               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/rdimon-crt0.o (memset)
-/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-freer.o)
-                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o) (_free_r)
-/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-mallocr.o)
-                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o) (_malloc_r)
-/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-sbrkr.o)
-                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-mallocr.o) (_sbrk_r)
-/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signal.o)
-                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-abort.o) (raise)
-/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signalr.o)
-                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signal.o) (_kill_r)
-/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-mlock.o)
-                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-freer.o) (__malloc_lock)
-/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-reent.o)
-                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-sbrkr.o) (errno)
-/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
-                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-mlock.o) (__retarget_lock_acquire_recursive)
 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
-                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signalr.o) (_getpid)
+                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/rdimon-crt0.o (initialise_monitor_handles)
 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_exit.o)
-                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-abort.o) (_exit)
+                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-exit.o) (_exit)
 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_kill.o)
                               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_exit.o) (_kill_shared)
 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-errno.o)
@@ -46,6 +20,12 @@ Archive member included to satisfy reference by file (symbol)
                               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o) (__sinit)
 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fwalk.o)
                               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o) (_fwalk)
+/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o) (__retarget_lock_init_recursive)
+/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-mallocr.o)
+                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o) (_malloc_r)
+/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-sbrkr.o)
+                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-mallocr.o) (_sbrk_r)
 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o)
                               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o) (__sread)
 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strlen.o)
@@ -58,30 +38,38 @@ Archive member included to satisfy reference by file (symbol)
                               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o) (_fflush_r)
 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lseekr.o)
                               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o) (_lseek_r)
+/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-mlock.o)
+                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-mallocr.o) (__malloc_lock)
+/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-freer.o)
+                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fflush.o) (_free_r)
 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-readr.o)
                               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o) (_read_r)
+/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-reent.o)
+                              /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-sbrkr.o) (errno)
+/home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
+                              /tmp/ccBZqEqR.ltrans0.ltrans.o (malloc)
 
 Allocating common symbols
 Common symbol       size              file
 
 __lock___atexit_recursive_mutex
-                    0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
+                    0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
 __lock___arc4random_mutex
-                    0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
-errno               0x4               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-reent.o)
+                    0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+errno               0x4               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-reent.o)
 __lock___env_recursive_mutex
-                    0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
+                    0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
 __lock___sinit_recursive_mutex
-                    0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
+                    0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
 __lock___malloc_recursive_mutex
-                    0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
+                    0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
 __lock___at_quick_exit_mutex
-                    0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
+                    0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
 __lock___dd_hash_mutex
-                    0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
-__lock___tz_mutex   0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
+                    0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+__lock___tz_mutex   0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
 __lock___sfp_recursive_mutex
-                    0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
+                    0x1               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
 
 Discarded input sections
 
@@ -98,26 +86,14 @@ Discarded input sections
                 0x0000000000000000       0x1c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/rdimon-crt0.o
  .data          0x0000000000000000        0x0 startup_ARMCM4.o
  .bss           0x0000000000000000        0x0 startup_ARMCM4.o
- .comment       0x0000000000000000      0x4a6 /tmp/cc5GNZPGdebugobj
- .text          0x0000000000000000        0x0 /tmp/ccFkzrgR.ltrans0.ltrans.o
- .data          0x0000000000000000        0x0 /tmp/ccFkzrgR.ltrans0.ltrans.o
- .bss           0x0000000000000000        0x0 /tmp/ccFkzrgR.ltrans0.ltrans.o
- .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_op.o)
- .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_op.o)
- .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_op.o)
- .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(del_op.o)
- .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(del_op.o)
- .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(del_op.o)
- .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_handler.o)
- .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_handler.o)
- .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_handler.o)
- .text._ZSt15set_new_handlerPFvvE
-                0x0000000000000000       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_handler.o)
- .rodata._ZSt7nothrow
-                0x0000000000000000        0x1 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_handler.o)
- .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-abort.o)
- .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-abort.o)
- .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-abort.o)
+ .comment       0x0000000000000000      0x4a6 /tmp/ccHIylQndebugobj
+ .text          0x0000000000000000        0x0 /tmp/ccBZqEqR.ltrans0.ltrans.o
+ .data          0x0000000000000000        0x0 /tmp/ccBZqEqR.ltrans0.ltrans.o
+ .bss           0x0000000000000000        0x0 /tmp/ccBZqEqR.ltrans0.ltrans.o
+ .text._ZdaPv   0x0000000000000000        0x4 /tmp/ccBZqEqR.ltrans0.ltrans.o
+ .text._ZdlPv   0x0000000000000000        0x4 /tmp/ccBZqEqR.ltrans0.ltrans.o
+ .text._Znaj    0x0000000000000000        0x4 /tmp/ccBZqEqR.ltrans0.ltrans.o
+ .text._Znwj    0x0000000000000000        0x4 /tmp/ccBZqEqR.ltrans0.ltrans.o
  .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-exit.o)
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-exit.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-exit.o)
@@ -128,6 +104,8 @@ Discarded input sections
  .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-impure.o)
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-impure.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-impure.o)
+ .rodata._global_impure_ptr
+                0x0000000000000000        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-impure.o)
  .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-init.o)
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-init.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-init.o)
@@ -136,70 +114,51 @@ Discarded input sections
  .debug_frame   0x0000000000000000       0x2c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-init.o)
  .ARM.attributes
                 0x0000000000000000       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-init.o)
- .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
- .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
- .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
  .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-memset.o)
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-memset.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-memset.o)
- .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-freer.o)
- .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-freer.o)
- .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-freer.o)
- .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-mallocr.o)
- .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-mallocr.o)
- .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-mallocr.o)
- .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-sbrkr.o)
- .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-sbrkr.o)
- .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-sbrkr.o)
- .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signal.o)
- .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signal.o)
- .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signal.o)
- .text._init_signal_r
-                0x0000000000000000       0x28 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signal.o)
- .text._signal_r
-                0x0000000000000000       0x30 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signal.o)
- .text.__sigtramp_r
-                0x0000000000000000       0x48 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signal.o)
- .text.signal   0x0000000000000000       0x10 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signal.o)
- .text._init_signal
-                0x0000000000000000        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signal.o)
- .text.__sigtramp
-                0x0000000000000000       0x10 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signal.o)
- .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signalr.o)
- .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signalr.o)
- .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signalr.o)
- .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-mlock.o)
- .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-mlock.o)
- .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-mlock.o)
- .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-reent.o)
- .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-reent.o)
- .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-reent.o)
- .text.cleanup_glue
-                0x0000000000000000       0x1a /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-reent.o)
- .text._reclaim_reent
-                0x0000000000000000       0xb8 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-reent.o)
- .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
- .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
- .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
- .text.__retarget_lock_init
-                0x0000000000000000        0x2 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
- .text.__retarget_lock_close
-                0x0000000000000000        0x2 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
- .text.__retarget_lock_close_recursive
-                0x0000000000000000        0x2 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
- .text.__retarget_lock_acquire
-                0x0000000000000000        0x2 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
- .text.__retarget_lock_try_acquire
-                0x0000000000000000        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
- .text.__retarget_lock_try_acquire_recursive
-                0x0000000000000000        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
- .text.__retarget_lock_release
-                0x0000000000000000        0x2 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
+ .text.memset   0x0000000000000000       0x10 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-memset.o)
+ .debug_frame   0x0000000000000000       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-memset.o)
+ .ARM.attributes
+                0x0000000000000000       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-memset.o)
+ .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
+ .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
+ .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
+ .text.free     0x0000000000000000       0x10 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
  .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text.findslot
+                0x0000000000000000       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text.checkerror
+                0x0000000000000000       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text.error    0x0000000000000000       0x1c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text._swiread
+                0x0000000000000000       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text._read    0x0000000000000000       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text._swilseek
+                0x0000000000000000       0x78 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text._lseek   0x0000000000000000        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text._swiwrite
+                0x0000000000000000       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text._write   0x0000000000000000       0x40 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text._swiclose
+                0x0000000000000000       0x1a /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text._close   0x0000000000000000       0x4c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text._getpid  0x0000000000000000        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text._swistat
+                0x0000000000000000       0x42 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
  .text._fstat   0x0000000000000000       0x1c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text._stat    0x0000000000000000       0x3a /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text._swiopen
+                0x0000000000000000       0xb4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
  .text._open    0x0000000000000000       0x12 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text._get_semihosting_exts
+                0x0000000000000000       0xb4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text.initialise_semihosting_exts
+                0x0000000000000000       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .text._has_ext_exit_extended
+                0x0000000000000000       0x18 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
  .text._has_ext_stdout_stderr
                 0x0000000000000000       0x18 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
  .text.initialise_monitor_handles
@@ -219,26 +178,59 @@ Discarded input sections
                 0x0000000000000000        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
  .bss.monitor_stdout
                 0x0000000000000000        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .bss.openfiles
+                0x0000000000000000       0xa0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .data.supports_ext_exit_extended
+                0x0000000000000000        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .data.supports_ext_stdout_stderr
+                0x0000000000000000        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .rodata._get_semihosting_exts.str1.1
+                0x0000000000000000       0x16 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
  .rodata.initialise_monitor_handles.str1.1
                 0x0000000000000000        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
  .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_exit.o)
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_exit.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_exit.o)
+ .text._exit    0x0000000000000000       0x14 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_exit.o)
+ .debug_frame   0x0000000000000000       0x28 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_exit.o)
+ .ARM.attributes
+                0x0000000000000000       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_exit.o)
  .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_kill.o)
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_kill.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_kill.o)
+ .text._kill_shared
+                0x0000000000000000       0x26 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_kill.o)
+ .text._kill    0x0000000000000000       0x18 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_kill.o)
+ .debug_frame   0x0000000000000000       0x40 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_kill.o)
+ .ARM.attributes
+                0x0000000000000000       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_kill.o)
  .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-errno.o)
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-errno.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-errno.o)
  .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
+ .text.std      0x0000000000000000       0x48 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
+ .text._cleanup_r
+                0x0000000000000000        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
  .text.__fp_lock
                 0x0000000000000000       0x18 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
  .text.__fp_unlock
                 0x0000000000000000       0x18 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
+ .text.__sfmoreglue
+                0x0000000000000000       0x2c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
  .text._cleanup
                 0x0000000000000000        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
+ .text.__sfp_lock_acquire
+                0x0000000000000000        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
+ .text.__sfp_lock_release
+                0x0000000000000000        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
+ .text.__sinit_lock_acquire
+                0x0000000000000000        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
+ .text.__sinit_lock_release
+                0x0000000000000000        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
+ .text.__sinit  0x0000000000000000       0x70 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
+ .text.__sfp    0x0000000000000000       0x8c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
  .text.__fp_lock_all
                 0x0000000000000000       0x1c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
  .text.__fp_unlock_all
@@ -247,29 +239,114 @@ Discarded input sections
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fwalk.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fwalk.o)
  .text._fwalk   0x0000000000000000       0x38 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fwalk.o)
+ .text._fwalk_reent
+                0x0000000000000000       0x3c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fwalk.o)
+ .debug_frame   0x0000000000000000       0x54 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fwalk.o)
+ .ARM.attributes
+                0x0000000000000000       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fwalk.o)
+ .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+ .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+ .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_init
+                0x0000000000000000        0x2 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_init_recursive
+                0x0000000000000000        0x2 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_close
+                0x0000000000000000        0x2 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_close_recursive
+                0x0000000000000000        0x2 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_acquire
+                0x0000000000000000        0x2 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_try_acquire
+                0x0000000000000000        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_try_acquire_recursive
+                0x0000000000000000        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+ .text.__retarget_lock_release
+                0x0000000000000000        0x2 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+ .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-mallocr.o)
+ .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-mallocr.o)
+ .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-mallocr.o)
+ .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-sbrkr.o)
+ .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-sbrkr.o)
+ .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-sbrkr.o)
  .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o)
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o)
+ .text.__sread  0x0000000000000000       0x22 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o)
  .text.__seofread
                 0x0000000000000000        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o)
+ .text.__swrite
+                0x0000000000000000       0x38 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o)
+ .text.__sseek  0x0000000000000000       0x24 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o)
+ .text.__sclose
+                0x0000000000000000        0x8 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o)
+ .debug_frame   0x0000000000000000       0x88 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o)
+ .ARM.attributes
+                0x0000000000000000       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o)
+ .text          0x0000000000000000       0x10 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strlen.o)
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strlen.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strlen.o)
+ .ARM.attributes
+                0x0000000000000000       0x17 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strlen.o)
  .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-writer.o)
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-writer.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-writer.o)
+ .text._write_r
+                0x0000000000000000       0x24 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-writer.o)
+ .debug_frame   0x0000000000000000       0x2c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-writer.o)
+ .ARM.attributes
+                0x0000000000000000       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-writer.o)
  .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-closer.o)
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-closer.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-closer.o)
+ .text._close_r
+                0x0000000000000000       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-closer.o)
+ .debug_frame   0x0000000000000000       0x2c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-closer.o)
+ .ARM.attributes
+                0x0000000000000000       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-closer.o)
  .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fflush.o)
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fflush.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fflush.o)
+ .text.__sflush_r
+                0x0000000000000000      0x10c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fflush.o)
+ .text._fflush_r
+                0x0000000000000000       0x78 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fflush.o)
  .text.fflush   0x0000000000000000       0x24 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fflush.o)
+ .debug_frame   0x0000000000000000       0x5c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fflush.o)
+ .ARM.attributes
+                0x0000000000000000       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fflush.o)
  .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lseekr.o)
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lseekr.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lseekr.o)
+ .text._lseek_r
+                0x0000000000000000       0x24 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lseekr.o)
+ .debug_frame   0x0000000000000000       0x2c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lseekr.o)
+ .ARM.attributes
+                0x0000000000000000       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lseekr.o)
+ .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-mlock.o)
+ .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-mlock.o)
+ .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-mlock.o)
+ .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-freer.o)
+ .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-freer.o)
+ .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-freer.o)
+ .text._free_r  0x0000000000000000       0x9c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-freer.o)
+ .debug_frame   0x0000000000000000       0x38 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-freer.o)
+ .ARM.attributes
+                0x0000000000000000       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-freer.o)
  .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-readr.o)
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-readr.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-readr.o)
+ .text._read_r  0x0000000000000000       0x24 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-readr.o)
+ .debug_frame   0x0000000000000000       0x2c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-readr.o)
+ .ARM.attributes
+                0x0000000000000000       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-readr.o)
+ .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-reent.o)
+ .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-reent.o)
+ .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-reent.o)
+ .text.cleanup_glue
+                0x0000000000000000       0x1a /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-reent.o)
+ .text._reclaim_reent
+                0x0000000000000000       0xb8 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-reent.o)
  .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtend.o
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtend.o
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtend.o
@@ -290,8 +367,8 @@ LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-no
 LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/rdimon-crt0.o
 LOAD startup_ARMCM4.o
-LOAD /tmp/cc5GNZPGdebugobj
-LOAD /tmp/ccFkzrgR.ltrans0.ltrans.o
+LOAD /tmp/ccHIylQndebugobj
+LOAD /tmp/ccBZqEqR.ltrans0.ltrans.o
 LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a
 LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a
 START GROUP
@@ -312,7 +389,7 @@ END GROUP
 LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtend.o
 LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtn.o
 
-.text           0x0000000000000000     0x1aac
+.text           0x0000000000000000      0xb98
  *(.isr_vector)
  .isr_vector    0x0000000000000000      0x26c startup_ARMCM4.o
                 0x0000000000000000                __isr_vector
@@ -408,201 +485,66 @@ LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-no
                 0x00000000000002ec                CAN_1_Handler
                 0x00000000000002ec                _16_32_Bit_Timer_4B_Handler
  .text._ZN4Nvic17disableInterruptsEv
-                0x00000000000002f0       0x20 /tmp/ccFkzrgR.ltrans0.ltrans.o
+                0x00000000000002f0       0x20 /tmp/ccBZqEqR.ltrans0.ltrans.o
  .text._ZN4Nvic16enableInterruptsEv
-                0x0000000000000310       0x20 /tmp/ccFkzrgR.ltrans0.ltrans.o
+                0x0000000000000310       0x20 /tmp/ccBZqEqR.ltrans0.ltrans.o
  .text._ZN4Nvic3wfiEv
-                0x0000000000000330       0x16 /tmp/ccFkzrgR.ltrans0.ltrans.o
- .text._ZN4Gpio8gpioReadEv
-                0x0000000000000346       0x34 /tmp/ccFkzrgR.ltrans0.ltrans.o
- .text._ZN8Register25setRegisterBitFieldStatusE16registerBitFieldm
-                0x000000000000037a       0x48 /tmp/ccFkzrgR.ltrans0.ltrans.o
+                0x0000000000000330       0x16 /tmp/ccBZqEqR.ltrans0.ltrans.o
+ .text._ZN8Register25setRegisterBitFieldStatusE8bitFieldm
+                0x0000000000000346       0x3c /tmp/ccBZqEqR.ltrans0.ltrans.o
  .text._ZN4Gpio9gpioWriteE10setORClear.part.0
-                0x00000000000003c2       0x18 /tmp/ccFkzrgR.ltrans0.ltrans.o
+                0x0000000000000382       0x28 /tmp/ccBZqEqR.ltrans0.ltrans.o
  .text._ZN4Gpio14interruptClearEv
-                0x00000000000003da       0x1a /tmp/ccFkzrgR.ltrans0.ltrans.o
+                0x00000000000003aa       0x26 /tmp/ccBZqEqR.ltrans0.ltrans.o
+ .text._ZN8Register25getRegisterBitFieldStatusE8bitField
+                0x00000000000003d0       0x2c /tmp/ccBZqEqR.ltrans0.ltrans.o
+ .text._ZN4Gpio8gpioReadEv
+                0x00000000000003fc       0x26 /tmp/ccBZqEqR.ltrans0.ltrans.o
+ *fill*         0x0000000000000422        0x2 
  .text._ZN4GpioC2E14GPIO_Port_Pins9direction
-                0x00000000000003f4      0x508 /tmp/ccFkzrgR.ltrans0.ltrans.o
+                0x0000000000000424      0x22c /tmp/ccBZqEqR.ltrans0.ltrans.o
  .text._ZN4GpioC2E14GPIO_Port_Pins9directionm.constprop.0
-                0x00000000000008fc      0x1ec /tmp/ccFkzrgR.ltrans0.ltrans.o
+                0x0000000000000650       0xe8 /tmp/ccBZqEqR.ltrans0.ltrans.o
  .text.startup.main
-                0x0000000000000ae8       0x68 /tmp/ccFkzrgR.ltrans0.ltrans.o
-                0x0000000000000ae8                main
+                0x0000000000000738       0x74 /tmp/ccBZqEqR.ltrans0.ltrans.o
+                0x0000000000000738                main
  .text.SystemInit
-                0x0000000000000b50      0x240 /tmp/ccFkzrgR.ltrans0.ltrans.o
-                0x0000000000000b50                SystemInit
+                0x00000000000007ac      0x198 /tmp/ccBZqEqR.ltrans0.ltrans.o
+                0x00000000000007ac                SystemInit
  .text.GPIO_Port_F_Handler
-                0x0000000000000d90       0x84 /tmp/ccFkzrgR.ltrans0.ltrans.o
-                0x0000000000000d90                GPIO_Port_F_Handler
- .text._Znwj    0x0000000000000e14       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_op.o)
-                0x0000000000000e14                operator new(unsigned int)
- .text._ZdlPv   0x0000000000000e34        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(del_op.o)
-                0x0000000000000e34                operator delete(void*)
- .text._ZSt15get_new_handlerv
-                0x0000000000000e38       0x10 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_handler.o)
-                0x0000000000000e38                std::get_new_handler()
- .text.abort    0x0000000000000e48        0xe /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-abort.o)
-                0x0000000000000e48                abort
- *fill*         0x0000000000000e56        0x2 
- .text.malloc   0x0000000000000e58       0x10 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
-                0x0000000000000e58                malloc
- .text.free     0x0000000000000e68       0x10 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
-                0x0000000000000e68                free
- .text.memset   0x0000000000000e78       0x10 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-memset.o)
-                0x0000000000000e78                memset
- .text._free_r  0x0000000000000e88       0x9c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-freer.o)
-                0x0000000000000e88                _free_r
- .text._malloc_r
-                0x0000000000000f24       0xb4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-mallocr.o)
-                0x0000000000000f24                _malloc_r
- .text._sbrk_r  0x0000000000000fd8       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-sbrkr.o)
-                0x0000000000000fd8                _sbrk_r
- .text._raise_r
-                0x0000000000000ff8       0x50 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signal.o)
-                0x0000000000000ff8                _raise_r
- .text.raise    0x0000000000001048       0x10 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signal.o)
-                0x0000000000001048                raise
- .text._kill_r  0x0000000000001058       0x24 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signalr.o)
-                0x0000000000001058                _kill_r
- .text._getpid_r
-                0x000000000000107c        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signalr.o)
-                0x000000000000107c                _getpid_r
- .text.__malloc_lock
-                0x0000000000001080        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-mlock.o)
-                0x0000000000001080                __malloc_lock
- .text.__malloc_unlock
-                0x000000000000108c        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-mlock.o)
-                0x000000000000108c                __malloc_unlock
- .text.__retarget_lock_init_recursive
-                0x0000000000001098        0x2 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
-                0x0000000000001098                __retarget_lock_init_recursive
+                0x0000000000000944       0x84 /tmp/ccBZqEqR.ltrans0.ltrans.o
+                0x0000000000000944                GPIO_Port_F_Handler
+ .text.malloc   0x00000000000009c8       0x10 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
+                0x00000000000009c8                malloc
+ .text._sbrk    0x00000000000009d8       0x48 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+                0x00000000000009d8                _sbrk
+ .text.__errno  0x0000000000000a20        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-errno.o)
+                0x0000000000000a20                __errno
  .text.__retarget_lock_acquire_recursive
-                0x000000000000109a        0x2 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
-                0x000000000000109a                __retarget_lock_acquire_recursive
+                0x0000000000000a2c        0x2 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+                0x0000000000000a2c                __retarget_lock_acquire_recursive
  .text.__retarget_lock_release_recursive
-                0x000000000000109c        0x2 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
-                0x000000000000109c                __retarget_lock_release_recursive
- *fill*         0x000000000000109e        0x2 
- .text.findslot
-                0x00000000000010a0       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
- .text.checkerror
-                0x00000000000010d4       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
- .text.error    0x00000000000010f4       0x1c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
- .text._swiread
-                0x0000000000001110       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
-                0x0000000000001110                _swiread
- .text._read    0x0000000000001130       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
-                0x0000000000001130                _read
- .text._swilseek
-                0x0000000000001164       0x78 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
-                0x0000000000001164                _swilseek
- .text._lseek   0x00000000000011dc        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
-                0x00000000000011dc                _lseek
- .text._swiwrite
-                0x00000000000011e0       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
-                0x00000000000011e0                _swiwrite
- .text._write   0x0000000000001200       0x40 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
-                0x0000000000001200                _write
- .text._swiclose
-                0x0000000000001240       0x1a /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
-                0x0000000000001240                _swiclose
- *fill*         0x000000000000125a        0x2 
- .text._close   0x000000000000125c       0x4c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
-                0x000000000000125c                _close
- .text._getpid  0x00000000000012a8        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
-                0x00000000000012a8                _getpid
- .text._sbrk    0x00000000000012ac       0x48 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
-                0x00000000000012ac                _sbrk
- .text._swistat
-                0x00000000000012f4       0x42 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
-                0x00000000000012f4                _swistat
- .text._stat    0x0000000000001336       0x3a /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
-                0x0000000000001336                _stat
- .text._swiopen
-                0x0000000000001370       0xb4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
-                0x0000000000001370                _swiopen
- .text._get_semihosting_exts
-                0x0000000000001424       0xb4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
-                0x0000000000001424                _get_semihosting_exts
- .text.initialise_semihosting_exts
-                0x00000000000014d8       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
- .text._has_ext_exit_extended
-                0x000000000000150c       0x18 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
-                0x000000000000150c                _has_ext_exit_extended
- .text._exit    0x0000000000001524       0x14 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_exit.o)
-                0x0000000000001524                _exit
- .text._kill_shared
-                0x0000000000001538       0x26 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_kill.o)
-                0x0000000000001538                _kill_shared
- *fill*         0x000000000000155e        0x2 
- .text._kill    0x0000000000001560       0x18 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_kill.o)
-                0x0000000000001560                _kill
- .text.__errno  0x0000000000001578        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-errno.o)
-                0x0000000000001578                __errno
- .text.std      0x0000000000001584       0x48 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
- .text._cleanup_r
-                0x00000000000015cc        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
-                0x00000000000015cc                _cleanup_r
- .text.__sfmoreglue
-                0x00000000000015d8       0x2c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
-                0x00000000000015d8                __sfmoreglue
- .text.__sfp_lock_acquire
-                0x0000000000001604        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
-                0x0000000000001604                __sfp_lock_acquire
- .text.__sfp_lock_release
-                0x0000000000001610        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
-                0x0000000000001610                __sfp_lock_release
- .text.__sinit_lock_acquire
-                0x000000000000161c        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
-                0x000000000000161c                __sinit_lock_acquire
- .text.__sinit_lock_release
-                0x0000000000001628        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
-                0x0000000000001628                __sinit_lock_release
- .text.__sinit  0x0000000000001634       0x70 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
-                0x0000000000001634                __sinit
- .text.__sfp    0x00000000000016a4       0x8c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
-                0x00000000000016a4                __sfp
- .text._fwalk_reent
-                0x0000000000001730       0x3c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fwalk.o)
-                0x0000000000001730                _fwalk_reent
- .text.__sread  0x000000000000176c       0x22 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o)
-                0x000000000000176c                __sread
- .text.__swrite
-                0x000000000000178e       0x38 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o)
-                0x000000000000178e                __swrite
- .text.__sseek  0x00000000000017c6       0x24 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o)
-                0x00000000000017c6                __sseek
- .text.__sclose
-                0x00000000000017ea        0x8 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o)
-                0x00000000000017ea                __sclose
- .text          0x00000000000017f2       0x10 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strlen.o)
-                0x00000000000017f2                strlen
- *fill*         0x0000000000001802        0x2 
- .text._write_r
-                0x0000000000001804       0x24 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-writer.o)
-                0x0000000000001804                _write_r
- .text._close_r
-                0x0000000000001828       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-closer.o)
-                0x0000000000001828                _close_r
- .text.__sflush_r
-                0x0000000000001848      0x10c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fflush.o)
-                0x0000000000001848                __sflush_r
- .text._fflush_r
-                0x0000000000001954       0x78 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fflush.o)
-                0x0000000000001954                _fflush_r
- .text._lseek_r
-                0x00000000000019cc       0x24 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lseekr.o)
-                0x00000000000019cc                _lseek_r
- .text._read_r  0x00000000000019f0       0x24 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-readr.o)
-                0x00000000000019f0                _read_r
+                0x0000000000000a2e        0x2 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+                0x0000000000000a2e                __retarget_lock_release_recursive
+ .text._malloc_r
+                0x0000000000000a30       0xb4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-mallocr.o)
+                0x0000000000000a30                _malloc_r
+ .text._sbrk_r  0x0000000000000ae4       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-sbrkr.o)
+                0x0000000000000ae4                _sbrk_r
+ .text.__malloc_lock
+                0x0000000000000b04        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-mlock.o)
+                0x0000000000000b04                __malloc_lock
+ .text.__malloc_unlock
+                0x0000000000000b10        0xc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-mlock.o)
+                0x0000000000000b10                __malloc_unlock
  *(.init)
- .init          0x0000000000001a14        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crti.o
-                0x0000000000001a14                _init
- .init          0x0000000000001a18        0x8 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtn.o
+ .init          0x0000000000000b1c        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crti.o
+                0x0000000000000b1c                _init
+ .init          0x0000000000000b20        0x8 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtn.o
  *(.fini)
- .fini          0x0000000000001a20        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crti.o
-                0x0000000000001a20                _fini
- .fini          0x0000000000001a24        0x8 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtn.o
+ .fini          0x0000000000000b28        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crti.o
+                0x0000000000000b28                _fini
+ .fini          0x0000000000000b2c        0x8 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtn.o
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
@@ -614,53 +556,47 @@ LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-no
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
  *(.rodata*)
- .rodata._global_impure_ptr
-                0x0000000000001a2c        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-impure.o)
-                0x0000000000001a2c                _global_impure_ptr
- .rodata._get_semihosting_exts.str1.1
-                0x0000000000001a30       0x16 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
- *fill*         0x0000000000001a46        0x2 
  .rodata.__sf_fake_stderr
-                0x0000000000001a48       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
-                0x0000000000001a48                __sf_fake_stderr
+                0x0000000000000b34       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
+                0x0000000000000b34                __sf_fake_stderr
  .rodata.__sf_fake_stdin
-                0x0000000000001a68       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
-                0x0000000000001a68                __sf_fake_stdin
+                0x0000000000000b54       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
+                0x0000000000000b54                __sf_fake_stdin
  .rodata.__sf_fake_stdout
-                0x0000000000001a88       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
-                0x0000000000001a88                __sf_fake_stdout
+                0x0000000000000b74       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
+                0x0000000000000b74                __sf_fake_stdout
  *(.eh_frame*)
- .eh_frame      0x0000000000001aa8        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtbegin.o
- .eh_frame      0x0000000000001aa8        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtend.o
+ .eh_frame      0x0000000000000b94        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .eh_frame      0x0000000000000b94        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtend.o
 
-.glue_7         0x0000000000001aac        0x0
- .glue_7        0x0000000000001aac        0x0 linker stubs
+.glue_7         0x0000000000000b98        0x0
+ .glue_7        0x0000000000000b98        0x0 linker stubs
 
-.glue_7t        0x0000000000001aac        0x0
- .glue_7t       0x0000000000001aac        0x0 linker stubs
+.glue_7t        0x0000000000000b98        0x0
+ .glue_7t       0x0000000000000b98        0x0 linker stubs
 
-.vfp11_veneer   0x0000000000001aac        0x0
- .vfp11_veneer  0x0000000000001aac        0x0 linker stubs
+.vfp11_veneer   0x0000000000000b98        0x0
+ .vfp11_veneer  0x0000000000000b98        0x0 linker stubs
 
-.v4_bx          0x0000000000001aac        0x0
- .v4_bx         0x0000000000001aac        0x0 linker stubs
+.v4_bx          0x0000000000000b98        0x0
+ .v4_bx         0x0000000000000b98        0x0 linker stubs
 
-.iplt           0x0000000000001aac        0x0
- .iplt          0x0000000000001aac        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+.iplt           0x0000000000000b98        0x0
+ .iplt          0x0000000000000b98        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.rel.dyn        0x0000000000001aac        0x0
- .rel.iplt      0x0000000000001aac        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+.rel.dyn        0x0000000000000b98        0x0
+ .rel.iplt      0x0000000000000b98        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0000000000001aac                __exidx_start = .
+                0x0000000000000b98                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0000000000001aac                __exidx_end = .
-                0x0000000000001aac                __etext = ALIGN (0x4)
+                0x0000000000000b98                __exidx_end = .
+                0x0000000000000b98                __etext = ALIGN (0x4)
 
-.data           0x0000000020000000       0x78 load address 0x0000000000001aac
+.data           0x0000000020000000       0x70 load address 0x0000000000000b98
                 0x0000000020000000                __data_start__ = .
  *(vtable)
  *(.data*)
@@ -672,82 +608,75 @@ LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-no
  .data.__heap_limit
                 0x0000000020000064        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
                 0x0000000020000064                __heap_limit
- .data.supports_ext_exit_extended
-                0x0000000020000068        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
- .data.supports_ext_stdout_stderr
-                0x000000002000006c        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
-                0x0000000020000070                . = ALIGN (0x4)
-                0x0000000020000070                PROVIDE (__preinit_array_start = .)
+                0x0000000020000068                . = ALIGN (0x4)
+                0x0000000020000068                PROVIDE (__preinit_array_start = .)
  *(.preinit_array)
-                0x0000000020000070                PROVIDE (__preinit_array_end = .)
-                0x0000000020000070                . = ALIGN (0x4)
-                0x0000000020000070                PROVIDE (__init_array_start = .)
+                0x0000000020000068                PROVIDE (__preinit_array_end = .)
+                0x0000000020000068                . = ALIGN (0x4)
+                0x0000000020000068                PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array)
- .init_array    0x0000000020000070        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtbegin.o
-                0x0000000020000074                PROVIDE (__init_array_end = .)
-                0x0000000020000074                . = ALIGN (0x4)
+ .init_array    0x0000000020000068        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+                0x000000002000006c                PROVIDE (__init_array_end = .)
+                0x000000002000006c                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array)
- .fini_array    0x0000000020000074        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .fini_array    0x000000002000006c        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
  *(.jcr*)
-                0x0000000020000078                . = ALIGN (0x4)
-                0x0000000020000078                __data_end__ = .
+                0x0000000020000070                . = ALIGN (0x4)
+                0x0000000020000070                __data_end__ = .
 
-.igot.plt       0x0000000020000078        0x0 load address 0x0000000000001b24
- .igot.plt      0x0000000020000078        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+.igot.plt       0x0000000020000070        0x0 load address 0x0000000000000c08
+ .igot.plt      0x0000000020000070        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 
-.bss            0x0000000020000078       0xf0 load address 0x0000000000001b24
-                0x0000000020000078                . = ALIGN (0x4)
-                0x0000000020000078                __bss_start__ = .
+.bss            0x0000000020000070       0x50 load address 0x0000000000000c08
+                0x0000000020000070                . = ALIGN (0x4)
+                0x0000000020000070                __bss_start__ = .
  *(.bss*)
- .bss           0x0000000020000078       0x1c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtbegin.o
- .bss.blueLed   0x0000000020000094        0x4 /tmp/ccFkzrgR.ltrans0.ltrans.o
- .bss.myNvic    0x0000000020000098        0x4 /tmp/ccFkzrgR.ltrans0.ltrans.o
- .bss.redLed    0x000000002000009c        0x4 /tmp/ccFkzrgR.ltrans0.ltrans.o
- .bss.swtich1   0x00000000200000a0        0x4 /tmp/ccFkzrgR.ltrans0.ltrans.o
- .bss.swtich2   0x00000000200000a4        0x4 /tmp/ccFkzrgR.ltrans0.ltrans.o
- .bss._ZN12_GLOBAL__N_113__new_handlerE
-                0x00000000200000a8        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_handler.o)
- .bss.__malloc_free_list
-                0x00000000200000ac        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-mallocr.o)
-                0x00000000200000ac                __malloc_free_list
- .bss.__malloc_sbrk_start
-                0x00000000200000b0        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-mallocr.o)
-                0x00000000200000b0                __malloc_sbrk_start
+ .bss           0x0000000020000070       0x1c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtbegin.o
+ .bss.blueLed   0x000000002000008c        0x4 /tmp/ccBZqEqR.ltrans0.ltrans.o
+ .bss.greenLed  0x0000000020000090        0x4 /tmp/ccBZqEqR.ltrans0.ltrans.o
+ .bss.myNvic    0x0000000020000094        0x4 /tmp/ccBZqEqR.ltrans0.ltrans.o
+ .bss.redLed    0x0000000020000098        0x4 /tmp/ccBZqEqR.ltrans0.ltrans.o
+ .bss.swtich1   0x000000002000009c        0x4 /tmp/ccBZqEqR.ltrans0.ltrans.o
+ .bss.swtich2   0x00000000200000a0        0x4 /tmp/ccBZqEqR.ltrans0.ltrans.o
  .bss.heap_end.7697
-                0x00000000200000b4        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
- .bss.openfiles
-                0x00000000200000b8       0xa0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+                0x00000000200000a4        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .bss.__malloc_free_list
+                0x00000000200000a8        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-mallocr.o)
+                0x00000000200000a8                __malloc_free_list
+ .bss.__malloc_sbrk_start
+                0x00000000200000ac        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-mallocr.o)
+                0x00000000200000ac                __malloc_sbrk_start
  *(COMMON)
- COMMON         0x0000000020000158        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-reent.o)
-                0x0000000020000158                errno
- COMMON         0x000000002000015c        0x9 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
-                0x000000002000015c                __lock___atexit_recursive_mutex
-                0x000000002000015d                __lock___arc4random_mutex
-                0x000000002000015e                __lock___env_recursive_mutex
-                0x000000002000015f                __lock___sinit_recursive_mutex
-                0x0000000020000160                __lock___malloc_recursive_mutex
-                0x0000000020000161                __lock___at_quick_exit_mutex
-                0x0000000020000162                __lock___dd_hash_mutex
-                0x0000000020000163                __lock___tz_mutex
-                0x0000000020000164                __lock___sfp_recursive_mutex
-                0x0000000020000168                . = ALIGN (0x4)
- *fill*         0x0000000020000165        0x3 
-                0x0000000020000168                __bss_end__ = .
+ COMMON         0x00000000200000b0        0x9 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+                0x00000000200000b0                __lock___atexit_recursive_mutex
+                0x00000000200000b1                __lock___arc4random_mutex
+                0x00000000200000b2                __lock___env_recursive_mutex
+                0x00000000200000b3                __lock___sinit_recursive_mutex
+                0x00000000200000b4                __lock___malloc_recursive_mutex
+                0x00000000200000b5                __lock___at_quick_exit_mutex
+                0x00000000200000b6                __lock___dd_hash_mutex
+                0x00000000200000b7                __lock___tz_mutex
+                0x00000000200000b8                __lock___sfp_recursive_mutex
+ *fill*         0x00000000200000b9        0x3 
+ COMMON         0x00000000200000bc        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-reent.o)
+                0x00000000200000bc                errno
+                0x00000000200000c0                . = ALIGN (0x4)
+                0x00000000200000c0                __bss_end__ = .
 
-.heap           0x0000000020000168        0x0
-                0x0000000020000168                __end__ = .
-                0x0000000020000168                PROVIDE (end = .)
+.heap           0x00000000200000c0        0x0
+                0x00000000200000c0                __end__ = .
+                0x00000000200000c0                PROVIDE (end = .)
  *(.heap*)
- .heap          0x0000000020000168        0x0 startup_ARMCM4.o
-                0x0000000020000168                __HeapLimit = .
+ .heap          0x00000000200000c0        0x0 startup_ARMCM4.o
+                0x00000000200000c0                __HeapLimit = .
 
-.stack_dummy    0x0000000020000168      0x400
+.stack_dummy    0x00000000200000c0      0x400
  *(.stack*)
- .stack         0x0000000020000168      0x400 startup_ARMCM4.o
+ .stack         0x00000000200000c0      0x400 startup_ARMCM4.o
                 0x0000000020008000                __StackTop = (ORIGIN (RAM) + LENGTH (RAM))
                 0x0000000020007c00                __StackLimit = (__StackTop - SIZEOF (.stack_dummy))
                 [!provide]                        PROVIDE (__stack = __StackTop)
@@ -763,141 +692,88 @@ OUTPUT(main.elf elf32-littlearm)
  .ARM.attributes
                 0x0000000000000052       0x20 startup_ARMCM4.o
  .ARM.attributes
-                0x0000000000000072       0x32 /tmp/ccFkzrgR.ltrans0.ltrans.o
+                0x0000000000000072       0x32 /tmp/ccBZqEqR.ltrans0.ltrans.o
  .ARM.attributes
-                0x00000000000000a4       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_op.o)
+                0x00000000000000a4       0x32 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-impure.o)
  .ARM.attributes
-                0x00000000000000d8       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(del_op.o)
+                0x00000000000000d6       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
  .ARM.attributes
-                0x000000000000010c       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_handler.o)
+                0x000000000000010a       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
  .ARM.attributes
-                0x0000000000000140       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-abort.o)
+                0x000000000000013e       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-errno.o)
  .ARM.attributes
-                0x0000000000000174       0x32 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-impure.o)
+                0x0000000000000172       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
  .ARM.attributes
-                0x00000000000001a6       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
+                0x00000000000001a6       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
  .ARM.attributes
-                0x00000000000001da       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-memset.o)
+                0x00000000000001da       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-mallocr.o)
  .ARM.attributes
-                0x000000000000020e       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-freer.o)
+                0x000000000000020e       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-sbrkr.o)
  .ARM.attributes
-                0x0000000000000242       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-mallocr.o)
+                0x0000000000000242       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-mlock.o)
  .ARM.attributes
-                0x0000000000000276       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-sbrkr.o)
+                0x0000000000000276       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-reent.o)
  .ARM.attributes
-                0x00000000000002aa       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signal.o)
+                0x00000000000002aa       0x32 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtend.o
  .ARM.attributes
-                0x00000000000002de       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signalr.o)
- .ARM.attributes
-                0x0000000000000312       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-mlock.o)
- .ARM.attributes
-                0x0000000000000346       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-reent.o)
- .ARM.attributes
-                0x000000000000037a       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
- .ARM.attributes
-                0x00000000000003ae       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
- .ARM.attributes
-                0x00000000000003e2       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_exit.o)
- .ARM.attributes
-                0x0000000000000416       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_kill.o)
- .ARM.attributes
-                0x000000000000044a       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-errno.o)
- .ARM.attributes
-                0x000000000000047e       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
- .ARM.attributes
-                0x00000000000004b2       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fwalk.o)
- .ARM.attributes
-                0x00000000000004e6       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o)
- .ARM.attributes
-                0x000000000000051a       0x17 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-strlen.o)
- .ARM.attributes
-                0x0000000000000531       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-writer.o)
- .ARM.attributes
-                0x0000000000000565       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-closer.o)
- .ARM.attributes
-                0x0000000000000599       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fflush.o)
- .ARM.attributes
-                0x00000000000005cd       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lseekr.o)
- .ARM.attributes
-                0x0000000000000601       0x34 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-readr.o)
- .ARM.attributes
-                0x0000000000000635       0x32 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtend.o
- .ARM.attributes
-                0x0000000000000667       0x1e /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtn.o
+                0x00000000000002dc       0x1e /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtn.o
 
 .comment        0x0000000000000000       0x76
- .comment       0x0000000000000000       0x76 /tmp/ccFkzrgR.ltrans0.ltrans.o
+ .comment       0x0000000000000000       0x76 /tmp/ccBZqEqR.ltrans0.ltrans.o
                                          0x77 (size before relaxing)
 
 .debug_line     0x0000000000000000     0x36c6
  .debug_line    0x0000000000000000       0x60 startup_ARMCM4.o
- .debug_line    0x0000000000000060     0x1ca9 /tmp/cc5GNZPGdebugobj
- .debug_line    0x0000000000001d09     0x19bd /tmp/ccFkzrgR.ltrans0.ltrans.o
+ .debug_line    0x0000000000000060     0x2ba9 /tmp/ccHIylQndebugobj
+ .debug_line    0x0000000000002c09      0xabd /tmp/ccBZqEqR.ltrans0.ltrans.o
 
-.debug_info     0x0000000000000000    0x110a7
+.debug_info     0x0000000000000000    0x15814
  .debug_info    0x0000000000000000       0x26 startup_ARMCM4.o
- .debug_info    0x0000000000000026     0xb61c /tmp/cc5GNZPGdebugobj
-                0x0000000000000026                main.cpp.e64570c4
-                0x00000000000025a8                register.cpp.1f52a840
-                0x0000000000002ca4                systick.cpp.79f25b59
-                0x0000000000003407                nvic.cpp.b41a65f5
-                0x0000000000003ed8                sbc.cpp.0eab0fdc
-                0x0000000000004afa                mpu.cpp.3b09cbca
-                0x0000000000007948                fpu.cpp.5ec6b23a
-                0x0000000000008148                systemControl.cpp.438e0e28
-                0x0000000000009382                gpio.cpp.2ba9eb86
-                0x000000000000a865                generalPurposeTimer.cpp.147e2101
- .debug_info    0x000000000000b642     0x5a65 /tmp/ccFkzrgR.ltrans0.ltrans.o
+ .debug_info    0x0000000000000026    0x137af /tmp/ccHIylQndebugobj
+                0x0000000000000026                main.cpp.7ec5f2c1
+                0x0000000000002578                register.cpp.ad5c3ca9
+                0x000000000000407d                systick.cpp.43d2ed6b
+                0x0000000000005835                nvic.cpp.eb88000d
+                0x00000000000075f0                sbc.cpp.3b810c5b
+                0x0000000000008d58                mpu.cpp.439f2795
+                0x000000000000c10e                fpu.cpp.6b6cf089
+                0x000000000000d8d3                systemControl.cpp.ed2345e0
+                0x000000000000f890                gpio.cpp.4da7b0ba
+                0x0000000000011dba                generalPurposeTimer.cpp.5b5e29d5
+ .debug_info    0x00000000000137d5     0x203f /tmp/ccBZqEqR.ltrans0.ltrans.o
 
-.debug_abbrev   0x0000000000000000     0x18e1
+.debug_abbrev   0x0000000000000000     0x30c7
  .debug_abbrev  0x0000000000000000       0x14 startup_ARMCM4.o
- .debug_abbrev  0x0000000000000014     0x171a /tmp/cc5GNZPGdebugobj
- .debug_abbrev  0x000000000000172e      0x1b3 /tmp/ccFkzrgR.ltrans0.ltrans.o
+ .debug_abbrev  0x0000000000000014     0x2f00 /tmp/ccHIylQndebugobj
+ .debug_abbrev  0x0000000000002f14      0x1b3 /tmp/ccBZqEqR.ltrans0.ltrans.o
 
-.debug_aranges  0x0000000000000000       0x98
+.debug_aranges  0x0000000000000000       0xb0
  .debug_aranges
                 0x0000000000000000       0x20 startup_ARMCM4.o
  .debug_aranges
-                0x0000000000000020       0x78 /tmp/ccFkzrgR.ltrans0.ltrans.o
+                0x0000000000000020       0x90 /tmp/ccBZqEqR.ltrans0.ltrans.o
 
-.debug_str      0x0000000000000000     0x44ac
+.debug_str      0x0000000000000000     0x37e9
  .debug_str     0x0000000000000000       0x3d startup_ARMCM4.o
- .debug_str     0x000000000000003d     0x4334 /tmp/cc5GNZPGdebugobj
-                                       0xa7f1 (size before relaxing)
- .debug_str     0x0000000000004371      0x13b /tmp/ccFkzrgR.ltrans0.ltrans.o
+ .debug_str     0x000000000000003d     0x3671 /tmp/ccHIylQndebugobj
+                                       0xdd62 (size before relaxing)
+ .debug_str     0x00000000000036ae      0x13b /tmp/ccBZqEqR.ltrans0.ltrans.o
                                         0x159 (size before relaxing)
 
-.debug_loc      0x0000000000000000     0x51c9
- .debug_loc     0x0000000000000000     0x51c9 /tmp/ccFkzrgR.ltrans0.ltrans.o
+.debug_loc      0x0000000000000000     0x15c0
+ .debug_loc     0x0000000000000000     0x15c0 /tmp/ccBZqEqR.ltrans0.ltrans.o
 
-.debug_ranges   0x0000000000000000     0x10c0
- .debug_ranges  0x0000000000000000     0x10c0 /tmp/ccFkzrgR.ltrans0.ltrans.o
+.debug_ranges   0x0000000000000000      0x2c8
+ .debug_ranges  0x0000000000000000      0x2c8 /tmp/ccBZqEqR.ltrans0.ltrans.o
 
-.debug_frame    0x0000000000000000      0xcb8
- .debug_frame   0x0000000000000000      0x18c /tmp/ccFkzrgR.ltrans0.ltrans.o
- .debug_frame   0x000000000000018c       0x28 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_op.o)
- .debug_frame   0x00000000000001b4       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(del_op.o)
- .debug_frame   0x00000000000001d4       0x30 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a(new_handler.o)
- .debug_frame   0x0000000000000204       0x28 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-abort.o)
- .debug_frame   0x000000000000022c       0x30 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
- .debug_frame   0x000000000000025c       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-memset.o)
- .debug_frame   0x000000000000027c       0x38 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-freer.o)
- .debug_frame   0x00000000000002b4       0x30 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-nano-mallocr.o)
- .debug_frame   0x00000000000002e4       0x2c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-sbrkr.o)
- .debug_frame   0x0000000000000310       0xcc /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signal.o)
- .debug_frame   0x00000000000003dc       0x3c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-signalr.o)
- .debug_frame   0x0000000000000418       0x30 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-mlock.o)
- .debug_frame   0x0000000000000448       0x5c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-reent.o)
- .debug_frame   0x00000000000004a4       0xb0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-lock.o)
- .debug_frame   0x0000000000000554      0x3a8 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
- .debug_frame   0x00000000000008fc       0x28 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_exit.o)
- .debug_frame   0x0000000000000924       0x40 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-_kill.o)
- .debug_frame   0x0000000000000964       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-errno.o)
- .debug_frame   0x0000000000000984      0x14c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
- .debug_frame   0x0000000000000ad0       0x54 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fwalk.o)
- .debug_frame   0x0000000000000b24       0x88 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-stdio.o)
- .debug_frame   0x0000000000000bac       0x2c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-writer.o)
- .debug_frame   0x0000000000000bd8       0x2c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-closer.o)
- .debug_frame   0x0000000000000c04       0x5c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-fflush.o)
- .debug_frame   0x0000000000000c60       0x2c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lseekr.o)
- .debug_frame   0x0000000000000c8c       0x2c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-readr.o)
+.debug_frame    0x0000000000000000      0x8c8
+ .debug_frame   0x0000000000000000      0x1ec /tmp/ccBZqEqR.ltrans0.ltrans.o
+ .debug_frame   0x00000000000001ec       0x30 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
+ .debug_frame   0x000000000000021c      0x3a8 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
+ .debug_frame   0x00000000000005c4       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-errno.o)
+ .debug_frame   0x00000000000005e4      0x14c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
+ .debug_frame   0x0000000000000730       0xb0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-lock.o)
+ .debug_frame   0x00000000000007e0       0x30 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-nano-mallocr.o)
+ .debug_frame   0x0000000000000810       0x2c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-sbrkr.o)
+ .debug_frame   0x000000000000083c       0x30 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-mlock.o)
+ .debug_frame   0x000000000000086c       0x5c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-reent.o)

@@ -41,38 +41,39 @@ Gpio::Gpio(GPIO_Port_Pins gpio, direction dir)
     (*this).gpioBaseAddress = GPIO_Port_AHB_BASE + (((*this).gpio)/8) * 0x1000;
     (*this).gpioPin = (((*this).gpio % 8));
 
-    RCGCGPIO = new Register((volatile uint32_t*)(systemControlBase + RCGCGPIO_OFFSET)); 
-    PRGPIO = new Register((volatile uint32_t*)(systemControlBase + PRGPIO_OFFSET)); 
+    Register RCGCGPIO((volatile uint32_t*)(systemControlBase + RCGCGPIO_OFFSET)); 
+    Register PRGPIO((volatile uint32_t*)(systemControlBase + PRGPIO_OFFSET)); 
 
-    GPIOAFSEL = new Register((volatile uint32_t*)(gpioBaseAddress + GPIOAFSEl_OFFSET));
-    GPIOPUR = new Register((volatile uint32_t*)(gpioBaseAddress + GPIOPUR_OFFSET));
-    GPIODEN = new Register((volatile uint32_t*)(gpioBaseAddress + GPIODEN_OFFSET));
-    GPIOLOCK = new Register((volatile uint32_t*)(gpioBaseAddress + GPIOLOCK_OFFSET));
-    GPIOCR = new Register((volatile uint32_t*)(gpioBaseAddress + GPIOCR_OFFSET));
-    GPIOAMSEL = new Register((volatile uint32_t*)(gpioBaseAddress + GPIOAMSEL_OFFSET));
-    GPIOPCTL = new Register((volatile uint32_t*)(gpioBaseAddress + GPIOPCTL_OFFSET));
-    GPIODIR = new Register((volatile uint32_t*)(gpioBaseAddress + GPIODIR_OFFSET));
+    Register GPIOAFSEL((volatile uint32_t*)(gpioBaseAddress + GPIOAFSEl_OFFSET));
+    Register GPIOPUR((volatile uint32_t*)(gpioBaseAddress + GPIOPUR_OFFSET));
+    Register GPIODEN((volatile uint32_t*)(gpioBaseAddress + GPIODEN_OFFSET));
+    Register GPIOLOCK((volatile uint32_t*)(gpioBaseAddress + GPIOLOCK_OFFSET));
+    Register GPIOCR((volatile uint32_t*)(gpioBaseAddress + GPIOCR_OFFSET));
+    Register GPIOAMSEL((volatile uint32_t*)(gpioBaseAddress + GPIOAMSEL_OFFSET));
+    Register GPIOPCTL((volatile uint32_t*)(gpioBaseAddress + GPIOPCTL_OFFSET));
+    Register GPIODIR((volatile uint32_t*)(gpioBaseAddress + GPIODIR_OFFSET));
 
-    GPIOICR = new Register((volatile uint32_t*)(gpioBaseAddress + GPIOICR_OFFSET));
-    GPIO_Port_GPIODATA = new Register((volatile uint32_t*)(gpioBaseAddress + GPIODATA_OFFSET));
+    // GPIOICR = new Register((volatile uint32_t*)(gpioBaseAddress + GPIOICR_OFFSET));
+    // GPIO_Port_GPIODATA = new Register((volatile uint32_t*)(gpioBaseAddress + GPIODATA_OFFSET));
 
-    // GPIODATA_DATA = new bitField(0, 1, RW);
+    bitField RCGCGPIO_Rn((uint32_t)((*this).gpio)/8, 1, RW);
+    bitField PRGPIO_Rn((uint32_t)((*this).gpio)/8, 1, RO);
 
-    RCGCGPIO_Rn.bit = ((*this).gpio)/8;
-    PRGPIO_Rn.bit = ((*this).gpio)/8;
+    bitField GPIODATA_DATA(gpioPin, 1, RW);
 
-    GPIOPUR_PUE.bit = gpioPin;
-    GPIODATA_DATA.bit = gpioPin;
-    GPIODIR_DIR.bit = gpioPin;
+    bitField GPIOPUR_PUE(gpioPin, 1, RW);
+    bitField GPIODIR_DIR(gpioPin, 1, RW);
+    bitField GPIOAFSEL_AFSEL(gpioPin, 1, RW);
+    bitField GPIODEN_DEN(gpioPin, 1, RW);
+    bitField GPIOAMSEL_GPIOAMSEL(gpioPin, 1, RW);
+    bitField GPIOLOCK_LOCK(0, 32, RW);
     
     //GPIOCR_CR.bit = gpioPin;
-    GPIOAFSEL_AFSEL.bit = gpioPin;
-    GPIODEN_DEN.bit = gpioPin;
-    GPIOAMSEL_GPIOAMSEL.bit = gpioPin;
+ 
 
 
-    (*RCGCGPIO).setRegisterBitFieldStatus(RCGCGPIO_Rn, set);
-    while((*PRGPIO).getRegisterBitFieldStatus(PRGPIO_Rn) == 0)
+    (RCGCGPIO).setRegisterBitFieldStatus(RCGCGPIO_Rn, set);
+    while((PRGPIO).getRegisterBitFieldStatus(PRGPIO_Rn) == 0)
     {
         //Ready?
     }
@@ -80,30 +81,21 @@ Gpio::Gpio(GPIO_Port_Pins gpio, direction dir)
     //Unlock NMI for use.
     if(gpio == PF0)
     {
-        (*GPIOLOCK).setRegisterBitFieldStatus(GPIOLOCK_LOCK, gpioKey);
-        *((*GPIOCR).getRegisterAddress()) |= (0x1 << gpioPin);
+        (GPIOLOCK).setRegisterBitFieldStatus(GPIOLOCK_LOCK, gpioKey);
+        *((GPIOCR).getRegisterAddress()) |= (0x1 << gpioPin);
     }
 
-    (*GPIODIR).setRegisterBitFieldStatus(GPIODIR_DIR, dir);
+    (GPIODIR).setRegisterBitFieldStatus(GPIODIR_DIR, dir);
     if(dir == input)
     {
-        (*GPIOPUR).setRegisterBitFieldStatus(GPIOPUR_PUE, set);
+        (GPIOPUR).setRegisterBitFieldStatus(GPIOPUR_PUE, set);
     }
 
-    (*GPIOAFSEL).setRegisterBitFieldStatus(GPIOAFSEL_AFSEL, clear);
-    (*GPIODEN).setRegisterBitFieldStatus(GPIODEN_DEN, set);
-    (*GPIOAMSEL).setRegisterBitFieldStatus(GPIOAMSEL_GPIOAMSEL, clear);
+    (GPIOAFSEL).setRegisterBitFieldStatus(GPIOAFSEL_AFSEL, clear);
+    (GPIODEN).setRegisterBitFieldStatus(GPIODEN_DEN, set);
+    (GPIOAMSEL).setRegisterBitFieldStatus(GPIOAMSEL_GPIOAMSEL, clear);
     
-    delete RCGCGPIO;
-    delete PRGPIO;
-    delete GPIOAFSEL;
-    delete GPIOPUR;
-    delete GPIODEN;
-    delete GPIOLOCK;
-    delete GPIOCR;
-    delete GPIOAMSEL;
-    delete GPIOPCTL;
-    delete GPIODIR;
+
 
 }
 
@@ -117,26 +109,27 @@ Gpio::Gpio(GPIO_Port_Pins gpio, direction dir, uint32_t interruptPriority) : Gpi
     // GPIO_PORTF_ICR_R |= 0x11;
     // GPIO_PORTF_IM_R |= 0x11; //Set the interupts to be enabled.
 
-    myNvic = new Nvic();
+    Nvic myNvic;
     // (*myNvic).disableInterrupts();
 
-    GPIOIM = new Register((volatile uint32_t*)(gpioBaseAddress + GPIOIM_OFFSET)); 
-    GPIOIS = new Register((volatile uint32_t*)(gpioBaseAddress + GPIOIS_OFFSET)); 
-    GPIOIBE = new Register((volatile uint32_t*)(gpioBaseAddress + GPIOIBE_OFFSET)); 
-    GPIOIEV = new Register((volatile uint32_t*)(gpioBaseAddress + GPIOIEV_OFFSET)); 
-    GPIORIS = new Register((volatile uint32_t*)(gpioBaseAddress + GPIORIS_OFFSET));
+    Register GPIOIM((volatile uint32_t*)(gpioBaseAddress + GPIOIM_OFFSET)); 
+    Register GPIOIS((volatile uint32_t*)(gpioBaseAddress + GPIOIS_OFFSET)); 
+    Register GPIOIBE((volatile uint32_t*)(gpioBaseAddress + GPIOIBE_OFFSET)); 
+    Register GPIOIEV((volatile uint32_t*)(gpioBaseAddress + GPIOIEV_OFFSET)); 
+    Register GPIORIS((volatile uint32_t*)(gpioBaseAddress + GPIORIS_OFFSET));
+    Register GPIOICR((volatile uint32_t*)(gpioBaseAddress + GPIOICR_OFFSET));
 
-    GPIOIM_IME.bit = gpioPin;
-    GPIOIS_IS.bit = gpioPin;
-    GPIOIBE_IBE.bit = gpioPin;
-    GPIOICR_IC.bit = gpioPin;
-    GPIOIM_IME.bit = gpioPin;
+    bitField GPIOIM_IME(gpioPin, 1, RW);
+    bitField GPIOIS_IS(gpioPin, 1, RW);
+    bitField GPIOIBE_IBE(gpioPin, 1, RW);
+    bitField GPIOICR_IC(gpioPin, 1, RW);
+    // GPIOICR_IC = new bitField(gpioPin, 1, RW);
 
-    (*GPIOIM).setRegisterBitFieldStatus(GPIOIM_IME, clear);
-    (*GPIOIS).setRegisterBitFieldStatus(GPIOIS_IS, clear);
-    (*GPIOIBE).setRegisterBitFieldStatus(GPIOIBE_IBE, set);
-    (*GPIOICR).setRegisterBitFieldStatus(GPIOICR_IC, set);
-    (*GPIOIM).setRegisterBitFieldStatus(GPIOIM_IME, set);
+    (GPIOIM).setRegisterBitFieldStatus(GPIOIM_IME, clear);
+    (GPIOIS).setRegisterBitFieldStatus(GPIOIS_IS, clear);
+    (GPIOIBE).setRegisterBitFieldStatus(GPIOIBE_IBE, set);
+    (GPIOICR).setRegisterBitFieldStatus(GPIOICR_IC, set);
+    (GPIOIM).setRegisterBitFieldStatus(GPIOIM_IME, set);
 
 
     /**
@@ -144,37 +137,39 @@ Gpio::Gpio(GPIO_Port_Pins gpio, direction dir, uint32_t interruptPriority) : Gpi
      * (according to interrupt table), else use interrupt number 0 -> 4 
      * (corresponding to interrupt Port A through Port E)
      */
-    (*myNvic).activateInterrupt((interrupt)((((((*this).gpio)/8) == 5) ? 30 : (((*this).gpio)/8))), interruptPriority);
+    myNvic.activateInterrupt((interrupt)((((((*this).gpio)/8) == 5) ? 30 : (((*this).gpio)/8))), interruptPriority);
     // (*myNvic).enableInterrupts();
 
-    delete GPIOIM;
-    delete GPIOIS;
-    delete GPIOIBE;
-    delete GPIOIEV;
-    delete myNvic;
 }
 
 Gpio::~Gpio()
-{
-    delete GPIOICR;
-    delete GPIO_Port_GPIODATA;
-    delete GPIORIS;
+{   
+    // delete GPIO_Port_GPIODATA;
+    // delete GPIOICR;
 }
 
 void Gpio::interruptClear(void)
 {
-    (*GPIOICR).setRegisterBitFieldStatus(GPIOICR_IC, set);
+    bitField GPIOICR_IC(gpioPin, 1, RW);
+    Register GPIOICR((volatile uint32_t*)(gpioBaseAddress + GPIOICR_OFFSET));
+    (GPIOICR).setRegisterBitFieldStatus(GPIOICR_IC, set);
 }
 
 void Gpio::gpioWrite(setORClear value)
 {
     if((value == 0x0) || (value == 0x1))
     {
-        (*GPIO_Port_GPIODATA).setRegisterBitFieldStatus(GPIODATA_DATA, value);
+        bitField GPIODATA_DATA(gpioPin, 1, RW);
+        Register GPIO_Port_GPIODATA((volatile uint32_t*)(gpioBaseAddress + GPIODATA_OFFSET));
+
+        (GPIO_Port_GPIODATA).setRegisterBitFieldStatus(GPIODATA_DATA, value);
     }
 }
 
 uint32_t Gpio::gpioRead(void)
 {
-    return((*GPIO_Port_GPIODATA).getRegisterBitFieldStatus(GPIODATA_DATA));
+    bitField GPIODATA_DATA(gpioPin, 1, RW);
+    Register GPIO_Port_GPIODATA((volatile uint32_t*)(gpioBaseAddress + GPIODATA_OFFSET));
+
+    return((GPIO_Port_GPIODATA).getRegisterBitFieldStatus(GPIODATA_DATA));
 }

@@ -136,154 +136,86 @@ class Gpio
         const uint32_t GPIORIS_OFFSET = 0x414; // 0x414 GPIORIS RO 0x0000.0000 GPIO Raw Interrupt Status 668
         const uint32_t GPIOMIS_OFFSET = 0x418; // 0x418 GPIOMIS RO 0x0000.0000 GPIO Masked Interrupt Status 669
         const uint32_t GPIOICR_OFFSET = 0x41C; // 0x41C GPIOICR W1C 0x0000.0000 GPIO Interrupt Clear 670
-        const uint32_t GPIODR2R = 0x500;
-        const uint32_t GPIODR4R = 0x504;
-        const uint32_t GPIODR8R = 0x508;
-        const uint32_t GPIOODR = 0x50C;
-        const uint32_t GPIOPDR = 0x514;
-        const uint32_t GPIOSLR = 0x518;
-        const uint32_t GPIOADCCTL = 0x530;
-        const uint32_t GPIODMACTL = 0x534;
-        const uint32_t GPIOPeriphID4 = 0xFD0;
-        const uint32_t GPIOPeriphID5 = 0xFD4;
-        const uint32_t GPIOPeriphID6 = 0xFD8;
-        const uint32_t GPIOPeriphID7 = 0xFDC;
-        const uint32_t GPIOPeriphID0 = 0xFE0;
-        const uint32_t GPIOPeriphID1 = 0xFE4;
-        const uint32_t GPIOPeriphID2 = 0xFE8;
-        const uint32_t GPIOPeriphID3 = 0xFEC;
-        const uint32_t GPIOPCellID0 = 0xFF0;
-        const uint32_t GPIOPCellID1 = 0xFF4;
-        const uint32_t GPIOPCellID2 = 0xFF8;
-        const uint32_t GPIOPCellID3 = 0xFFC;
+        const uint32_t GPIODR2R_OFFSET = 0x500; // 0x500 GPIODR2R RW 0x0000.00FF GPIO 2-mA Drive Select 673
+        const uint32_t GPIODR4R_OFFSET = 0x504; // 0x504 GPIODR4R RW 0x0000.0000 GPIO 4-mA Drive Select 674
+        const uint32_t GPIODR8R_OFFSET = 0x508; // 0x508 GPIODR8R RW 0x0000.0000 GPIO 8-mA Drive Select 675
+        const uint32_t GPIOODR_OFFSET = 0x50C; // 0x50C GPIOODR RW 0x0000.0000 GPIO Open Drain Select 676
+        const uint32_t GPIOPDR_OFFSET = 0x514; // 0x514 GPIOPDR RW 0x0000.0000 GPIO Pull-Down Select 679
+        const uint32_t GPIOSLR_OFFSET = 0x518; // 0x518 GPIOSLR RW 0x0000.0000 GPIO Slew Rate Control Select 681
+        const uint32_t GPIOADCCTL_OFFSET = 0x530; // 0x530 GPIOADCCTL RW 0x0000.0000 GPIO ADC Control 690
+        const uint32_t GPIODMACTL_OFFSET = 0x534; // 0x534 GPIODMACTL RW 0x0000.0000 GPIO DMA Control 691
+        const uint32_t GPIOPeriphID4_OFFSET = 0xFD0; // 0xFD0 GPIOPeriphID4 RO 0x0000.0000 GPIO Peripheral Identification 4 692
+        const uint32_t GPIOPeriphID5_OFFSET = 0xFD4; // 0xFD4 GPIOPeriphID5 RO 0x0000.0000 GPIO Peripheral Identification 5 693
+        const uint32_t GPIOPeriphID6_OFFSET = 0xFD8; // 0xFD8 GPIOPeriphID6 RO 0x0000.0000 GPIO Peripheral Identification 6 694
+        const uint32_t GPIOPeriphID7_OFFSET = 0xFDC; // 0xFDC GPIOPeriphID7 RO 0x0000.0000 GPIO Peripheral Identification 7 695
+        const uint32_t GPIOPeriphID0_OFFSET = 0xFE0; // 0xFE0 GPIOPeriphID0 RO 0x0000.0061 GPIO Peripheral Identification 0 696
+        const uint32_t GPIOPeriphID1_OFFSET = 0xFE4; // 0xFE4 GPIOPeriphID1 RO 0x0000.0000 GPIO Peripheral Identification 1 697
+        const uint32_t GPIOPeriphID2_OFFSET = 0xFE8; // 0xFE8 GPIOPeriphID2 RO 0x0000.0018 GPIO Peripheral Identification 2 698
+        const uint32_t GPIOPeriphID3_OFFSET = 0xFEC; // 0xFEC GPIOPeriphID3 RO 0x0000.0001 GPIO Peripheral Identification 3 699
+        const uint32_t GPIOPCellID0_OFFSET = 0xFF0; // 0xFF0 GPIOPCellID0 RO 0x0000.000D GPIO PrimeCell Identification 0 700
+        const uint32_t GPIOPCellID1_OFFSET = 0xFF4; // 0xFF4 GPIOPCellID1 RO 0x0000.00F0 GPIO PrimeCell Identification 1 701
+        const uint32_t GPIOPCellID2_OFFSET = 0xFF8; // 0xFF8 GPIOPCellID2 RO 0x0000.0005 GPIO PrimeCell Identification 2 702
+        const uint32_t GPIOPCellID3_OFFSET = 0xFFC; // 0xFFC GPIOPCellID3 RO 0x0000.00B1 GPIO PrimeCell Identification 3 703
         
 
-        Register* RCGCGPIO; //0x608 RCGCGPIO RW 0x0000.0000 General-Purpose Input/Output Run Mode Clock Gating Control 340
-        Register* PRGPIO; //0xA08 PRGPIO RO 0x0000.0000 General-Purpose Input/Output Peripheral Ready 406
-
-        Register* GPIOAFSEL; // 0x420 GPIOAFSEL RW - GPIO Alternate Function Select 671
-        Register* GPIOPUR; // 0x510 GPIOPUR RW - GPIO Pull-Up Select 677
-        Register* GPIODEN; // 0x51C GPIODEN RW - GPIO Digital Enable 682
-        Register* GPIOLOCK; // 0x520 GPIOLOCK RW 0x0000.0001 GPIO Lock 684
-        Register* GPIOCR; // 0x524 GPIOCR - - GPIO Commit 685
-        Register* GPIOAMSEL; // 0x528 GPIOAMSEL RW 0x0000.0000 GPIO Analog Mode Select 687
-        Register* GPIOPCTL; // 0x52C GPIOPCTL RW - GPIO Port Control 688
-        Register* GPIODIR; // 0x400 GPIODIR RW 0x0000.0000 GPIO Direction 663
-
-        Register* GPIOICR; // 0x41C GPIOICR W1C 0x0000.0000 GPIO Interrupt Clear 670
-        Register* GPIO_Port_GPIODATA; // 0x000 GPIODATA RW 0x0000.0000 GPIO Data 662
-
-        Register* GPIOIM; // 0x410 GPIOIM RW 0x0000.0000 GPIO Interrupt Mask 667
-        Register* GPIOIS; // 0x404 GPIOIS RW 0x0000.0000 GPIO Interrupt Sense 664
-        Register* GPIOIBE; // 0x408 GPIOIBE RW 0x0000.0000 GPIO Interrupt Both Edges 665
-        Register* GPIOIEV; // 0x40C GPIOIEV RW 0x0000.0000 GPIO Interrupt Event 666
-        Register* GPIORIS; // 0x414 GPIORIS RO 0x0000.0000 GPIO Raw Interrupt Status 668
-
-        Register* GPIO_Port_GPIODR2R; // 0x500 GPIODR2R RW 0x0000.00FF GPIO 2-mA Drive Select 673
-        Register* GPIO_Port_GPIODR4R; // 0x504 GPIODR4R RW 0x0000.0000 GPIO 4-mA Drive Select 674
-        Register* GPIO_Port_GPIODR8R; // 0x508 GPIODR8R RW 0x0000.0000 GPIO 8-mA Drive Select 675
-        Register* GPIO_Port_GPIOODR; // 0x50C GPIOODR RW 0x0000.0000 GPIO Open Drain Select 676
-        Register* GPIO_Port_GPIOPDR; // 0x514 GPIOPDR RW 0x0000.0000 GPIO Pull-Down Select 679
-        Register* GPIO_Port_GPIOSLR; // 0x518 GPIOSLR RW 0x0000.0000 GPIO Slew Rate Control Select 681
-        Register* GPIO_Port_GPIOADCCTL ;// 0x530 GPIOADCCTL RW 0x0000.0000 GPIO ADC Control 690
-        Register* GPIO_Port_GPIODMACTL; // 0x534 GPIODMACTL RW 0x0000.0000 GPIO DMA Control 691
-        Register* GPIO_Port_GPIOPeriphID4; // 0xFD0 GPIOPeriphID4 RO 0x0000.0000 GPIO Peripheral Identification 4 692
-        Register* GPIO_Port_GPIOPeriphID5; // 0xFD4 GPIOPeriphID5 RO 0x0000.0000 GPIO Peripheral Identification 5 693
-        Register* GPIO_Port_GPIOPeriphID6; // 0xFD8 GPIOPeriphID6 RO 0x0000.0000 GPIO Peripheral Identification 6 694
-        Register* GPIO_Port_GPIOPeriphID7; // 0xFDC GPIOPeriphID7 RO 0x0000.0000 GPIO Peripheral Identification 7 695
-        Register* GPIO_Port_GPIOPeriphID0; // 0xFE0 GPIOPeriphID0 RO 0x0000.0061 GPIO Peripheral Identification 0 696
-        Register* GPIO_Port_GPIOPeriphID1; // 0xFE4 GPIOPeriphID1 RO 0x0000.0000 GPIO Peripheral Identification 1 697
-        Register* GPIO_Port_GPIOPeriphID2; // 0xFE8 GPIOPeriphID2 RO 0x0000.0018 GPIO Peripheral Identification 2 698
-        Register* GPIO_Port_GPIOPeriphID3; // 0xFEC GPIOPeriphID3 RO 0x0000.0001 GPIO Peripheral Identification 3 699    
-        Register* GPIO_Port_GPIOPCellID0; // 0xFF0 GPIOPCellID0 RO 0x0000.000D GPIO PrimeCell Identification 0 700
-        Register* GPIO_Port_GPIOPCellID1; // 0xFF4 GPIOPCellID1 RO 0x0000.00F0 GPIO PrimeCell Identification 1 701
-        Register* GPIO_Port_GPIOPCellID2; // 0xFF8 GPIOPCellID2 RO 0x0000.0005 GPIO PrimeCell Identification 2 702
-        Register* GPIO_Port_GPIOPCellID3; // 0xFFC GPIOPCellID3 RO 0x0000.00B1 GPIO PrimeCell Identification 3 703
-
-        bitField GPIODATA_DATA{0, 1, RW}; //GPIO Data. 
-
-        bitField GPIODIR_DIR{0, 1, RW}; //GPIO Data Direction. 
-
-        bitField PPGPIO_Pn{0, 1, RO}; //GPIO Port n Present
-
-        bitField SRGPIO_Rn{0, 1, RW}; //GPIO Port n Software Reset
-
-        bitField RCGCGPIO_Rn{0, 1, RW}; //GPIO Port n Run Mode Clock Gating Control
-
-        bitField SCGCGPIO_Sn{0, 1, RW}; //GPIO Port n Sleep Mode Clock Gating Control
-
-        bitField DCGCGPIO_Dn{0, 1, RW}; //GPIO Port n Deep-Sleep Mode Clock Gating Control
-
-        bitField PRGPIO_Rn{0, 1, RO}; //GPIO Port n Peripheral Ready
-
-        bitField GPIOAFSEL_AFSEL{0, 1, RW}; //GPIO Alternate Function Select
-
-        bitField GPIOLOCK_LOCK{0, 32, RW}; //GPIO Lock. A write of the value 0x4C4F.434B unlocks the GPIO Commit (GPIOCR) register for write access.
-
-        bitField GPIOCR_CR{0, 1, RW}; //GPIO Commit
-
-        bitField GPIODEN_DEN{0, 1, RW}; //Digital Enable
-
-        bitField GPIOAMSEL_GPIOAMSEL{0, 1, RW}; //GPIO Analog Mode Select
-
-        bitField GPIOPUR_PUE{0, 1, RW}; //Pad Weak Pull-Up Enable
-
-        bitField GPIOIS_IS{0, 1, RW}; //GPIO Interrupt Sense. 
-
-        bitField GPIOIBE_IBE{0, 1, RW}; //GPIO Interrupt Both Edges. 
-
-        bitField GPIOIEV_IEV{0, 1, RW}; //GPIO Interrupt Event.
-
-        bitField GPIOIM_IME{0, 1, RW}; //GPIO Interrupt Mask Enable
-
-        bitField GPIORIS_RIS{0, 1, RW}; //GPIO Interrupt Raw Status
-
-        bitField GPIOMIS_MIS{0, 1, RW}; //GPIO Masked Interrupt Status
-
-        bitField GPIOICR_IC{0, 1, RW}; //GPIO Interrupt Clear
-
-        bitField GPIODR2R_DRV2{0, 1, RW}; //Output Pad 2-mA Drive Enable
-
-        bitField GPIODR4R_DRV4{0, 1, RW}; //Output Pad 4-mA Drive Enable
-
-        bitField GPIODR8R_DRV8{0, 1, RW}; //Output Pad 8-mA Drive Enable
-
-        bitField GPIOODR_ODE{0, 1, RW}; //Output Pad Open Drain Enable
 
 
-        bitField GPIOPDR_PDE{0, 1, RW}; //Pad Weak Pull-Down Enable
+        // bitField* PPGPIO_Pn; // bitField PPGPIO_Pn{0, 1, RO}; //GPIO Port n Present
+        // bitField* SRGPIO_Rn; // bitField SRGPIO_Rn{0, 1, RW}; //GPIO Port n Software Reset
+        // bitField* RCGCGPIO_Rn; // bitField RCGCGPIO_Rn{0, 1, RW}; //GPIO Port n Run Mode Clock Gating Control
+        // bitField* SCGCGPIO_Sn; // bitField SCGCGPIO_Sn{0, 1, RW}; //GPIO Port n Sleep Mode Clock Gating Control
+        // bitField* DCGCGPIO_Dn; // bitField DCGCGPIO_Dn{0, 1, RW}; //GPIO Port n Deep-Sleep Mode Clock Gating Control
+        // bitField* PRGPIO_Rn; // bitField PRGPIO_Rn{0, 1, RO}; //GPIO Port n Peripheral Ready
 
-        bitField GPIOSLR_SRL{0, 1, RW}; //Slew Rate Limit Enable (8-mA drive only)
+        // bitField* GPIODATA_DATA; // bitField GPIODATA_DATA{0, 1, RW}; //GPIO Data.
+        // bitField* GPIODIR_DIR; // bitField GPIODIR_DIR{0, 1, RW}; //GPIO Data Direction.
+        // bitField* GPIOAFSEL_AFSEL; // bitField GPIOAFSEL_AFSEL{0, 1, RW}; //GPIO Alternate Function Select
+        // bitField* GPIOLOCK_LOCK; // bitField GPIOLOCK_LOCK{0, 32, RW}; //GPIO Lock. A write of the value 0x4C4F.434B unlocks the GPIO Commit (GPIOCR) register for write access.
+        // bitField* GPIOCR_CR; // bitField GPIOCR_CR{0, 1, RW}; //GPIO Commit
+        // bitField* GPIODEN_DEN; // bitField GPIODEN_DEN{0, 1, RW}; //Digital Enable
+        // bitField* GPIOAMSEL_GPIOAMSEL; // bitField GPIOAMSEL_GPIOAMSEL{0, 1, RW}; //GPIO Analog Mode Select
+        // bitField* GPIOPUR_PUE; // bitField GPIOPUR_PUE{0, 1, RW}; //Pad Weak Pull-Up Enable
+        // bitField* GPIOIS_IS; // bitField GPIOIS_IS{0, 1, RW}; //GPIO Interrupt Sense. 
+        // bitField* GPIOIBE_IBE; // bitField GPIOIBE_IBE{0, 1, RW}; //GPIO Interrupt Both Edges. 
+        // bitField* GPIOIEV_IEV; // bitField GPIOIEV_IEV{0, 1, RW}; //GPIO Interrupt Event.
+        // bitField* GPIOIM_IME; // bitField GPIOIM_IME{0, 1, RW}; //GPIO Interrupt Mask Enable
+        // bitField* GPIORIS_RIS; // bitField GPIORIS_RIS{0, 1, RW}; //GPIO Interrupt Raw Status
+        // bitField* GPIOMIS_MIS; // bitField GPIOMIS_MIS{0, 1, RW}; //GPIO Masked Interrupt Status
+        // bitField* GPIOICR_IC; // bitField GPIOICR_IC{0, 1, RW}; //GPIO Interrupt Clear
+        // bitField* GPIODR2R_DRV2; // bitField GPIODR2R_DRV2{0, 1, RW}; //Output Pad 2-mA Drive Enable
+        // bitField* GPIODR4R_DRV4; // bitField* GPIODR4R_DRV4{0, 1, RW}; //Output Pad 4-mA Drive Enable
+        // bitField* GPIODR8R_DRV8; // bitField GPIODR8R_DRV8{0, 1, RW}; //Output Pad 8-mA Drive Enable
+        // bitField* GPIOODR_ODE; // bitField GPIOODR_ODE{0, 1, RW}; //Output Pad Open Drain Enable
+        // bitField* GPIOPDR_PDE; // bitField GPIOPDR_PDE{0, 1, RW}; //Pad Weak Pull-Down Enable
+        // bitField* GPIOSLR_SRL; // bitField GPIOSLR_SRL{0, 1, RW}; //Slew Rate Limit Enable (8-mA drive only)
 
-        bitField GPIOPCTL_PMC7{28, 4, RW}; //Port Mux Control 7. This field controls the configuration for GPIO pin 7.
-        bitField GPIOPCTL_PMC6{24, 4, RW}; //Port Mux Control 6. This field controls the configuration for GPIO pin 6.
-        bitField GPIOPCTL_PMC5{20, 4, RW}; //Port Mux Control 5. This field controls the configuration for GPIO pin 5.
-        bitField GPIOPCTL_PMC4{16, 4, RW}; //Port Mux Control 4. This field controls the configuration for GPIO pin 4.
-        bitField GPIOPCTL_PMC3{12, 4, RW}; //Port Mux Control 3. This field controls the configuration for GPIO pin 3.
-        bitField GPIOPCTL_PMC2{8, 4, RW}; //Port Mux Control 2. This field controls the configuration for GPIO pin 2.
-        bitField GPIOPCTL_PMC1{4, 4, RW}; //Port Mux Control 1. This field controls the configuration for GPIO pin 1.
-        bitField GPIOPCTL_PMC0{0, 4, RW}; //Port Mux Control 0. This field controls the configuration for GPIO pin 0.
+        // bitField* GPIOPCTL_PMC7; // bitField GPIOPCTL_PMC7{28, 4, RW}; //Port Mux Control 7. This field controls the configuration for GPIO pin 7.
+        // bitField* GPIOPCTL_PMC6; // bitField GPIOPCTL_PMC6{24, 4, RW}; //Port Mux Control 6. This field controls the configuration for GPIO pin 6.
+        // bitField* GPIOPCTL_PMC5; // bitField GPIOPCTL_PMC5{20, 4, RW}; //Port Mux Control 5. This field controls the configuration for GPIO pin 5.
+        // bitField* GPIOPCTL_PMC4; // bitField GPIOPCTL_PMC4{16, 4, RW}; //Port Mux Control 4. This field controls the configuration for GPIO pin 4.
+        // bitField* GPIOPCTL_PMC3; // bitField GPIOPCTL_PMC3{12, 4, RW}; //Port Mux Control 3. This field controls the configuration for GPIO pin 3.
+        // bitField* GPIOPCTL_PMC2; // bitField GPIOPCTL_PMC2{8, 4, RW}; //Port Mux Control 2. This field controls the configuration for GPIO pin 2.
+        // bitField* GPIOPCTL_PMC1; // bitField GPIOPCTL_PMC1{4, 4, RW}; //Port Mux Control 1. This field controls the configuration for GPIO pin 1.
+        // bitField* GPIOPCTL_PMC0; // bitField GPIOPCTL_PMC0{0, 4, RW}; //Port Mux Control 0. This field controls the configuration for GPIO pin 0.
 
-        bitField GPIOADCCTL_ADCEN{0, 1, RW}; //ADC Trigger Enable
+        // bitField* GPIOADCCTL_ADCEN; // bitField GPIOADCCTL_ADCEN{0, 1, RW}; //ADC Trigger Enable
+        // bitField* GPIODMACTL_DMAEN;// bitField GPIODMACTL_DMAEN{0, 1, RW}; //μDMA Trigger Enable
 
-        bitField GPIODMACTL_DMAEN{0, 1, RW}; //μDMA Trigger Enable
+        // bitField* GPIOPeriphID4_PID4; // bitField GPIOPeriphID4_PID4{0, 8, RO}; //GPIO Peripheral ID Register [7:0]
+        // bitField* GPIOPeriphID5_PID5; // bitField GPIOPeriphID5_PID5{0, 8, RO}; //GPIO Peripheral ID Register [15:8]
+        // bitField* GPIOPeriphID6_PID6; // bitField GPIOPeriphID6_PID6{0, 8, RO}; //GPIO Peripheral ID Register [23:16]
+        // bitField* GPIOPeriphID7_PID7; // bitField GPIOPeriphID7_PID7{0, 8, RO}; //GPIO Peripheral ID Register [31:24]
 
-        bitField GPIOPeriphID4_PID4{0, 8, RO}; //GPIO Peripheral ID Register [7:0]
-        bitField GPIOPeriphID5_PID5{0, 8, RO}; //GPIO Peripheral ID Register [15:8]
-        bitField GPIOPeriphID6_PID6{0, 8, RO}; //GPIO Peripheral ID Register [23:16]
-        bitField GPIOPeriphID7_PID7{0, 8, RO}; //GPIO Peripheral ID Register [31:24]
+        // bitField* GPIOPeriphID0_PID0; // bitField GPIOPeriphID0_PID0{0, 8, RO}; //GPIO Peripheral ID Register [7:0]. Can be used by software to identify the presence of this peripheral.
+        // bitField* GPIOPeriphID1_PID1; // bitField GPIOPeriphID1_PID1{0, 8, RO}; //GPIO Peripheral ID Register [15:8]
+        // bitField* GPIOPeriphID2_PID2; // bitField GPIOPeriphID2_PID2{0, 8, RO}; //GPIO Peripheral ID Register [23:16]
+        // bitField* GPIOPeriphID3_PID3; // bitField GPIOPeriphID3_PID3{0, 8, RO}; //GPIO Peripheral ID Register [31:24]
 
-        bitField GPIOPeriphID0_PID0{0, 8, RO}; //GPIO Peripheral ID Register [7:0]. Can be used by software to identify the presence of this peripheral.
-        bitField GPIOPeriphID1_PID1{0, 8, RO}; //GPIO Peripheral ID Register [15:8]
-        bitField GPIOPeriphID2_PID2{0, 8, RO}; //GPIO Peripheral ID Register [23:16]
-        bitField GPIOPeriphID3_PID3{0, 8, RO}; //GPIO Peripheral ID Register [31:24]
+        // bitField* GPIOPCellID0_CID0; // bitField GPIOPCellID0_CID0{0, 8, RO}; //GPIO PrimeCell ID Register [7:0]
+        // bitField* GPIOPCellID1_CID1; // bitField GPIOPCellID1_CID1{0, 8, RO}; //GPIO PrimeCell ID Register [15:8]
+        // bitField* GPIOPCellID2_CID2; // bitField GPIOPCellID2_CID2{0, 8, RO}; //GPIO PrimeCell ID Register [23:16]
+        // bitField* GPIOPCellID3_CID3; // bitField GPIOPCellID3_CID3{0, 8, RO}; //GPIO PrimeCell ID Register [31:24]
 
-        bitField GPIOPCellID0_CID0{0, 8, RO}; //GPIO PrimeCell ID Register [7:0]
-        bitField GPIOPCellID1_CID1{0, 8, RO}; //GPIO PrimeCell ID Register [15:8]
-        bitField GPIOPCellID2_CID2{0, 8, RO}; //GPIO PrimeCell ID Register [23:16]
-        bitField GPIOPCellID3_CID3{0, 8, RO}; //GPIO PrimeCell ID Register [31:24]
-
-        Nvic* myNvic;
 
 };
 

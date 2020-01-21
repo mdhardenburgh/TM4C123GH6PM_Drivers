@@ -40,10 +40,12 @@
 #ifndef SYSTEM_CONTROL_H
 #define SYSTEM_CONTROL_H
 
-#include "../register.h"
+#include "../register/register.h"
 #include "../corePeripherals/nvic/nvic.h"
 
 const uint32_t systemControlBase = 0x400FE000;
+
+
 
 enum SYSDIV2
 {
@@ -112,14 +114,13 @@ class SystemControl
     private:
 
         // const uint32_t systemControlBase = 0x400FE000;
-        const uint32_t RCC_OFFSET = 0x060;
-        const uint32_t RCC2_OFFSET = 0x070;
-        const uint32_t RIS_OFFSET = 0x050;
-
-
 
 
 /**********************System Control Register Descriptions********************/
+
+        const uint32_t RCC_OFFSET = 0x060; //RCC RW 0x078E.3AD1 Run-Mode Clock Configuration 254
+        const uint32_t RCC2_OFFSET = 0x070; //RCC2 RW 0x07C0.6810 Run-Mode Clock Configuration 2 260
+        const uint32_t RIS_OFFSET = 0x050; //0x050 RIS RO 0x0000.0000 Raw Interrupt Status 244
 
         const uint32_t DID0_OFFSET = 0x000; //0x000 DID0 RO - Device Identification 238
         const uint32_t DID1_OFFSET = 0x004; //0x004 DID1 RO 0x10A1.606E Device Identification 1 240
@@ -127,6 +128,14 @@ class SystemControl
         const uint32_t IMC_OFFSET = 0x054; //0x054 IMC RW 0x0000.0000 Interrupt Mask Control 247
         const uint32_t MISC_OFFSET = 0x058; //0x058 MISC RW1C 0x0000.0000 Masked Interrupt Status and Clear 249
         const uint32_t RESC_OFFSET = 0x05C; //0x05C RESC RW - Reset Cause 252
+        const uint32_t MOSCCTL_OFFSET = 0x07C; //0x07C MOSCCTL RW 0x0000.0000 Main Oscillator Control 263
+        const uint32_t DSLPCLKCFG_OFFSET = 0x144; //0x144 DSLPCLKCFG RW 0x0780.0000 Deep Sleep Clock Configuration 264
+        const uint32_t SYSPROP_OFFSET = 0x14C; //0x14C SYSPROP RO 0x0000.1D31 System Properties 266
+        const uint32_t PIOSCCAL_OFFSET = 0x150; //0x150 PIOSCCAL RW 0x0000.0000 Precision Internal Oscillator Calibration 268
+        const uint32_t PIOSCSTAT_OFFSET = 0x154; //0x154 PIOSCSTAT RO 0x0000.0040 Precision Internal Oscillator Statistics 270
+        const uint32_t PLLFREQ0_OFFSET = 0x160; //0x160 PLLFREQ0 RO 0x0000.0032 PLL Frequency 0 271
+        const uint32_t PLLFREQ1_OFFSET = 0x164; //0x164 PLLFREQ1 RO 0x0000.0001 PLL Frequency 1 272
+        const uint32_t PLLSTAT_OFFSET = 0x168; //0x168 PLLSTAT RO 0x0000.0000 PLL Status 273
         const uint32_t SLPPWRCFG_OFFSET = 0x188; //0x188 SLPPWRCFG RW 0x0000.0000 Sleep Power Configuration 274
         const uint32_t DSLPPWRCFG_OFFSET = 0x18C; //0x18C DSLPPWRCFG RW 0x0000.0000 Deep-Sleep Power Configuration 276
         const uint32_t LDOSPCTL_OFFSET = 0x1B4; //0x1B4 LDOSPCTL RW 0x0000.0018 LDO Sleep Power Control 278
@@ -135,176 +144,138 @@ class SystemControl
         const uint32_t LDODPCAL_OFFSET = 0x1C0; //0x1C0 LDODPCAL RO 0x0000.1212 LDO Deep-Sleep Power Calibration 283
         const uint32_t SDPMST_OFFSET = 0x1CC; //0x1CC SDPMST RO 0x0000.0000 Sleep/Deep-Sleep Power Mode Status 284
         const uint32_t GPIOHBCTL_OFFSET = 0x06C; //0x06C GPIOHBCTL RW 0x0000.7E00 GPIO High-Performance Bus Control 258
-
-        const uint32_t MOSCCTL_OFFSET = 0x07C;
-        const uint32_t DSLPCLKCFG_OFFSET = 0x144;
-        const uint32_t PIOSCCAL_OFFSET = 0x150;
-        const uint32_t PIOSCSTAT_OFFSET = 0x154;
-        const uint32_t PLLFREQ0_OFFSET = 0x160;
-        const uint32_t PLLFREQ1_OFFSET = 0x164;
-        const uint32_t PLLSTAT_OFFSET = 0x168;
         
 
-/**********************System Control Register Descriptions********************/
-
-///////////////////////////////////////////////////////////////////////////Offset Name Type Reset Description See page
-        Register* DID0; //0x000 DID0 RO - Device Identification 238
-        Register* DID1; //0x004 DID1 RO 0x10A1.606E Device Identification 1 240
-        Register* PBORCTL; //0x030 PBORCTL RW 0x0000.7FFF Brown-Out Reset Control 243
-        Register* IMC; //0x054 IMC RW 0x0000.0000 Interrupt Mask Control 247
-        Register* MISC; //0x058 MISC RW1C 0x0000.0000 Masked Interrupt Status and Clear 249
-        Register* RESC; //0x05C RESC RW - Reset Cause 252
-        Register* GPIOHBCTL; //0x06C GPIOHBCTL RW 0x0000.7E00 GPIO High-Performance Bus Control 258
-        Register* SLPPWRCFG; //0x188 SLPPWRCFG RW 0x0000.0000 Sleep Power Configuration 274
-        Register* DSLPPWRCFG; //0x18C DSLPPWRCFG RW 0x0000.0000 Deep-Sleep Power Configuration 276
-        Register* LDOSPCTL; //0x1B4 LDOSPCTL RW 0x0000.0018 LDO Sleep Power Control 278
-        Register* LDOSPCAL; //0x1B8 LDOSPCAL RO 0x0000.1818 LDO Sleep Power Calibration 280
-        Register* LDODPCTL; //0x1BC LDODPCTL RW 0x0000.0012 LDO Deep-Sleep Power Control 28
-        Register* LDODPCAL; //0x1C0 LDODPCAL RO 0x0000.1212 LDO Deep-Sleep Power Calibration 283
-        Register* SDPMST; //0x1CC SDPMST RO 0x0000.0000 Sleep/Deep-Sleep Power Mode Status 284
-
-        Register* MOSCCTL; //0x07C MOSCCTL RW 0x0000.0000 Main Oscillator Control 263
-        Register* DSLPCLKCFG; //0x144 DSLPCLKCFG RW 0x0780.0000 Deep Sleep Clock Configuration 264
-        Register* PIOSCCAL; //0x150 PIOSCCAL RW 0x0000.0000 Precision Internal Oscillator Calibration 268
-        Register* PIOSCSTAT; //0x154 PIOSCSTAT RO 0x0000.0040 Precision Internal Oscillator Statistics 270
-        Register* PLLFREQ0; //0x160 PLLFREQ0 RO 0x0000.0032 PLL Frequency 0 271
-        Register* PLLFREQ1; //0x164 PLLFREQ1 RO 0x0000.0001 PLL Frequency 1 272
-        Register* PLLSTAT; //0x168 PLLSTAT RO 0x0000.0000 PLL Status 273
-
-        Register* RCC; //0x060 RCC RW 0x078E.3AD1 Run-Mode Clock Configuration 254
-        Register* RCC2; //0x070 RCC2 RW 0x07C0.6810 Run-Mode Clock Configuration 2 260
-        Register* RIS; //0x050 RIS RO 0x0000.0000 Raw Interrupt Status 244
 
 /**************************System Control BitFields****************************/
-
-        bitField DID0_VER{28, 3, RO}; //DID0 Version
-        bitField DID0_CLASS{16, 8, RO}; //Device Class
-        bitField DID0_MAJOR{8, 8, RO}; //Major Die Revision
-        bitField DID0_MINOR{0, 8, RO}; //Minor Die Revision
-
-        bitField DID1_VER{28, 4, RO}; //DID1 Version
-        bitField DID1_FAM{24, 4, RO}; //Family
-        bitField DID1_PARTNO{16, 8, RO}; //Part Number
-        bitField DID1_PINCOUNT{13, 3, RO}; //Package Pin Count
-        bitField DID1_TEMP{5, 3, RO}; //Temperature Range
-        bitField DID1_PKG{3, 2, RO}; //Package Type
-        bitField DID1_ROHS{2, 1, RO}; //RoHS-Compliance
-        bitField DID1_QUAL{0, 2, RO}; //Qualification Status
-
-        bitField PBORCTL_BOR0{2, 1, RW}; //VDD under BOR0 Event Action
-        bitField PBORCTL_BOR1{1, 1, RW}; //VDD under BOR1 Event Action
-
-        bitField RIS_BOR0RIS{11, 1, RO}; //VDD under BOR0 Raw Interrupt Status
-        bitField RIS_VDDARIS{10, 1, RO}; //VDDA Power OK Event Raw Interrupt Status
-        bitField RIS_BOR1RIS{1, 1, RO}; //VDD under BOR1 Raw Interrupt Status
-
-        bitField IMC_BOR0IM{11, 1, RW}; //VDD under BOR0 Interrupt Mask
-        bitField IMC_VDDAIM{10, 1, RW}; //VDDA Power OK Interrupt Mask
-        bitField IMC_BOR1IM{1, 1, RW}; //VDD under BOR1 Interrupt Mask
-
-        bitField MISC_BOR0MIS{11, 1, RW1C}; //VDD under BOR0 Masked Interrupt Status
-        bitField MISC_VDDAMIS{10, 1, RW1C}; //VDDA Power OK Masked Interrupt Status
-        bitField MISC_BOR1MIS{1, 1, RW1C}; //VDD under BOR1 Masked Interrupt Status
         
-        bitField RESC_SW{4, 1, RW}; //Software Reset
-        bitField RESC_BOR{2, 1, RW}; //Brown-Out Reset
-        bitField RESC_POR{1, 1, RW}; //Power-On Reset
-        bitField RESC_EXT{0, 1, RW}; //External Reset
+        // bitField DID0_VER{28, 3, RO}; //DID0 Version
+        // bitField DID0_CLASS{16, 8, RO}; //Device Class
+        // bitField DID0_MAJOR{8, 8, RO}; //Major Die Revision
+        // bitField DID0_MINOR{0, 8, RO}; //Minor Die Revision
 
-        bitField GPIOHBCTL_PORTn{0, 1, RW}; //Port n Advanced High-Performance Bus
+        // bitField DID1_VER{28, 4, RO}; //DID1 Version
+        // bitField DID1_FAM{24, 4, RO}; //Family
+        // bitField DID1_PARTNO{16, 8, RO}; //Part Number
+        // bitField DID1_PINCOUNT{13, 3, RO}; //Package Pin Count
+        // bitField DID1_TEMP{5, 3, RO}; //Temperature Range
+        // bitField DID1_PKG{3, 2, RO}; //Package Type
+        // bitField DID1_ROHS{2, 1, RO}; //RoHS-Compliance
+        // bitField DID1_QUAL{0, 2, RO}; //Qualification Status
 
-        bitField SYSPROP_SRAMSM{11, 1, RO}; //SRAM Sleep/Deep-Sleep Standby Mode Present
-        bitField SYSPROP_SRAMLPM{10, 1, RO}; //SRAM Sleep/Deep-Sleep Low Power Mode Present
-        bitField SYSPROP_FLASHLPM{8, 1, RO}; //Flash Memory Sleep/Deep-Sleep Low Power Mode Present
-        bitField SYSPROP_FPU{0, 1, RO}; //FPU Present. This bit indicates if the FPU is present in the Cortex-M4 core.
+        // bitField PBORCTL_BOR0{2, 1, RW}; //VDD under BOR0 Event Action
+        // bitField PBORCTL_BOR1{1, 1, RW}; //VDD under BOR1 Event Action
 
-        bitField SLPPWRCFG_FLASHPM{4, 2, RW}; //Flash Power Modes
-        bitField SLPPWRCFG_SRAMPM{0, 2, RW}; //SRAM Power Modes
+        // bitField RIS_BOR0RIS{11, 1, RO}; //VDD under BOR0 Raw Interrupt Status
+        // bitField RIS_VDDARIS{10, 1, RO}; //VDDA Power OK Event Raw Interrupt Status
+        // bitField RIS_BOR1RIS{1, 1, RO}; //VDD under BOR1 Raw Interrupt Status
 
-        bitField DSLPPWRCFG_FLASHPM{4, 2, RW}; //Flash Power Modes
-        bitField DSLPPWRCFG_SRAMPM{0, 2, RW}; //SRAM Power Modes
+        // bitField IMC_BOR0IM{11, 1, RW}; //VDD under BOR0 Interrupt Mask
+        // bitField IMC_VDDAIM{10, 1, RW}; //VDDA Power OK Interrupt Mask
+        // bitField IMC_BOR1IM{1, 1, RW}; //VDD under BOR1 Interrupt Mask
 
-        bitField LDOSPCTL_VADJEN{31, 1, RW}; //Voltage Adjust Enable
-        bitField LDOSPCTL_VLDO{0, 8, RW}; //LDO Output Voltage
+        // bitField MISC_BOR0MIS{11, 1, RW1C}; //VDD under BOR0 Masked Interrupt Status
+        // bitField MISC_VDDAMIS{10, 1, RW1C}; //VDDA Power OK Masked Interrupt Status
+        // bitField MISC_BOR1MIS{1, 1, RW1C}; //VDD under BOR1 Masked Interrupt Status
+        
+        // bitField RESC_SW{4, 1, RW}; //Software Reset
+        // bitField RESC_BOR{2, 1, RW}; //Brown-Out Reset
+        // bitField RESC_POR{1, 1, RW}; //Power-On Reset
+        // bitField RESC_EXT{0, 1, RW}; //External Reset
 
-        bitField LDOSPCAL_WITHPLL{8, 8, RO}; //Sleep with PLL
-        bitField LDOSPCAL_NOPLL{0, 8, RO}; //Sleep without PLL
 
-        bitField LDODPCTL_VADJEN{31, 1, RW}; //Voltage Adjust Enable
-        bitField LDODPCTL_VLDO{0, 8, RW}; //LDO Output Voltage
+        // bitField SYSPROP_SRAMSM{11, 1, RO}; //SRAM Sleep/Deep-Sleep Standby Mode Present
+        // bitField SYSPROP_SRAMLPM{10, 1, RO}; //SRAM Sleep/Deep-Sleep Low Power Mode Present
+        // bitField SYSPROP_FLASHLPM{8, 1, RO}; //Flash Memory Sleep/Deep-Sleep Low Power Mode Present
+        // bitField SYSPROP_FPU{0, 1, RO}; //FPU Present. This bit indicates if the FPU is present in the Cortex-M4 core.
 
-        bitField LDODPCAL_NOPLL{8, 8, RO}; //Deep-Sleep without PLL
-        bitField LDODPCAL_30KHZ{0, 8, RO}; //Deep-Sleep with IOSC
+        // bitField SLPPWRCFG_FLASHPM{4, 2, RW}; //Flash Power Modes
+        // bitField SLPPWRCFG_SRAMPM{0, 2, RW}; //SRAM Power Modes
 
-        bitField SDPMST_LDOUA{19, 1, RO}; //LDO Update Active
-        bitField SDPMST_FLASHLP{18, 1, RO}; //Flash Memory in Low Power State
-        bitField SDPMST_LOWPWR{17, 1, RO}; //Sleep or Deep-Sleep Mode
-        bitField SDPMST_PRACT{16, 1, RO}; //Sleep or Deep-Sleep Power Request Active
-        bitField SDPMST_PPDW{7, 1, RO}; //PIOSC Power Down Request Warning
-        bitField SDPMST_LMAXERR{6, 1, RO}; //VLDO Value Above Maximum Error
-        bitField SDPMST_LSMINERR{4, 1, RO}; //VLDO Value Below Minimum Error in Sleep Mode
-        bitField SDPMST_LDMINERR{3, 1, RO}; //VLDO Value Below Minimum Error in Deep-Sleep Mode
-        bitField SDPMST_PPDERR{2, 1, RO}; //PIOSC Power Down Request Error
-        bitField SDPMST_FPDERR{1, 1, RO}; //Flash Memory Power Down Request Error
-        bitField SDPMST_SPDERR{0, 1, RO}; //SRAM Power Down Request Error
+        // bitField DSLPPWRCFG_FLASHPM{4, 2, RW}; //Flash Power Modes
+        // bitField DSLPPWRCFG_SRAMPM{0, 2, RW}; //SRAM Power Modes
 
-        bitField RIS_MOSCPUPRIS{8, 1, RO}; //MOSC Power Up Raw Interrupt Status
-        bitField RIS_PLLLRIS{6, 1, RO}; //PLL Lock Raw Interrupt Status
-        bitField RIS_MOFRIS{3, 1, RO}; //Main Oscillator Failure Raw Interrupt Status
+        // bitField LDOSPCTL_VADJEN{31, 1, RW}; //Voltage Adjust Enable
+        // bitField LDOSPCTL_VLDO{0, 8, RW}; //LDO Output Voltage
 
-        bitField IMC_MOSCPUPIM{8, 1, RW}; //MOSC Power Up Interrupt Mask
-        bitField IMC_PLLLIM{6, 1, RW}; //PLL Lock Interrupt Mask
-        bitField IMC_MOFIM{3, 1, RW}; //Main Oscillator Failure Interrupt Mask
+        // bitField LDOSPCAL_WITHPLL{8, 8, RO}; //Sleep with PLL
+        // bitField LDOSPCAL_NOPLL{0, 8, RO}; //Sleep without PLL
 
-        bitField MISC_MOSCPUPMIS{8, 1, RW1C}; //MOSC Power Up Masked Interrupt Status
-        bitField MISC_PLLLMIS{6, 1, RW1C}; //PLL Lock Masked Interrupt Status
-        bitField MISC_MOFMIS{3, 1, RO}; //Main Oscillator Failure Masked Interrupt Status
+        // bitField LDODPCTL_VADJEN{31, 1, RW}; //Voltage Adjust Enable
+        // bitField LDODPCTL_VLDO{0, 8, RW}; //LDO Output Voltage
 
-        bitField RESC_MOSCFAIL{16, 1, RW}; //MOSC Failure Reset
+        // bitField LDODPCAL_NOPLL{8, 8, RO}; //Deep-Sleep without PLL
+        // bitField LDODPCAL_30KHZ{0, 8, RO}; //Deep-Sleep with IOSC
 
-        bitField RCC_ACG{27, 1, RW}; //Auto Clock Gating
-        bitField RCC_SYSDIV{23, 4, RW}; //System Clock Divisor
-        bitField RCC_BYPASS{11, 1, RW}; //PLL Bypass
-        bitField RCC_USESYSDIV{22, 1, RW}; //Enable System Clock Divider
-        bitField RCC_XTAL{6, 5, RW}; //Crystal Value
-        bitField RCC_OSCSRC{4, 2, RW}; //Oscillator Source
-        bitField RCC_PWRDN{13, 1, RW}; //PLL Power Down
-        bitField RCC_MOSCDIS{0, 1, RW}; //Main Oscillator Disable
+        // bitField SDPMST_LDOUA{19, 1, RO}; //LDO Update Active
+        // bitField SDPMST_FLASHLP{18, 1, RO}; //Flash Memory in Low Power State
+        // bitField SDPMST_LOWPWR{17, 1, RO}; //Sleep or Deep-Sleep Mode
+        // bitField SDPMST_PRACT{16, 1, RO}; //Sleep or Deep-Sleep Power Request Active
+        // bitField SDPMST_PPDW{7, 1, RO}; //PIOSC Power Down Request Warning
+        // bitField SDPMST_LMAXERR{6, 1, RO}; //VLDO Value Above Maximum Error
+        // bitField SDPMST_LSMINERR{4, 1, RO}; //VLDO Value Below Minimum Error in Sleep Mode
+        // bitField SDPMST_LDMINERR{3, 1, RO}; //VLDO Value Below Minimum Error in Deep-Sleep Mode
+        // bitField SDPMST_PPDERR{2, 1, RO}; //PIOSC Power Down Request Error
+        // bitField SDPMST_FPDERR{1, 1, RO}; //Flash Memory Power Down Request Error
+        // bitField SDPMST_SPDERR{0, 1, RO}; //SRAM Power Down Request Error
 
-        bitField RCC2_USERCC2{31, 1, RW}; //Use RCC2
-        bitField RCC2_DIV400{30, 1, RW}; //Divide PLL as 400 MHz versus 200 MHz
-        bitField RCC2_SYSDIV2{23, 6, RW}; //System Clock Divisor 2
-        bitField RCC2_SYSDIV2LSB{22, 1, RW}; //Additional LSB for SYSDIV2
-        bitField RCC2_PWRDN2{13, 1, RW}; //Power-Down PLL 2
-        bitField RCC2_BYPASS2{11, 1, RW}; //PLL Bypass 2
-        bitField RCC2_OSCSRC2{4, 3, RW}; //Oscillator Source 2
+        // bitField RIS_MOSCPUPRIS{8, 1, RO}; //MOSC Power Up Raw Interrupt Status
+        // // bitField RIS_PLLLRIS{6, 1, RO}; //PLL Lock Raw Interrupt Status
+        // bitField RIS_MOFRIS{3, 1, RO}; //Main Oscillator Failure Raw Interrupt Status
 
-        bitField MOSCCTL_NOXTAL{2, 1, RW}; //No Crystal Connected
-        bitField MOSCCTL_MOSCIM{1, 1, RW}; //MOSC Failure Action
-        bitField MOSCCTL_CVAL{0, 1, RW}; //Clock Validation for MOSC
+        // bitField IMC_MOSCPUPIM{8, 1, RW}; //MOSC Power Up Interrupt Mask
+        // bitField IMC_PLLLIM{6, 1, RW}; //PLL Lock Interrupt Mask
+        // bitField IMC_MOFIM{3, 1, RW}; //Main Oscillator Failure Interrupt Mask
 
-        bitField DSLPCLKCFG_DSDIVORIDE{23, 6, RW}; //Divider Field Override
-        bitField DSLPCLKCFG_DSOSCSRC{4, 3, RW}; //Clock Source, Specifies the clock source during Deep-Sleep mode.
-        bitField DSLPCLKCFG_PIOSCPD{1, 1, RW}; //PIOSC Power Down Request
+        // bitField MISC_MOSCPUPMIS{8, 1, RW1C}; //MOSC Power Up Masked Interrupt Status
+        // bitField MISC_PLLLMIS{6, 1, RW1C}; //PLL Lock Masked Interrupt Status
+        // bitField MISC_MOFMIS{3, 1, RO}; //Main Oscillator Failure Masked Interrupt Status
 
-        bitField SYSPROP_PIOSCPDE{12, 1, RO}; //PIOSC Power Down Present
+        // bitField RESC_MOSCFAIL{16, 1, RW}; //MOSC Failure Reset
 
-        bitField PIOSCCAL_UTEN{31, 1, RW}; //Use User Trim Value
-        bitField PIOSCCAL_CAL{9, 1, RW}; //Start Calibration
-        bitField PIOSCCAL_UPDATE{8, 1, RW}; //Update Trim
-        bitField PIOSCCAL_UT{0, 7, RW}; //User Trim Value. User trim value that can be loaded into the PIOSC.
+        // bitField RCC_ACG{27, 1, RW}; //Auto Clock Gating
+        // bitField RCC_SYSDIV{23, 4, RW}; //System Clock Divisor
+        // bitField RCC_BYPASS{11, 1, RW}; //PLL Bypass
+        // bitField RCC_USESYSDIV{22, 1, RW}; //Enable System Clock Divider
+        // // bitField RCC_XTAL{6, 5, RW}; //Crystal Value
+        // bitField RCC_OSCSRC{4, 2, RW}; //Oscillator Source
+        // bitField RCC_PWRDN{13, 1, RW}; //PLL Power Down
+        // bitField RCC_MOSCDIS{0, 1, RW}; //Main Oscillator Disable
 
-        bitField PIOSCSTAT_DT{16, 7, RO}; //Default Trim Value. This field contains the default trim value.
-        bitField PIOSCSTAT_RESULT{8, 2, RO}; //Calibration Result
-        bitField PIOSCSTAT_CT{0, 7, RO}; //Calibration Trim Value
+        // // bitField RCC2_USERCC2{31, 1, RW}; //Use RCC2
+        // // bitField RCC2_DIV400{30, 1, RW}; //Divide PLL as 400 MHz versus 200 MHz
+        // // bitField RCC2_SYSDIV2{23, 6, RW}; //System Clock Divisor 2
+        // // bitField RCC2_SYSDIV2LSB{22, 1, RW}; //Additional LSB for SYSDIV2
+        // // bitField RCC2_PWRDN2{13, 1, RW}; //Power-Down PLL 2
+        // // bitField RCC2_BYPASS2{11, 1, RW}; //PLL Bypass 2
+        // // bitField RCC2_OSCSRC2{4, 3, RW}; //Oscillator Source 2
 
-        bitField PLLFREQ0_MFRAC{10, 10, RO}; //PLL M Fractional Value. This field contains the integer value of the PLL M value.
-        bitField PLLFREQ0_MINT{0, 10, RO}; //PLL M Integer Value. This field contains the integer value of the PLL M value.
+        // bitField MOSCCTL_NOXTAL{2, 1, RW}; //No Crystal Connected
+        // bitField MOSCCTL_MOSCIM{1, 1, RW}; //MOSC Failure Action
+        // bitField MOSCCTL_CVAL{0, 1, RW}; //Clock Validation for MOSC
 
-        bitField PLLFREQ1_Q{8, 5, RO}; //PLL Q Value. This field contains the PLL Q value.
-        bitField PLLFREQ1_N{0, 5, RO}; //PLL N Value. This field contains the PLL N value.
+        // bitField DSLPCLKCFG_DSDIVORIDE{23, 6, RW}; //Divider Field Override
+        // bitField DSLPCLKCFG_DSOSCSRC{4, 3, RW}; //Clock Source, Specifies the clock source during Deep-Sleep mode.
+        // bitField DSLPCLKCFG_PIOSCPD{1, 1, RW}; //PIOSC Power Down Request
 
-        bitField PLLSTAT_LOCK{0, 1, RO}; //PLL Lock
+        // bitField SYSPROP_PIOSCPDE{12, 1, RO}; //PIOSC Power Down Present
+
+        // bitField PIOSCCAL_UTEN{31, 1, RW}; //Use User Trim Value
+        // bitField PIOSCCAL_CAL{9, 1, RW}; //Start Calibration
+        // bitField PIOSCCAL_UPDATE{8, 1, RW}; //Update Trim
+        // bitField PIOSCCAL_UT{0, 7, RW}; //User Trim Value. User trim value that can be loaded into the PIOSC.
+
+        // bitField PIOSCSTAT_DT{16, 7, RO}; //Default Trim Value. This field contains the default trim value.
+        // bitField PIOSCSTAT_RESULT{8, 2, RO}; //Calibration Result
+        // bitField PIOSCSTAT_CT{0, 7, RO}; //Calibration Trim Value
+
+        // bitField PLLFREQ0_MFRAC{10, 10, RO}; //PLL M Fractional Value. This field contains the integer value of the PLL M value.
+        // bitField PLLFREQ0_MINT{0, 10, RO}; //PLL M Integer Value. This field contains the integer value of the PLL M value.
+
+        // bitField PLLFREQ1_Q{8, 5, RO}; //PLL Q Value. This field contains the PLL Q value.
+        // bitField PLLFREQ1_N{0, 5, RO}; //PLL N Value. This field contains the PLL N value.
+
+        // bitField PLLSTAT_LOCK{0, 1, RO}; //PLL Lock
 };
 
 #endif //SYSTEM_CONTROL_H

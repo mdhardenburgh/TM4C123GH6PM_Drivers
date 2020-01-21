@@ -40,7 +40,7 @@
 #include <stdint-gcc.h>
 #include <stddef.h>
 #include <math.h>
-#include "../../register.h"
+#include "../../register/register.h"
 
 class Mpu
 {
@@ -54,19 +54,6 @@ class Mpu
          * These register definitions begin on page 134 of the TM4C123GH6PM Datasheet.
          */
         const uint32_t corePeripheralBase = 0xE000E000;
-        const uint32_t MPUTYPE_OFFSET = 0xD90;
-        const uint32_t MPUCTRL_OFFSET = 0xD94;
-        const uint32_t MPUNUMBER_OFFSET = 0xD98;
-        const uint32_t MPUBASE_OFFSET = 0xD9C;
-        const uint32_t MPUBASE1_OFFSET = 0xDA4;
-        const uint32_t MPUBASE2_OFFSET = 0xDAC;
-        const uint32_t MPUBASE3_OFFSET = 0xDB4;
-        const uint32_t MPUATTR_OFFSET = 0xDA0;
-        const uint32_t MPUATTR1_OFFSET = 0xDA8;
-        const uint32_t MPUATTR2_OFFSET = 0xDB0;
-        const uint32_t MPUATTR3_OFFSET = 0xDB8;
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         /**
          * Register 80: MPU Type (MPUTYPE), offset 0xD90
@@ -76,7 +63,7 @@ class Mpu
          * The MPUTYPE register indicates whether the MPU is present, and if so, how
          * many regions it supports.
          */
-        Register* MPUTYPE;
+        const uint32_t MPUTYPE_OFFSET = 0xD90;
 
         /**
          * Register 81: MPU Control (MPUCTRL), offset 0xD94
@@ -121,7 +108,7 @@ class Mpu
          * exception or when FAULTMASK is enabled. Setting the HFNMIENA bit 
          * enables the MPU when operating with these two priorities.
          */
-        Register* MPUCTRL;
+        const uint32_t MPUCTRL_OFFSET = 0xD94;
 
         /**
          * Register 82: MPU Region Number (MPUNUMBER), offset 0xD98
@@ -136,7 +123,7 @@ class Mpu
          * writing to the MPUBASE register with the VALID bit set (see page 190). 
          * This write updates the value of the REGION field.
          */
-        Register* MPUNUMBER;
+        const uint32_t MPUNUMBER_OFFSET = 0xD98;
 
         /**
          * Register 83: MPU Region Base Address (MPUBASE), offset 0xD9C
@@ -165,10 +152,10 @@ class Mpu
          * region must be aligned on a multiple of 64 KB, for example, at 0x0001.0000 or 
          * 0x0002.0000.
          */
-        Register* MPUBASE;
-        Register* MPUBASE1;
-        Register* MPUBASE2;
-        Register* MPUBASE3;
+        const uint32_t MPUBASE_OFFSET = 0xD9C;
+        // const uint32_t MPUBASE1_OFFSET = 0xDA4;
+        // const uint32_t MPUBASE2_OFFSET = 0xDAC;
+        // const uint32_t MPUBASE3_OFFSET = 0xDB4;
 
         /**
          * Register 87: MPU Region Attribute and Size (MPUATTR), offset 0xDA0
@@ -221,21 +208,12 @@ class Mpu
          * a. Refers to the N parameter in the MPUBASE register (see page 190).
          * 
          */
-        Register* MPUATTR;
-        Register* MPUATTR1;
-        Register* MPUATTR2;
-        Register* MPUATTR3;
+        const uint32_t MPUATTR_OFFSET = 0xDA0;  
+        // const uint32_t MPUATTR1_OFFSET = 0xDA8;
+        // const uint32_t MPUATTR2_OFFSET = 0xDB0;
+        // const uint32_t MPUATTR3_OFFSET = 0xDB8;
 
-
-
-
-
-
-
-
-
-
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
         /**
@@ -245,7 +223,7 @@ class Mpu
          * This field always contains 0x00. The MPU memory map is unified and
          * is described by the DREGION field.
          */
-        bitField MPUTYPE_IREGION{16, 8, RO};
+        // bitField MPUTYPE_IREGION{16, 8, RO};
 
         /**
          * Description: Number of D Regions
@@ -253,7 +231,7 @@ class Mpu
          * Value Description
          * 0x08__Indicates there are eight supported MPU data regions.
          */
-        bitField MPUTYPE_DREGION{8, 8, RO};
+        // bitField MPUTYPE_DREGION{8, 8, RO};
 
         /**
          * Description: Separate or Unified MPU
@@ -261,7 +239,7 @@ class Mpu
          * Value Description
          * 0_____Indicates the MPU is unified.
          */
-        bitField MPUTYPE_SEPARATE{0, 1, RO};
+        // bitField MPUTYPE_SEPARATE{0, 1, RO};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -287,7 +265,7 @@ class Mpu
          * 
          * If the MPU is disabled, the processor ignores this bit.
          */
-        bitField MPUCTRL_PRIVDEFEN{2, 1, RW};
+        // bitField MPUCTRL_PRIVDEFEN{2, 1, RW};
 
         /**
          * Description: MPU Enabled During Faults
@@ -305,7 +283,7 @@ class Mpu
          * When the MPU is disabled and this bit is set, the resulting behavior 
          * is unpredictable.
          */
-        bitField MPUCTRL_HFNMIENA{1, 1, RW};
+        // bitField MPUCTRL_HFNMIENA{1, 1, RW};
 
         /**
          * Description: MPU Enable
@@ -318,7 +296,7 @@ class Mpu
          * When the MPU is disabled and the HFNMIENA bit is set, the resulting
          * behavior is unpredictable.
          */
-        bitField MPUCTRL_ENABLE{0, 1, RW};
+        // bitField MPUCTRL_ENABLE{0, 1, RW};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -330,7 +308,7 @@ class Mpu
          * This field indicates the MPU region referenced by the MPUBASE and
          * MPUATTR registers. The MPU supports eight memory regions.
          */
-        bitField MPUNUMBER_NUMBER{0, 3, RW};
+        // bitField MPUNUMBER_NUMBER{0, 3, RW};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -347,7 +325,7 @@ class Mpu
          * compatibility with future products, the value of a reserved bit 
          * should be preserved across a read-modify-write operation.
          */
-        bitField MPUBASE_ADDR{5, 27, RW};
+        // bitField MPUBASE_ADDR{5, 27, RW};
 
         /**
          * Description: Region Number Valid
@@ -363,7 +341,7 @@ class Mpu
          * 
          * This bit is always read as 0.
          */
-        bitField MPUBASE_VALID{4, 1, WO};
+        // bitField MPUBASE_VALID{4, 1, WO};
 
         /**
          * Description: Region Number
@@ -371,7 +349,7 @@ class Mpu
          * On a write, contains the value to be written to the MPUNUMBER register.
          * On a read, returns the current region number in the MPUNUMBER register.
          */
-        bitField MPUBASE_REGION{0, 3, RW};
+        // bitField MPUBASE_REGION{0, 3, RW};
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -386,42 +364,42 @@ class Mpu
          * 
          * 1_____Instruction fetches are disabled.
          */
-        bitField MPUATTR_XN{28, 1, RW};
+        // bitField MPUATTR_XN{28, 1, RW};
 
         /**
          * Description: Access Privilege
          * 
          * For information on using this bit field, see Table 3-5 on page 129.
          */
-        bitField MPUATTR_AP{24, 3, RW};
+        // bitField MPUATTR_AP{24, 3, RW};
 
         /**
          * Description: Type Extension Mask
          * 
          * For information on using this bit field, see Table 3-3 on page 128.
          */
-        bitField MPUATTR_TEX{19, 3, RW};
+        // bitField MPUATTR_TEX{19, 3, RW};
 
         /**
          * Description: Shareable
          * 
          * For information on using this bit, see Table 3-3 on page 128.
          */
-        bitField MPUATTR_S{18, 1, RW};
+        // bitField MPUATTR_S{18, 1, RW};
 
         /**
          * Description: Cacheable
          * 
          * For information on using this bit, see Table 3-3 on page 128.
          */
-        bitField MPUATTR_C{17, 1, RW};
+        // bitField MPUATTR_C{17, 1, RW};
 
         /**
          * Description: Bufferable
          * 
          * For information on using this bit, see Table 3-3 on page 128.
          */
-        bitField MPUATTR_B{16, 1, RW};
+        // bitField MPUATTR_B{16, 1, RW};
 
         /**
          * Description: Subregion Disable Bits
@@ -436,7 +414,7 @@ class Mpu
          * 0x00. See the section called “Subregions” on page 128 for more 
          * information.
          */
-        bitField MPUATTR_SRD{8, 8, RW};
+        // bitField MPUATTR_SRD{8, 8, RW};
 
         /**
          * Description: Region Size Mask
@@ -445,7 +423,7 @@ class Mpu
          * the MPUNUMBER register. Refer to Table 3-10 on page 192 for more
          * information.
          */
-        bitField MPUATTR_SIZE{1, 5, RW};
+        // bitField MPUATTR_SIZE{1, 5, RW};
 
         /**
          * Description: Region Enable
@@ -455,7 +433,7 @@ class Mpu
          * 
          * 1_____The region is enabled.
          */
-        bitField MPUATTR_ENABLE{0, 1, RW};
+        // bitField MPUATTR_ENABLE{0, 1, RW};
 
 };
 

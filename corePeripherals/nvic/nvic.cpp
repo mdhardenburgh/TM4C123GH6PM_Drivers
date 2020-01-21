@@ -63,17 +63,15 @@ void Nvic::activateInterrupt(interrupt myInterrupt, uint32_t priority)
 {
     if((myInterrupt < 139) && (priority < 8))
     {
-        PRIORITY_INT.bit = ((myInterrupt % nvicRegisterOffset) * 8) + 5;
-        INT.bit = myInterrupt % 32;
+        bitField PRIORITY_INT(((myInterrupt % nvicRegisterOffset) * 8) + 5, 3, RW); //bit place isn't being used. Renaming 3 to INT_PRIORITY.size to eliminate magic numbers
+        bitField INT((uint32_t)(myInterrupt % 32), 1, RW); //bit place isn't being used. Renaming 1 to INT.bitWidth to eliminate magic numbers
 
-        PRI = new Register((volatile uint32_t*)(corePeripheralBase + PRI_OFFSET + (nvicRegisterOffset * (myInterrupt / nvicRegisterOffset))));
-        EN = new Register((volatile uint32_t*)(corePeripheralBase + EN_OFFSET + (nvicRegisterOffset * (myInterrupt / 32))));
+        Register PRI((volatile uint32_t*)(corePeripheralBase + PRI_OFFSET + (nvicRegisterOffset * (myInterrupt / nvicRegisterOffset))));
+        Register EN((volatile uint32_t*)(corePeripheralBase + EN_OFFSET + (nvicRegisterOffset * (myInterrupt / 32))));
 
-        (*PRI).setRegisterBitFieldStatus(PRIORITY_INT, priority);
-        (*EN).setRegisterBitFieldStatus(INT, (uint32_t)set);
+        (PRI).setRegisterBitFieldStatus(PRIORITY_INT, priority);
+        (EN).setRegisterBitFieldStatus(INT, (uint32_t)set);
 
-        delete PRI;
-        delete EN;
     }
     
     else

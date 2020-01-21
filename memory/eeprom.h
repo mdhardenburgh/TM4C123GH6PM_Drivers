@@ -63,30 +63,22 @@ class Eeprom : SystemControl
 
         const uint32_t eepromBase = 0x400AF000;
 
-        const uint32_t PPEEPROM = 0x358;
-        const uint32_t SREEPROM = 0x558;
-        const uint32_t RCGCEEPROM = 0x658;
-        const uint32_t SCGCEEPROM = 0x758;
-        const uint32_t DCGCEEPROM = 0x858;
-        const uint32_t PREEPROM = 0xA58;
+        const uint32_t PPEEPROM = 0x358; //0x358 PPEEPROM RO 0x0000.0001 EEPROM Peripheral Present 307
+        const uint32_t SREEPROM = 0x558; //0x558 SREEPROM RW 0x0000.0000 EEPROM Software Reset 334
+        const uint32_t RCGCEEPROM = 0x658; //0x658 RCGCEEPROM RW 0x0000.0000 EEPROM Run Mode Clock Gating Control 356
+        const uint32_t SCGCEEPROM = 0x758; //0x758 SCGCEEPROM RW 0x0000.0000 EEPROM Sleep Mode Clock Gating Control 378
+        const uint32_t DCGCEEPROM = 0x858; //0x858 DCGCEEPROM RW 0x0000.0000 EEPROM Deep-Sleep Mode Clock Gating Control 400
+        const uint32_t PREEPROM = 0xA58; //0xA58 PREEPROM RO 0x0000.0000 EEPROM Peripheral Ready 422
 
-/**********************System Control Register Descriptions********************/
-
-        Register* PPEEPROM; //0x358 PPEEPROM RO 0x0000.0001 EEPROM Peripheral Present 307
-        Register* SREEPROM; //0x558 SREEPROM RW 0x0000.0000 EEPROM Software Reset 334
-        Register* RCGCEEPROM; //0x658 RCGCEEPROM RW 0x0000.0000 EEPROM Run Mode Clock Gating Control 356
-        Register* SCGCEEPROM; //0x758 SCGCEEPROM RW 0x0000.0000 EEPROM Sleep Mode Clock Gating Control 378
-        Register* DCGCEEPROM; //0x858 DCGCEEPROM RW 0x0000.0000 EEPROM Deep-Sleep Mode Clock Gating Control 400
-        Register* PREEPROM; //0xA58 PREEPROM RO 0x0000.0000 EEPROM Peripheral Ready 422
 
 /**************************System Control BitFields****************************/
 
-        bitField PPEEPROM_P0{0, 1, RO}; //EEPROM Module Present
-        bitField SREEPROM_R0{0, 1, RW}; //EEPROM Module Software Reset
-        bitField RCGCEEPROM_R0{0, 1, RW}; //EEPROM Module Run Mode Clock Gating Control
-        bitField SCGCEEPROM_S0{0, 1, RW}; //EEPROM Module Sleep Mode Clock Gating Control
-        bitField DCGCEEPROM_D0{0, 1, RW}; //EEPROM Module Deep-Sleep Mode Clock Gating Control
-        bitField PREEPROM_R0{0, 1, RO}; //EEPROM Module Peripheral Ready
+        // bitField PPEEPROM_P0{0, 1, RO}; //EEPROM Module Present
+        // bitField SREEPROM_R0{0, 1, RW}; //EEPROM Module Software Reset
+        // bitField RCGCEEPROM_R0{0, 1, RW}; //EEPROM Module Run Mode Clock Gating Control
+        // bitField SCGCEEPROM_S0{0, 1, RW}; //EEPROM Module Sleep Mode Clock Gating Control
+        // bitField DCGCEEPROM_D0{0, 1, RW}; //EEPROM Module Deep-Sleep Mode Clock Gating Control
+        // bitField PREEPROM_R0{0, 1, RO}; //EEPROM Module Peripheral Ready
 
 };
 

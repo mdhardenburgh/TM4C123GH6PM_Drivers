@@ -52,7 +52,7 @@
 
 // #include <stdint-gcc.h>
 // #include <stddef.h>
-#include "../../register.h"
+#include "../../register/register.h"
 
 
 enum interrupt
@@ -154,13 +154,6 @@ class Nvic
         const uint32_t corePeripheralBase = 0xE000E000;
         const uint32_t nvicRegisterOffset = 0x4;
 
-        const uint32_t EN_OFFSET = 0x100;
-        const uint32_t DIS_OFFSET = 0x180;
-        const uint32_t PEND_OFFSET = 0x200;
-        const uint32_t UNPEND_OFFSET = 0x280;
-        const uint32_t ACTIVE_OFFSET = 0x300;
-        const uint32_t PRI_OFFSET = 0x400;
-        const uint32_t SWTRIG_OFFSET = 0xF00;
 
         /**
          * Interrupt enable registers
@@ -171,7 +164,7 @@ class Nvic
          * Register 7: Interrupt 96-127 Set Enable (EN3), offset 0x10C P.142
          * Register 8: Interrupt 128-138 Set Enable (EN4), offset 0x110 P.143
          */
-        Register* EN;
+        const uint32_t EN_OFFSET = 0x100;
 
         /**
          * Interrupt clear enable (disable) registers
@@ -182,7 +175,7 @@ class Nvic
          * Register 12: Interrupt 96-127 Clear Enable (DIS3), offset 0x18C P.144
          * Register 13: Interrupt 128-138 Clear Enable (DIS4), offset 0x190 P.145
          */
-        Register* DIS;
+        const uint32_t DIS_OFFSET = 0x180;
 
         /**
          * Set interrupt pending registers
@@ -193,7 +186,7 @@ class Nvic
          * Register 17: Interrupt 96-127 Set Pending (PEND3), offset 0x20C P.146
          * Register 18: Interrupt 128-138 Set Pending (PEND4), offset 0x210 P.147
          */
-        Register* PEND;
+        const uint32_t PEND_OFFSET = 0x200;
 
         /**
          * Clear pending interrupt register
@@ -204,7 +197,7 @@ class Nvic
          * Register 22: Interrupt 96-127 Clear Pending (UNPEND3), offset 0x28C P.148
          * Register 23: Interrupt 128-138 Clear Pending (UNPEND4), offset 0x290 P.149
          */
-        Register* UNPEND;
+        const uint32_t UNPEND_OFFSET = 0x280;
 
         /**
          * The interrupt is active or active and pending registers
@@ -220,7 +213,7 @@ class Nvic
          * Register 27: Interrupt 96-127 Active Bit (ACTIVE3), offset 0x30C P.150
          * Register 28: Interrupt 128-138 Active Bit (ACTIVE4), offset 0x310 P.151
          */
-        Register* ACTIVE;
+        const uint32_t ACTIVE_OFFSET = 0x300;
 
         /**
          * Sets the priority of the interrupt. 0 Is highest priority, 7 is lowest priority.
@@ -261,7 +254,7 @@ class Nvic
          * Register 62: Interrupt 132-135 Priority (PRI33), offset 0x484 P.154
          * Register 63: Interrupt 136-138 Priority (PRI34), offset 0x488 P.154
          */
-        Register* PRI;
+        const uint32_t PRI_OFFSET = 0x400;
 
         /**
          * Register 64: Software Trigger Interrupt (SWTRIG), offset 0xF00
@@ -277,19 +270,23 @@ class Nvic
          * register (see page 168) is set, unprivileged software can access the 
          * SWTRIG register.
          */
-        Register* SWTRIG;
+        const uint32_t SWTRIG_OFFSET = 0xF00;
 
-        bitField INT{0, 1, RW}; //bit place isn't being used. Renaming 1 to INT.bitWidth to eliminate magic numbers
 
-        bitField PRIORITY_INT{5, 3, RW}; //bit place isn't being used. Renaming 3 to INT_PRIORITY.size to eliminate magic numbers
 
         /**
+         * bitField INT{0, 1, RW}; //bit place isn't being used. Renaming 1 to INT.bitWidth to eliminate magic numbers
+         * 
+         * bitField PRIORITY_INT{5, 3, RW}; //bit place isn't being used. Renaming 3 to INT_PRIORITY.size to eliminate magic numbers
+         * 
+         * 
          * Description: Interrupt ID
          * 
          * This field holds the interrupt ID of the required SGI. For example, 
          * a value of 0x3 generates an interrupt on IRQ3.
+         * 
+         * bitField INTID{0, 8, WO}; //bit place and field size
          */
-        bitField INTID{0, 8, WO}; //bit place and field size
 
 };
 #endif //NVIC

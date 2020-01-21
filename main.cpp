@@ -29,14 +29,30 @@ along with this program.  If not, see <https://www.gnu.org/licenses/.
 
 #include "main.h"
 
-Nvic* myNvic;
-Sbc* mySbc;
-SystemControl* systemController;
+SystemControl* mySystemControl = NULL;
+Nvic* myNvic = NULL;
+Sbc* mySbc = NULL;
 
-Gpio* blueLed;
-Gpio* redLed;
-Gpio* swtich1;
-Gpio* swtich2;
+
+Gpio* greenLed = NULL;
+Gpio* blueLed = NULL;
+Gpio* redLed = NULL;
+Gpio* swtich1 = NULL;
+Gpio* swtich2 = NULL;
+
+/**
+ * These functions further help eliminate unwanted exceptions
+ */
+
+extern "C" void __cxa_pure_virtual() 
+{ 
+    while(1); 
+}
+
+void __gnu_cxx::__verbose_terminate_handler()
+{
+    while(1);
+}
 
 extern "C" void GPIO_Port_F_Handler(void)
 {
@@ -69,21 +85,27 @@ extern "C" void GPIO_Port_F_Handler(void)
 
 extern "C" void SystemInit(void)
 {
+    mySystemControl = new SystemControl(_80MHz);
     myNvic = new Nvic();
     mySbc = new Sbc();
-    systemController = new SystemControl(_80MHz);
 
+    greenLed = new Gpio(PF3, output);
     blueLed = new Gpio(PF2, output);
     redLed = new Gpio(PF1, output);
+
+
 }
 
 int main(void)
 {
+
+    
     (*myNvic).disableInterrupts();
     swtich1 = new Gpio(PF4, input, 3);
     swtich2 = new Gpio(PF0, input, 3);
     (*myNvic).enableInterrupts();
-
+    
+    (*greenLed).gpioWrite(set);
     (*blueLed).gpioWrite(set);
     (*redLed).gpioWrite(set);
     
@@ -91,12 +113,12 @@ int main(void)
 
     while(1)
     {
-        (*myNvic).wfi(); // the -Os flag was causing issues
+        (*myNvic).wfi();
     }
 
+    delete mySystemControl;
     delete myNvic;
     delete mySbc;
-    delete systemController;
     delete blueLed;
     delete redLed;
     delete swtich1;

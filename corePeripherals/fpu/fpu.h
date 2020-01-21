@@ -37,7 +37,7 @@
 #ifndef FPU_H
 #define FPU_H
 
-#include "../../register.h"
+#include "../../register/register.h"
 
 class Fpu
 {
@@ -52,26 +52,19 @@ class Fpu
          */
         const uint32_t corePeripheralBase = 0xE000E000;
 
-        const uint32_t CPAC_OFFSET = 0xD88;
-        const uint32_t FPCC_OFFSET = 0xF34;
-        const uint32_t FPCA_OFFSET = 0xF38;
-        const uint32_t FPDSC_OFFSET = 0xF3C;
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
         /**
          * Register 91: Coprocessor Access Control (CPAC), offset 0xD88
          * 
          * The CPAC register specifies the access privileges for coprocessors.
          */
-        Register CPAC;
+        const uint32_t CPAC_OFFSET = 0xD88;
 
         /**
          * Register 92: Floating-Point Context Control (FPCC), offset 0xF34
          * 
          * The FPCC register sets or returns FPU control data.
          */
-        Register FPCC;
+        const uint32_t FPCC_OFFSET = 0xF34;
 
         /**
          * Register 93: Floating-Point Context Address (FPCA), offset 0xF38
@@ -79,7 +72,8 @@ class Fpu
          * The FPCA register holds the location of the unpopulated floating-point 
          * register space allocated on an exception stack frame.
          */
-        Register FPCA;
+        const uint32_t FPCA_OFFSET = 0xF38;
+
 
         /**
          * Register 94: Floating-Point Default Status Control (FPDSC), offset 0xF3C
@@ -87,7 +81,9 @@ class Fpu
          * The FPDSC register holds the default values for the Floating-Point Status 
          * Control (FPSC) register.
          */
-        Register FPDSC;
+        const uint32_t FPDSC_OFFSET = 0xF3C;
+
+
 
 
 
@@ -108,7 +104,7 @@ class Fpu
          * 
          * 0x3____Full Access
          */
-        bitField CPAC_CP11{22, 2, RW};
+        // bitField CPAC_CP11{22, 2, RW};
 
         /**
          * Description: CP10 Coprocessor Access Privilege
@@ -125,7 +121,7 @@ class Fpu
          * 
          * 0x3____Full Access
          */
-        bitField CPAC_CP10{20, 2, RW};
+        // bitField CPAC_CP10{20, 2, RW};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -147,7 +143,7 @@ class Fpu
          * _____________________________________________________________________
          * 
          */
-        bitField FPCC_ASPEN{31, 1, RW};
+        // bitField FPCC_ASPEN{31, 1, RW};
 
         /**
          * Description: Lazy State Preservation Enable
@@ -155,7 +151,7 @@ class Fpu
          * When set, enables automatic lazy state preservation for 
          * floating-point context.
          */
-        bitField FPCC_LSPEN{30, 1, RW};
+        // bitField FPCC_LSPEN{30, 1, RW};
 
         /**
          * Description: Monitor Ready
@@ -163,7 +159,7 @@ class Fpu
          * When set, DebugMonitor is enabled and priority permits setting
          * MON_PEND when the floating-point stack frame was allocated.
          */
-        bitField FPCC_MONRDY{8, 1, RW};
+        // bitField FPCC_MONRDY{8, 1, RW};
 
         /**
          * Description: Bus Fault Ready
@@ -172,7 +168,7 @@ class Fpu
          * BusFault handler to the pending state when the floating-point stack 
          * frame was allocated.
          */
-        bitField FPCC_BFRDY{6, 1, RW};
+        // bitField FPCC_BFRDY{6, 1, RW};
 
         /**
          * Description: Memory Management Fault Ready
@@ -181,7 +177,7 @@ class Fpu
          * MemManage handler to the pending state when the floating-point stack
          * frame was allocated.
          */
-        bitField FPCC_MMRDY{5, 1, RW};
+        // bitField FPCC_MMRDY{5, 1, RW};
 
         /**
          * Description: Hard Fault Ready
@@ -189,7 +185,7 @@ class Fpu
          * When set, priority permitted setting the HardFault handler to the 
          * pending state when the floating-point stack frame was allocated.
          */
-        bitField FPCC_HFRDY{4, 1, RW};
+        // bitField FPCC_HFRDY{4, 1, RW};
 
         /**
          * Description: Thread Mode
@@ -197,7 +193,7 @@ class Fpu
          * When set, mode was Thread Mode when the floating-point stack frame
          * was allocated.
          */
-        bitField FPCC_THREAD{3, 1, RW};
+        // bitField FPCC_THREAD{3, 1, RW};
 
         /**
          * Description: User Privilege Level
@@ -205,7 +201,7 @@ class Fpu
          * When set, privilege level was user when the floating-point stack 
          * frame was allocated.
          */
-        bitField FPCC_USER{1, 1, RW};
+        // bitField FPCC_USER{1, 1, RW};
 
         /**
          * Description: Lazy State Preservation Active
@@ -213,7 +209,7 @@ class Fpu
          * When set, Lazy State preservation is active. Floating-point stack 
          * frame has been allocated but saving state to it has been deferred.
          */
-        bitField FPCC_LSPACT{0, 1, RW};
+        // bitField FPCC_LSPACT{0, 1, RW};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -225,7 +221,7 @@ class Fpu
          * The location of the unpopulated floating-point register space 
          * allocated on an exception stack frame.
          */
-        bitField FPCA_ADDRESS{3, 29, RW};
+        // bitField FPCA_ADDRESS{3, 29, RW};
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -236,21 +232,21 @@ class Fpu
          * 
          * This bit holds the default value for the AHP bit in the FPSC register.
          */
-        bitField FPDSC_AHP{26, 1, RW};
+        // bitField FPDSC_AHP{26, 1, RW};
 
         /**
          * Description: DN Bit Default
          * 
          * This bit holds the default value for the DN bit in the FPSC register.
          */
-        bitField FPDSC_DN{25, 1, RW};
+        // bitField FPDSC_DN{25, 1, RW};
 
         /**
          * Description: FZ Bit Default
          * 
          * This bit holds the default value for the FZ bit in the FPSC register.
          */
-        bitField FPDSC_FZ{24, 1, RW};
+        // bitField FPDSC_FZ{24, 1, RW};
 
         /**
          * Description: RMODE Bit Default
@@ -267,7 +263,7 @@ class Fpu
          * 
          * 0x3___Round towards Zero (RZ) mode
          */
-        bitField FPDSC_RMODE{22, 2, RW};
+        // bitField FPDSC_RMODE{22, 2, RW};
                 
 };
 

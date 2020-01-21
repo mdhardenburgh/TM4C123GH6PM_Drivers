@@ -44,7 +44,7 @@
 #ifndef GENERAL_PURPOSE_TIMER_H
 #define GENERAL_PURPOSE_TIMER_H
 
-#include "../register.h"
+#include "../register/register.h"
 #include "generalPurposeTimer.h"
 
 enum timerMode
@@ -79,19 +79,19 @@ class GeneralPurposeTimer
         const uint32_t _32_64_bit_Wide_Timer_4 = 0x4004E000;
         const uint32_t _32_64_bit_Wide_Timer_5 = 0x4004F000;
 
-        const uint32_t PPTIMER_OFFSET = 0x304;
-        const uint32_t SRTIMER_OFFSET = 0x504;
-        const uint32_t RCGCTIMER_OFFSET = 0x604;
-        const uint32_t SCGCTIMER_OFFSET = 0x704;
-        const uint32_t DCGCTIMER_OFFSET = 0x804;
-        const uint32_t PRTIMER_OFFSET = 0xA04;
+        const uint32_t PPTIMER_OFFSET = 0x304; //0x304 PPTIMER RO 0x0000.003F 16/32-Bit General-Purpose Timer Peripheral Present 288
+        const uint32_t SRTIMER_OFFSET = 0x504; //0x504 SRTIMER RW 0x0000.0000 16/32-Bit General-Purpose Timer Software Reset 312
+        const uint32_t RCGCTIMER_OFFSET = 0x604; //0x604 RCGCTIMER RW 0x0000.0000 16/32-Bit General-Purpose Timer Run Mode Clock Gating Control 338
+        const uint32_t SCGCTIMER_OFFSET = 0x704; //0x704 SCGCTIMER RW 0x0000.0000 16/32-Bit General-Purpose Timer Sleep Mode Clock Gating Control 360
+        const uint32_t DCGCTIMER_OFFSET = 0x804; //0x804 DCGCTIMER RW 0x0000.0000 16/32-Bit General-Purpose Timer Deep-Sleep Mode Clock Gating Control 382
+        const uint32_t PRTIMER_OFFSET = 0xA04; //0xA04 PRTIMER RO 0x0000.0000 16/32-Bit General-Purpose Timer Peripheral Ready 404
 
-        const uint32_t PPWTIMER_OFFSET = 0x304;
-        const uint32_t SRWTIMER_OFFSET = 0x55C;
-        const uint32_t RCGCWTIMER_OFFSET = 0x65C;
-        const uint32_t SCGCWTIMER_OFFSET = 0x75C;
-        const uint32_t DCGCWTIMER_OFFSET = 0x85C;
-        const uint32_t PRWTIMER_OFFSET = 0xA5C;
+        const uint32_t PPWTIMER_OFFSET = 0x304; //0x35C PPWTIMER RO 0x0000.003F 32/64-Bit Wide General-Purpose Timer Peripheral Present 308
+        const uint32_t SRWTIMER_OFFSET = 0x55C; //0x55C SRWTIMER RW 0x0000.0000 32/64-Bit Wide General-Purpose Timer Software Reset 335
+        const uint32_t RCGCWTIMER_OFFSET = 0x65C; //0x65C RCGCWTIMER RW 0x0000.0000 32/64-Bit Wide General-Purpose Timer Run Mode Clock Gating Control 357
+        const uint32_t SCGCWTIMER_OFFSET = 0x75C; //0x75C SCGCWTIMER RW 0x0000.0000 32/64-Bit Wide General-Purpose Timer Sleep Mode Clock Gating Control 379
+        const uint32_t DCGCWTIMER_OFFSET = 0x85C; //0x85C DCGCWTIMER RW 0x0000.0000 32/64-Bit Wide General-Purpose Timer Deep-Sleep Mode Clock Gating Control 401
+        const uint32_t PRWTIMER_OFFSET = 0xA5C; //0xA5C PRWTIMER RO 0x0000.0000 32/64-Bit Wide General-Purpose Timer Peripheral Ready 423
 
 
         const uint32_t GPTMCFG_OFFSET = 0x000; // 0x000 GPTMCFG RW 0x0000.0000 GPTM Configuration 727
@@ -122,107 +122,93 @@ class GeneralPurposeTimer
         const uint32_t GPTMTBPV_OFFSET = 0x068; // 0x068 GPTMTBPV RO 0x0000.0000 GPTM Timer B Prescale Value 772
         const uint32_t GPTMPP_OFFSET = 0xFC0; // 0xFC0 GPTMPP RO 0x0000.0000 GPTM Peripheral Properties 773
 
-/**********************System Control Register Descriptions********************/
 
-        Register* PPTIMER; //0x304 PPTIMER RO 0x0000.003F 16/32-Bit General-Purpose Timer Peripheral Present 288
-        Register* SRTIMER; //0x504 SRTIMER RW 0x0000.0000 16/32-Bit General-Purpose Timer Software Reset 312
-        Register* RCGCTIMER; //0x604 RCGCTIMER RW 0x0000.0000 16/32-Bit General-Purpose Timer Run Mode Clock Gating Control 338
-        Register* SCGCTIMER; //0x704 SCGCTIMER RW 0x0000.0000 16/32-Bit General-Purpose Timer Sleep Mode Clock Gating Control 360
-        Register* DCGCTIMER; //0x804 DCGCTIMER RW 0x0000.0000 16/32-Bit General-Purpose Timer Deep-Sleep Mode Clock Gating Control 382
-        Register* PRTIMER; //0xA04 PRTIMER RO 0x0000.0000 16/32-Bit General-Purpose Timer Peripheral Ready 404
-
-        Register* PPWTIMER; //0x35C PPWTIMER RO 0x0000.003F 32/64-Bit Wide General-Purpose Timer Peripheral Present 308
-        Register* SRWTIMER; //0x55C SRWTIMER RW 0x0000.0000 32/64-Bit Wide General-Purpose Timer Software Reset 335
-        Register* RCGCWTIMER; //0x65C RCGCWTIMER RW 0x0000.0000 32/64-Bit Wide General-Purpose Timer Run Mode Clock Gating Control 357
-        Register* SCGCWTIMER; //0x75C SCGCWTIMER RW 0x0000.0000 32/64-Bit Wide General-Purpose Timer Sleep Mode Clock Gating Control 379
-        Register* DCGCWTIMER; //0x85C DCGCWTIMER RW 0x0000.0000 32/64-Bit Wide General-Purpose Timer Deep-Sleep Mode Clock Gating Control 401
-        Register* PRWTIMER; //0xA5C PRWTIMER RO 0x0000.0000 32/64-Bit Wide General-Purpose Timer Peripheral Ready 423
 
 /**************************System Control BitFields****************************/
 
-        bitField PPTIMER_P5{5, 1, RO}; //16/32-Bit Short General-Purpose Timer 5 Present
-        bitField PPTIMER_P4{4, 1, RO}; //16/32-Bit Short General-Purpose Timer 4 Present
-        bitField PPTIMER_P3{3, 1, RO}; //16/32-Bit Short General-Purpose Timer 3 Present
-        bitField PPTIMER_P2{2, 1, RO}; //16/32-Bit Short General-Purpose Timer 2 Present
-        bitField PPTIMER_P1{1, 1, RO}; //16/32-Bit Short General-Purpose Timer 1 Present
-        bitField PPTIMER_P0{0, 1, RO}; //16/32-Bit Short General-Purpose Timer 0 Present
+        // bitField PPTIMER_P5{5, 1, RO}; //16/32-Bit Short General-Purpose Timer 5 Present
+        // bitField PPTIMER_P4{4, 1, RO}; //16/32-Bit Short General-Purpose Timer 4 Present
+        // bitField PPTIMER_P3{3, 1, RO}; //16/32-Bit Short General-Purpose Timer 3 Present
+        // bitField PPTIMER_P2{2, 1, RO}; //16/32-Bit Short General-Purpose Timer 2 Present
+        // bitField PPTIMER_P1{1, 1, RO}; //16/32-Bit Short General-Purpose Timer 1 Present
+        // bitField PPTIMER_P0{0, 1, RO}; //16/32-Bit Short General-Purpose Timer 0 Present
 
-        bitField SRTIMER_R5{5, 1, RW}; //16/32-Bit Short General-Purpose Timer 5 Software Reset
-        bitField SRTIMER_R4{4, 1, RW}; //16/32-Bit Short General-Purpose Timer 4 Software Reset
-        bitField SRTIMER_R3{3, 1, RW}; //16/32-Bit Short General-Purpose Timer 3 Software Reset
-        bitField SRTIMER_R2{2, 1, RW}; //16/32-Bit Short General-Purpose Timer 2 Software Reset
-        bitField SRTIMER_R1{1, 1, RW}; //16/32-Bit Short General-Purpose Timer 1 Software Reset
-        bitField SRTIMER_R0{0, 1, RW}; //16/32-Bit Short General-Purpose Timer 0 Software Reset
+        // bitField SRTIMER_R5{5, 1, RW}; //16/32-Bit Short General-Purpose Timer 5 Software Reset
+        // bitField SRTIMER_R4{4, 1, RW}; //16/32-Bit Short General-Purpose Timer 4 Software Reset
+        // bitField SRTIMER_R3{3, 1, RW}; //16/32-Bit Short General-Purpose Timer 3 Software Reset
+        // bitField SRTIMER_R2{2, 1, RW}; //16/32-Bit Short General-Purpose Timer 2 Software Reset
+        // bitField SRTIMER_R1{1, 1, RW}; //16/32-Bit Short General-Purpose Timer 1 Software Reset
+        // bitField SRTIMER_R0{0, 1, RW}; //16/32-Bit Short General-Purpose Timer 0 Software Reset
 
-        bitField RCGCTIMER_5{5, 1, RW}; //16/32-Bit Short General-Purpose Timer 5 Run Mode Clock Gating Control
-        bitField RCGCTIMER_4{4, 1, RW}; //16/32-Bit Short General-Purpose Timer 4 Run Mode Clock Gating Control
-        bitField RCGCTIMER_3{3, 1, RW}; //16/32-Bit Short General-Purpose Timer 3 Run Mode Clock Gating Control
-        bitField RCGCTIMER_2{2, 1, RW}; //16/32-Bit Short General-Purpose Timer 2 Run Mode Clock Gating Control
-        bitField RCGCTIMER_1{1, 1, RW}; //16/32-Bit Short General-Purpose Timer 1 Run Mode Clock Gating Control
-        bitField RCGCTIMER_0{0, 1, RW}; //16/32-Bit Short General-Purpose Timer 0 Run Mode Clock Gating Control
+        // bitField RCGCTIMER_5{5, 1, RW}; //16/32-Bit Short General-Purpose Timer 5 Run Mode Clock Gating Control
+        // bitField RCGCTIMER_4{4, 1, RW}; //16/32-Bit Short General-Purpose Timer 4 Run Mode Clock Gating Control
+        // bitField RCGCTIMER_3{3, 1, RW}; //16/32-Bit Short General-Purpose Timer 3 Run Mode Clock Gating Control
+        // bitField RCGCTIMER_2{2, 1, RW}; //16/32-Bit Short General-Purpose Timer 2 Run Mode Clock Gating Control
+        // bitField RCGCTIMER_1{1, 1, RW}; //16/32-Bit Short General-Purpose Timer 1 Run Mode Clock Gating Control
+        // bitField RCGCTIMER_0{0, 1, RW}; //16/32-Bit Short General-Purpose Timer 0 Run Mode Clock Gating Control
 
-        bitField SCGCTIMER_S5{5, 1, RW}; //16/32-Bit Short General-Purpose Timer 5 Sleep Mode Clock Gating Control
-        bitField SCGCTIMER_S4{4, 1, RW}; //16/32-Bit Short General-Purpose Timer 4 Sleep Mode Clock Gating Control
-        bitField SCGCTIMER_S3{3, 1, RW}; //16/32-Bit Short General-Purpose Timer 3 Sleep Mode Clock Gating Control
-        bitField SCGCTIMER_S2{2, 1, RW}; //16/32-Bit Short General-Purpose Timer 2 Sleep Mode Clock Gating Control
-        bitField SCGCTIMER_S1{1, 1, RW}; //16/32-Bit Short General-Purpose Timer 1 Sleep Mode Clock Gating Control
-        bitField SCGCTIMER_S0{0, 1, RW}; //16/32-Bit Short General-Purpose Timer 0 Sleep Mode Clock Gating Control
+        // bitField SCGCTIMER_S5{5, 1, RW}; //16/32-Bit Short General-Purpose Timer 5 Sleep Mode Clock Gating Control
+        // bitField SCGCTIMER_S4{4, 1, RW}; //16/32-Bit Short General-Purpose Timer 4 Sleep Mode Clock Gating Control
+        // bitField SCGCTIMER_S3{3, 1, RW}; //16/32-Bit Short General-Purpose Timer 3 Sleep Mode Clock Gating Control
+        // bitField SCGCTIMER_S2{2, 1, RW}; //16/32-Bit Short General-Purpose Timer 2 Sleep Mode Clock Gating Control
+        // bitField SCGCTIMER_S1{1, 1, RW}; //16/32-Bit Short General-Purpose Timer 1 Sleep Mode Clock Gating Control
+        // bitField SCGCTIMER_S0{0, 1, RW}; //16/32-Bit Short General-Purpose Timer 0 Sleep Mode Clock Gating Control
 
-        bitField DCGCTIMER_D5{5, 1, RW}; //16/32-Bit Short General-Purpose Timer 5 Deep-Sleep Mode Clock Gating Control
-        bitField DCGCTIMER_D4{4, 1, RW}; //16/32-Bit Short General-Purpose Timer 4 Deep-Sleep Mode Clock Gating Control
-        bitField DCGCTIMER_D3{3, 1, RW}; //16/32-Bit Short General-Purpose Timer 3 Deep-Sleep Mode Clock Gating Control
-        bitField DCGCTIMER_D2{2, 1, RW}; //16/32-Bit Short General-Purpose Timer 2 Deep-Sleep Mode Clock Gating Control
-        bitField DCGCTIMER_D1{1, 1, RW}; //16/32-Bit Short General-Purpose Timer 1 Deep-Sleep Mode Clock Gating Control
-        bitField DCGCTIMER_D0{0, 1, RW}; //16/32-Bit Short General-Purpose Timer 0 Deep-Sleep Mode Clock Gating Control
+        // bitField DCGCTIMER_D5{5, 1, RW}; //16/32-Bit Short General-Purpose Timer 5 Deep-Sleep Mode Clock Gating Control
+        // bitField DCGCTIMER_D4{4, 1, RW}; //16/32-Bit Short General-Purpose Timer 4 Deep-Sleep Mode Clock Gating Control
+        // bitField DCGCTIMER_D3{3, 1, RW}; //16/32-Bit Short General-Purpose Timer 3 Deep-Sleep Mode Clock Gating Control
+        // bitField DCGCTIMER_D2{2, 1, RW}; //16/32-Bit Short General-Purpose Timer 2 Deep-Sleep Mode Clock Gating Control
+        // bitField DCGCTIMER_D1{1, 1, RW}; //16/32-Bit Short General-Purpose Timer 1 Deep-Sleep Mode Clock Gating Control
+        // bitField DCGCTIMER_D0{0, 1, RW}; //16/32-Bit Short General-Purpose Timer 0 Deep-Sleep Mode Clock Gating Control
 
-        bitField PRTIMER_R5{5, 1, RO}; //16/32-Bit Short General-Purpose Timer 5 Peripheral Ready
-        bitField PRTIMER_R4{4, 1, RO}; //16/32-Bit Short General-Purpose Timer 4 Peripheral Ready
-        bitField PRTIMER_R3{3, 1, RO}; //16/32-Bit Short General-Purpose Timer 3 Peripheral Ready
-        bitField PRTIMER_R2{2, 1, RO}; //16/32-Bit Short General-Purpose Timer 2 Peripheral Ready
-        bitField PRTIMER_R1{1, 1, RO}; //16/32-Bit Short General-Purpose Timer 1 Peripheral Ready
-        bitField PRTIMER_R0{0, 1, RO}; //16/32-Bit Short General-Purpose Timer 0 Peripheral Ready
+        // bitField PRTIMER_R5{5, 1, RO}; //16/32-Bit Short General-Purpose Timer 5 Peripheral Ready
+        // bitField PRTIMER_R4{4, 1, RO}; //16/32-Bit Short General-Purpose Timer 4 Peripheral Ready
+        // bitField PRTIMER_R3{3, 1, RO}; //16/32-Bit Short General-Purpose Timer 3 Peripheral Ready
+        // bitField PRTIMER_R2{2, 1, RO}; //16/32-Bit Short General-Purpose Timer 2 Peripheral Ready
+        // bitField PRTIMER_R1{1, 1, RO}; //16/32-Bit Short General-Purpose Timer 1 Peripheral Ready
+        // bitField PRTIMER_R0{0, 1, RO}; //16/32-Bit Short General-Purpose Timer 0 Peripheral Ready
         
-        bitField PPWTIMER_P5{5, 1, RO}; //32/64-Bit Wide General-Purpose Timer 5 Present
-        bitField PPWTIMER_P4{4, 1, RO}; //32/64-Bit Wide General-Purpose Timer 4 Present
-        bitField PPWTIMER_P3{3, 1, RO}; //32/64-Bit Wide General-Purpose Timer 3 Present
-        bitField PPWTIMER_P2{2, 1, RO}; //32/64-Bit Wide General-Purpose Timer 2 Present
-        bitField PPWTIMER_P1{1, 1, RO}; //32/64-Bit Wide General-Purpose Timer 1 Present
-        bitField PPWTIMER_P0{0, 1, RO}; //32/64-Bit Wide General-Purpose Timer 0 Present
+        // bitField PPWTIMER_P5{5, 1, RO}; //32/64-Bit Wide General-Purpose Timer 5 Present
+        // bitField PPWTIMER_P4{4, 1, RO}; //32/64-Bit Wide General-Purpose Timer 4 Present
+        // bitField PPWTIMER_P3{3, 1, RO}; //32/64-Bit Wide General-Purpose Timer 3 Present
+        // bitField PPWTIMER_P2{2, 1, RO}; //32/64-Bit Wide General-Purpose Timer 2 Present
+        // bitField PPWTIMER_P1{1, 1, RO}; //32/64-Bit Wide General-Purpose Timer 1 Present
+        // bitField PPWTIMER_P0{0, 1, RO}; //32/64-Bit Wide General-Purpose Timer 0 Present
 
-        bitField SRWTIMER_R5{5, 1, RW}; //32/64-Bit Wide General-Purpose Timer 5 Software Reset
-        bitField SRWTIMER_R4{4, 1, RW}; //32/64-Bit Wide General-Purpose Timer 4 Software Reset
-        bitField SRWTIMER_R3{3, 1, RW}; //32/64-Bit Wide General-Purpose Timer 3 Software Reset
-        bitField SRWTIMER_R2{2, 1, RW}; //32/64-Bit Wide General-Purpose Timer 2 Software Reset
-        bitField SRWTIMER_R1{1, 1, RW}; //32/64-Bit Wide General-Purpose Timer 1 Software Reset
-        bitField SRWTIMER_R0{0, 0, RW}; //32/64-Bit Wide General-Purpose Timer 0 Software Reset
+        // bitField SRWTIMER_R5{5, 1, RW}; //32/64-Bit Wide General-Purpose Timer 5 Software Reset
+        // bitField SRWTIMER_R4{4, 1, RW}; //32/64-Bit Wide General-Purpose Timer 4 Software Reset
+        // bitField SRWTIMER_R3{3, 1, RW}; //32/64-Bit Wide General-Purpose Timer 3 Software Reset
+        // bitField SRWTIMER_R2{2, 1, RW}; //32/64-Bit Wide General-Purpose Timer 2 Software Reset
+        // bitField SRWTIMER_R1{1, 1, RW}; //32/64-Bit Wide General-Purpose Timer 1 Software Reset
+        // bitField SRWTIMER_R0{0, 0, RW}; //32/64-Bit Wide General-Purpose Timer 0 Software Reset
 
-        bitField RCGCWTIMER_R5{5, 1, RW}; //32/64-Bit Wide General-Purpose Timer 5 Run Mode Clock Gating Control
-        bitField RCGCWTIMER_R4{4, 1, RW}; //32/64-Bit Wide General-Purpose Timer 4 Run Mode Clock Gating Control
-        bitField RCGCWTIMER_R3{3, 1, RW}; //32/64-Bit Wide General-Purpose Timer 3 Run Mode Clock Gating Control
-        bitField RCGCWTIMER_R2{2, 1, RW}; //32/64-Bit Wide General-Purpose Timer 2 Run Mode Clock Gating Control
-        bitField RCGCWTIMER_R1{1, 1, RW}; //32/64-Bit Wide General-Purpose Timer 1 Run Mode Clock Gating Control
-        bitField RCGCWTIMER_R0{0, 1, RW}; //32/64-Bit Wide General-Purpose Timer 0 Run Mode Clock Gating Control
+        // bitField RCGCWTIMER_R5{5, 1, RW}; //32/64-Bit Wide General-Purpose Timer 5 Run Mode Clock Gating Control
+        // bitField RCGCWTIMER_R4{4, 1, RW}; //32/64-Bit Wide General-Purpose Timer 4 Run Mode Clock Gating Control
+        // bitField RCGCWTIMER_R3{3, 1, RW}; //32/64-Bit Wide General-Purpose Timer 3 Run Mode Clock Gating Control
+        // bitField RCGCWTIMER_R2{2, 1, RW}; //32/64-Bit Wide General-Purpose Timer 2 Run Mode Clock Gating Control
+        // bitField RCGCWTIMER_R1{1, 1, RW}; //32/64-Bit Wide General-Purpose Timer 1 Run Mode Clock Gating Control
+        // bitField RCGCWTIMER_R0{0, 1, RW}; //32/64-Bit Wide General-Purpose Timer 0 Run Mode Clock Gating Control
 
-        bitField SCGCWTIMER_S5{5, 1, RW}; //32/64-Bit Wide General-Purpose Timer 5 Sleep Mode Clock Gating Control
-        bitField SCGCWTIMER_S4{4, 1, RW}; //32/64-Bit Wide General-Purpose Timer 4 Sleep Mode Clock Gating Control
-        bitField SCGCWTIMER_S3{3, 1, RW}; //32/64-Bit Wide General-Purpose Timer 3 Sleep Mode Clock Gating Control
-        bitField SCGCWTIMER_S2{2, 1, RW}; //32/64-Bit Wide General-Purpose Timer 2 Sleep Mode Clock Gating Control
-        bitField SCGCWTIMER_S1{1, 1, RW}; //32/64-Bit Wide General-Purpose Timer 1 Sleep Mode Clock Gating Control
-        bitField SCGCWTIMER_S0{0, 1, RW}; //32/64-Bit Wide General-Purpose Timer 0 Sleep Mode Clock Gating Control
+        // bitField SCGCWTIMER_S5{5, 1, RW}; //32/64-Bit Wide General-Purpose Timer 5 Sleep Mode Clock Gating Control
+        // bitField SCGCWTIMER_S4{4, 1, RW}; //32/64-Bit Wide General-Purpose Timer 4 Sleep Mode Clock Gating Control
+        // bitField SCGCWTIMER_S3{3, 1, RW}; //32/64-Bit Wide General-Purpose Timer 3 Sleep Mode Clock Gating Control
+        // bitField SCGCWTIMER_S2{2, 1, RW}; //32/64-Bit Wide General-Purpose Timer 2 Sleep Mode Clock Gating Control
+        // bitField SCGCWTIMER_S1{1, 1, RW}; //32/64-Bit Wide General-Purpose Timer 1 Sleep Mode Clock Gating Control
+        // bitField SCGCWTIMER_S0{0, 1, RW}; //32/64-Bit Wide General-Purpose Timer 0 Sleep Mode Clock Gating Control
 
-        bitField DCGCWTIMER_D5{5, 1, RW}; //32/64-Bit Wide General-Purpose Timer 5 Deep-Sleep Mode Clock Gating Control
-        bitField DCGCWTIMER_D4{4, 1, RW}; //32/64-Bit Wide General-Purpose Timer 4 Deep-Sleep Mode Clock Gating Control
-        bitField DCGCWTIMER_D3{3, 1, RW}; //32/64-Bit Wide General-Purpose Timer 3 Deep-Sleep Mode Clock Gating Control
-        bitField DCGCWTIMER_D2{2, 1, RW}; //32/64-Bit Wide General-Purpose Timer 2 Deep-Sleep Mode Clock Gating Control
-        bitField DCGCWTIMER_D1{1, 1, RW}; //32/64-Bit Wide General-Purpose Timer 1 Deep-Sleep Mode Clock Gating Control
-        bitField DCGCWTIMER_D0{0, 1, RW}; //32/64-Bit Wide General-Purpose Timer 0 Deep-Sleep Mode Clock Gating Control
+        // bitField DCGCWTIMER_D5{5, 1, RW}; //32/64-Bit Wide General-Purpose Timer 5 Deep-Sleep Mode Clock Gating Control
+        // bitField DCGCWTIMER_D4{4, 1, RW}; //32/64-Bit Wide General-Purpose Timer 4 Deep-Sleep Mode Clock Gating Control
+        // bitField DCGCWTIMER_D3{3, 1, RW}; //32/64-Bit Wide General-Purpose Timer 3 Deep-Sleep Mode Clock Gating Control
+        // bitField DCGCWTIMER_D2{2, 1, RW}; //32/64-Bit Wide General-Purpose Timer 2 Deep-Sleep Mode Clock Gating Control
+        // bitField DCGCWTIMER_D1{1, 1, RW}; //32/64-Bit Wide General-Purpose Timer 1 Deep-Sleep Mode Clock Gating Control
+        // bitField DCGCWTIMER_D0{0, 1, RW}; //32/64-Bit Wide General-Purpose Timer 0 Deep-Sleep Mode Clock Gating Control
 
-        bitField PRWTIMER_R5{5, 1, RO}; //32/64-Bit Wide General-Purpose Timer 5 Peripheral Ready
-        bitField PRWTIMER_R4{4, 1, RO}; //32/64-Bit Wide General-Purpose Timer 4 Peripheral Ready
-        bitField PRWTIMER_R3{3, 1, RO}; //32/64-Bit Wide General-Purpose Timer 3 Peripheral Ready
-        bitField PRWTIMER_R2{2, 1, RO}; //32/64-Bit Wide General-Purpose Timer 2 Peripheral Ready
-        bitField PRWTIMER_R1{1, 1, RO}; //32/64-Bit Wide General-Purpose Timer 1 Peripheral Ready
-        bitField PRWTIMER_R0{0, 1, RO}; //32/64-Bit Wide General-Purpose Timer 0 Peripheral Ready
+        // bitField PRWTIMER_R5{5, 1, RO}; //32/64-Bit Wide General-Purpose Timer 5 Peripheral Ready
+        // bitField PRWTIMER_R4{4, 1, RO}; //32/64-Bit Wide General-Purpose Timer 4 Peripheral Ready
+        // bitField PRWTIMER_R3{3, 1, RO}; //32/64-Bit Wide General-Purpose Timer 3 Peripheral Ready
+        // bitField PRWTIMER_R2{2, 1, RO}; //32/64-Bit Wide General-Purpose Timer 2 Peripheral Ready
+        // bitField PRWTIMER_R1{1, 1, RO}; //32/64-Bit Wide General-Purpose Timer 1 Peripheral Ready
+        // bitField PRWTIMER_R0{0, 1, RO}; //32/64-Bit Wide General-Purpose Timer 0 Peripheral Ready
 
 };
 

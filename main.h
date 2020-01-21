@@ -1,7 +1,7 @@
 // #ifndef MAIN_H
 // #define MAIN_H
 
-#include "register.h"
+#include "register/register.h"
 #include "corePeripherals/systick/systick.h"
 #include "corePeripherals/nvic/nvic.h"
 #include "corePeripherals/sbc/sbc.h"

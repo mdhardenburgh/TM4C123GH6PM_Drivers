@@ -6,7 +6,8 @@
 
 STARTUP_DEFS=-D__STARTUP_CLEAR_BSS -D__START=main 
 ARCH_FLAGS=-mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
-CXXFLAGS=$(ARCH_FLAGS) $(STARTUP_DEFS) -c -g -std=c++11 -Wall -W -Werror -pedantic -Os -flto -ffunction-sections -fdata-sections # removed -Os flag
+CORE_PERIPHERALS=corePeripherals/systick/systick.o corePeripherals/nvic/nvic.o corePeripherals/sbc/sbc.o corePeripherals/mpu/mpu.o corePeripherals/fpu/fpu.o
+CXXFLAGS=$(ARCH_FLAGS) $(STARTUP_DEFS) -c -g -std=c++11 -Wall -W -Werror -pedantic -Os -flto -ffunction-sections -fdata-sections -fno-exceptions
 CXX=arm-none-eabi-g++
 USE_NANO=--specs=nano.specs
 
@@ -19,50 +20,54 @@ GC=-Wl,--gc-sections
 MAP=-Wl,-Map=main.map
 
 LDSCRIPTS= -T gcc.ld
-LFLAGS=$(USE_NANO) $(USE_SEMIHOST) $(LDSCRIPTS) $(GC) $(MAP)
+LFLAGS=$(USE_NANO) $(USE_SEMIHOST) $(LDSCRIPTS) $(GC) $(MAP) 
 
 
 main.bin: main.elf
 	arm-none-eabi-objcopy -O binary main.elf main.bin
+	arm-none-eabi-objdump main.elf -S > disasembly.txt
 	arm-none-eabi-size main.elf
 
-main.elf: startup_ARMCM4.o main.o register.o systick.o nvic.o sbc.o mpu.o fpu.o systemControl.o gpio.o generalPurposeTimer.o
-	$(CXX) $^ $(ARCH_FLAGS) $(STARTUP_DEFS) -g -std=c++11 -Wall -W -Werror -pedantic -Os -flto -ffunction-sections -fdata-sections  -fno-exceptions $(LFLAGS) -o $@
- 
+
+main.elf: startup_ARMCM4.o main.o register/register.o $(CORE_PERIPHERALS) systemControl/systemControl.o gpio/gpio.o timer/generalPurposeTimer.o
+	$(CXX) $^ $(ARCH_FLAGS) $(STARTUP_DEFS) -g -std=c++11 -Wall -W -Werror -pedantic -Os -flto -ffunction-sections -fdata-sections -fno-exceptions $(LFLAGS) -o $@
+
 startup_ARMCM4.o: startup_ARMCM4.S
-	$(CXX) $^ $(CXXFLAGS) -fno-exceptions
+	$(CXX) $^ $(CXXFLAGS)
 
-main.o: main.cpp register.h
-	$(CXX) $^ $(CXXFLAGS) -fno-exceptions
+main.o: main.cpp register/register.h
+	$(CXX) $^ $(CXXFLAGS)
 
-register.o: register.cpp register.h
-	$(CXX) $^ $(CXXFLAGS) -fno-exceptions
+register.o: register.cpp register/register.h
+	$(CXX) $^ $(CXXFLAGS) -o $@
 
-systick.o: corePeripherals/systick/systick.cpp corePeripherals/systick/systick.h register.h
-	$(CXX) $^ $(CXXFLAGS) -fno-exceptions
+systick.o: corePeripherals/systick/systick.cpp corePeripherals/systick/systick.h register/register.h
+	$(CXX) $^ $(CXXFLAGS) -o $@
 
-nvic.o: corePeripherals/nvic/nvic.cpp corePeripherals/nvic/nvic.h register.h
-	$(CXX) $^ $(CXXFLAGS) -fno-exceptions
+nvic.o: corePeripherals/nvic/nvic.cpp corePeripherals/nvic/nvic.h register/register.h
+	$(CXX) $^ $(CXXFLAGS) -o $@
 
-sbc.o: corePeripherals/sbc/sbc.cpp corePeripherals/sbc/sbc.h register.h
-	$(CXX) $^ $(CXXFLAGS) -fno-exceptions
+sbc.o: corePeripherals/sbc/sbc.cpp corePeripherals/sbc/sbc.h register/register.h
+	$(CXX) $^ $(CXXFLAGS) -o $@
 
-mpu.o: corePeripherals/mpu/mpu.cpp corePeripherals/mpu/mpu.h register.h
-	$(CXX) $^ $(CXXFLAGS) -fno-exceptions
+mpu.o: corePeripherals/mpu/mpu.cpp corePeripherals/mpu/mpu.h register/register.h
+	$(CXX) $^ $(CXXFLAGS) -o $@
 
-fpu.o: corePeripherals/fpu/fpu.cpp corePeripherals/fpu/fpu.h register.h
-	$(CXX) $^ $(CXXFLAGS) -fno-exceptions
+fpu.o: corePeripherals/fpu/fpu.cpp corePeripherals/fpu/fpu.h register/register.h
+	$(CXX) $^ $(CXXFLAGS) -o $@
 
-systemControl.o: systemControl/systemControl.cpp systemControl/systemControl.h register.h
-	$(CXX) $^ $(CXXFLAGS) -fno-exceptions
+systemControl.o: systemControl/systemControl.cpp systemControl/systemControl.h register/register.h
+	$(CXX) $^ $(CXXFLAGS) -o $@
 
-gpio.o: gpio/gpio.cpp gpio/gpio.h register.h
-	$(CXX) $^ $(CXXFLAGS) -fno-exceptions
+gpio.o: gpio/gpio.cpp gpio/gpio.h register/register.h
+	$(CXX) $^ $(CXXFLAGS) -o $@
 
-generalPurposeTimer.o: timer/generalPurposeTimer.cpp timer/generalPurposeTimer.h register.h
-	$(CXX) $^ $(CXXFLAGS) -fno-exceptions
+generalPurposeTimer.o: timer/generalPurposeTimer.cpp timer/generalPurposeTimer.h register/register.h
+	$(CXX) $^ $(CXXFLAGS) -o $@
 
 clean:
 	rm -f *.o *.elf *.bin *.gch
+	find . -name "*.o" -type f -delete
+	find . -name "*.gch" -type f -delete
 
 
