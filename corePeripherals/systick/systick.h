@@ -37,6 +37,10 @@
 
 #include "../../register/register.h"
 
+const uint32_t STCTRL_OFFSET = 0x010;
+const uint32_t STRELOAD_OFFSET = 0x014;
+const uint32_t STCURRENT_OFFSET = 0x018;
+
 class Systick
 {
     public:
@@ -45,46 +49,6 @@ class Systick
         ~Systick();
 
     private:
-        const uint32_t corePeripheralBase = 0xE000E000;
-
-        /**
-         * Register 1: SysTick Control and Status Register (STCTRL), offset 0x010
-         * 
-         * Note: This register can only be accessed from privileged mode.
-         * 
-         * The SysTick STCTRL register enables the SysTick features.
-         */
-        const uint32_t STCTRL_OFFSET = 0x010;
-
-        /**
-         * Register 2: SysTick Reload Value Register (STRELOAD), offset 0x014
-         * 
-         * Note: This register can only be accessed from privileged mode.
-         * 
-         * The STRELOAD register specifies the start value to load into the 
-         * SysTick Current Value (STCURRENT) register when the counter reaches 0. 
-         * The start value can be between 0x1 and 0x00FF.FFFF. A start value of 
-         * 0 is possible but has no effect because the SysTick interrupt and the
-         * COUNT bit are activated when counting from 1 to 0.
-         * 
-         * SysTick can be configured as a multi-shot timer, repeated over and 
-         * over, firing every N+1 clock pulses, where N is any value from 1 to 
-         * 0x00FF.FFFF. For example, if a tick interrupt is required every 100 
-         * clock pulses, 99 must be written into the RELOAD field.
-         * 
-         * Note that in order to access this register correctly, the system 
-         * clock must be faster than 8 MHz.
-         */
-        const uint32_t STRELOAD_OFFSET = 0x014;
-        
-        /**
-         * Register 3: SysTick Current Value Register (STCURRENT), offset 0x018
-         * 
-         * Note: This register can only be accessed from privileged mode.
-         * 
-         * The STCURRENT register contains the current value of the SysTick counter.
-         */
-        const uint32_t STCURRENT_OFFSET = 0x018;
 
 
         /**

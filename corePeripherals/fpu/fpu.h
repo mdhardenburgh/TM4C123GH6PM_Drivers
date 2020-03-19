@@ -39,6 +39,11 @@
 
 #include "../../register/register.h"
 
+const uint32_t CPAC_OFFSET = 0xD88;
+const uint32_t FPCC_OFFSET = 0xF34;
+const uint32_t FPCA_OFFSET = 0xF38;
+const uint32_t FPDSC_OFFSET = 0xF3C;
+
 class Fpu
 {
     public:
@@ -46,47 +51,6 @@ class Fpu
         ~Fpu();
     
     private:
-        /**
-         * Cortex-M4 Peripheral SysTick, NVIC, MPU, FPU and SCB registers.
-         * These register definitions begin on page 134 of the TM4C123GH6PM Datasheet.
-         */
-        const uint32_t corePeripheralBase = 0xE000E000;
-
-        /**
-         * Register 91: Coprocessor Access Control (CPAC), offset 0xD88
-         * 
-         * The CPAC register specifies the access privileges for coprocessors.
-         */
-        const uint32_t CPAC_OFFSET = 0xD88;
-
-        /**
-         * Register 92: Floating-Point Context Control (FPCC), offset 0xF34
-         * 
-         * The FPCC register sets or returns FPU control data.
-         */
-        const uint32_t FPCC_OFFSET = 0xF34;
-
-        /**
-         * Register 93: Floating-Point Context Address (FPCA), offset 0xF38
-         * 
-         * The FPCA register holds the location of the unpopulated floating-point 
-         * register space allocated on an exception stack frame.
-         */
-        const uint32_t FPCA_OFFSET = 0xF38;
-
-
-        /**
-         * Register 94: Floating-Point Default Status Control (FPDSC), offset 0xF3C
-         * 
-         * The FPDSC register holds the default values for the Floating-Point Status 
-         * Control (FPSC) register.
-         */
-        const uint32_t FPDSC_OFFSET = 0xF3C;
-
-
-
-
-
 
 
         /**

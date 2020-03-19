@@ -43,6 +43,15 @@
 
 #include "../systemControl/systemControl.h"
 
+const uint32_t usbBaseAddress = 0x40050000;
+
+const uint32_t PPUSB_OFFSET = 0x328; //0x328 PPUSB RO 0x0000.0001 Universal Serial Bus Peripheral Present 301
+const uint32_t SRUSB_OFFSET = 0x528; //0x528 SRUSB RW 0x0000.0000 Universal Serial Bus Software Reset 324
+const uint32_t RCGCUSB_OFFSET = 0x628; //0x628 RCGCUSB RW 0x0000.0000 Universal Serial Bus Run Mode Clock Gating Control 350
+const uint32_t SCGCUSB_OFFSET = 0x728; //0x728 SCGCUSB RW 0x0000.0000 Universal Serial Bus Sleep Mode Clock Gating Control 372
+const uint32_t DCGCUSB_OFFSET = 0x828; //0x828 DCGCUSB RW 0x0000.0000 Universal Serial Bus Deep-Sleep Mode Clock Gating Control 394
+const uint32_t PRUSB_OFFSET = 0xA28;//0xA28 PRUSB RO 0x0000.0000 Universal Serial Bus Peripheral Ready 416
+
 class Usb : SystemControl
 {
     public:
@@ -50,14 +59,6 @@ class Usb : SystemControl
         ~Usb();
 
     private:
-        const uint32_t usbBaseAddress = 0x40050000;
-
-        const uint32_t PPUSB_OFFSET = 0x328; //0x328 PPUSB RO 0x0000.0001 Universal Serial Bus Peripheral Present 301
-        const uint32_t SRUSB_OFFSET = 0x528; //0x528 SRUSB RW 0x0000.0000 Universal Serial Bus Software Reset 324
-        const uint32_t RCGCUSB_OFFSET = 0x628; //0x628 RCGCUSB RW 0x0000.0000 Universal Serial Bus Run Mode Clock Gating Control 350
-        const uint32_t SCGCUSB_OFFSET = 0x728; //0x728 SCGCUSB RW 0x0000.0000 Universal Serial Bus Sleep Mode Clock Gating Control 372
-        const uint32_t DCGCUSB_OFFSET = 0x828; //0x828 DCGCUSB RW 0x0000.0000 Universal Serial Bus Deep-Sleep Mode Clock Gating Control 394
-        const uint32_t PRUSB_OFFSET = 0xA28;//0xA28 PRUSB RO 0x0000.0000 Universal Serial Bus Peripheral Ready 416
 
 
 

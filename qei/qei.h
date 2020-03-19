@@ -45,6 +45,16 @@
 
 #include "../systemControl/systemControl.h"
 
+const uint32_t qei0BaseAddress = 0x4002C000;
+const uint32_t qei1BaseAddress = 0x4002D000;
+
+const uint32_t PPQEI_OFFSET = 0x344; //0x344 PPQEI RO 0x0000.0003 Quadrature Encoder Interface Peripheral Present 306
+const uint32_t SRQEI_OFFSET = 0x544; //0x544 SRQEI RW 0x0000.0000 Quadrature Encoder Interface Software Reset 332
+const uint32_t RCGCQEI_OFFSET = 0x644; //0x644 RCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Run Mode Clock Gating Control 355
+const uint32_t SCGCQEI_OFFSET = 0x744; //0x744 SCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Sleep Mode Clock Gating Control 377
+const uint32_t DCGCQEI_OFFSET = 0x844; //0x844 DCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Deep-Sleep Mode Clock Gating Control 399
+const uint32_t PRQEI_OFFSET = 0xA44; //0xA44 PRQEI RO 0x0000.0000 Quadrature Encoder Interface Peripheral Ready 421
+
 class Qei : SystemControl
 {
     public:
@@ -52,15 +62,6 @@ class Qei : SystemControl
         ~Qei();
 
     private:
-        const uint32_t qei0BaseAddress = 0x4002C000;
-        const uint32_t qei1BaseAddress = 0x4002D000;
-
-        const uint32_t PPQEI_OFFSET = 0x344; //0x344 PPQEI RO 0x0000.0003 Quadrature Encoder Interface Peripheral Present 306
-        const uint32_t SRQEI_OFFSET = 0x544; //0x544 SRQEI RW 0x0000.0000 Quadrature Encoder Interface Software Reset 332
-        const uint32_t RCGCQEI_OFFSET = 0x644; //0x644 RCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Run Mode Clock Gating Control 355
-        const uint32_t SCGCQEI_OFFSET = 0x744; //0x744 SCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Sleep Mode Clock Gating Control 377
-        const uint32_t DCGCQEI_OFFSET = 0x844; //0x844 DCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Deep-Sleep Mode Clock Gating Control 399
-        const uint32_t PRQEI_OFFSET = 0xA44; //0xA44 PRQEI RO 0x0000.0000 Quadrature Encoder Interface Peripheral Ready 421
 
 /**************************System Control BitFields****************************/
 

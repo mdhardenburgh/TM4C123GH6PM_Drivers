@@ -1,13 +1,14 @@
 // #ifndef MAIN_H
 // #define MAIN_H
 
-#include "register/register.h"
+// #include "register/register.h"
 #include "corePeripherals/systick/systick.h"
-#include "corePeripherals/nvic/nvic.h"
+// #include "corePeripherals/nvic/nvic.h"
 #include "corePeripherals/sbc/sbc.h"
-#include "systemControl/systemControl.h"
+// #include "systemControl/systemControl.h"
 #include "gpio/gpio.h"
 #include "timer/generalPurposeTimer.h"
+
 
 // Gpio blueLed;
 // Gpio redLed;

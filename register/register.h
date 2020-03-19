@@ -19,6 +19,8 @@ enum bitFieldPermission
     RW, RO, WO, RW1C
 };
 
+const uint32_t corePeripheralBase = 0xE000E000;
+
 class bitField
 {
     public:
@@ -57,7 +59,9 @@ class Register
 
         uint32_t getRegisterBitFieldStatus(bitField myBitField);
         void setRegisterBitFieldStatus(bitField myBitField, uint32_t value);
-        
+
+        static uint32_t _getRegisterBitFieldStatus(volatile uint32_t* address, uint32_t bit, uint32_t bitWidth, bitFieldPermission permission);
+        static void _setRegisterBitFieldStatus(volatile uint32_t* address, uint32_t value, uint32_t bit, uint32_t bitWidth, bitFieldPermission permission);
     
     protected:
         volatile uint32_t* address;

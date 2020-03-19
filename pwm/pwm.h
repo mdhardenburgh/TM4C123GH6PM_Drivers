@@ -45,6 +45,16 @@
 
 #include "../systemControl/systemControl.h"
 
+const uint32_t pwm0BaseAddress = 0x40028000;
+const uint32_t pwm1BaseAddress = 0x40029000;
+
+const uint32_t PPPWM_OFFSET = 0x340; //0x340 PPPWM RO 0x0000.0003 Pulse Width Modulator Peripheral Present 305
+const uint32_t SRPWM_OFFSET = 0x540; //0x540 SRPWM RW 0x0000.0000 Pulse Width Modulator Software Reset 330
+const uint32_t RCGCPWM_OFFSET = 0x640; //0x640 RCGCPWM RW 0x0000.0000 Pulse Width Modulator Run Mode Clock Gating Control 354
+const uint32_t SCGCPWM_OFFSET = 0x740; //0x740 SCGCPWM RW 0x0000.0000 Pulse Width Modulator Sleep Mode Clock Gating Control 376
+const uint32_t DCGCPWM_OFFSET = 0x840; //0x840 DCGCPWM RW 0x0000.0000 Pulse Width Modulator Deep-Sleep Mode Clock Gating Control 398
+const uint32_t PRPWM_OFFSET = 0xA40; //0xA40 PRPWM RO 0x0000.0000 Pulse Width Modulator Peripheral Ready 420
+
 class Pwm : SystemControl
 {
     public:
@@ -52,15 +62,6 @@ class Pwm : SystemControl
         ~Pwm();
 
     private:
-        const uint32_t pwm0BaseAddress = 0x40028000;
-        const uint32_t pwm1BaseAddress = 0x40029000;
-
-        const uint32_t PPPWM_OFFSET = 0x340; //0x340 PPPWM RO 0x0000.0003 Pulse Width Modulator Peripheral Present 305
-        const uint32_t SRPWM_OFFSET = 0x540; //0x540 SRPWM RW 0x0000.0000 Pulse Width Modulator Software Reset 330
-        const uint32_t RCGCPWM_OFFSET = 0x640; //0x640 RCGCPWM RW 0x0000.0000 Pulse Width Modulator Run Mode Clock Gating Control 354
-        const uint32_t SCGCPWM_OFFSET = 0x740; //0x740 SCGCPWM RW 0x0000.0000 Pulse Width Modulator Sleep Mode Clock Gating Control 376
-        const uint32_t DCGCPWM_OFFSET = 0x840; //0x840 DCGCPWM RW 0x0000.0000 Pulse Width Modulator Deep-Sleep Mode Clock Gating Control 398
-        const uint32_t PRPWM_OFFSET = 0xA40; //0xA40 PRPWM RO 0x0000.0000 Pulse Width Modulator Peripheral Ready 420
 
 /**************************System Control BitFields****************************/
 

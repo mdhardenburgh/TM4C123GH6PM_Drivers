@@ -44,6 +44,15 @@
 
 #include "../systemControl/systemControl.h"
 
+const uint32_t hibernateBase = 0x400FC000;
+
+const uint32_t PPHIB_OFFSET = 0x314; //0x314 PPHIB RO 0x0000.0001 Hibernation Peripheral Present 294
+const uint32_t SRHIB_OFFSET = 0x514; //0x514 SRHIB RW 0x0000.0000 Hibernation Software Reset 317
+const uint32_t RCGCHIB_OFFSET = 0x614; //0x614 RCGCHIB RW 0x0000.0001 Hibernation Run Mode Clock Gating Control 343
+const uint32_t SCGCHIB_OFFSET = 0x714; //0x714 SCGCHIB RW 0x0000.0001 Hibernation Sleep Mode Clock Gating Control 365
+const uint32_t DCGCHIB_OFFSET = 0x814; //0x814 DCGCHIB RW 0x0000.0001 Hibernation Deep-Sleep Mode Clock Gating Control 387
+const uint32_t PRHIB_OFFSET = 0xA14; //0xA14 PRHIB RO 0x0000.0001 Hibernation Peripheral Ready 409
+
 class Hibernate : SystemControl
 {
     public:
@@ -51,14 +60,6 @@ class Hibernate : SystemControl
         ~Hibernate();
 
     private:
-        const uint32_t hibernateBase = 0x400FC000;
-
-        const uint32_t PPHIB_OFFSET = 0x314; //0x314 PPHIB RO 0x0000.0001 Hibernation Peripheral Present 294
-        const uint32_t SRHIB_OFFSET = 0x514; //0x514 SRHIB RW 0x0000.0000 Hibernation Software Reset 317
-        const uint32_t RCGCHIB_OFFSET = 0x614; //0x614 RCGCHIB RW 0x0000.0001 Hibernation Run Mode Clock Gating Control 343
-        const uint32_t SCGCHIB_OFFSET = 0x714; //0x714 SCGCHIB RW 0x0000.0001 Hibernation Sleep Mode Clock Gating Control 365
-        const uint32_t DCGCHIB_OFFSET = 0x814; //0x814 DCGCHIB RW 0x0000.0001 Hibernation Deep-Sleep Mode Clock Gating Control 387
-        const uint32_t PRHIB_OFFSET = 0xA14; //0xA14 PRHIB RO 0x0000.0001 Hibernation Peripheral Ready 409
 
 
 /**************************System Control BitFields****************************/

@@ -45,6 +45,18 @@
 
 #include "../systemControl/systemControl.h"
 
+const uint32_t ssi0BaseAddress = 0x40008000;
+const uint32_t ssi1BaseAddress = 0x40009000;
+const uint32_t ssi2BaseAddress = 0x4000A000;
+const uint32_t ssi3BaseAddress = 0x4000B000;
+
+const uint32_t PPSSI_OFFSET = 0x31C; //0x31C PPSSI RO 0x0000.000F Synchronous Serial Interface Peripheral Present 297
+const uint32_t SRSSI_OFFSET = 0x51C; //0x51C SRSSI RW 0x0000.0000 Synchronous Serial Interface Software Reset 320
+const uint32_t RCGCSSI_OFFSET = 0x61C; //0x61C RCGCSSI RW 0x0000.0000 Synchronous Serial Interface Run Mode Clock Gating Control 346
+const uint32_t SCGCSSI_OFFSET = 0x71C; //0x71C SCGCSSI RW 0x0000.0000 Synchronous Serial Interface Sleep Mode Clock Gating Control 368
+const uint32_t DCGCSSI_OFFSET = 0x81C; //0x81C DCGCSSI RW 0x0000.0000 Synchronous Serial Interface Deep-Sleep Mode Clock Gating Control 390
+const uint32_t PRSSI_OFFSET = 0xA1C; //0xA1C PRSSI RO 0x0000.0000 Synchronous Serial Interface Peripheral Ready 412
+
 class Ssi : SystemControl
 {
     public:
@@ -52,17 +64,6 @@ class Ssi : SystemControl
         ~Ssi();
 
     private:
-        const uint32_t ssi0BaseAddress = 0x40008000;
-        const uint32_t ssi1BaseAddress = 0x40009000;
-        const uint32_t ssi2BaseAddress = 0x4000A000;
-        const uint32_t ssi3BaseAddress = 0x4000B000;
-
-        const uint32_t PPSSI_OFFSET = 0x31C; //0x31C PPSSI RO 0x0000.000F Synchronous Serial Interface Peripheral Present 297
-        const uint32_t SRSSI_OFFSET = 0x51C; //0x51C SRSSI RW 0x0000.0000 Synchronous Serial Interface Software Reset 320
-        const uint32_t RCGCSSI_OFFSET = 0x61C; //0x61C RCGCSSI RW 0x0000.0000 Synchronous Serial Interface Run Mode Clock Gating Control 346
-        const uint32_t SCGCSSI_OFFSET = 0x71C; //0x71C SCGCSSI RW 0x0000.0000 Synchronous Serial Interface Sleep Mode Clock Gating Control 368
-        const uint32_t DCGCSSI_OFFSET = 0x81C; //0x81C DCGCSSI RW 0x0000.0000 Synchronous Serial Interface Deep-Sleep Mode Clock Gating Control 390
-        const uint32_t PRSSI_OFFSET = 0xA1C; //0xA1C PRSSI RO 0x0000.0000 Synchronous Serial Interface Peripheral Ready 412
 
 /**************************System Control BitFields****************************/
 

@@ -45,6 +45,16 @@
 
 #include "../systemControl/systemControl.h"
 
+const uint32_t adc0BaseAddress = 0x40038000;
+const uint32_t adc1BaseAddress = 0x40039000;
+
+const uint32_t PPADC_OFFSET = 0x338; //0x338 PPADC RO 0x0000.0003 Analog-to-Digital Converter Peripheral Present 303
+const uint32_t SRADC_OFFSET = 0x538; //0x538 SRADC RW 0x0000.0000 Analog-to-Digital Converter Software Reset 327
+const uint32_t RCGCADC_OFFSET = 0x638; //0x638 RCGCADC RW 0x0000.0000 Analog-to-Digital Converter Run Mode Clock Gating Control 352
+const uint32_t SCGCADC_OFFSET = 0x738; //0x738 SCGCADC RW 0x0000.0000 Analog-to-Digital Converter Sleep Mode Clock Gating Control 374
+const uint32_t DCGCADC_OFFSET = 0x838; //0x838 DCGCADC RW 0x0000.0000 Analog-to-Digital Converter Deep-Sleep Mode Clock Gating Control 396
+const uint32_t PRADC_OFFSET = 0xA38; //0xA38 PRADC RO 0x0000.0000 Analog-to-Digital Converter Peripheral Ready 418
+
 class Adc : SystemControl
 {
     public:
@@ -52,15 +62,6 @@ class Adc : SystemControl
         ~Adc();
 
     private:
-        const uint32_t adc0BaseAddress = 0x40038000;
-        const uint32_t adc1BaseAddress = 0x40039000;
-
-        const uint32_t PPADC_OFFSET = 0x338; //0x338 PPADC RO 0x0000.0003 Analog-to-Digital Converter Peripheral Present 303
-        const uint32_t SRADC_OFFSET = 0x538; //0x538 SRADC RW 0x0000.0000 Analog-to-Digital Converter Software Reset 327
-        const uint32_t RCGCADC_OFFSET = 0x638; //0x638 RCGCADC RW 0x0000.0000 Analog-to-Digital Converter Run Mode Clock Gating Control 352
-        const uint32_t SCGCADC_OFFSET = 0x738; //0x738 SCGCADC RW 0x0000.0000 Analog-to-Digital Converter Sleep Mode Clock Gating Control 374
-        const uint32_t DCGCADC_OFFSET = 0x838; //0x838 DCGCADC RW 0x0000.0000 Analog-to-Digital Converter Deep-Sleep Mode Clock Gating Control 396
-        const uint32_t PRADC_OFFSET = 0xA38; //0xA38 PRADC RO 0x0000.0000 Analog-to-Digital Converter Peripheral Ready 418
 
 /**************************System Control BitFields****************************/
 

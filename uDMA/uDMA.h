@@ -45,6 +45,15 @@
 
 #include "../systemControl/systemControl.h"
 
+const uint32_t uDMA_Base = 0x400FF000;
+
+const uint32_t PPDMA_OFFSET = 0x30C; //0x30C PPDMA RO 0x0000.0001 Micro Direct Memory Access Peripheral Present 293
+const uint32_t SRDMA_OFFSET = 0x50C; //0x50C SRDMA RW 0x0000.0000 Micro Direct Memory Access Software Reset 316
+const uint32_t RCGCDMA_OFFSET = 0x60C; //0x60C RCGCDMA RW 0x0000.0000 Micro Direct Memory Access Run Mode Clock Gating Control 342
+const uint32_t SCGCDMA_OFFSET = 0x70C; //0x70C SCGCDMA RW 0x0000.0000 Micro Direct Memory Access Sleep Mode Clock Gating Control 364
+const uint32_t DCGCDMA_OFFSET = 0x80C; //0x80C DCGCDMA RW 0x0000.0000 Micro Direct Memory Access Deep-Sleep Mode Clock Gating Control 386
+const uint32_t PRDMA_OFFSET = 0xA0C; //0xA0C PRDMA RO 0x0000.0000 Micro Direct Memory Access Peripheral Ready 408
+
 class uDMA : SystemControl
 {
     public:
@@ -52,14 +61,6 @@ class uDMA : SystemControl
         ~uDMA();
 
     private:
-        const uint32_t uDMA_Base = 0x400FF000;
-
-        const uint32_t PPDMA_OFFSET = 0x30C; //0x30C PPDMA RO 0x0000.0001 Micro Direct Memory Access Peripheral Present 293
-        const uint32_t SRDMA_OFFSET = 0x50C; //0x50C SRDMA RW 0x0000.0000 Micro Direct Memory Access Software Reset 316
-        const uint32_t RCGCDMA_OFFSET = 0x60C; //0x60C RCGCDMA RW 0x0000.0000 Micro Direct Memory Access Run Mode Clock Gating Control 342
-        const uint32_t SCGCDMA_OFFSET = 0x70C; //0x70C SCGCDMA RW 0x0000.0000 Micro Direct Memory Access Sleep Mode Clock Gating Control 364
-        const uint32_t DCGCDMA_OFFSET = 0x80C; //0x80C DCGCDMA RW 0x0000.0000 Micro Direct Memory Access Deep-Sleep Mode Clock Gating Control 386
-        const uint32_t PRDMA_OFFSET = 0xA0C; //0xA0C PRDMA RO 0x0000.0000 Micro Direct Memory Access Peripheral Ready 408
 
 /**************************System Control BitFields****************************/
 

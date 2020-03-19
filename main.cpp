@@ -30,8 +30,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/.
 #include "main.h"
 
 SystemControl* mySystemControl = NULL;
-Nvic* myNvic = NULL;
-Sbc* mySbc = NULL;
+
 
 
 Gpio* greenLed = NULL;
@@ -39,6 +38,7 @@ Gpio* blueLed = NULL;
 Gpio* redLed = NULL;
 Gpio* swtich1 = NULL;
 Gpio* swtich2 = NULL;
+GeneralPurposeTimer* testTimer = NULL;
 
 /**
  * These functions further help eliminate unwanted exceptions
@@ -83,11 +83,38 @@ extern "C" void GPIO_Port_F_Handler(void)
 
 }
 
+extern "C" void _16_32_Bit_Timer_0A_Handler(void)
+{
+    if((*greenLed).gpioRead() == set)
+    {
+        (*greenLed).gpioWrite(clear);
+        (*testTimer).interruptClear();
+    }
+    else if((*greenLed).gpioRead() == clear)
+    {
+        (*greenLed).gpioWrite(set);
+        (*testTimer).interruptClear();
+    }
+    
+}
+
+void blink(void)
+{    
+    if((*greenLed).gpioRead() == set)
+    {
+        (*greenLed).gpioWrite(clear);
+        (*testTimer).interruptClear();
+    }
+    else if((*greenLed).gpioRead() == clear)
+    {
+        (*greenLed).gpioWrite(set);
+        (*testTimer).interruptClear();
+    }
+}
+
 extern "C" void SystemInit(void)
 {
     mySystemControl = new SystemControl(_80MHz);
-    myNvic = new Nvic();
-    mySbc = new Sbc();
 
     greenLed = new Gpio(PF3, output);
     blueLed = new Gpio(PF2, output);
@@ -99,13 +126,17 @@ extern "C" void SystemInit(void)
 int main(void)
 {
 
-    
-    (*myNvic).disableInterrupts();
+    Nvic::disableInterrupts();
     swtich1 = new Gpio(PF4, input, 3);
     swtich2 = new Gpio(PF0, input, 3);
-    (*myNvic).enableInterrupts();
+    testTimer = new GeneralPurposeTimer(periodic, shortTimer0, 80000000, down, concatenated, 3);
+    (*testTimer).enableTimer();
+    Nvic::enableInterrupts();
+
+    // testTimer = new GeneralPurposeTimer(periodic, shortTimer0, 80000000, down, concatenated);
+    // (*testTimer).enableTimer();
     
-    (*greenLed).gpioWrite(set);
+    // (*greenLed).gpioWrite(set);
     (*blueLed).gpioWrite(set);
     (*redLed).gpioWrite(set);
     
@@ -113,12 +144,11 @@ int main(void)
 
     while(1)
     {
-        (*myNvic).wfi();
+        // (*testTimer).pollStatus(blink);
+        Nvic::wfi();
     }
 
     delete mySystemControl;
-    delete myNvic;
-    delete mySbc;
     delete blueLed;
     delete redLed;
     delete swtich1;

@@ -49,9 +49,21 @@
 
 #include "nvic.h"
 
+const uint32_t Nvic::ENn_OFFSET[5] = {EN0_OFFSET, EN1_OFFSET, EN2_OFFSET, EN3_OFFSET, EN4_OFFSET};
+const uint32_t Nvic::DISn_OFFSET[5] = {DIS0_OFFSET, DIS1_OFFSET, DIS2_OFFSET, DIS3_OFFSET, DIS4_OFFSET};
+const uint32_t Nvic::PENDn_OFFSET[5] = {PEND0_OFFSET, PEND1_OFFSET, PEND2_OFFSET, PEND3_OFFSET, PEND4_OFFSET};
+const uint32_t Nvic::UNPENDn_OFFSET[5] = {UNPEND0_OFFSET, UNPEND1_OFFSET, UNPEND2_OFFSET, UNPEND3_OFFSET, UNPEND4_OFFSET};
+const uint32_t Nvic::ACTIVEn_OFFSET[5] = {ACTIVE0_OFFSET, ACTIVE1_OFFSET, ACTIVE2_OFFSET, ACTIVE3_OFFSET, ACTIVE4_OFFSET};
+const uint32_t Nvic::PRIn_OFFSET[35] = {PRI0_OFFSET, PRI1_OFFSET, PRI2_OFFSET, PRI3_OFFSET, PRI4_OFFSET, PRI5_OFFSET,
+                                        PRI6_OFFSET, PRI7_OFFSET, PRI8_OFFSET, PRI9_OFFSET, PRI10_OFFSET, PRI11_OFFSET,
+                                        PRI12_OFFSET, PRI13_OFFSET, PRI14_OFFSET, PRI15_OFFSET, PRI16_OFFSET, PRI17_OFFSET,
+                                        PRI18_OFFSET, PRI19_OFFSET, PRI20_OFFSET, PRI21_OFFSET, PRI22_OFFSET, PRI23_OFFSET,
+                                        PRI24_OFFSET, PRI25_OFFSET, PRI26_OFFSET, PRI27_OFFSET, PRI28_OFFSET, PRI29_OFFSET,
+                                        PRI30_OFFSET, PRI31_OFFSET, PRI32_OFFSET, PRI33_OFFSET, PRI34_OFFSET};
+
 Nvic::Nvic()
 {
-    //Init NVIC here
+
 }
 
 Nvic::~Nvic()
@@ -59,15 +71,18 @@ Nvic::~Nvic()
 
 }
 
+/**
+ * @param myInterrupt 
+ */
 void Nvic::activateInterrupt(interrupt myInterrupt, uint32_t priority)
 {
     if((myInterrupt < 139) && (priority < 8))
     {
-        bitField PRIORITY_INT(((myInterrupt % nvicRegisterOffset) * 8) + 5, 3, RW); //bit place isn't being used. Renaming 3 to INT_PRIORITY.size to eliminate magic numbers
-        bitField INT((uint32_t)(myInterrupt % 32), 1, RW); //bit place isn't being used. Renaming 1 to INT.bitWidth to eliminate magic numbers
+        bitField PRIORITY_INT(((myInterrupt % nvicRegisterOffset) * 8) + 5, 3, RW);
+        bitField INT((uint32_t)(myInterrupt % 32), 1, RW);
 
-        Register PRI((volatile uint32_t*)(corePeripheralBase + PRI_OFFSET + (nvicRegisterOffset * (myInterrupt / nvicRegisterOffset))));
-        Register EN((volatile uint32_t*)(corePeripheralBase + EN_OFFSET + (nvicRegisterOffset * (myInterrupt / 32))));
+        Register PRI((volatile uint32_t*)(corePeripheralBase + PRIn_OFFSET[myInterrupt/4]));
+        Register EN((volatile uint32_t*)(corePeripheralBase + ENn_OFFSET[myInterrupt/32]));
 
         (PRI).setRegisterBitFieldStatus(PRIORITY_INT, priority);
         (EN).setRegisterBitFieldStatus(INT, (uint32_t)set);

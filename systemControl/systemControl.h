@@ -45,6 +45,32 @@
 
 const uint32_t systemControlBase = 0x400FE000;
 
+const uint32_t RCC_OFFSET = 0x060; //RCC RW 0x078E.3AD1 Run-Mode Clock Configuration 254
+const uint32_t RCC2_OFFSET = 0x070; //RCC2 RW 0x07C0.6810 Run-Mode Clock Configuration 2 260
+const uint32_t RIS_OFFSET = 0x050; //0x050 RIS RO 0x0000.0000 Raw Interrupt Status 244
+
+const uint32_t DID0_OFFSET = 0x000; //0x000 DID0 RO - Device Identification 238
+const uint32_t DID1_OFFSET = 0x004; //0x004 DID1 RO 0x10A1.606E Device Identification 1 240
+const uint32_t PBORCTL_OFFSET = 0x030; //0x030 PBORCTL RW 0x0000.7FFF Brown-Out Reset Control 243
+const uint32_t IMC_OFFSET = 0x054; //0x054 IMC RW 0x0000.0000 Interrupt Mask Control 247
+const uint32_t MISC_OFFSET = 0x058; //0x058 MISC RW1C 0x0000.0000 Masked Interrupt Status and Clear 249
+const uint32_t RESC_OFFSET = 0x05C; //0x05C RESC RW - Reset Cause 252
+const uint32_t MOSCCTL_OFFSET = 0x07C; //0x07C MOSCCTL RW 0x0000.0000 Main Oscillator Control 263
+const uint32_t DSLPCLKCFG_OFFSET = 0x144; //0x144 DSLPCLKCFG RW 0x0780.0000 Deep Sleep Clock Configuration 264
+const uint32_t SYSPROP_OFFSET = 0x14C; //0x14C SYSPROP RO 0x0000.1D31 System Properties 266
+const uint32_t PIOSCCAL_OFFSET = 0x150; //0x150 PIOSCCAL RW 0x0000.0000 Precision Internal Oscillator Calibration 268
+const uint32_t PIOSCSTAT_OFFSET = 0x154; //0x154 PIOSCSTAT RO 0x0000.0040 Precision Internal Oscillator Statistics 270
+const uint32_t PLLFREQ0_OFFSET = 0x160; //0x160 PLLFREQ0 RO 0x0000.0032 PLL Frequency 0 271
+const uint32_t PLLFREQ1_OFFSET = 0x164; //0x164 PLLFREQ1 RO 0x0000.0001 PLL Frequency 1 272
+const uint32_t PLLSTAT_OFFSET = 0x168; //0x168 PLLSTAT RO 0x0000.0000 PLL Status 273
+const uint32_t SLPPWRCFG_OFFSET = 0x188; //0x188 SLPPWRCFG RW 0x0000.0000 Sleep Power Configuration 274
+const uint32_t DSLPPWRCFG_OFFSET = 0x18C; //0x18C DSLPPWRCFG RW 0x0000.0000 Deep-Sleep Power Configuration 276
+const uint32_t LDOSPCTL_OFFSET = 0x1B4; //0x1B4 LDOSPCTL RW 0x0000.0018 LDO Sleep Power Control 278
+const uint32_t LDOSPCAL_OFFSET = 0x1B8; //0x1B8 LDOSPCAL RO 0x0000.1818 LDO Sleep Power Calibration 280
+const uint32_t LDODPCTL_OFFSET = 0x1BC; //0x1BC LDODPCTL RW 0x0000.0012 LDO Deep-Sleep Power Control 28
+const uint32_t LDODPCAL_OFFSET = 0x1C0; //0x1C0 LDODPCAL RO 0x0000.1212 LDO Deep-Sleep Power Calibration 283
+const uint32_t SDPMST_OFFSET = 0x1CC; //0x1CC SDPMST RO 0x0000.0000 Sleep/Deep-Sleep Power Mode Status 284
+const uint32_t GPIOHBCTL_OFFSET = 0x06C; //0x06C GPIOHBCTL RW 0x0000.7E00 GPIO High-Performance Bus Control 258
 
 
 enum SYSDIV2
@@ -118,32 +144,6 @@ class SystemControl
 
 /**********************System Control Register Descriptions********************/
 
-        const uint32_t RCC_OFFSET = 0x060; //RCC RW 0x078E.3AD1 Run-Mode Clock Configuration 254
-        const uint32_t RCC2_OFFSET = 0x070; //RCC2 RW 0x07C0.6810 Run-Mode Clock Configuration 2 260
-        const uint32_t RIS_OFFSET = 0x050; //0x050 RIS RO 0x0000.0000 Raw Interrupt Status 244
-
-        const uint32_t DID0_OFFSET = 0x000; //0x000 DID0 RO - Device Identification 238
-        const uint32_t DID1_OFFSET = 0x004; //0x004 DID1 RO 0x10A1.606E Device Identification 1 240
-        const uint32_t PBORCTL_OFFSET = 0x030; //0x030 PBORCTL RW 0x0000.7FFF Brown-Out Reset Control 243
-        const uint32_t IMC_OFFSET = 0x054; //0x054 IMC RW 0x0000.0000 Interrupt Mask Control 247
-        const uint32_t MISC_OFFSET = 0x058; //0x058 MISC RW1C 0x0000.0000 Masked Interrupt Status and Clear 249
-        const uint32_t RESC_OFFSET = 0x05C; //0x05C RESC RW - Reset Cause 252
-        const uint32_t MOSCCTL_OFFSET = 0x07C; //0x07C MOSCCTL RW 0x0000.0000 Main Oscillator Control 263
-        const uint32_t DSLPCLKCFG_OFFSET = 0x144; //0x144 DSLPCLKCFG RW 0x0780.0000 Deep Sleep Clock Configuration 264
-        const uint32_t SYSPROP_OFFSET = 0x14C; //0x14C SYSPROP RO 0x0000.1D31 System Properties 266
-        const uint32_t PIOSCCAL_OFFSET = 0x150; //0x150 PIOSCCAL RW 0x0000.0000 Precision Internal Oscillator Calibration 268
-        const uint32_t PIOSCSTAT_OFFSET = 0x154; //0x154 PIOSCSTAT RO 0x0000.0040 Precision Internal Oscillator Statistics 270
-        const uint32_t PLLFREQ0_OFFSET = 0x160; //0x160 PLLFREQ0 RO 0x0000.0032 PLL Frequency 0 271
-        const uint32_t PLLFREQ1_OFFSET = 0x164; //0x164 PLLFREQ1 RO 0x0000.0001 PLL Frequency 1 272
-        const uint32_t PLLSTAT_OFFSET = 0x168; //0x168 PLLSTAT RO 0x0000.0000 PLL Status 273
-        const uint32_t SLPPWRCFG_OFFSET = 0x188; //0x188 SLPPWRCFG RW 0x0000.0000 Sleep Power Configuration 274
-        const uint32_t DSLPPWRCFG_OFFSET = 0x18C; //0x18C DSLPPWRCFG RW 0x0000.0000 Deep-Sleep Power Configuration 276
-        const uint32_t LDOSPCTL_OFFSET = 0x1B4; //0x1B4 LDOSPCTL RW 0x0000.0018 LDO Sleep Power Control 278
-        const uint32_t LDOSPCAL_OFFSET = 0x1B8; //0x1B8 LDOSPCAL RO 0x0000.1818 LDO Sleep Power Calibration 280
-        const uint32_t LDODPCTL_OFFSET = 0x1BC; //0x1BC LDODPCTL RW 0x0000.0012 LDO Deep-Sleep Power Control 28
-        const uint32_t LDODPCAL_OFFSET = 0x1C0; //0x1C0 LDODPCAL RO 0x0000.1212 LDO Deep-Sleep Power Calibration 283
-        const uint32_t SDPMST_OFFSET = 0x1CC; //0x1CC SDPMST RO 0x0000.0000 Sleep/Deep-Sleep Power Mode Status 284
-        const uint32_t GPIOHBCTL_OFFSET = 0x06C; //0x06C GPIOHBCTL RW 0x0000.7E00 GPIO High-Performance Bus Control 258
         
 
 

@@ -7,7 +7,8 @@
 STARTUP_DEFS=-D__STARTUP_CLEAR_BSS -D__START=main 
 ARCH_FLAGS=-mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
 CORE_PERIPHERALS=corePeripherals/systick/systick.o corePeripherals/nvic/nvic.o corePeripherals/sbc/sbc.o corePeripherals/mpu/mpu.o corePeripherals/fpu/fpu.o
-CXXFLAGS=$(ARCH_FLAGS) $(STARTUP_DEFS) -c -g -std=c++11 -Wall -W -Werror -pedantic -Os -flto -ffunction-sections -fdata-sections -fno-exceptions
+CXXFLAGS=$(ARCH_FLAGS) $(STARTUP_DEFS) -c -g -std=c++11 -Wall -W -Werror -pedantic -Os -flto -ffunction-sections -fdata-sections -fno-exceptions 
+# CXXFLAGS=$(ARCH_FLAGS) $(STARTUP_DEFS) -c -g -std=c++11 -Wall -W -Werror -pedantic 
 CXX=arm-none-eabi-g++
 USE_NANO=--specs=nano.specs
 
@@ -31,6 +32,7 @@ main.bin: main.elf
 
 main.elf: startup_ARMCM4.o main.o register/register.o $(CORE_PERIPHERALS) systemControl/systemControl.o gpio/gpio.o timer/generalPurposeTimer.o
 	$(CXX) $^ $(ARCH_FLAGS) $(STARTUP_DEFS) -g -std=c++11 -Wall -W -Werror -pedantic -Os -flto -ffunction-sections -fdata-sections -fno-exceptions $(LFLAGS) -o $@
+	# $(CXX) $^ $(ARCH_FLAGS) $(STARTUP_DEFS) -g -std=c++11 -Wall -W -Werror -pedantic  $(LFLAGS) -o $@
 
 startup_ARMCM4.o: startup_ARMCM4.S
 	$(CXX) $^ $(CXXFLAGS)

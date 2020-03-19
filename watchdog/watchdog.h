@@ -44,6 +44,16 @@
 
 #include "../systemControl/systemControl.h"
 
+const uint32_t watchdog0BaseAddress = 0x40000000;
+const uint32_t watchdog1BaseAddress = 0x40001000;
+
+const uint32_t PPWD_OFFSET = 0x300; //0x300 PPWD RO 0x0000.0003 Watchdog Timer Peripheral Present 287
+const uint32_t SRWD_OFFSET = 0x500; //0x500 SRWD RW 0x0000.0000 Watchdog Timer Software Reset 310
+const uint32_t RCGCWD_OFFSET = 0x600; //0x600 RCGCWD RW 0x0000.0000 Watchdog Timer Run Mode Clock Gating Control 337
+const uint32_t SCGCWD_OFFSET = 0x700; //0x700 SCGCWD RW 0x0000.0000 Watchdog Timer Sleep Mode Clock Gating Control 359
+const uint32_t DCGCWD_OFFSET = 0x800; //0x800 DCGCWD RW 0x0000.0000 Watchdog Timer Deep-Sleep Mode Clock Gating Control 381
+const uint32_t PRWD_OFFSET = 0xA00; //0xA00 PRWD RO 0x0000.0000 Watchdog Timer Peripheral Ready 403
+
 class Watchdog : SystemControl
 {
     public:
@@ -51,15 +61,6 @@ class Watchdog : SystemControl
         ~Watchdog();
 
     private:
-        const uint32_t watchdog0BaseAddress = 0x40000000;
-        const uint32_t watchdog1BaseAddress = 0x40001000;
-
-        const uint32_t PPWD_OFFSET = 0x300; //0x300 PPWD RO 0x0000.0003 Watchdog Timer Peripheral Present 287
-        const uint32_t SRWD_OFFSET = 0x500; //0x500 SRWD RW 0x0000.0000 Watchdog Timer Software Reset 310
-        const uint32_t RCGCWD_OFFSET = 0x600; //0x600 RCGCWD RW 0x0000.0000 Watchdog Timer Run Mode Clock Gating Control 337
-        const uint32_t SCGCWD_OFFSET = 0x700; //0x700 SCGCWD RW 0x0000.0000 Watchdog Timer Sleep Mode Clock Gating Control 359
-        const uint32_t DCGCWD_OFFSET = 0x800; //0x800 DCGCWD RW 0x0000.0000 Watchdog Timer Deep-Sleep Mode Clock Gating Control 381
-        const uint32_t PRWD_OFFSET = 0xA00; //0xA00 PRWD RO 0x0000.0000 Watchdog Timer Peripheral Ready 403
 
 /**************************System Control BitFields****************************/
 

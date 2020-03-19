@@ -25,68 +25,6 @@ volatile uint32_t* Register::getRegisterAddress(void)
     return(address);
 }
 
-// uint32_t Register::getRegisterBitFieldStatus(bitField* myBitField)
-// {
-//     if(((*myBitField).permission == RW) || ((*myBitField).permission == RO) || ((*myBitField).permission == RW1C))
-//     {
-//         uint32_t select = ((((0xFFFFFFFF >> (32 - (*myBitField).bitWidth)))) << (*myBitField).bit);
-//         return(((*address) & select) >> (*myBitField).bit);
-//     }
-
-//     else
-//     {
-//         return(UINT32_MAX);
-//     }
-    
-// }
-
-// void Register::setRegisterBitFieldStatus(bitField* myBitField, uint32_t value)
-// {
-//     if(((*myBitField).permission == RW1C) && (value != 1))
-//     {
-//         return;
-//     }
-    
-//     else if(((*myBitField).permission == RW) || ((*myBitField).permission == WO) || ((*myBitField).permission == RW1C))
-//     {
-//         uint32_t maxValue = (0xFFFFFFFF >> (32 - (*myBitField).bitWidth));
-
-//         if((value <= maxValue))
-//         {
-//             uint32_t clear = (~(maxValue << (*myBitField).bit));
-//             value = value << (*myBitField).bit;
-    
-//             (*address) &= clear;
-//             (*address) |= value;
-//         }
-
-//         else
-//         {
-//             return;
-//         }
-        
-//     }
-
-//     else
-//     {
-//         return;
-//     }
-    
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 uint32_t Register::getRegisterBitFieldStatus(bitField myBitField)
 {
     if(((myBitField).permission == RW) || ((myBitField).permission == RO) || ((myBitField).permission == RW1C))
@@ -137,6 +75,52 @@ void Register::setRegisterBitFieldStatus(bitField myBitField, uint32_t value)
 }
 
 
+uint32_t Register::_getRegisterBitFieldStatus(volatile uint32_t* address, uint32_t bit, uint32_t bitWidth, bitFieldPermission permission)
+{
+    if((permission == RW) || (permission == RO) || (permission == RW1C))
+    {
+        uint32_t select = ((((0xFFFFFFFF >> (32 - bitWidth)))) << bit);
+        return(((*address) & select) >> bit);
+    }
+
+    else
+    {
+        return(UINT32_MAX);
+    }
+}
+
+void Register::_setRegisterBitFieldStatus(volatile uint32_t* address, uint32_t value, uint32_t bit, uint32_t bitWidth, bitFieldPermission permission)
+{
+    if((permission == RW1C) && (value != 1))
+    {
+        return;
+    }
+    
+    else if((permission == RW) || (permission == WO) || (permission == RW1C))
+    {
+        uint32_t maxValue = (0xFFFFFFFF >> (32 - bitWidth));
+
+        if((value <= maxValue))
+        {
+            uint32_t clear = (~(maxValue << bit));
+            value = value << bit;
+    
+            (*address) &= clear;
+            (*address) |= value;
+        }
+
+        else
+        {
+            return;
+        }
+        
+    }
+
+    else
+    {
+        return;
+    }
+}
 
 
 void* operator new(size_t size) noexcept 

@@ -54,7 +54,6 @@
 // #include <stddef.h>
 #include "../../register/register.h"
 
-
 enum interrupt
 {
     GPIO_Port_A_Interrupt = 0u,
@@ -143,135 +142,92 @@ class Nvic
         
         Nvic();
         ~Nvic();
-        uint32_t disableInterrupts(void);
-        uint32_t enableInterrupts(void);
-        void wfi(void);
-        void activateInterrupt(interrupt myInterrupt, uint32_t priority);
-
-    protected:
+        static void activateInterrupt(interrupt myInterrupt, uint32_t priority);
+        static uint32_t disableInterrupts(void);
+        static uint32_t enableInterrupts(void);
+        static void wfi(void);
 
     private:
-        const uint32_t corePeripheralBase = 0xE000E000;
-        const uint32_t nvicRegisterOffset = 0x4;
+        static const uint32_t nvicRegisterOffset = 0x4;
+        
+        static const uint32_t EN0_OFFSET = 0x100; // 0x100 EN0 RW 0x0000.0000 Interrupt 0-31 Set Enable 142
+        static const uint32_t EN1_OFFSET = 0x104; // 0x104 EN1 RW 0x0000.0000 Interrupt 32-63 Set Enable 142
+        static const uint32_t EN2_OFFSET = 0x108; // 0x108 EN2 RW 0x0000.0000 Interrupt 64-95 Set Enable 142
+        static const uint32_t EN3_OFFSET = 0x10C; // 0x10C EN3 RW 0x0000.0000 Interrupt 96-127 Set Enable 142
+        static const uint32_t EN4_OFFSET = 0x110; // 0x110 EN4 RW 0x0000.0000 Interrupt 128-138 Set Enable 143
+        static const uint32_t ENn_OFFSET[5];
 
+        static const uint32_t DIS0_OFFSET = 0x180; // 0x180 DIS0 RW 0x0000.0000 Interrupt 0-31 Clear Enable 144
+        static const uint32_t DIS1_OFFSET = 0x184; // 0x184 DIS1 RW 0x0000.0000 Interrupt 32-63 Clear Enable 144
+        static const uint32_t DIS2_OFFSET = 0x188; // 0x188 DIS2 RW 0x0000.0000 Interrupt 64-95 Clear Enable 144
+        static const uint32_t DIS3_OFFSET = 0x18C; // 0x18C DIS3 RW 0x0000.0000 Interrupt 96-127 Clear Enable 144
+        static const uint32_t DIS4_OFFSET = 0x190; // 0x190 DIS4 RW 0x0000.0000 Interrupt 128-138 Clear Enable 145
+        static const uint32_t DISn_OFFSET[5];
 
-        /**
-         * Interrupt enable registers
-         * 
-         * Register 4: Interrupt 0-31 Set Enable (EN0), offset 0x100 P.142 
-         * Register 5: Interrupt 32-63 Set Enable (EN1), offset 0x104 P.142
-         * Register 6: Interrupt 64-95 Set Enable (EN2), offset 0x108 P.142
-         * Register 7: Interrupt 96-127 Set Enable (EN3), offset 0x10C P.142
-         * Register 8: Interrupt 128-138 Set Enable (EN4), offset 0x110 P.143
-         */
-        const uint32_t EN_OFFSET = 0x100;
+        static const uint32_t PEND0_OFFSET = 0x200; // 0x200 PEND0 RW 0x0000.0000 Interrupt 0-31 Set Pending 146
+        static const uint32_t PEND1_OFFSET = 0x204; // 0x204 PEND1 RW 0x0000.0000 Interrupt 32-63 Set Pending 146
+        static const uint32_t PEND2_OFFSET = 0x208; // 0x208 PEND2 RW 0x0000.0000 Interrupt 64-95 Set Pending 146
+        static const uint32_t PEND3_OFFSET = 0x20C; // 0x20C PEND3 RW 0x0000.0000 Interrupt 96-127 Set Pending 146
+        static const uint32_t PEND4_OFFSET = 0x210; // 0x210 PEND4 RW 0x0000.0000 Interrupt 128-138 Set Pending 147
+        static const uint32_t PENDn_OFFSET[5];
 
-        /**
-         * Interrupt clear enable (disable) registers
-         * 
-         * Register 9: Interrupt 0-31 Clear Enable (DIS0), offset 0x180 P.144
-         * Register 10: Interrupt 32-63 Clear Enable (DIS1), offset 0x184 P.144
-         * Register 11: Interrupt 64-95 Clear Enable (DIS2), offset 0x188 P.144
-         * Register 12: Interrupt 96-127 Clear Enable (DIS3), offset 0x18C P.144
-         * Register 13: Interrupt 128-138 Clear Enable (DIS4), offset 0x190 P.145
-         */
-        const uint32_t DIS_OFFSET = 0x180;
+        static const uint32_t UNPEND0_OFFSET = 0x280; // 0x280 UNPEND0 RW 0x0000.0000 Interrupt 0-31 Clear Pending 148
+        static const uint32_t UNPEND1_OFFSET = 0x284; // 0x284 UNPEND1 RW 0x0000.0000 Interrupt 32-63 Clear Pending 148
+        static const uint32_t UNPEND2_OFFSET = 0x288; // 0x288 UNPEND2 RW 0x0000.0000 Interrupt 64-95 Clear Pending 148
+        static const uint32_t UNPEND3_OFFSET = 0x28C; // 0x28C UNPEND3 RW 0x0000.0000 Interrupt 96-127 Clear Pending 148
+        static const uint32_t UNPEND4_OFFSET = 0x290; // 0x290 UNPEND4 RW 0x0000.0000 Interrupt 128-138 Clear Pending 149
+        static const uint32_t UNPENDn_OFFSET[5];
 
-        /**
-         * Set interrupt pending registers
-         * 
-         * Register 14: Interrupt 0-31 Set Pending (PEND0), offset 0x200 P.146
-         * Register 15: Interrupt 32-63 Set Pending (PEND1), offset 0x204 P.146
-         * Register 16: Interrupt 64-95 Set Pending (PEND2), offset 0x208 P.146
-         * Register 17: Interrupt 96-127 Set Pending (PEND3), offset 0x20C P.146
-         * Register 18: Interrupt 128-138 Set Pending (PEND4), offset 0x210 P.147
-         */
-        const uint32_t PEND_OFFSET = 0x200;
+        /** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+         * CAUTION – DO NOT manually set or clear the bits in the ACTIVE 
+         * register or you will have a VERY bad day.
+         * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+         */ 
+        static const uint32_t ACTIVE0_OFFSET = 0x300; // 0x300 ACTIVE0 RO 0x0000.0000 Interrupt 0-31 Active Bit 150
+        static const uint32_t ACTIVE1_OFFSET = 0x304; // 0x304 ACTIVE1 RO 0x0000.0000 Interrupt 32-63 Active Bit 150
+        static const uint32_t ACTIVE2_OFFSET = 0x308; // 0x308 ACTIVE2 RO 0x0000.0000 Interrupt 64-95 Active Bit 150
+        static const uint32_t ACTIVE3_OFFSET = 0x30C; // 0x30C ACTIVE3 RO 0x0000.0000 Interrupt 96-127 Active Bit 150
+        static const uint32_t ACTIVE4_OFFSET = 0x310; // 0x310 ACTIVE4 RO 0x0000.0000 Interrupt 128-138 Active Bit 151
+        static const uint32_t ACTIVEn_OFFSET[5];
 
-        /**
-         * Clear pending interrupt register
-         * 
-         * Register 19: Interrupt 0-31 Clear Pending (UNPEND0), offset 0x280 P.148
-         * Register 20: Interrupt 32-63 Clear Pending (UNPEND1), offset 0x284 P.148
-         * Register 21: Interrupt 64-95 Clear Pending (UNPEND2), offset 0x288 P.148
-         * Register 22: Interrupt 96-127 Clear Pending (UNPEND3), offset 0x28C P.148
-         * Register 23: Interrupt 128-138 Clear Pending (UNPEND4), offset 0x290 P.149
-         */
-        const uint32_t UNPEND_OFFSET = 0x280;
+        static const uint32_t PRI0_OFFSET = 0x400; // 0x400 PRI0 RW 0x0000.0000 Interrupt 0-3 Priority 152
+        static const uint32_t PRI1_OFFSET = 0x404; // 0x404 PRI1 RW 0x0000.0000 Interrupt 4-7 Priority 152
+        static const uint32_t PRI2_OFFSET = 0x408; // 0x408 PRI2 RW 0x0000.0000 Interrupt 8-11 Priority 152
+        static const uint32_t PRI3_OFFSET = 0x40C; // 0x40C PRI3 RW 0x0000.0000 Interrupt 12-15 Priority 152
+        static const uint32_t PRI4_OFFSET = 0x40C; // 0x410 PRI4 RW 0x0000.0000 Interrupt 16-19 Priority 152
+        static const uint32_t PRI5_OFFSET = 0x414; // 0x414 PRI5 RW 0x0000.0000 Interrupt 20-23 Priority 152
+        static const uint32_t PRI6_OFFSET = 0x418; // 0x418 PRI6 RW 0x0000.0000 Interrupt 24-27 Priority 152
+        static const uint32_t PRI7_OFFSET = 0x41C; // 0x41C PRI7 RW 0x0000.0000 Interrupt 28-31 Priority 152
+        static const uint32_t PRI8_OFFSET = 0x420; // 0x420 PRI8 RW 0x0000.0000 Interrupt 32-35 Priority 152
+        static const uint32_t PRI9_OFFSET = 0x424; // 0x424 PRI9 RW 0x0000.0000 Interrupt 36-39 Priority 152
+        static const uint32_t PRI10_OFFSET = 0x428; // 0x428 PRI10 RW 0x0000.0000 Interrupt 40-43 Priority 152
+        static const uint32_t PRI11_OFFSET = 0x42C; // 0x42C PRI11 RW 0x0000.0000 Interrupt 44-47 Priority 152
+        static const uint32_t PRI12_OFFSET = 0x430; // 0x430 PRI12 RW 0x0000.0000 Interrupt 48-51 Priority 152
+        static const uint32_t PRI13_OFFSET = 0x434; // 0x434 PRI13 RW 0x0000.0000 Interrupt 52-55 Priority 152
+        static const uint32_t PRI14_OFFSET = 0x438; // 0x438 PRI14 RW 0x0000.0000 Interrupt 56-59 Priority 152
+        static const uint32_t PRI15_OFFSET = 0x43C; // 0x43C PRI15 RW 0x0000.0000 Interrupt 60-63 Priority 152
+        static const uint32_t PRI16_OFFSET = 0x440; // 0x440 PRI16 RW 0x0000.0000 Interrupt 64-67 Priority 154
+        static const uint32_t PRI17_OFFSET = 0x444; // 0x444 PRI17 RW 0x0000.0000 Interrupt 68-71 Priority 154
+        static const uint32_t PRI18_OFFSET = 0x448; // 0x448 PRI18 RW 0x0000.0000 Interrupt 72-75 Priority 154
+        static const uint32_t PRI19_OFFSET = 0x44C; // 0x44C PRI19 RW 0x0000.0000 Interrupt 76-79 Priority 154
+        static const uint32_t PRI20_OFFSET = 0x450; // 0x450 PRI20 RW 0x0000.0000 Interrupt 80-83 Priority 154
+        static const uint32_t PRI21_OFFSET = 0x454; // 0x454 PRI21 RW 0x0000.0000 Interrupt 84-87 Priority 154
+        static const uint32_t PRI22_OFFSET = 0x458; // 0x458 PRI22 RW 0x0000.0000 Interrupt 88-91 Priority 154
+        static const uint32_t PRI23_OFFSET = 0x45C; // 0x45C PRI23 RW 0x0000.0000 Interrupt 92-95 Priority 154
+        static const uint32_t PRI24_OFFSET = 0x460; // 0x460 PRI24 RW 0x0000.0000 Interrupt 96-99 Priority 154
+        static const uint32_t PRI25_OFFSET = 0x464; // 0x464 PRI25 RW 0x0000.0000 Interrupt 100-103 Priority 154
+        static const uint32_t PRI26_OFFSET = 0x468; // 0x468 PRI26 RW 0x0000.0000 Interrupt 104-107 Priority 154
+        static const uint32_t PRI27_OFFSET = 0x46C; // 0x46C PRI27 RW 0x0000.0000 Interrupt 108-111 Priority 154
+        static const uint32_t PRI28_OFFSET = 0x470; // 0x470 PRI28 RW 0x0000.0000 Interrupt 112-115 Priority 154
+        static const uint32_t PRI29_OFFSET = 0x474; // 0x474 PRI29 RW 0x0000.0000 Interrupt 116-119 Priority 154
+        static const uint32_t PRI30_OFFSET = 0x478; // 0x478 PRI30 RW 0x0000.0000 Interrupt 120-123 Priority 154
+        static const uint32_t PRI31_OFFSET = 0x47C; // 0x47C PRI31 RW 0x0000.0000 Interrupt 124-127 Priority 154
+        static const uint32_t PRI32_OFFSET = 0x480; // 0x480 PRI32 RW 0x0000.0000 Interrupt 128-131 Priority 154
+        static const uint32_t PRI33_OFFSET = 0x484; // 0x484 PRI33 RW 0x0000.0000 Interrupt 132-135 Priority 154
+        static const uint32_t PRI34_OFFSET = 0x488; // 0x488 PRI34 RW 0x0000.0000 Interrupt 136-138 Priority 154
+        static const uint32_t PRIn_OFFSET[35];
 
-        /**
-         * The interrupt is active or active and pending registers
-         * 
-         * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         * CAUTION – DO NOT manually set or clear the bits in the ACTIVE register or you
-         * will have a VERY bad day.
-         * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-         * 
-         * Register 24: Interrupt 0-31 Active Bit (ACTIVE0), offset 0x300 P.150
-         * Register 25: Interrupt 32-63 Active Bit (ACTIVE1), offset 0x304 P.150
-         * Register 26: Interrupt 64-95 Active Bit (ACTIVE2), offset 0x308 P.15
-         * Register 27: Interrupt 96-127 Active Bit (ACTIVE3), offset 0x30C P.150
-         * Register 28: Interrupt 128-138 Active Bit (ACTIVE4), offset 0x310 P.151
-         */
-        const uint32_t ACTIVE_OFFSET = 0x300;
-
-        /**
-         * Sets the priority of the interrupt. 0 Is highest priority, 7 is lowest priority.
-         * 
-         * Register 29: Interrupt 0-3 Priority (PRI0), offset 0x400 P.152
-         * Register 30: Interrupt 4-7 Priority (PRI1), offset 0x404 P.152
-         * Register 31: Interrupt 8-11 Priority (PRI2), offset 0x408 P.152
-         * Register 32: Interrupt 12-15 Priority (PRI3), offset 0x40C P.152
-         * Register 33: Interrupt 16-19 Priority (PRI4), offset 0x410 P.152
-         * Register 34: Interrupt 20-23 Priority (PRI5), offset 0x414 P.152
-         * Register 35: Interrupt 24-27 Priority (PRI6), offset 0x418 P.152
-         * Register 36: Interrupt 28-31 Priority (PRI7), offset 0x41C P.152
-         * Register 37: Interrupt 32-35 Priority (PRI8), offset 0x420 P.152
-         * Register 38: Interrupt 36-39 Priority (PRI9), offset 0x424 P.152
-         * Register 39: Interrupt 40-43 Priority (PRI10), offset 0x428 P.152
-         * Register 40: Interrupt 44-47 Priority (PRI11), offset 0x42C P.152
-         * Register 41: Interrupt 48-51 Priority (PRI12), offset 0x430 P.152
-         * Register 42: Interrupt 52-55 Priority (PRI13), offset 0x434 P.152
-         * Register 43: Interrupt 56-59 Priority (PRI14), offset 0x438 P.152
-         * Register 44: Interrupt 60-63 Priority (PRI15), offset 0x43C P.152
-         * Register 45: Interrupt 64-67 Priority (PRI16), offset 0x440 P.154
-         * Register 46: Interrupt 68-71 Priority (PRI17), offset 0x444 P.154
-         * Register 47: Interrupt 72-75 Priority (PRI18), offset 0x448 P.154
-         * Register 48: Interrupt 76-79 Priority (PRI19), offset 0x44C P.154
-         * Register 49: Interrupt 80-83 Priority (PRI20), offset 0x450 P.154
-         * Register 50: Interrupt 84-87 Priority (PRI21), offset 0x454 P.154
-         * Register 51: Interrupt 88-91 Priority (PRI22), offset 0x458 P.154
-         * Register 52: Interrupt 92-95 Priority (PRI23), offset 0x45C P.154
-         * Register 53: Interrupt 96-99 Priority (PRI24), offset 0x460 P.154
-         * Register 54: Interrupt 100-103 Priority (PRI25), offset 0x464 P.154
-         * Register 55: Interrupt 104-107 Priority (PRI26), offset 0x468 P.154
-         * Register 56: Interrupt 108-111 Priority (PRI27), offset 0x46C P.154
-         * Register 57: Interrupt 112-115 Priority (PRI28), offset 0x470 P.154
-         * Register 58: Interrupt 116-119 Priority (PRI29), offset 0x474 P.154
-         * Register 59: Interrupt 120-123 Priority (PRI30), offset 0x478 P.154
-         * Register 60: Interrupt 124-127 Priority (PRI31), offset 0x47C P.154
-         * Register 61: Interrupt 128-131 Priority (PRI32), offset 0x480 P.154
-         * Register 62: Interrupt 132-135 Priority (PRI33), offset 0x484 P.154
-         * Register 63: Interrupt 136-138 Priority (PRI34), offset 0x488 P.154
-         */
-        const uint32_t PRI_OFFSET = 0x400;
-
-        /**
-         * Register 64: Software Trigger Interrupt (SWTRIG), offset 0xF00
-         * 
-         * Note: Only privileged software can enable unprivileged access to the 
-         * SWTRIG register.
-         * 
-         * Writing an interrupt number to the SWTRIG register generates a 
-         * Software Generated Interrupt (SGI). See Table 2-9 on page 104 for 
-         * interrupt assignments.
-         * 
-         * When the MAINPEND bit in the Configuration and Control (CFGCTRL) 
-         * register (see page 168) is set, unprivileged software can access the 
-         * SWTRIG register.
-         */
-        const uint32_t SWTRIG_OFFSET = 0xF00;
-
+        static const uint32_t SWTRIG_OFFSET = 0xF00; // 0xF00 SWTRIG WO 0x0000.0000 Software Trigger Interrupt 156
 
 
         /**

@@ -42,6 +42,18 @@
 #include <math.h>
 #include "../../register/register.h"
 
+const uint32_t MPUTYPE_OFFSET = 0xD90;
+const uint32_t MPUCTRL_OFFSET = 0xD94;
+const uint32_t MPUNUMBER_OFFSET = 0xD98;
+const uint32_t MPUBASE_OFFSET = 0xD9C;
+const uint32_t MPUBASE1_OFFSET = 0xDA4;
+const uint32_t MPUBASE2_OFFSET = 0xDAC;
+const uint32_t MPUBASE3_OFFSET = 0xDB4;
+const uint32_t MPUATTR_OFFSET = 0xDA0;  
+const uint32_t MPUATTR1_OFFSET = 0xDA8;
+const uint32_t MPUATTR2_OFFSET = 0xDB0;
+const uint32_t MPUATTR3_OFFSET = 0xDB8;
+
 class Mpu
 {
     public:
@@ -49,169 +61,8 @@ class Mpu
         ~Mpu();
 
     private:
-        /**
-         * Cortex-M4 Peripheral SysTick, NVIC, MPU, FPU and SCB registers.
-         * These register definitions begin on page 134 of the TM4C123GH6PM Datasheet.
-         */
-        const uint32_t corePeripheralBase = 0xE000E000;
+    
 
-        /**
-         * Register 80: MPU Type (MPUTYPE), offset 0xD90
-         * 
-         * Note: This register can only be accessed from privileged mode.
-         * 
-         * The MPUTYPE register indicates whether the MPU is present, and if so, how
-         * many regions it supports.
-         */
-        const uint32_t MPUTYPE_OFFSET = 0xD90;
-
-        /**
-         * Register 81: MPU Control (MPUCTRL), offset 0xD94
-         * 
-         * Note: This register can only be accessed from privileged mode. 
-         * 
-         * The MPUCTRL register enables the MPU, enables the default memory map 
-         * background region, and enables use of the MPU when in the hard fault, 
-         * Non-maskable Interrupt (NMI), and Fault Mask Register (FAULTMASK) 
-         * escalated handlers.
-         * 
-         * When the ENABLE and PRIVDEFEN bits are both set:
-         * 
-         *     ■ For privileged accesses, the default memory map is as described 
-         *       in “Memory Model” on page 92. Any access by privileged software 
-         *       that does not address an enabled memory region behaves as 
-         *       defined by the default memory map.
-         *     
-         *     ■ Any access by unprivileged software that does not address an 
-         *       enabled memory region causes a memory management fault.
-         * 
-         * Execute Never (XN) and Strongly Ordered rules always apply to the 
-         * System Control Space regardless of the value of the ENABLE bit.
-         * 
-         * When the ENABLE bit is set, at least one region of the memory map 
-         * must be enabled for the system to function unless the PRIVDEFEN bit 
-         * is set. If the PRIVDEFEN bit is set and no regions are enabled, then 
-         * only privileged software can operate.
-         * 
-         * When the ENABLE bit is clear, the system uses the default memory map, 
-         * which has the same memory attributes as if the MPU is not implemented 
-         * (see Table 2-5 on page 95 for more information). The default memory 
-         * map applies to accesses from both privileged and unprivileged software.
-         * 
-         * When the MPU is enabled, accesses to the System Control Space and 
-         * vector table are always permitted. Other areas are accessible based 
-         * on regions and whether PRIVDEFEN is set.
-         * 
-         * Unless HFNMIENA is set, the MPU is not enabled when the processor is 
-         * executing the handler for an exception with priority –1 or –2. These 
-         * priorities are only possible when handling a hard fault or NMI 
-         * exception or when FAULTMASK is enabled. Setting the HFNMIENA bit 
-         * enables the MPU when operating with these two priorities.
-         */
-        const uint32_t MPUCTRL_OFFSET = 0xD94;
-
-        /**
-         * Register 82: MPU Region Number (MPUNUMBER), offset 0xD98
-         * 
-         * Note: This register can only be accessed from privileged mode.
-         * 
-         * The MPUNUMBER register selects which memory region is referenced by 
-         * the MPU Region Base Address (MPUBASE) and MPU Region Attribute and 
-         * Size (MPUATTR) registers. Normally, the required region number 
-         * should be written to this register before accessing the MPUBASE or 
-         * the MPUATTR register. However, the region number can be changed by 
-         * writing to the MPUBASE register with the VALID bit set (see page 190). 
-         * This write updates the value of the REGION field.
-         */
-        const uint32_t MPUNUMBER_OFFSET = 0xD98;
-
-        /**
-         * Register 83: MPU Region Base Address (MPUBASE), offset 0xD9C
-         * Register 84: MPU Region Base Address Alias 1 (MPUBASE1), offset 0xDA4
-         * Register 85: MPU Region Base Address Alias 2 (MPUBASE2), offset 0xDAC
-         * Register 86: MPU Region Base Address Alias 3 (MPUBASE3), offset 0xDB4
-         * 
-         * Note: This register can only be accessed from privileged mode. 
-         * 
-         * The MPUBASE register defines the base address of the MPU region selected by 
-         * the MPU Region Number (MPUNUMBER) register and can update the value of the 
-         * MPUNUMBER register. To change the current region number and update the 
-         * MPUNUMBER register, write the MPUBASE register with the VALID bit set.
-         * 
-         * The ADDR field is bits 31:N of the MPUBASE register. Bits (N-1):5 are 
-         * reserved. The region size, as specified by the SIZE field in the MPU Region 
-         * Attribute and Size (MPUATTR) register, defines the value of N where:
-         * 
-         * N = Log 2 (Region size in bytes)
-         * 
-         * If the region size is configured to 4 GB in the MPUATTR register, there is no 
-         * valid ADDR field. In this case, the region occupies the complete memory map, 
-         * and the base address is 0x0000.0000.
-         * 
-         * The base address is aligned to the size of the region. For example, a 64-KB 
-         * region must be aligned on a multiple of 64 KB, for example, at 0x0001.0000 or 
-         * 0x0002.0000.
-         */
-        const uint32_t MPUBASE_OFFSET = 0xD9C;
-        // const uint32_t MPUBASE1_OFFSET = 0xDA4;
-        // const uint32_t MPUBASE2_OFFSET = 0xDAC;
-        // const uint32_t MPUBASE3_OFFSET = 0xDB4;
-
-        /**
-         * Register 87: MPU Region Attribute and Size (MPUATTR), offset 0xDA0
-         * Register 88: MPU Region Attribute and Size Alias 1 (MPUATTR1), offset 0xDA8
-         * Register 89: MPU Region Attribute and Size Alias 2 (MPUATTR2), offset 0xDB0
-         * Register 90: MPU Region Attribute and Size Alias 3 (MPUATTR3), offset 0xDB8
-         * 
-         * Note: This register can only be accessed from privileged mode. 
-         * 
-         * The MPUATTR register defines the region size and memory attributes of the MPU 
-         * region specified by the MPU Region Number (MPUNUMBER) register and enables 
-         * that region and any subregions.
-         * 
-         * The MPUATTR register is accessible using word or halfword accesses with the 
-         * most-significant halfword holding the region attributes and the 
-         * least-significant halfword holds the region size and the region and subregion 
-         * enable bits.
-         * 
-         * The MPU access permission attribute bits, XN, AP, TEX, S, C, and B, control 
-         * access to the corresponding memory region. If an access is made to an area of 
-         * memory without the required permissions, then the MPU generates a permission 
-         * fault.
-         * 
-         * The SIZE field defines the size of the MPU memory region specified by the 
-         * MPUNUMBER register as follows:
-         * 
-         * (Region size in bytes) = 2^(SIZE+1)
-         * 
-         * The smallest permitted region size is 32 bytes, corresponding to a SIZE value 
-         * of 4. Table 3-10 on page 192 gives example SIZE values with the corresponding 
-         * region size and value of N in the MPU Region Base Address (MPUBASE) register.
-         * 
-         * Table 3-10. Example SIZE Field Values
-         * ________________________________________________________________________________
-         * | SIZE Encoding  | Region Size | Value of N (a)        | Note                  |
-         * |----------------|-------------|-----------------------|-----------------------|
-         * | 00100b (0x4)   | 32 B        | 5                     | Minimum permitted size|
-         * |----------------|-------------|-----------------------|-----------------------|
-         * | 01001b (0x9)   | 1 KB        | 10                    |                       |
-         * |----------------|-------------|-----------------------|-----------------------|
-         * | 10011b (0x13)  | 1 MB        | 20                    |                       |
-         * |----------------|-------------|-----------------------|-----------------------|
-         * | 11101b (0x1D)  | 1 GB        | 30                    |                       |
-         * |----------------|-------------|-----------------------|-----------------------|
-         * | 11111b (0x1F)  | 4 GB        | No valid ADDR field   | Maximum possible size |
-         * |                |             | in MPUBASE; the region|                       |
-         * |                |             | occupies the complete |                       |
-         * |                |             | memory map.           |                       |
-         * |________________|_____________|_______________________|_______________________|
-         * a. Refers to the N parameter in the MPUBASE register (see page 190).
-         * 
-         */
-        const uint32_t MPUATTR_OFFSET = 0xDA0;  
-        // const uint32_t MPUATTR1_OFFSET = 0xDA8;
-        // const uint32_t MPUATTR2_OFFSET = 0xDB0;
-        // const uint32_t MPUATTR3_OFFSET = 0xDB8;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

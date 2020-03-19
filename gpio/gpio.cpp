@@ -41,7 +41,7 @@ Gpio::Gpio(GPIO_Port_Pins gpio, direction dir)
     (*this).gpioBaseAddress = GPIO_Port_AHB_BASE + (((*this).gpio)/8) * 0x1000;
     (*this).gpioPin = (((*this).gpio % 8));
 
-    Register RCGCGPIO((volatile uint32_t*)(systemControlBase + RCGCGPIO_OFFSET)); 
+    Register RCGCGPIO((volatile uint32_t*)(systemControlBase + RCGCGPIO_OFFSET));
     Register PRGPIO((volatile uint32_t*)(systemControlBase + PRGPIO_OFFSET)); 
 
     Register GPIOAFSEL((volatile uint32_t*)(gpioBaseAddress + GPIOAFSEl_OFFSET));

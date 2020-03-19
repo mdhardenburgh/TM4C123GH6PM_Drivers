@@ -45,6 +45,22 @@
 
 #include "../systemControl/systemControl.h"
 
+const uint32_t uart0BaseAddress = 0x4000C000;
+const uint32_t uart1BaseAddress = 0x4000D000;
+const uint32_t uart2BaseAddress = 0x4000E000;
+const uint32_t uart3BaseAddress = 0x4000F000;
+const uint32_t uart4BaseAddress = 0x40010000;
+const uint32_t uart5BaseAddress = 0x40011000;
+const uint32_t uart6BaseAddress = 0x40012000;
+const uint32_t uart6BaseAddress = 0x40013000;
+
+const uint32_t PPUART_OFFSET = 0x318; //0x318 PPUART RO 0x0000.00FF Universal Asynchronous Receiver/Transmitter Peripheral Present 295
+const uint32_t SRUART_OFFSET = 0x518; //0x518 SRUART RW 0x0000.0000 Universal Asynchronous Receiver/Transmitter Software Reset 318
+const uint32_t RCGCUART_OFFSET = 0x618; //0x618 RCGCUART RW 0x0000.0000 Universal Asynchronous Receiver/Transmitter Run Mode Clock Gating Control 344
+const uint32_t SCGCUART_OFFSET = 0x718; //0x718 SCGCUART RW 0x0000.0000 Universal Asynchronous Receiver/Transmitter Sleep Mode Clock Gating Control 366
+const uint32_t DCGCUART_OFFSET = 0x818; //0x818 DCGCUART RW 0x0000.0000 Universal Asynchronous Receiver/Transmitter Deep-Sleep Mode Clock Gating Control 388
+const uint32_t PRUART_OFFSET = 0xA18; //0xA18 PRUART RO 0x0000.0000 Universal Asynchronous Receiver/Transmitter Peripheral Ready 410
+
 class Uart : SystemControl
 {
     public:
@@ -52,22 +68,6 @@ class Uart : SystemControl
         ~Uart();
 
     private:
-
-        const uint32_t uart0BaseAddress = 0x4000C000;
-        const uint32_t uart1BaseAddress = 0x4000D000;
-        const uint32_t uart2BaseAddress = 0x4000E000;
-        const uint32_t uart3BaseAddress = 0x4000F000;
-        const uint32_t uart4BaseAddress = 0x40010000;
-        const uint32_t uart5BaseAddress = 0x40011000;
-        const uint32_t uart6BaseAddress = 0x40012000;
-        const uint32_t uart6BaseAddress = 0x40013000;
-
-        const uint32_t PPUART_OFFSET = 0x318; //0x318 PPUART RO 0x0000.00FF Universal Asynchronous Receiver/Transmitter Peripheral Present 295
-        const uint32_t SRUART_OFFSET = 0x518; //0x518 SRUART RW 0x0000.0000 Universal Asynchronous Receiver/Transmitter Software Reset 318
-        const uint32_t RCGCUART_OFFSET = 0x618; //0x618 RCGCUART RW 0x0000.0000 Universal Asynchronous Receiver/Transmitter Run Mode Clock Gating Control 344
-        const uint32_t SCGCUART_OFFSET = 0x718; //0x718 SCGCUART RW 0x0000.0000 Universal Asynchronous Receiver/Transmitter Sleep Mode Clock Gating Control 366
-        const uint32_t DCGCUART_OFFSET = 0x818; //0x818 DCGCUART RW 0x0000.0000 Universal Asynchronous Receiver/Transmitter Deep-Sleep Mode Clock Gating Control 388
-        const uint32_t PRUART_OFFSET = 0xA18; //0xA18 PRUART RO 0x0000.0000 Universal Asynchronous Receiver/Transmitter Peripheral Ready 410
 
 
 /**************************System Control BitFields****************************/
