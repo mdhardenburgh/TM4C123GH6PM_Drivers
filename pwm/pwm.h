@@ -45,46 +45,23 @@
 
 #include "../systemControl/systemControl.h"
 
-const uint32_t pwm0BaseAddress = 0x40028000;
-const uint32_t pwm1BaseAddress = 0x40029000;
-
-const uint32_t PPPWM_OFFSET = 0x340; //0x340 PPPWM RO 0x0000.0003 Pulse Width Modulator Peripheral Present 305
-const uint32_t SRPWM_OFFSET = 0x540; //0x540 SRPWM RW 0x0000.0000 Pulse Width Modulator Software Reset 330
-const uint32_t RCGCPWM_OFFSET = 0x640; //0x640 RCGCPWM RW 0x0000.0000 Pulse Width Modulator Run Mode Clock Gating Control 354
-const uint32_t SCGCPWM_OFFSET = 0x740; //0x740 SCGCPWM RW 0x0000.0000 Pulse Width Modulator Sleep Mode Clock Gating Control 376
-const uint32_t DCGCPWM_OFFSET = 0x840; //0x840 DCGCPWM RW 0x0000.0000 Pulse Width Modulator Deep-Sleep Mode Clock Gating Control 398
-const uint32_t PRPWM_OFFSET = 0xA40; //0xA40 PRPWM RO 0x0000.0000 Pulse Width Modulator Peripheral Ready 420
-
-class Pwm : SystemControl
+class Pwm
 {
     public:
         Pwm();
         ~Pwm();
 
     private:
+        
+        static const uint32_t pwm0BaseAddress = 0x40028000;
+        static const uint32_t pwm1BaseAddress = 0x40029000;
 
-/**************************System Control BitFields****************************/
-
-        // bitField RCC_USEPWMDIV{20, 1, RW}; //Enable PWM Clock Divisor
-        // bitField RCC_PWMDIV{17, 3, RW}; //PWM Unit Clock Divisor
-
-        // bitField PPPWM_P1{1, 1, RO}; //PWM Module 1 Present
-        // bitField PPPWM_P0{0, 1, RO}; //PWM Module 0 Present
-
-        // bitField SRPWM_R1{1, 1, RW}; //PWM Module 1 Software Reset
-        // bitField SRPWM_R0{0, 1, RW}; //PWM Module 0 Software Reset
-
-        // bitField RCGCPWM_R1{1, 1, RW}; //PWM Module 1 Run Mode Clock Gating Control
-        // bitField RCGCPWM_R0{0, 1, RW}; //PWM Module 0 Run Mode Clock Gating Control
-
-        // bitField SCGCPWM_S1{1, 1, RW}; //PWM Module 1 Sleep Mode Clock Gating Control
-        // bitField SCGCPWM_S0{0, 1, RW}; //PWM Module 0 Sleep Mode Clock Gating Control
-
-        // bitField DCGCPWM_D1{1, 1, RW}; //PWM Module 1 Deep-Sleep Mode Clock Gating Control
-        // bitField DCGCPWM_D0{0, 1, RW}; //PWM Module 0 Deep-Sleep Mode Clock Gating Control
-
-        // bitField PRPWM_R1{1, 1, RO}; //PWM Module 1 Peripheral Ready
-        // bitField PRPWM_R0{0, 1, RO}; //PWM Module 0 Peripheral Ready
+        static const uint32_t PPPWM_OFFSET = 0x340; //0x340 PPPWM RO 0x0000.0003 Pulse Width Modulator Peripheral Present 305
+        static const uint32_t SRPWM_OFFSET = 0x540; //0x540 SRPWM RW 0x0000.0000 Pulse Width Modulator Software Reset 330
+        static const uint32_t RCGCPWM_OFFSET = 0x640; //0x640 RCGCPWM RW 0x0000.0000 Pulse Width Modulator Run Mode Clock Gating Control 354
+        static const uint32_t SCGCPWM_OFFSET = 0x740; //0x740 SCGCPWM RW 0x0000.0000 Pulse Width Modulator Sleep Mode Clock Gating Control 376
+        static const uint32_t DCGCPWM_OFFSET = 0x840; //0x840 DCGCPWM RW 0x0000.0000 Pulse Width Modulator Deep-Sleep Mode Clock Gating Control 398
+        static const uint32_t PRPWM_OFFSET = 0xA40; //0xA40 PRPWM RO 0x0000.0000 Pulse Width Modulator Peripheral Ready 420
 
 
 };

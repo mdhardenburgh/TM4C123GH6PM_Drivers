@@ -148,6 +148,7 @@ class Nvic
         static void wfi(void);
 
     private:
+        
         static const uint32_t nvicRegisterOffset = 0x4;
         
         static const uint32_t EN0_OFFSET = 0x100; // 0x100 EN0 RW 0x0000.0000 Interrupt 0-31 Set Enable 142
@@ -228,21 +229,6 @@ class Nvic
         static const uint32_t PRIn_OFFSET[35];
 
         static const uint32_t SWTRIG_OFFSET = 0xF00; // 0xF00 SWTRIG WO 0x0000.0000 Software Trigger Interrupt 156
-
-
-        /**
-         * bitField INT{0, 1, RW}; //bit place isn't being used. Renaming 1 to INT.bitWidth to eliminate magic numbers
-         * 
-         * bitField PRIORITY_INT{5, 3, RW}; //bit place isn't being used. Renaming 3 to INT_PRIORITY.size to eliminate magic numbers
-         * 
-         * 
-         * Description: Interrupt ID
-         * 
-         * This field holds the interrupt ID of the required SGI. For example, 
-         * a value of 0x3 generates an interrupt on IRQ3.
-         * 
-         * bitField INTID{0, 8, WO}; //bit place and field size
-         */
 
 };
 #endif //NVIC

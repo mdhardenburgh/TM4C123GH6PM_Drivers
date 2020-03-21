@@ -205,20 +205,21 @@ class GeneralPurposeTimer
         static const uint32_t GPTMTnPS_OFFSET[2];
         static const uint32_t GPTMTnPV_OFFSET[2];
 
-        volatile uint32_t* RCGCnTIMER;
-        volatile uint32_t* PRnTIMER;
-        volatile uint32_t* GPTMCTL;
-        volatile uint32_t* GPTMCFG;
-        volatile uint32_t* GPTMTnMR;
-        volatile uint32_t* GPTMTAILR;
-        volatile uint32_t* GPTMTBILR;
-        volatile uint32_t* GPTMIMR;
-        volatile uint32_t* GPTMTAMATCHR;
-        volatile uint32_t* GPTMTBMATCHR;
-        volatile uint32_t* GPTMTAPR;
-        volatile uint32_t* GPTMTBPR;
-        volatile uint32_t* GPTMRIS;
-        volatile uint32_t* GPTMICR;
+        // volatile uint32_t* RCGCnTIMER;
+        // volatile uint32_t* PRnTIMER;
+        // volatile uint32_t* GPTMCTL;
+        // volatile uint32_t* GPTMCFG;
+        // volatile uint32_t* GPTMTnMR;
+        // volatile uint32_t* GPTMTAILR;
+        // volatile uint32_t* GPTMTBILR;
+        // volatile uint32_t* GPTMIMR;
+        // volatile uint32_t* GPTMTAMATCHR;
+        // volatile uint32_t* GPTMTBMATCHR;
+        // volatile uint32_t* GPTMTAPR;
+        // volatile uint32_t* GPTMTBPR;
+        // volatile uint32_t* GPTMRIS;
+        // volatile uint32_t* GPTMICR;
+
 
 };
 

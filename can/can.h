@@ -49,17 +49,7 @@
 
 #include "../systemControl/systemControl.h"
 
-const uint32_t can0BaseAddress = 0x40040000;
-const uint32_t can1BaseAddress = 0x40041000;
-
-const uint32_t PPCAN_OFFSET = 0x334; //0x334 PPCAN RO 0x0000.0003 Controller Area Network Peripheral Present 302
-const uint32_t SRCAN_OFFSET = 0x534; //0x534 SRCAN RW 0x0000.0000 Controller Area Network Software Reset 325
-const uint32_t RCGCCAN_OFFSET = 0x634; //0x634 RCGCCAN RW 0x0000.0000 Controller Area Network Run Mode Clock Gating Control 351
-const uint32_t SCGCCAN_OFFSET = 0x734; //0x734 SCGCCAN RW 0x0000.0000 Controller Area Network Sleep Mode Clock Gating Control 373
-const uint32_t DCGCCAN_OFFSET = 0x834; //0x834 DCGCCAN RW 0x0000.0000 Controller Area Network Deep-Sleep Mode Clock Gating Control 395
-const uint32_t PRCAN_OFFSET = 0xA34; //0xA34 PRCAN RO 0x0000.0000 Controller Area Network Peripheral Ready 417
-
-class Can : SystemControl
+class Can
 {
     public:
         Can();
@@ -67,26 +57,16 @@ class Can : SystemControl
 
     private:
 
+        static const uint32_t can0BaseAddress = 0x40040000;
+        static const uint32_t can1BaseAddress = 0x40041000;
 
-/**************************System Control BitFields****************************/
+        static const uint32_t PPCAN_OFFSET = 0x334; //0x334 PPCAN RO 0x0000.0003 Controller Area Network Peripheral Present 302
+        static const uint32_t SRCAN_OFFSET = 0x534; //0x534 SRCAN RW 0x0000.0000 Controller Area Network Software Reset 325
+        static const uint32_t RCGCCAN_OFFSET = 0x634; //0x634 RCGCCAN RW 0x0000.0000 Controller Area Network Run Mode Clock Gating Control 351
+        static const uint32_t SCGCCAN_OFFSET = 0x734; //0x734 SCGCCAN RW 0x0000.0000 Controller Area Network Sleep Mode Clock Gating Control 373
+        static const uint32_t DCGCCAN_OFFSET = 0x834; //0x834 DCGCCAN RW 0x0000.0000 Controller Area Network Deep-Sleep Mode Clock Gating Control 395
+        static const uint32_t PRCAN_OFFSET = 0xA34; //0xA34 PRCAN RO 0x0000.0000 Controller Area Network Peripheral Ready 417
 
-        // bitField PPCAN_P1{1, 1, RO}; //CAN Module 1 Present
-        // bitField PPCAN_P0{0, 1, RO}; //CAN Module 0 Present
-
-        // bitField SRCAN_R1{1, 1, RW}; //CAN Module 1 Software Reset
-        // bitField SRCAN_R0{0, 1, RW}; //CAN Module 0 Software Reset
-
-        // bitField RCGCCAN_R1{1, 1, RW}; //CAN Module 1 Run Mode Clock Gating Control
-        // bitField RCGCCAN_R0{0, 1, RW}; //CAN Module 0 Run Mode Clock Gating Control
-
-        // bitField SCGCCAN_S1{1, 1, RW}; //CAN Module 1 Sleep Mode Clock Gating Control
-        // bitField SCGCCAN_S0{0, 1, RW}; //CAN Module 0 Sleep Mode Clock Gating Control
-
-        // bitField DCGCCAN_D1{1, 1, RW}; //CAN Module 1 Deep-Sleep Mode Clock Gating Control
-        // bitField DCGCCAN_D0{0, 1, RW}; //CAN Module 0 Deep-Sleep Mode Clock Gating Control
-
-        // bitField PRCAN_R1{1, 1, RO}; //CAN Module 1 Peripheral Ready
-        // bitField PRCAN_R0{0, 1, RO}; //CAN Module 0 Peripheral Ready
 
 };
 

@@ -76,16 +76,11 @@ Nvic::~Nvic()
  */
 void Nvic::activateInterrupt(interrupt myInterrupt, uint32_t priority)
 {
+    
     if((myInterrupt < 139) && (priority < 8))
-    {
-        bitField PRIORITY_INT(((myInterrupt % nvicRegisterOffset) * 8) + 5, 3, RW);
-        bitField INT((uint32_t)(myInterrupt % 32), 1, RW);
-
-        Register PRI((volatile uint32_t*)(corePeripheralBase + PRIn_OFFSET[myInterrupt/4]));
-        Register EN((volatile uint32_t*)(corePeripheralBase + ENn_OFFSET[myInterrupt/32]));
-
-        (PRI).setRegisterBitFieldStatus(PRIORITY_INT, priority);
-        (EN).setRegisterBitFieldStatus(INT, (uint32_t)set);
+    {   
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(corePeripheralBase + PRIn_OFFSET[myInterrupt/4])), priority, ((myInterrupt % nvicRegisterOffset) * 8) + 5, 3, RW);
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(corePeripheralBase + ENn_OFFSET[myInterrupt/32])), (uint32_t)set, (uint32_t)(myInterrupt % 32), 1, RW);
 
     }
     

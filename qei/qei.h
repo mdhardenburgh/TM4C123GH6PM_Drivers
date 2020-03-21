@@ -45,17 +45,7 @@
 
 #include "../systemControl/systemControl.h"
 
-const uint32_t qei0BaseAddress = 0x4002C000;
-const uint32_t qei1BaseAddress = 0x4002D000;
-
-const uint32_t PPQEI_OFFSET = 0x344; //0x344 PPQEI RO 0x0000.0003 Quadrature Encoder Interface Peripheral Present 306
-const uint32_t SRQEI_OFFSET = 0x544; //0x544 SRQEI RW 0x0000.0000 Quadrature Encoder Interface Software Reset 332
-const uint32_t RCGCQEI_OFFSET = 0x644; //0x644 RCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Run Mode Clock Gating Control 355
-const uint32_t SCGCQEI_OFFSET = 0x744; //0x744 SCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Sleep Mode Clock Gating Control 377
-const uint32_t DCGCQEI_OFFSET = 0x844; //0x844 DCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Deep-Sleep Mode Clock Gating Control 399
-const uint32_t PRQEI_OFFSET = 0xA44; //0xA44 PRQEI RO 0x0000.0000 Quadrature Encoder Interface Peripheral Ready 421
-
-class Qei : SystemControl
+class Qei
 {
     public:
         Qei();
@@ -63,26 +53,16 @@ class Qei : SystemControl
 
     private:
 
-/**************************System Control BitFields****************************/
+        static const uint32_t qei0BaseAddress = 0x4002C000;
+        static const uint32_t qei1BaseAddress = 0x4002D000;
 
-        // bitField PPQEI_P1{1, 1, RO}; //QEI Module 1 Present
-        // bitField PPQEI_P0{0, 1, RO}; //QEI Module 0 Present
+        static const uint32_t PPQEI_OFFSET = 0x344; //0x344 PPQEI RO 0x0000.0003 Quadrature Encoder Interface Peripheral Present 306
+        static const uint32_t SRQEI_OFFSET = 0x544; //0x544 SRQEI RW 0x0000.0000 Quadrature Encoder Interface Software Reset 332
+        static const uint32_t RCGCQEI_OFFSET = 0x644; //0x644 RCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Run Mode Clock Gating Control 355
+        static const uint32_t SCGCQEI_OFFSET = 0x744; //0x744 SCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Sleep Mode Clock Gating Control 377
+        static const uint32_t DCGCQEI_OFFSET = 0x844; //0x844 DCGCQEI RW 0x0000.0000 Quadrature Encoder Interface Deep-Sleep Mode Clock Gating Control 399
+        static const uint32_t PRQEI_OFFSET = 0xA44; //0xA44 PRQEI RO 0x0000.0000 Quadrature Encoder Interface Peripheral Ready 421
 
-        // bitField SRQEI_R1{1, 1, RW}; //QEI Module 1 Software Reset
-        // bitField SRQEI_R0{0, 1, RW}; //QEI Module 0 Software Reset
-
-        // bitField RCGCQEI_R1{1, 1, RW}; //QEI Module 1 Run Mode Clock Gating Control
-        // bitField RCGCQEI_R0{0, 1, RW}; //QEI Module 0 Run Mode Clock Gating Control
-
-        // bitField SCGCQEI_S1{1, 1, RW}; //QEI Module 1 Sleep Mode Clock Gating Control
-        // bitField SCGCQEI_S0{0, 1, RW}; //QEI Module 0 Sleep Mode Clock Gating Control
-
-        // bitField DCGCQEI_D1{1, 1, RW}; //QEI Module 1 Deep-Sleep Mode Clock Gating Control
-        // bitField DCGCQEI_D0{0, 1, RW}; //QEI Module 0 Deep-Sleep Mode Clock Gating Control
-
-        // bitField PRQEI_R1{1, 1, RO}; //QEI Module 1 Peripheral Ready
-        // bitField PRQEI_R0{0, 1, RO}; //QEI Module 0 Peripheral Ready
-        
 };
 
 #endif //P_H

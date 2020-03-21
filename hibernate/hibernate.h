@@ -44,32 +44,21 @@
 
 #include "../systemControl/systemControl.h"
 
-const uint32_t hibernateBase = 0x400FC000;
-
-const uint32_t PPHIB_OFFSET = 0x314; //0x314 PPHIB RO 0x0000.0001 Hibernation Peripheral Present 294
-const uint32_t SRHIB_OFFSET = 0x514; //0x514 SRHIB RW 0x0000.0000 Hibernation Software Reset 317
-const uint32_t RCGCHIB_OFFSET = 0x614; //0x614 RCGCHIB RW 0x0000.0001 Hibernation Run Mode Clock Gating Control 343
-const uint32_t SCGCHIB_OFFSET = 0x714; //0x714 SCGCHIB RW 0x0000.0001 Hibernation Sleep Mode Clock Gating Control 365
-const uint32_t DCGCHIB_OFFSET = 0x814; //0x814 DCGCHIB RW 0x0000.0001 Hibernation Deep-Sleep Mode Clock Gating Control 387
-const uint32_t PRHIB_OFFSET = 0xA14; //0xA14 PRHIB RO 0x0000.0001 Hibernation Peripheral Ready 409
-
-class Hibernate : SystemControl
+class Hibernate
 {
     public:
         Hibernate();
         ~Hibernate();
 
     private:
+        static const uint32_t hibernateBase = 0x400FC000;
 
-
-/**************************System Control BitFields****************************/
-
-        // bitField PPHIB_P0{0, 1, RO}; //Hibernation Module Present
-        // bitField SRHIB_R0{0, 1, RW}; //Hibernation Module Software Reset
-        // bitField RCGCHIB_RO{0, 1, RW}; //Hibernation Module Run Mode Clock Gating Control
-        // bitField SCGCHIB_S0{0, 1, RW}; //Hibernation Module Sleep Mode Clock Gating Control
-        // bitField DCGCHIB_D0{0, 1, RW}; //Hibernation Module Deep-Sleep Mode Clock Gating Control
-        // bitField PRHIB_R0{0, 1, RO}; //Hibernation Module Peripheral Ready
+        static const uint32_t PPHIB_OFFSET = 0x314; //0x314 PPHIB RO 0x0000.0001 Hibernation Peripheral Present 294
+        static const uint32_t SRHIB_OFFSET = 0x514; //0x514 SRHIB RW 0x0000.0000 Hibernation Software Reset 317
+        static const uint32_t RCGCHIB_OFFSET = 0x614; //0x614 RCGCHIB RW 0x0000.0001 Hibernation Run Mode Clock Gating Control 343
+        static const uint32_t SCGCHIB_OFFSET = 0x714; //0x714 SCGCHIB RW 0x0000.0001 Hibernation Sleep Mode Clock Gating Control 365
+        static const uint32_t DCGCHIB_OFFSET = 0x814; //0x814 DCGCHIB RW 0x0000.0001 Hibernation Deep-Sleep Mode Clock Gating Control 387
+        static const uint32_t PRHIB_OFFSET = 0xA14; //0xA14 PRHIB RO 0x0000.0001 Hibernation Peripheral Ready 409
 
 };
 

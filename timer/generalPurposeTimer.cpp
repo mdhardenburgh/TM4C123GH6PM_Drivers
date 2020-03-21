@@ -76,55 +76,40 @@ GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint3
     (*this).use = use;
     (*this).mode = mode;
     period = period - 1;
-    
-    RCGCnTIMER = ((volatile uint32_t*)(systemControlBase + RCGCnTIMER_OFFSET[block/6]));
-    PRnTIMER = ((volatile uint32_t*)(systemControlBase + PRnTIMER_OFFSET[block/6]));
     baseAddress = timerBaseAddresses[block];
-    
-    GPTMCTL = ((volatile uint32_t*)(baseAddress + GPTMCTL_OFFSET));
-    GPTMCFG = ((volatile uint32_t*)(baseAddress + GPTMCFG_OFFSET));
-    GPTMTnMR = ((volatile uint32_t*)(baseAddress + GPTMTnMR_OFFSET[(use%2)]));
-    GPTMTAILR = ((volatile uint32_t*)(baseAddress + GPTMTAILR_OFFSET));
-    GPTMTBILR = ((volatile uint32_t*)(baseAddress + GPTMTBILR_OFFSET));
-    GPTMIMR = ((volatile uint32_t*)(baseAddress + GPTMIMR_OFFSET));
-    GPTMTAMATCHR = ((volatile uint32_t*)(baseAddress + GPTMTAMATCHR_OFFSET));
-    GPTMTBMATCHR = ((volatile uint32_t*)(baseAddress + GPTMTBMATCHR_OFFSET));
-    GPTMTAPR = ((volatile uint32_t*)(baseAddress + GPTMTAPR_OFFSET));
-    GPTMTBPR = ((volatile uint32_t*)(baseAddress + GPTMTBPR_OFFSET));
-    GPTMRIS = ((volatile uint32_t*)(baseAddress + GPTMRIS_OFFSET));
-    GPTMICR = ((volatile uint32_t*)(baseAddress + GPTMICR_OFFSET));
+
 
     //0. Enable the clock for the timer
-    Register::_setRegisterBitFieldStatus(RCGCnTIMER, set, (block%6), 1, RW);
-    while(Register::_getRegisterBitFieldStatus(PRnTIMER, (block%6), 1, RO) == 0)
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RCGCnTIMER_OFFSET[block/6])), set, (block%6), 1, RW);
+    while(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + PRnTIMER_OFFSET[block/6])), (block%6), 1, RO) == 0)
     {
         //Ready?
     }
 
     //1. Disbale the timer before making any changes
-    Register::_setRegisterBitFieldStatus(GPTMCTL, clear, (use%2)*8, 1, RW); //disable the timer
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMCTL_OFFSET)), clear, (use%2)*8, 1, RW); //disable the timer
     if((mode == oneShot) || (mode == periodic))
     {
         interruptBit = ((use == timerB) ? 8 : 0);
         
         //2. Configure for single or concatenated mode 
-        Register::_setRegisterBitFieldStatus(GPTMCFG, ((use == concatenated) ? 0x0 : 0x4), 0, 3, RW);
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMCFG_OFFSET)), ((use == concatenated) ? 0x0 : 0x4), 0, 3, RW);
 
         //3. Configure for One-Shot or Periodic mode
-        Register::_setRegisterBitFieldStatus(GPTMTnMR, mode + 1, 0, 2, RW);
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTnMR_OFFSET[(use%2)])), mode + 1, 0, 2, RW);
 
         //4. Optional configuration. Configure for count direction
-        Register::_setRegisterBitFieldStatus(GPTMTnMR, dir, 4, 1, RW);
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTnMR_OFFSET[(use%2)])), dir, 4, 1, RW);
         
         //5. Interval load
         if(use == timerA)
         {
-            Register::_setRegisterBitFieldStatus(GPTMTAILR, period, 0, 16, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTAILR_OFFSET)), period, 0, 16, RW);
         }
 
         else if(use == timerB)
         {
-            Register::_setRegisterBitFieldStatus(GPTMTBILR, period, 0, 16, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTBILR_OFFSET)), period, 0, 16, RW);
         }
 
         else if(use == concatenated)
@@ -133,16 +118,16 @@ GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint3
             if((block/6) == 0)
             {
                 // GPTMTAILR.setRegisterBitFieldStatus(GPTMTAILR_TAILR, period);
-                Register::_setRegisterBitFieldStatus(GPTMTAILR, period, 0, 32, RW); //This is where the problems begin with reg B
-                Register::_setRegisterBitFieldStatus(GPTMTAPR, clear, 0, 8, RW);
+                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTAILR_OFFSET)), period, 0, 32, RW); //This is where the problems begin with reg B
+                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTAPR_OFFSET)), clear, 0, 8, RW);
 
             }
 
             //concatenated wide timer
             else
             {
-                Register::_setRegisterBitFieldStatus(GPTMTBILR, ((period & 0xFFFFFFFF00000000) >> 32), 0, 32, RW);
-                Register::_setRegisterBitFieldStatus(GPTMTAILR, (period & 0x00000000FFFFFFFF), 0, 32, RW);
+                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTBILR_OFFSET)), ((period & 0xFFFFFFFF00000000) >> 32), 0, 32, RW);
+                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTAILR_OFFSET)), (period & 0x00000000FFFFFFFF), 0, 32, RW);
             }
         }
 
@@ -185,7 +170,7 @@ GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint3
  */
 GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint32_t period, countDirection dir, timerUse use, uint32_t interuptPriority) : GeneralPurposeTimer(mode, block, period, dir, use)
 {
-    Register::_setRegisterBitFieldStatus(GPTMIMR, set, interruptBit, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMIMR_OFFSET)), set, interruptBit, 1, RW);
 
     switch (block)
     {
@@ -252,7 +237,7 @@ GeneralPurposeTimer::~GeneralPurposeTimer()
 void GeneralPurposeTimer::pollStatus(void(*action)(void))
 {
     
-    if(Register::_getRegisterBitFieldStatus(GPTMRIS, interruptBit, 1, RO) == set)
+    if(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMRIS_OFFSET)), interruptBit, 1, RO) == set)
     {
         action();
     }
@@ -261,10 +246,10 @@ void GeneralPurposeTimer::pollStatus(void(*action)(void))
 
 void GeneralPurposeTimer::interruptClear(void)
 {
-    Register::_setRegisterBitFieldStatus(GPTMICR, set, interruptBit, 1, RW1C);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMICR_OFFSET)), set, interruptBit, 1, RW1C);
 }
 
 void GeneralPurposeTimer::enableTimer(void)
 {
-    Register::_setRegisterBitFieldStatus(GPTMCTL, set, (use%2)*8, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMCTL_OFFSET)), set, (use%2)*8, 1, RW);
 }

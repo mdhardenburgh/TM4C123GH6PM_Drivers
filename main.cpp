@@ -29,10 +29,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/.
 
 #include "main.h"
 
-SystemControl* mySystemControl = NULL;
-
-
-
 Gpio* greenLed = NULL;
 Gpio* blueLed = NULL;
 Gpio* redLed = NULL;
@@ -98,29 +94,14 @@ extern "C" void _16_32_Bit_Timer_0A_Handler(void)
     
 }
 
-void blink(void)
-{    
-    if((*greenLed).gpioRead() == set)
-    {
-        (*greenLed).gpioWrite(clear);
-        (*testTimer).interruptClear();
-    }
-    else if((*greenLed).gpioRead() == clear)
-    {
-        (*greenLed).gpioWrite(set);
-        (*testTimer).interruptClear();
-    }
-}
-
 extern "C" void SystemInit(void)
 {
-    mySystemControl = new SystemControl(_80MHz);
+    SystemControl::initializeGPIOHB();
+    SystemControl::initializeClock(_80MHz);
 
     greenLed = new Gpio(PF3, output);
     blueLed = new Gpio(PF2, output);
     redLed = new Gpio(PF1, output);
-
-
 }
 
 int main(void)
@@ -132,9 +113,6 @@ int main(void)
     testTimer = new GeneralPurposeTimer(periodic, shortTimer0, 80000000, down, concatenated, 3);
     (*testTimer).enableTimer();
     Nvic::enableInterrupts();
-
-    // testTimer = new GeneralPurposeTimer(periodic, shortTimer0, 80000000, down, concatenated);
-    // (*testTimer).enableTimer();
     
     // (*greenLed).gpioWrite(set);
     (*blueLed).gpioWrite(set);
@@ -144,11 +122,9 @@ int main(void)
 
     while(1)
     {
-        // (*testTimer).pollStatus(blink);
         Nvic::wfi();
     }
 
-    delete mySystemControl;
     delete blueLed;
     delete redLed;
     delete swtich1;

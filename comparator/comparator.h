@@ -45,16 +45,8 @@
 
 #include "../systemControl/systemControl.h"
 
-const uint32_t analogComparatorBaseAddress = 0x4003C000;
 
-const uint32_t PPACMP_OFFSET = 0x33C; //0x33C PPACMP RO 0x0000.0001 Analog Comparator Peripheral Present 304
-const uint32_t SRACMP_OFFSET = 0x53C; //0x53C SRACMP RW 0x0000.0000 Analog Comparator Software Reset 329
-const uint32_t RCGCACMP_OFFSET = 0x63C; //0x63C RCGCACMP RW 0x0000.0000 Analog Comparator Run Mode Clock Gating Control 353
-const uint32_t SCGCACMP_OFFSET = 0x73C; //0x73C SCGCACMP RW 0x0000.0000 Analog Comparator Sleep Mode Clock Gating Control 375
-const uint32_t DCGCACMP_OFFSET = 0x83C; //0x83C DCGCACMP RW 0x0000.0000 Analog Comparator Deep-Sleep Mode Clock Gating Control 397
-const uint32_t PRACMP_OFFSET = 0xA3C; //0xA3C PRACMP RO 0x0000.0000 Analog Comparator Peripheral Ready 419
-
-class Comparator : SystemControl
+class Comparator 
 {
     public:
         Comparator();
@@ -62,16 +54,15 @@ class Comparator : SystemControl
 
     private:
 
+        static const uint32_t analogComparatorBaseAddress = 0x4003C000;
 
-/**************************System Control BitFields****************************/
+        static const uint32_t PPACMP_OFFSET = 0x33C; //0x33C PPACMP RO 0x0000.0001 Analog Comparator Peripheral Present 304
+        static const uint32_t SRACMP_OFFSET = 0x53C; //0x53C SRACMP RW 0x0000.0000 Analog Comparator Software Reset 329
+        static const uint32_t RCGCACMP_OFFSET = 0x63C; //0x63C RCGCACMP RW 0x0000.0000 Analog Comparator Run Mode Clock Gating Control 353
+        static const uint32_t SCGCACMP_OFFSET = 0x73C; //0x73C SCGCACMP RW 0x0000.0000 Analog Comparator Sleep Mode Clock Gating Control 375
+        static const uint32_t DCGCACMP_OFFSET = 0x83C; //0x83C DCGCACMP RW 0x0000.0000 Analog Comparator Deep-Sleep Mode Clock Gating Control 397
+        static const uint32_t PRACMP_OFFSET = 0xA3C; //0xA3C PRACMP RO 0x0000.0000 Analog Comparator Peripheral Ready 419
 
-        // bitField PPACMP_P0{0, 1, RO}; //Analog Comparator Module Present
-        // bitField SRACMP_R0{0, 1, RW}; //Analog Comparator Module 0 Software Reset
-        // bitField RCGCACMP_R0{0, 1, RW}; //Analog Comparator Module 0 Run Mode Clock Gating Control
-        // bitField SCGCACMP_S0{0, 1, RW}; //Analog Comparator Module 0 Sleep Mode Clock Gating Control
-        // bitField DCGCACMP_D0{0, 1, RW}; //Analog Comparator Module 0 Deep-Sleep Mode Clock Gating Control
-        // bitField PRACMP_R0{0, 1, RO}; //Analog Comparator Module 0 Peripheral Ready
-        
 
 };
 
