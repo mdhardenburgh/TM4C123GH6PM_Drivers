@@ -1,0 +1,75 @@
+\hypertarget{classI2c}{}\doxysection{I2c Class Reference}
+\label{classI2c}\index{I2c@{I2c}}
+
+
+T\+M4\+C123\+G\+H6\+PM \mbox{\hyperlink{classI2c}{I2c}} Driver.  
+
+
+
+
+{\ttfamily \#include $<$i2c.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classI2c_a36df1af69fc9ca5ee3b2c9812ccf5797}\label{classI2c_a36df1af69fc9ca5ee3b2c9812ccf5797}} 
+\mbox{\hyperlink{classI2c_a36df1af69fc9ca5ee3b2c9812ccf5797}{I2c}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classI2c_a4e070c0892abaaf1993c40a5dc1ecee2}\label{classI2c_a4e070c0892abaaf1993c40a5dc1ecee2}} 
+\mbox{\hyperlink{classI2c_a4e070c0892abaaf1993c40a5dc1ecee2}{$\sim$\+I2c}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM \mbox{\hyperlink{classI2c}{I2c}} Driver. 
+
+\hypertarget{classI2c_i2cDescription}{}\doxysubsection{I2\+C Description}\label{classI2c_i2cDescription}
+\mbox{\hyperlink{classI2c}{I2c}} is a common master-\/slave type bi-\/directional serial communication interface used for communication with external devices (such as an A\+DC, R\+AM, R\+OM, L\+C\+Ds, etc...). The T\+M4\+C123\+G\+H6\+PM microcontroller has 4 I2C modules. Each module has the following features\+:
+\begin{DoxyItemize}
+\item Devices on the I2C bus can be designated as either a master or a slave
+\begin{DoxyItemize}
+\item Supports both transmitting and receiving data as either a master or a slave
+\item Supports simultaneous master and slave operation
+\end{DoxyItemize}
+\item Four I2C modes
+\begin{DoxyItemize}
+\item Master Transmit
+\item Master Receive
+\item Slave Transmit
+\item Slave Recieve
+\end{DoxyItemize}
+\item Four transmission speeds\+:
+\begin{DoxyItemize}
+\item Standard 100Kbps
+\item Fast-\/mode 400Kbps
+\item Fast-\/mode plus 1Mbps
+\item High-\/speed mode 3.\+33\+Mbps
+\end{DoxyItemize}
+\item Clock low timeout interrupt
+\item Dual slave address capability
+\item Glitch suppression
+\item Master and slave interrupt generation
+\begin{DoxyItemize}
+\item Master generates interrupts when a transmit or receive operation completes (or aborts due to an error)
+\item Slave generates interrupts when data has been transferred or requested by a master or when a S\+T\+A\+RT or S\+T\+OP condition is detected
+\end{DoxyItemize}
+\item Master with arbitration and clock synchronization, multimaster support, and 7-\/bit addressing mode
+\end{DoxyItemize}
+
+For more detailed information on the A\+DC please see page 997 of the T\+M4\+C123\+G\+H6\+PM datasheet @ \href{https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf}{\texttt{ https\+://www.\+ti.\+com/lit/ds/symlink/tm4c123gh6pm.\+pdf}}\hypertarget{classI2c_i2cSignalDescription}{}\doxysubsubsection{I2\+C Signal Description}\label{classI2c_i2cSignalDescription}
+The following table list the external signals of the I2C interace. The G\+P\+I\+Os must be configured for the I2C alternate function and default to G\+P\+IO at reset. The number parenthesis in the table below in the column Pin Mux/\+Pin Assignment is what should be programmed into the {\ttfamily P\+M\+Cn} field of the G\+P\+IO Port Control register to use the pin for I2C. The serial data pin {\ttfamily I2\+C\+S\+DA} should be set to an open drain using the G\+P\+IO Open Drain Select (G\+P\+I\+O\+O\+DR) register.
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{i2cSignalPins.png}}
+\end{DoxyImageNoCaption}
+ 
+
+Definition at line 88 of file i2c.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+i2c/\mbox{\hyperlink{i2c_8h}{i2c.\+h}}\item 
+i2c/\mbox{\hyperlink{i2c_8cpp}{i2c.\+cpp}}\end{DoxyCompactItemize}

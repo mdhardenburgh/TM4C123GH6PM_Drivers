@@ -1,0 +1,333 @@
+\hypertarget{classGeneralPurposeTimer}{}\doxysection{General\+Purpose\+Timer Class Reference}
+\label{classGeneralPurposeTimer}\index{GeneralPurposeTimer@{GeneralPurposeTimer}}
+
+
+T\+M4\+C123\+G\+H6\+PM General Purpose Timer Driver.  
+
+
+
+
+{\ttfamily \#include $<$general\+Purpose\+Timer.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classGeneralPurposeTimer_aacd435fee8abe6de74a93fecd3f42e8b}\label{classGeneralPurposeTimer_aacd435fee8abe6de74a93fecd3f42e8b}} 
+\mbox{\hyperlink{classGeneralPurposeTimer_aacd435fee8abe6de74a93fecd3f42e8b}{General\+Purpose\+Timer}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classGeneralPurposeTimer_ab987228f84bbff67a2376ed43c88af1d}{General\+Purpose\+Timer}} (\mbox{\hyperlink{generalPurposeTimer_8h_a5747cbc424ddee0f510749490692d1fd}{timer\+Mode}} mode, \mbox{\hyperlink{generalPurposeTimer_8h_a42b1a0a59f1c04b116b692167887fea6}{timer\+Block}} block, uint32\+\_\+t period, \mbox{\hyperlink{generalPurposeTimer_8h_ab642bd81c44c6f47b7b6def941a28f8f}{count\+Direction}} dir, \mbox{\hyperlink{generalPurposeTimer_8h_a15fc2b62c0786a15aa47530a425196f0}{timer\+Use}} use)
+\begin{DoxyCompactList}\small\item\em Initializes a timer in which the status of the timer is polled, rather than an N\+V\+IC interrupt being generated. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classGeneralPurposeTimer_a35a1e4d11b3d975720def84e2a8722e5}{General\+Purpose\+Timer}} (\mbox{\hyperlink{generalPurposeTimer_8h_a5747cbc424ddee0f510749490692d1fd}{timer\+Mode}} mode, \mbox{\hyperlink{generalPurposeTimer_8h_a42b1a0a59f1c04b116b692167887fea6}{timer\+Block}} block, uint32\+\_\+t period, \mbox{\hyperlink{generalPurposeTimer_8h_ab642bd81c44c6f47b7b6def941a28f8f}{count\+Direction}} dir, \mbox{\hyperlink{generalPurposeTimer_8h_a15fc2b62c0786a15aa47530a425196f0}{timer\+Use}} use, uint32\+\_\+t interupt\+Priority)
+\begin{DoxyCompactList}\small\item\em Initializes a timer in which an N\+V\+IC interrupt is generated and the status does not have to be constantly polled. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classGeneralPurposeTimer_aeff8934da3adf2845c70bab18c82c1ca}\label{classGeneralPurposeTimer_aeff8934da3adf2845c70bab18c82c1ca}} 
+\mbox{\hyperlink{classGeneralPurposeTimer_aeff8934da3adf2845c70bab18c82c1ca}{$\sim$\+General\+Purpose\+Timer}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGeneralPurposeTimer_a21e12e0de0bb688bde6c1d873ca51ced}{poll\+Status}} (void($\ast$action)(void))
+\begin{DoxyCompactList}\small\item\em To be used in a poll loop. Checks the Raw Interrupt Status of the timer. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classGeneralPurposeTimer_a0d59577b75ccb4b0e7be23d713ab72d8}\label{classGeneralPurposeTimer_a0d59577b75ccb4b0e7be23d713ab72d8}} 
+void \mbox{\hyperlink{classGeneralPurposeTimer_a0d59577b75ccb4b0e7be23d713ab72d8}{interrupt\+Clear}} (void)
+\begin{DoxyCompactList}\small\item\em clears the interrupt status \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classGeneralPurposeTimer_ae559d8ca124d89c99d92cbbb543a9586}\label{classGeneralPurposeTimer_ae559d8ca124d89c99d92cbbb543a9586}} 
+void \mbox{\hyperlink{classGeneralPurposeTimer_ae559d8ca124d89c99d92cbbb543a9586}{enable\+Timer}} (void)
+\begin{DoxyCompactList}\small\item\em timers are disabled by default during intialization. This function Enables the timers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM General Purpose Timer Driver. 
+
+\hypertarget{classGeneralPurposeTimer_generalPurposeTimerDescription}{}\doxysubsection{General Purpose Timer Description}\label{classGeneralPurposeTimer_generalPurposeTimerDescription}
+The T\+M4\+C123\+G\+H6\+PM microcontroller has 6 16/32-\/bit \char`\"{}short\char`\"{} general purpose timer blocks and 6 32/64-\/bit wide timer blocks. Each short timer block is split up into 2 16-\/bit timers (Timer A and Timer B). The A and B timer can be concatenated to make the short timer a single 32-\/bit timer. The same functionality goes for 32/64-\/bit wide timers as well. A\+DC can be triggered using a general purose timer. The General Purpose Timer module has the following capabilities\+:
+\begin{DoxyItemize}
+\item Twelve 16/32-\/bit Capture Compare P\+WM pins (C\+CP)
+\item Twelve 32/64-\/bit Capture Compare P\+WM pins (C\+CP)
+\item Daisy chaining of timer modules to allow a single timer to initiate multiple timing events
+\item Timer synchronization allows selected timers to start counting on the same clock cycle
+\item A\+DC event trigger
+\item User-\/enabled stalling when the microcontroller asserts C\+PU Halt flag during debug (excluding R\+TC mode)
+\item Ability to determine the elapsed time between the assertion of the timer interrupt and entry into the interrupt service routine
+\end{DoxyItemize}
+
+Efficient transfers using Micro Direct Memory Access Controller (µ\+D\+MA)
+\begin{DoxyItemize}
+\item Dedicated channel for each timer
+\item Burst request generated on timer interrupt
+\end{DoxyItemize}
+
+Additionally, the short and wide timers have the following capabilities listed in the following table.
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{timerCapabilities.png}}
+\end{DoxyImageNoCaption}
+
+
+The prescaler is only available when the timers are used individually
+
+A prescaler is an electronic counting circuit used to reduce a high frequency electrical signal to a lower frequency by integer division. The prescaler takes the basic timer clock frequency (which may be the C\+PU clock frequency or may be some higher or lower frequency) and divides it by some value before feeding it to the timer, according to how the prescaler register(s) are configured. The prescaler values that may be configured might be limited to a few fixed values (powers of 2), or they may be any integer value from 1 to 2$^\wedge$P, where P is the number of prescaler bits.
+
+For more detailed information on the General Purpose Timer please see page 704 of the T\+M4\+C123\+G\+H6\+PM datasheet @ \href{https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf}{\texttt{ https\+://www.\+ti.\+com/lit/ds/symlink/tm4c123gh6pm.\+pdf}}\hypertarget{classGeneralPurposeTimer_generalPurposeTimerSignalDescription}{}\doxysubsubsection{General Purpose Timer Signal Description}\label{classGeneralPurposeTimer_generalPurposeTimerSignalDescription}
+The following table lists the external signals and thier associtated pins for the Timer module. The G\+P\+IO needs to be configured for the Timer alternate function using the {\ttfamily A\+F\+S\+EL} bit in the G\+P\+IO Alternate Function \mbox{\hyperlink{classRegister}{Register}} (G\+P\+I\+O\+A\+F\+S\+EL). The number in parenthesis in the Pin Mux / Pin Assignment column of the table below is what is programmed into the {\ttfamily P\+M\+Cn} field in the G\+P\+IO Port Control (G\+P\+I\+O\+P\+C\+TL) register to assign a Timer signal to a G\+P\+IO.
+
+  
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{timerSignalPins.png}}
+\end{DoxyImageNoCaption}
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{timerSignalPins2.png}}
+\end{DoxyImageNoCaption}
+ 
+
+Definition at line 131 of file general\+Purpose\+Timer.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classGeneralPurposeTimer_ab987228f84bbff67a2376ed43c88af1d}\label{classGeneralPurposeTimer_ab987228f84bbff67a2376ed43c88af1d}} 
+\index{GeneralPurposeTimer@{GeneralPurposeTimer}!GeneralPurposeTimer@{GeneralPurposeTimer}}
+\index{GeneralPurposeTimer@{GeneralPurposeTimer}!GeneralPurposeTimer@{GeneralPurposeTimer}}
+\doxysubsubsection{\texorpdfstring{GeneralPurposeTimer()}{GeneralPurposeTimer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily General\+Purpose\+Timer\+::\+General\+Purpose\+Timer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{generalPurposeTimer_8h_a5747cbc424ddee0f510749490692d1fd}{timer\+Mode}}}]{mode,  }\item[{\mbox{\hyperlink{generalPurposeTimer_8h_a42b1a0a59f1c04b116b692167887fea6}{timer\+Block}}}]{block,  }\item[{uint32\+\_\+t}]{period,  }\item[{\mbox{\hyperlink{generalPurposeTimer_8h_ab642bd81c44c6f47b7b6def941a28f8f}{count\+Direction}}}]{dir,  }\item[{\mbox{\hyperlink{generalPurposeTimer_8h_a15fc2b62c0786a15aa47530a425196f0}{timer\+Use}}}]{use }\end{DoxyParamCaption})}
+
+
+
+Initializes a timer in which the status of the timer is polled, rather than an N\+V\+IC interrupt being generated. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & of the timer. \mbox{\hyperlink{classCan}{Can}} be one-\/shot, periodic, R\+TC, input edge count, time capture, or P\+WM \\
+\hline
+{\em block} & of the timer used. There are six A\&B short timers and six A\&B wide timers. \\
+\hline
+{\em period} & of the timer in clock ticks \\
+\hline
+{\em direction} & of the timer count \\
+\hline
+{\em use} & of timer. Timer A, Timer B, or concatonated \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 73 of file general\+Purpose\+Timer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{74 \{}
+\DoxyCodeLine{75     (*this).use = use;}
+\DoxyCodeLine{76     (*this).mode = mode;}
+\DoxyCodeLine{77     period = period -\/ 1;}
+\DoxyCodeLine{78     baseAddress = timerBaseAddresses[block];}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81     \textcolor{comment}{//0. Enable the clock for the timer}}
+\DoxyCodeLine{82     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(\mbox{\hyperlink{systemControl_8h_a96c9203e5958b72d5ce82192cb6cdb12}{systemControlBase}} + RCGCnTIMER\_OFFSET[block/6])), set, (block\%6), 1, RW);}
+\DoxyCodeLine{83     \textcolor{keywordflow}{while}(\mbox{\hyperlink{classRegister_a4cf68c709a58963070d518e6b7715ea6}{Register::getRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(\mbox{\hyperlink{systemControl_8h_a96c9203e5958b72d5ce82192cb6cdb12}{systemControlBase}} + PRnTIMER\_OFFSET[block/6])), (block\%6), 1, RO) == 0)}
+\DoxyCodeLine{84     \{}
+\DoxyCodeLine{85         \textcolor{comment}{//Ready?}}
+\DoxyCodeLine{86     \}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     \textcolor{comment}{//1. Disbale the timer before making any changes}}
+\DoxyCodeLine{89     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(baseAddress + GPTMCTL\_OFFSET)), clear, (use\%2)*8, 1, RW); \textcolor{comment}{//disable the timer}}
+\DoxyCodeLine{90     \textcolor{keywordflow}{if}((mode == oneShot) || (mode == periodic))}
+\DoxyCodeLine{91     \{}
+\DoxyCodeLine{92         interruptBit = ((use == timerB) ? 8 : 0);}
+\DoxyCodeLine{93         }
+\DoxyCodeLine{94         \textcolor{comment}{//2. Configure for single or concatenated mode }}
+\DoxyCodeLine{95         \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(baseAddress + GPTMCFG\_OFFSET)), ((use == concatenated) ? 0x0 : 0x4), 0, 3, RW);}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97         \textcolor{comment}{//3. Configure for One-\/Shot or Periodic mode}}
+\DoxyCodeLine{98         \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(baseAddress + GPTMTnMR\_OFFSET[(use\%2)])), mode + 1, 0, 2, RW);}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100         \textcolor{comment}{//4. Optional configuration. Configure for count direction}}
+\DoxyCodeLine{101         \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(baseAddress + GPTMTnMR\_OFFSET[(use\%2)])), dir, 4, 1, RW);}
+\DoxyCodeLine{102         }
+\DoxyCodeLine{103         \textcolor{comment}{//5. Interval load}}
+\DoxyCodeLine{104         \textcolor{keywordflow}{if}(use == timerA)}
+\DoxyCodeLine{105         \{}
+\DoxyCodeLine{106             \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(baseAddress + GPTMTAILR\_OFFSET)), period, 0, 16, RW);}
+\DoxyCodeLine{107         \}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(use == timerB)}
+\DoxyCodeLine{110         \{}
+\DoxyCodeLine{111             \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(baseAddress + GPTMTBILR\_OFFSET)), period, 0, 16, RW);}
+\DoxyCodeLine{112         \}}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{114         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(use == concatenated)}
+\DoxyCodeLine{115         \{}
+\DoxyCodeLine{116             \textcolor{comment}{//concatenated short timer}}
+\DoxyCodeLine{117             \textcolor{keywordflow}{if}((block/6) == 0)}
+\DoxyCodeLine{118             \{}
+\DoxyCodeLine{119                 \textcolor{comment}{// GPTMTAILR.setRegisterBitFieldStatus(GPTMTAILR\_TAILR, period);}}
+\DoxyCodeLine{120                 \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(baseAddress + GPTMTAILR\_OFFSET)), period, 0, 32, RW); \textcolor{comment}{//This is where the problems begin with reg B}}
+\DoxyCodeLine{121                 \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(baseAddress + GPTMTAPR\_OFFSET)), clear, 0, 8, RW);}
+\DoxyCodeLine{122 }
+\DoxyCodeLine{123             \}}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125             \textcolor{comment}{//concatenated wide timer}}
+\DoxyCodeLine{126             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{127             \{}
+\DoxyCodeLine{128                 \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(baseAddress + GPTMTBILR\_OFFSET)), ((period \& 0xFFFFFFFF00000000) >> 32), 0, 32, RW);}
+\DoxyCodeLine{129                 \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(baseAddress + GPTMTAILR\_OFFSET)), (period \& 0x00000000FFFFFFFF), 0, 32, RW);}
+\DoxyCodeLine{130             \}}
+\DoxyCodeLine{131         \}}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133     \}}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(mode == realTimeClock)}
+\DoxyCodeLine{136     \{}
+\DoxyCodeLine{137         interruptBit = 3;}
+\DoxyCodeLine{138     \}}
+\DoxyCodeLine{139 }
+\DoxyCodeLine{140     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(mode == edgeCount)}
+\DoxyCodeLine{141     \{}
+\DoxyCodeLine{142         interruptBit = ((use == timerB) ? 9 : 1);}
+\DoxyCodeLine{143     \}}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(mode == edgeTime)}
+\DoxyCodeLine{146     \{}
+\DoxyCodeLine{147         interruptBit = ((use == timerB) ? 10 : 2);}
+\DoxyCodeLine{148     \}}
+\DoxyCodeLine{149 }
+\DoxyCodeLine{150     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(mode == PWM)}
+\DoxyCodeLine{151     \{}
+\DoxyCodeLine{152         interruptBit = ((use == timerB) ? 10 : 2);}
+\DoxyCodeLine{153     \}}
+\DoxyCodeLine{154 }
+\DoxyCodeLine{155     \mbox{\hyperlink{classGeneralPurposeTimer_a0d59577b75ccb4b0e7be23d713ab72d8}{interruptClear}}();}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classGeneralPurposeTimer_a35a1e4d11b3d975720def84e2a8722e5}\label{classGeneralPurposeTimer_a35a1e4d11b3d975720def84e2a8722e5}} 
+\index{GeneralPurposeTimer@{GeneralPurposeTimer}!GeneralPurposeTimer@{GeneralPurposeTimer}}
+\index{GeneralPurposeTimer@{GeneralPurposeTimer}!GeneralPurposeTimer@{GeneralPurposeTimer}}
+\doxysubsubsection{\texorpdfstring{GeneralPurposeTimer()}{GeneralPurposeTimer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily General\+Purpose\+Timer\+::\+General\+Purpose\+Timer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{generalPurposeTimer_8h_a5747cbc424ddee0f510749490692d1fd}{timer\+Mode}}}]{mode,  }\item[{\mbox{\hyperlink{generalPurposeTimer_8h_a42b1a0a59f1c04b116b692167887fea6}{timer\+Block}}}]{block,  }\item[{uint32\+\_\+t}]{period,  }\item[{\mbox{\hyperlink{generalPurposeTimer_8h_ab642bd81c44c6f47b7b6def941a28f8f}{count\+Direction}}}]{dir,  }\item[{\mbox{\hyperlink{generalPurposeTimer_8h_a15fc2b62c0786a15aa47530a425196f0}{timer\+Use}}}]{use,  }\item[{uint32\+\_\+t}]{interupt\+Priority }\end{DoxyParamCaption})}
+
+
+
+Initializes a timer in which an N\+V\+IC interrupt is generated and the status does not have to be constantly polled. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode} & of the timer. \mbox{\hyperlink{classCan}{Can}} be one-\/shot, periodic, R\+TC, input edge count, time capture, or P\+WM \\
+\hline
+{\em block} & of the timer used. There are six A\&B short timers and six A\&B wide timers. \\
+\hline
+{\em period} & of the timer in clock ticks \\
+\hline
+{\em direction} & of the timer count \\
+\hline
+{\em use} & of timer. Timer A, Timer B, or concatonated \\
+\hline
+{\em interupt\+Priority} & of the interrupt. Lower numbers have higher priority. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 173 of file general\+Purpose\+Timer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{173                                                                                                                                                        : \mbox{\hyperlink{classGeneralPurposeTimer_aacd435fee8abe6de74a93fecd3f42e8b}{GeneralPurposeTimer}}(mode, block, period, dir, use)}
+\DoxyCodeLine{174 \{}
+\DoxyCodeLine{175     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(baseAddress + GPTMIMR\_OFFSET)), set, interruptBit, 1, RW);}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{177     \textcolor{keywordflow}{switch} (block)}
+\DoxyCodeLine{178     \{}
+\DoxyCodeLine{179         \textcolor{keywordflow}{case} shortTimer0:}
+\DoxyCodeLine{180             \mbox{\hyperlink{classNvic_ac10b867da5428824ce5cb1209b7b0d8b}{Nvic::activateInterrupt}}((use == timerB) ? \_16\_32\_Bit\_Timer\_0B\_Interrupt : \_16\_32\_Bit\_Timer\_0A\_Interrupt, interuptPriority);}
+\DoxyCodeLine{181             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{182 }
+\DoxyCodeLine{183         \textcolor{keywordflow}{case} shortTimer1:}
+\DoxyCodeLine{184             \mbox{\hyperlink{classNvic_ac10b867da5428824ce5cb1209b7b0d8b}{Nvic::activateInterrupt}}((use == timerB) ? \_16\_32\_Bit\_Timer\_1B\_Interrupt : \_16\_32\_Bit\_Timer\_1A\_Interrupt, interuptPriority);}
+\DoxyCodeLine{185             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{186         }
+\DoxyCodeLine{187         \textcolor{keywordflow}{case} shortTimer2:}
+\DoxyCodeLine{188             \mbox{\hyperlink{classNvic_ac10b867da5428824ce5cb1209b7b0d8b}{Nvic::activateInterrupt}}((use == timerB) ? \_16\_32\_Bit\_Timer\_2B\_Interrupt : \_16\_32\_Bit\_Timer\_2A\_Interrupt, interuptPriority);}
+\DoxyCodeLine{189             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{190 }
+\DoxyCodeLine{191         \textcolor{keywordflow}{case} shortTimer3:}
+\DoxyCodeLine{192             \mbox{\hyperlink{classNvic_ac10b867da5428824ce5cb1209b7b0d8b}{Nvic::activateInterrupt}}((use == timerB) ? \_16\_32\_Bit\_Timer\_3B\_Interrupt : \_16\_32\_Bit\_Timer\_3A\_Interrupt, interuptPriority);}
+\DoxyCodeLine{193             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{194 }
+\DoxyCodeLine{195         \textcolor{keywordflow}{case} shortTimer4:}
+\DoxyCodeLine{196             \mbox{\hyperlink{classNvic_ac10b867da5428824ce5cb1209b7b0d8b}{Nvic::activateInterrupt}}((use == timerB) ? \_16\_32\_Bit\_Timer\_4B\_Interrupt : \_16\_32\_Bit\_Timer\_4A\_Interrupt, interuptPriority);}
+\DoxyCodeLine{197             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199         \textcolor{keywordflow}{case} shortTimer5:}
+\DoxyCodeLine{200             \mbox{\hyperlink{classNvic_ac10b867da5428824ce5cb1209b7b0d8b}{Nvic::activateInterrupt}}((use == timerB) ? \_16\_32\_Bit\_Timer\_5B\_Interrupt : \_16\_32\_Bit\_Timer\_5A\_Interrupt, interuptPriority);}
+\DoxyCodeLine{201             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{202 }
+\DoxyCodeLine{203         \textcolor{keywordflow}{case} wideTimer0:}
+\DoxyCodeLine{204             \mbox{\hyperlink{classNvic_ac10b867da5428824ce5cb1209b7b0d8b}{Nvic::activateInterrupt}}((use == timerB) ? \_32\_64\_Bit\_Timer\_0B\_Interrupt : \_32\_64\_Bit\_Timer\_0A\_Interrupt, interuptPriority);}
+\DoxyCodeLine{205             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207         \textcolor{keywordflow}{case} wideTimer1:}
+\DoxyCodeLine{208             \mbox{\hyperlink{classNvic_ac10b867da5428824ce5cb1209b7b0d8b}{Nvic::activateInterrupt}}((use == timerB) ? \_32\_64\_Bit\_Timer\_1B\_Interrupt : \_32\_64\_Bit\_Timer\_1A\_Interrupt, interuptPriority);}
+\DoxyCodeLine{209             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{210 }
+\DoxyCodeLine{211         \textcolor{keywordflow}{case} wideTimer2:}
+\DoxyCodeLine{212             \mbox{\hyperlink{classNvic_ac10b867da5428824ce5cb1209b7b0d8b}{Nvic::activateInterrupt}}((use == timerB) ? \_32\_64\_Bit\_Timer\_2B\_Interrupt : \_32\_64\_Bit\_Timer\_2A\_Interrupt, interuptPriority);}
+\DoxyCodeLine{213             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215         \textcolor{keywordflow}{case} wideTimer3:}
+\DoxyCodeLine{216             \mbox{\hyperlink{classNvic_ac10b867da5428824ce5cb1209b7b0d8b}{Nvic::activateInterrupt}}((use == timerB) ? \_32\_64\_Bit\_Timer\_3B\_Interrupt : \_32\_64\_Bit\_Timer\_3A\_Interrupt, interuptPriority);}
+\DoxyCodeLine{217             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{218 }
+\DoxyCodeLine{219         \textcolor{keywordflow}{case} wideTimer4:}
+\DoxyCodeLine{220             \mbox{\hyperlink{classNvic_ac10b867da5428824ce5cb1209b7b0d8b}{Nvic::activateInterrupt}}((use == timerB) ? \_32\_64\_Bit\_Timer\_4B\_Interrupt : \_32\_64\_Bit\_Timer\_4A\_Interrupt, interuptPriority);}
+\DoxyCodeLine{221             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{222 }
+\DoxyCodeLine{223         \textcolor{keywordflow}{case} wideTimer5:}
+\DoxyCodeLine{224             \mbox{\hyperlink{classNvic_ac10b867da5428824ce5cb1209b7b0d8b}{Nvic::activateInterrupt}}((use == timerB) ? \_32\_64\_Bit\_Timer\_5B\_Interrupt : \_32\_64\_Bit\_Timer\_5A\_Interrupt, interuptPriority);}
+\DoxyCodeLine{225             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{226         }
+\DoxyCodeLine{227         \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{228             \mbox{\hyperlink{classNvic_ac10b867da5428824ce5cb1209b7b0d8b}{Nvic::activateInterrupt}}(\_16\_32\_Bit\_Timer\_0A\_Interrupt, interuptPriority);}
+\DoxyCodeLine{229             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{230     \}}
+\DoxyCodeLine{231     }
+\DoxyCodeLine{232 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classGeneralPurposeTimer_a21e12e0de0bb688bde6c1d873ca51ced}\label{classGeneralPurposeTimer_a21e12e0de0bb688bde6c1d873ca51ced}} 
+\index{GeneralPurposeTimer@{GeneralPurposeTimer}!pollStatus@{pollStatus}}
+\index{pollStatus@{pollStatus}!GeneralPurposeTimer@{GeneralPurposeTimer}}
+\doxysubsubsection{\texorpdfstring{pollStatus()}{pollStatus()}}
+{\footnotesize\ttfamily void General\+Purpose\+Timer\+::poll\+Status (\begin{DoxyParamCaption}\item[{void($\ast$)(void)}]{action }\end{DoxyParamCaption})}
+
+
+
+To be used in a poll loop. Checks the Raw Interrupt Status of the timer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em action} & to be taken if the R\+IS is set. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 247 of file general\+Purpose\+Timer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{248 \{}
+\DoxyCodeLine{249     }
+\DoxyCodeLine{250     \textcolor{keywordflow}{if}(\mbox{\hyperlink{classRegister_a4cf68c709a58963070d518e6b7715ea6}{Register::getRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(baseAddress + GPTMRIS\_OFFSET)), interruptBit, 1, RO) == set)}
+\DoxyCodeLine{251     \{}
+\DoxyCodeLine{252         action();}
+\DoxyCodeLine{253     \}}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255 \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+timer/\mbox{\hyperlink{generalPurposeTimer_8h}{general\+Purpose\+Timer.\+h}}\item 
+timer/\mbox{\hyperlink{generalPurposeTimer_8cpp}{general\+Purpose\+Timer.\+cpp}}\end{DoxyCompactItemize}

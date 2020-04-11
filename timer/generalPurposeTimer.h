@@ -1,14 +1,16 @@
 /**
  * @file generalPurposeTimer.h
- * @project RTOS
- * @engineer Matthew Hardenburgh
- * @date 12/18/2019
+ * @brief TM4C123GH6PM General Purpose Timer Driver Declaration
+ * @author Matthew Hardenburgh
+ * @version 0.1
+ * @date 3/21/2020
+ * @copyright Matthew Hardenburgh 2020
  * 
- * @section LICENSE
+ * @section license LICENSE
  * 
- * RTOS
- * Copyright (C) 2019 Matthew Hardenburgh
- * mdhardenburgh@gmail.com
+ * TM4C123GH6PM Drivers
+ * Copyright (C) 2020  Matthew Hardenburgh
+ * mdhardenburgh@protonmail.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,52 +24,40 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see https://www.gnu.org/licenses/.
- * 
- * @section DESCRIPTION
- * 
- * Class header for the system control unit for the Texas Instruments Tiva C 
- * ARM4F microcontroller, TM4C123GH6PM. 
- * 
- * System Control Register Descriptions
- * 
- * All addresses given are relative to the System Control base address of 
- * 0x400F.E000. Registers provided for legacy software support only are listed 
- * in “System Control Legacy Register Descriptions” on page 424.
- * 
- * General-Purpose Timers Register Descriptions
- * 
- * The remainder of this section lists and describes the GPTM registers, 
- * in numerical order by address offset.
- * 
  */
 
 /**
- * General Purpose Timer Capabilities
- * ____________________________________________________________________________________________________________________
- * |  Mode    |  Timer Use   | Count Direction | Counter Size          | Prescaler Size        |  Prescaler Behavior  |
- * |          |              |                 |-------------------- --|-----------------------|  (Count Direction)   |        
- * |          |              |                 | 16/32-bit | 32/64-bit | 16/32-bit | 32/64-bit |                      |
- * |----------|--------------|-----------------|-----------|-----------|-----------|-----------|----------------------|
- * | One-shot | Individual   | Up or Down      | 16-bit    | 32-bit    | 8-bit     | 16-bit    | Timer Extension (Up) |
- * |          |              |                 |           |           |           |           | Prescaler (Down)     |
- * |          |--------------|-----------------|-----------|-----------|-----------|-----------|----------------------|
- * |          | Concatenated | Up or Down      | 32-bit    | 64-bit    | -         | -         | N/A                  |
- * |----------|--------------|-----------------|-----------|-----------|-----------|-----------|----------------------|
- * | Periodic | Individual   | Up or Down      | 16-bit    | 32-bit    | 8-bit     | 16-bit    | Timer Extension (Up) |
- * |          |              |                 |           |           |           |           | Prescaler (Down)     |
- * |          |--------------|-----------------|-----------|-----------|-----------|-----------|----------------------|
- * |          | Concatenated | Up or Down      | 32-bit    | 64-bit    | -         | -         | N/A                  |     
- * |----------|--------------|-----------------|-----------|-----------|-----------|-----------|----------------------|
- * | RTC      | Concatenated | Up              | 32-bit    | 64-bit    | -         | -         | N/A                  | 
- * |----------|--------------|-----------------|-----------|-----------|-----------|-----------|----------------------|
- * | Edge     | Individual   | Up or Down      | 16-bit    | 32-bit    | 8-bit     | 16-bit    | Timer Extension      |
- * | Count    |              |                 |           |           |           |           | (both)               |
- * |----------|--------------|-----------------|-----------|-----------|-----------|-----------|----------------------|
- * | Edge     | Individual   | Up or Down      | 16-bit    | 32-bit    | 8-bit     | 16-bit    | Timer Extension      |
- * | Time     |              |                 |           |           |           |           | (both)               |
- * |----------|--------------|-----------------|-----------|-----------|-----------|-----------|----------------------|
- * | PWM      | Individual   | Down            | 16-bit    | 32-bit    | 8-bit     | 16-bit    | Timer Extension      |
- * |----------|--------------|-----------------|-----------|-----------|-----------|-----------|----------------------|
+ * @class GeneralPurposeTimer
+ * @brief TM4C123GH6PM General Purpose Timer Driver
+ * 
+ * @section generalPurposeTimerDescription General Purpose Timer Description
+ * 
+ * The TM4C123GH6PM microcontroller has 6 16/32-bit "short" general purpose 
+ * timer blocks and 6 32/64-bit wide timer blocks. Each short timer block is 
+ * split up into 2 16-bit timers (Timer A and Timer B). The A and B timer can be
+ * concatenated to make the short timer a single 32-bit timer. The same 
+ * functionality goes for 32/64-bit wide timers as well. ADC can be triggered
+ * using a general purose timer. The General Purpose Timer module has the 
+ * following capabilities:
+ *      - Twelve 16/32-bit Capture Compare PWM pins (CCP)
+ *      - Twelve 32/64-bit Capture Compare PWM pins (CCP)
+ *      - Daisy chaining of timer modules to allow a single timer to initiate multiple timing events
+ *      - Timer synchronization allows selected timers to start counting on the same clock cycle
+ *      - ADC event trigger
+ *      - User-enabled stalling when the microcontroller asserts CPU Halt flag 
+ *        during debug (excluding RTC mode)
+ *      - Ability to determine the elapsed time between the assertion of the 
+ *        timer interrupt and entry into the interrupt service routine
+ *     - Efficient transfers using Micro Direct Memory Access Controller (µDMA)
+ *          - Dedicated channel for each timer
+ *          - Burst request generated on timer interrupt
+ * 
+ * Additionally, the short and wide timers have the following capabilities 
+ * listed in the following table.
+ * 
+ * @image html timerCapabilities.png
+ * @image latex timerCapabilities.png
+ * 
  * The prescaler is only available when the timers are used individually
  * 
  * A prescaler is an electronic counting circuit used to reduce a high frequency 
@@ -79,31 +69,59 @@
  * few fixed values (powers of 2), or they may be any integer value from 1 to 
  * 2^P, where P is the number of prescaler bits.
  * 
+ * For more detailed information on the General Purpose Timer please see page 704 of the 
+ * TM4C123GH6PM datasheet @ https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf
+ * 
+ * @subsection generalPurposeTimerSignalDescription General Purpose Timer Signal Description
+ * 
+ * The following table lists the external signals and thier associtated pins 
+ * for the Timer module. The GPIO needs to be configured for the Timer alternate
+ * function using the \c AFSEL bit in the GPIO Alternate Function Register 
+ * (GPIOAFSEL). The number in parenthesis in the Pin Mux / Pin Assignment 
+ * column of the table below is what is programmed into the \c PMCn field in
+ * the GPIO Port Control (GPIOPCTL) register to assign a Timer signal to a GPIO. 
+ * 
+ * @image html timerSignalPins.png
+ * @image html timerSignalPins2.png
+ * @image latex timerSignalPins.png
+ * @image latex timerSignalPins2.png
+ * 
  */
 
 
 #ifndef GENERAL_PURPOSE_TIMER_H
 #define GENERAL_PURPOSE_TIMER_H
 
-// #include "../register/register.h"
 #include "../systemControl/systemControl.h"
 
+/**
+ * Mode of the timer.
+ */
 enum timerMode
 {
     oneShot, periodic, realTimeClock, edgeCount, edgeTime, PWM
 };
 
+/**
+ * Which timer block to use.
+ */
 enum timerBlock
 {
     shortTimer0, shortTimer1, shortTimer2, shortTimer3, shortTimer4, shortTimer5,
     wideTimer0, wideTimer1, wideTimer2, wideTimer3, wideTimer4, wideTimer5
 };
 
+/**
+ * Count direction of the timer.
+ */
 enum countDirection
 {
     up, down
 };
 
+/**
+ * Which subtimer to use or both in concatenated mode.
+ */
 enum timerUse
 {
     timerA, timerB, concatenated

@@ -1,0 +1,59 @@
+\hypertarget{classComparator}{}\doxysection{Comparator Class Reference}
+\label{classComparator}\index{Comparator@{Comparator}}
+
+
+T\+M4\+C123\+G\+H6\+PM \mbox{\hyperlink{classComparator}{Comparator}} Driver.  
+
+
+
+
+{\ttfamily \#include $<$comparator.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classComparator_a02256f0d728aa17d0638502d67b91708}\label{classComparator_a02256f0d728aa17d0638502d67b91708}} 
+\mbox{\hyperlink{classComparator_a02256f0d728aa17d0638502d67b91708}{Comparator}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classComparator_a81f72091f8c0056ba6ccc559f200c371}\label{classComparator_a81f72091f8c0056ba6ccc559f200c371}} 
+\mbox{\hyperlink{classComparator_a81f72091f8c0056ba6ccc559f200c371}{$\sim$\+Comparator}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM \mbox{\hyperlink{classComparator}{Comparator}} Driver. 
+
+\hypertarget{classComparator_comparatorDescription}{}\doxysubsection{Comparator Description}\label{classComparator_comparatorDescription}
+The T\+M4\+C123\+G\+H6\+PM microcontroller analog comparator compares two analog volatages and provides a binary output as the result. Note that not all comparators can drive an output pin, see Signal Description section below for more detials. The analog comparator can provide its output to a device pin, replacing the need for a discrete analog comparator on the board. The comparator can also flag the start of an A\+DC sample sequence. The analog comparator can also generate interrupts.
+
+The T\+M4\+C123\+G\+H6\+PM microcontroller has two independent analog comparators with the following functions\+:
+\begin{DoxyItemize}
+\item Compare external pin input to external pin input or to internal programmable voltage reference
+\item Compare a test voltage against any one of the following voltages\+:
+\begin{DoxyItemize}
+\item An individual external reference voltage
+\item A shared single external reference voltage
+\item A shared internal reference voltage
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+For more detailed information on the Analog \mbox{\hyperlink{classComparator}{Comparator}} please see page 1215 of the T\+M4\+C123\+G\+H6\+PM datasheet @ \href{https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf}{\texttt{ https\+://www.\+ti.\+com/lit/ds/symlink/tm4c123gh6pm.\+pdf}}\hypertarget{classComparator_comparatorSignalDescription}{}\doxysubsubsection{Comparator Signal Description}\label{classComparator_comparatorSignalDescription}
+The following table lists the G\+P\+IO pin mux and physical pin number of the pins that can be muxed for use by the Analog \mbox{\hyperlink{classComparator}{Comparator}}. The {\ttfamily A\+F\+S\+EL} bit in the G\+P\+IO Alternate Function Select (G\+P\+I\+O\+A\+F\+S\+EL) register should be set to choose the Analog \mbox{\hyperlink{classComparator}{Comparator}} function. The number in parentheses is the encoding that must be programmed into the {\ttfamily P\+M\+Cn} field in the G\+P\+IO Port Control (G\+P\+I\+O\+P\+C\+TL) register to assign the Analog \mbox{\hyperlink{classComparator}{Comparator}} signal to the specified G\+P\+IO port pin. The positive and negative input signals are configured by clearing the D\+EN bit in the G\+P\+IO Digital Enable (G\+P\+I\+O\+D\+EN) register.
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{comparatorSignals.png}}
+\end{DoxyImageNoCaption}
+\hypertarget{classComparator_comparatorSystemControlRegisterDescription}{}\doxysubsubsection{Comparator System Control Register Descriptions}\label{classComparator_comparatorSystemControlRegisterDescription}
+All addresses given are relative to the System Control base address of 0x400\+F.\+E000. Legacy registers not supported.\hypertarget{classComparator_comparatorRegisterDescription}{}\doxysubsubsection{Comparator Register Description}\label{classComparator_comparatorRegisterDescription}
+The \mbox{\hyperlink{classComparator}{Comparator}} class contains a list of C\+AN registers listed as an offset relative to the hexadecimal base address of the \mbox{\hyperlink{classComparator}{Comparator}} module block. Note that the \mbox{\hyperlink{classComparator}{Comparator}} clock must be enabled before the registers can be programmed. There must be a delay of 3 system clocks after the comparator ~\newline
+ clock is enabled before any comparator registers are accessed. 
+
+Definition at line 91 of file comparator.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+comparator/\mbox{\hyperlink{comparator_8h}{comparator.\+h}}\item 
+comparator/\mbox{\hyperlink{comparator_8cpp}{comparator.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,237 @@
+\hypertarget{nvic_8h}{}\doxysection{core\+Peripherals/nvic/nvic.h File Reference}
+\label{nvic_8h}\index{corePeripherals/nvic/nvic.h@{corePeripherals/nvic/nvic.h}}
+
+
+T\+M4\+C123\+G\+H6\+PM N\+V\+IC Driver Declaration.  
+
+
+{\ttfamily \#include \char`\"{}../../register/register.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classNvic}{Nvic}}
+\begin{DoxyCompactList}\small\item\em T\+M4\+C123\+G\+H6\+PM \mbox{\hyperlink{classNvic}{Nvic}} Driver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{nvic_8h_a83e304ff5052947728f95b6e732e25dd}{interrupt}} \{ \newline
+{\bfseries G\+P\+I\+O\+\_\+\+Port\+\_\+\+A\+\_\+\+Interrupt} = 0u, 
+{\bfseries G\+P\+I\+O\+\_\+\+Port\+\_\+\+B\+\_\+\+Interrupt} = 1u, 
+{\bfseries G\+P\+I\+O\+\_\+\+Port\+\_\+\+C\+\_\+\+Interrupt} = 2u, 
+{\bfseries G\+P\+I\+O\+\_\+\+Port\+\_\+\+D\+\_\+\+Interrupt} = 3u, 
+\newline
+{\bfseries G\+P\+I\+O\+\_\+\+Port\+\_\+\+E\+\_\+\+Interrupt} = 4u, 
+{\bfseries U\+A\+R\+T\+\_\+0\+\_\+\+Interrupt} = 5u, 
+{\bfseries U\+A\+R\+T\+\_\+1\+\_\+\+Interrupt} = 6u, 
+{\bfseries S\+S\+I\+\_\+0\+\_\+\+Interrupt} = 7u, 
+\newline
+{\bfseries I2\+C\+\_\+0\+\_\+\+Interrupt} = 8u, 
+{\bfseries P\+W\+M\+\_\+0\+\_\+\+Fault\+\_\+\+Interrupt} = 9u, 
+{\bfseries P\+W\+M\+\_\+0\+\_\+\+Generator\+\_\+0\+\_\+\+Interrupt} = 10u, 
+{\bfseries P\+W\+M\+\_\+0\+\_\+\+Generator\+\_\+1\+\_\+\+Interrupt} = 11u, 
+\newline
+{\bfseries P\+W\+M\+\_\+0\+\_\+\+Generator\+\_\+2\+\_\+\+Interrupt} = 12u, 
+{\bfseries Q\+E\+I\+\_\+0\+\_\+\+Interrupt} = 13u, 
+{\bfseries A\+D\+C\+\_\+0\+\_\+\+Sequence\+\_\+0\+\_\+\+Interrupt} = 14u, 
+{\bfseries A\+D\+C\+\_\+0\+\_\+\+Sequence\+\_\+1\+\_\+\+Interrupt} = 15u, 
+\newline
+{\bfseries A\+D\+C\+\_\+0\+\_\+\+Sequence\+\_\+2\+\_\+\+Interrupt} = 16u, 
+{\bfseries A\+D\+C\+\_\+0\+\_\+\+Sequence\+\_\+3\+\_\+\+Interrupt} = 17u, 
+{\bfseries Watchdog\+\_\+0\+\_\+and\+\_\+1\+\_\+\+Interrupt} = 18u, 
+{\bfseries \+\_\+16\+\_\+32\+\_\+\+Bit\+\_\+\+Timer\+\_\+0\+A\+\_\+\+Interrupt} = 19u, 
+\newline
+{\bfseries \+\_\+16\+\_\+32\+\_\+\+Bit\+\_\+\+Timer\+\_\+0\+B\+\_\+\+Interrupt} = 20u, 
+{\bfseries \+\_\+16\+\_\+32\+\_\+\+Bit\+\_\+\+Timer\+\_\+1\+A\+\_\+\+Interrupt} = 21u, 
+{\bfseries \+\_\+16\+\_\+32\+\_\+\+Bit\+\_\+\+Timer\+\_\+1\+B\+\_\+\+Interrupt} = 22u, 
+{\bfseries \+\_\+16\+\_\+32\+\_\+\+Bit\+\_\+\+Timer\+\_\+2\+A\+\_\+\+Interrupt} = 23u, 
+\newline
+{\bfseries \+\_\+16\+\_\+32\+\_\+\+Bit\+\_\+\+Timer\+\_\+2\+B\+\_\+\+Interrupt} = 24u, 
+{\bfseries Analog\+\_\+\+Comparator\+\_\+0\+\_\+\+Interrupt} = 25u, 
+{\bfseries Analog\+\_\+\+Comparator\+\_\+1\+\_\+\+Interrupt} = 26u, 
+{\bfseries System\+\_\+\+Control\+\_\+\+Interrupt} = 28u, 
+\newline
+{\bfseries Flash\+\_\+and\+\_\+\+E\+E\+P\+R\+O\+M\+\_\+\+Control\+\_\+\+Interrupt} = 29u, 
+{\bfseries G\+P\+I\+O\+\_\+\+Port\+\_\+\+F\+\_\+\+Interrupt} = 30u, 
+{\bfseries U\+A\+R\+T\+\_\+2\+\_\+\+Interrupt} = 33u, 
+{\bfseries S\+S\+I\+\_\+1\+\_\+\+Interrupt} = 34u, 
+\newline
+{\bfseries \+\_\+16\+\_\+32\+\_\+\+Bit\+\_\+\+Timer\+\_\+3\+A\+\_\+\+Interrupt} = 35u, 
+{\bfseries \+\_\+16\+\_\+32\+\_\+\+Bit\+\_\+\+Timer\+\_\+3\+B\+\_\+\+Interrupt} = 36u, 
+{\bfseries I2\+C\+\_\+1\+\_\+\+Interrupt} = 37u, 
+{\bfseries Q\+E\+I\+\_\+1\+\_\+\+Interrupt} = 38u, 
+\newline
+{\bfseries C\+A\+N\+\_\+0\+\_\+\+Interrupt} = 39u, 
+{\bfseries C\+A\+N\+\_\+1\+\_\+\+Interrupt} = 40u, 
+{\bfseries Hibernation\+\_\+\+Module\+\_\+\+Interrupt} = 43u, 
+{\bfseries U\+S\+B\+\_\+\+Interrupt} = 44u, 
+\newline
+{\bfseries P\+W\+M\+\_\+\+Generator\+\_\+3\+\_\+\+Interrupt} = 45u, 
+{\bfseries u\+D\+M\+A\+\_\+\+Software\+\_\+\+Interrupt} = 46u, 
+{\bfseries u\+D\+M\+A\+\_\+\+Error\+\_\+\+Interrupt} = 47u, 
+{\bfseries A\+D\+C\+\_\+1\+\_\+\+Sequence\+\_\+0\+\_\+\+Interrupt} = 48u, 
+\newline
+{\bfseries A\+D\+C\+\_\+1\+\_\+\+Sequence\+\_\+1\+\_\+\+Interrupt} = 49u, 
+{\bfseries A\+D\+C\+\_\+1\+\_\+\+Sequence\+\_\+2\+\_\+\+Interrupt} = 50u, 
+{\bfseries A\+D\+C\+\_\+1\+\_\+\+Sequence\+\_\+3\+\_\+\+Interrupt} = 51u, 
+{\bfseries S\+S\+I\+\_\+2\+\_\+\+Interrupt} = 57u, 
+\newline
+{\bfseries S\+S\+I\+\_\+3\+\_\+\+Interrupt} = 58u, 
+{\bfseries U\+A\+R\+T\+\_\+3\+\_\+\+Interrupt} = 59u, 
+{\bfseries U\+A\+R\+T\+\_\+4\+\_\+\+Interrupt} = 60u, 
+{\bfseries U\+A\+R\+T\+\_\+5\+\_\+\+Interrupt} = 61u, 
+\newline
+{\bfseries U\+A\+R\+T\+\_\+6\+\_\+\+Interrupt} = 62u, 
+{\bfseries U\+A\+R\+T\+\_\+7\+\_\+\+Interrupt} = 63u, 
+{\bfseries I2\+C\+\_\+2\+\_\+\+Interrupt} = 68u, 
+{\bfseries I2\+C\+\_\+3\+\_\+\+Interrupt} = 69u, 
+\newline
+{\bfseries \+\_\+16\+\_\+32\+\_\+\+Bit\+\_\+\+Timer\+\_\+4\+A\+\_\+\+Interrupt} = 70u, 
+{\bfseries \+\_\+16\+\_\+32\+\_\+\+Bit\+\_\+\+Timer\+\_\+4\+B\+\_\+\+Interrupt} = 71u, 
+{\bfseries \+\_\+16\+\_\+32\+\_\+\+Bit\+\_\+\+Timer\+\_\+5\+A\+\_\+\+Interrupt} = 92u, 
+{\bfseries \+\_\+16\+\_\+32\+\_\+\+Bit\+\_\+\+Timer\+\_\+5\+B\+\_\+\+Interrupt} = 93u, 
+\newline
+{\bfseries \+\_\+32\+\_\+64\+\_\+\+Bit\+\_\+\+Timer\+\_\+0\+A\+\_\+\+Interrupt} = 94u, 
+{\bfseries \+\_\+32\+\_\+64\+\_\+\+Bit\+\_\+\+Timer\+\_\+0\+B\+\_\+\+Interrupt} = 95u, 
+{\bfseries \+\_\+32\+\_\+64\+\_\+\+Bit\+\_\+\+Timer\+\_\+1\+A\+\_\+\+Interrupt} = 96u, 
+{\bfseries \+\_\+32\+\_\+64\+\_\+\+Bit\+\_\+\+Timer\+\_\+1\+B\+\_\+\+Interrupt} = 97u, 
+\newline
+{\bfseries \+\_\+32\+\_\+64\+\_\+\+Bit\+\_\+\+Timer\+\_\+2\+A\+\_\+\+Interrupt} = 98u, 
+{\bfseries \+\_\+32\+\_\+64\+\_\+\+Bit\+\_\+\+Timer\+\_\+2\+B\+\_\+\+Interrupt} = 99u, 
+{\bfseries \+\_\+32\+\_\+64\+\_\+\+Bit\+\_\+\+Timer\+\_\+3\+A\+\_\+\+Interrupt} = 100u, 
+{\bfseries \+\_\+32\+\_\+64\+\_\+\+Bit\+\_\+\+Timer\+\_\+3\+B\+\_\+\+Interrupt} = 101u, 
+\newline
+{\bfseries \+\_\+32\+\_\+64\+\_\+\+Bit\+\_\+\+Timer\+\_\+4\+A\+\_\+\+Interrupt} = 102u, 
+{\bfseries \+\_\+32\+\_\+64\+\_\+\+Bit\+\_\+\+Timer\+\_\+4\+B\+\_\+\+Interrupt} = 103u, 
+{\bfseries \+\_\+32\+\_\+64\+\_\+\+Bit\+\_\+\+Timer\+\_\+5\+A\+\_\+\+Interrupt} = 104u, 
+{\bfseries \+\_\+32\+\_\+64\+\_\+\+Bit\+\_\+\+Timer\+\_\+5\+B\+\_\+\+Interrupt} = 105u, 
+\newline
+{\bfseries System\+\_\+\+Exception\+\_\+\+Interrupt} = 106u, 
+{\bfseries P\+W\+M\+\_\+1\+\_\+\+Generator\+\_\+0\+\_\+\+Interrupt} = 134u, 
+{\bfseries P\+W\+M\+\_\+1\+\_\+\+Generator\+\_\+1\+\_\+\+Interrupt} = 135u, 
+{\bfseries P\+W\+M\+\_\+1\+\_\+\+Generator\+\_\+2\+\_\+\+Interrupt} = 136u, 
+\newline
+{\bfseries P\+W\+M\+\_\+1\+\_\+\+Generator\+\_\+3\+\_\+\+Interrupt} = 137u, 
+{\bfseries P\+W\+M\+\_\+1\+\_\+\+Fault\+\_\+\+Interrupt} = 138u
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM N\+V\+IC Driver Declaration. 
+
+\begin{DoxyAuthor}{Author}
+Matthew Hardenburgh 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+3/21/2020 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Matthew Hardenburgh 2020
+\end{DoxyCopyright}
+\hypertarget{watchdog_8h_license}{}\doxysubsection{L\+I\+C\+E\+N\+SE}\label{watchdog_8h_license}
+T\+M4\+C123\+G\+H6\+PM Drivers Copyright (C) 2020 Matthew Hardenburgh \href{mailto:mdhardenburgh@protonmail.com}{\texttt{ mdhardenburgh@protonmail.\+com}}
+
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program. If not, see \href{https://www.gnu.org/licenses/}{\texttt{ https\+://www.\+gnu.\+org/licenses/}}. 
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{nvic_8h_a83e304ff5052947728f95b6e732e25dd}\label{nvic_8h_a83e304ff5052947728f95b6e732e25dd}} 
+\index{nvic.h@{nvic.h}!interrupt@{interrupt}}
+\index{interrupt@{interrupt}!nvic.h@{nvic.h}}
+\doxysubsubsection{\texorpdfstring{interrupt}{interrupt}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{nvic_8h_a83e304ff5052947728f95b6e732e25dd}{interrupt}}}
+
+Interrupt number as according to the T\+M4\+C123\+G\+H6\+PM microcontroller datasheet Table 2-\/9 column two starting on page 104. 
+
+Definition at line 79 of file nvic.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{80 \{}
+\DoxyCodeLine{81     GPIO\_Port\_A\_Interrupt = 0u,}
+\DoxyCodeLine{82     GPIO\_Port\_B\_Interrupt = 1u,}
+\DoxyCodeLine{83     GPIO\_Port\_C\_Interrupt = 2u,}
+\DoxyCodeLine{84     GPIO\_Port\_D\_Interrupt = 3u,}
+\DoxyCodeLine{85     GPIO\_Port\_E\_Interrupt = 4u,}
+\DoxyCodeLine{86     UART\_0\_Interrupt = 5u,}
+\DoxyCodeLine{87     UART\_1\_Interrupt = 6u,}
+\DoxyCodeLine{88     SSI\_0\_Interrupt = 7u,}
+\DoxyCodeLine{89     I2C\_0\_Interrupt = 8u,}
+\DoxyCodeLine{90     PWM\_0\_Fault\_Interrupt = 9u,}
+\DoxyCodeLine{91     PWM\_0\_Generator\_0\_Interrupt = 10u,}
+\DoxyCodeLine{92     PWM\_0\_Generator\_1\_Interrupt = 11u,}
+\DoxyCodeLine{93     PWM\_0\_Generator\_2\_Interrupt = 12u,}
+\DoxyCodeLine{94     QEI\_0\_Interrupt = 13u,}
+\DoxyCodeLine{95     ADC\_0\_Sequence\_0\_Interrupt = 14u,}
+\DoxyCodeLine{96     ADC\_0\_Sequence\_1\_Interrupt = 15u,}
+\DoxyCodeLine{97     ADC\_0\_Sequence\_2\_Interrupt = 16u,}
+\DoxyCodeLine{98     ADC\_0\_Sequence\_3\_Interrupt = 17u,}
+\DoxyCodeLine{99     Watchdog\_0\_and\_1\_Interrupt = 18u,}
+\DoxyCodeLine{100     \_16\_32\_Bit\_Timer\_0A\_Interrupt = 19u,}
+\DoxyCodeLine{101     \_16\_32\_Bit\_Timer\_0B\_Interrupt = 20u,}
+\DoxyCodeLine{102     \_16\_32\_Bit\_Timer\_1A\_Interrupt = 21u,}
+\DoxyCodeLine{103     \_16\_32\_Bit\_Timer\_1B\_Interrupt = 22u,}
+\DoxyCodeLine{104     \_16\_32\_Bit\_Timer\_2A\_Interrupt = 23u,}
+\DoxyCodeLine{105     \_16\_32\_Bit\_Timer\_2B\_Interrupt = 24u,}
+\DoxyCodeLine{106     Analog\_Comparator\_0\_Interrupt = 25u,}
+\DoxyCodeLine{107     Analog\_Comparator\_1\_Interrupt = 26u,}
+\DoxyCodeLine{108     System\_Control\_Interrupt = 28u,}
+\DoxyCodeLine{109     Flash\_and\_EEPROM\_Control\_Interrupt = 29u,}
+\DoxyCodeLine{110     GPIO\_Port\_F\_Interrupt = 30u,}
+\DoxyCodeLine{111     UART\_2\_Interrupt = 33u,}
+\DoxyCodeLine{112     SSI\_1\_Interrupt = 34u,}
+\DoxyCodeLine{113     \_16\_32\_Bit\_Timer\_3A\_Interrupt = 35u,}
+\DoxyCodeLine{114     \_16\_32\_Bit\_Timer\_3B\_Interrupt = 36u,}
+\DoxyCodeLine{115     I2C\_1\_Interrupt = 37u,}
+\DoxyCodeLine{116     QEI\_1\_Interrupt = 38u,}
+\DoxyCodeLine{117     CAN\_0\_Interrupt = 39u,}
+\DoxyCodeLine{118     CAN\_1\_Interrupt = 40u,}
+\DoxyCodeLine{119     Hibernation\_Module\_Interrupt = 43u,}
+\DoxyCodeLine{120     USB\_Interrupt = 44u,}
+\DoxyCodeLine{121     PWM\_Generator\_3\_Interrupt = 45u,}
+\DoxyCodeLine{122     uDMA\_Software\_Interrupt = 46u,}
+\DoxyCodeLine{123     uDMA\_Error\_Interrupt = 47u,}
+\DoxyCodeLine{124     ADC\_1\_Sequence\_0\_Interrupt = 48u,}
+\DoxyCodeLine{125     ADC\_1\_Sequence\_1\_Interrupt = 49u,}
+\DoxyCodeLine{126     ADC\_1\_Sequence\_2\_Interrupt = 50u,}
+\DoxyCodeLine{127     ADC\_1\_Sequence\_3\_Interrupt = 51u,}
+\DoxyCodeLine{128     SSI\_2\_Interrupt = 57u,}
+\DoxyCodeLine{129     SSI\_3\_Interrupt = 58u,}
+\DoxyCodeLine{130     UART\_3\_Interrupt = 59u,}
+\DoxyCodeLine{131     UART\_4\_Interrupt = 60u,}
+\DoxyCodeLine{132     UART\_5\_Interrupt = 61u,}
+\DoxyCodeLine{133     UART\_6\_Interrupt = 62u,}
+\DoxyCodeLine{134     UART\_7\_Interrupt = 63u,}
+\DoxyCodeLine{135     I2C\_2\_Interrupt = 68u,}
+\DoxyCodeLine{136     I2C\_3\_Interrupt = 69u,}
+\DoxyCodeLine{137     \_16\_32\_Bit\_Timer\_4A\_Interrupt = 70u,}
+\DoxyCodeLine{138     \_16\_32\_Bit\_Timer\_4B\_Interrupt = 71u,}
+\DoxyCodeLine{139     \_16\_32\_Bit\_Timer\_5A\_Interrupt = 92u,}
+\DoxyCodeLine{140     \_16\_32\_Bit\_Timer\_5B\_Interrupt = 93u,}
+\DoxyCodeLine{141     \_32\_64\_Bit\_Timer\_0A\_Interrupt = 94u,}
+\DoxyCodeLine{142     \_32\_64\_Bit\_Timer\_0B\_Interrupt = 95u,}
+\DoxyCodeLine{143     \_32\_64\_Bit\_Timer\_1A\_Interrupt = 96u,}
+\DoxyCodeLine{144     \_32\_64\_Bit\_Timer\_1B\_Interrupt = 97u,}
+\DoxyCodeLine{145     \_32\_64\_Bit\_Timer\_2A\_Interrupt = 98u,}
+\DoxyCodeLine{146     \_32\_64\_Bit\_Timer\_2B\_Interrupt = 99u,}
+\DoxyCodeLine{147     \_32\_64\_Bit\_Timer\_3A\_Interrupt = 100u,}
+\DoxyCodeLine{148     \_32\_64\_Bit\_Timer\_3B\_Interrupt = 101u,}
+\DoxyCodeLine{149     \_32\_64\_Bit\_Timer\_4A\_Interrupt = 102u,}
+\DoxyCodeLine{150     \_32\_64\_Bit\_Timer\_4B\_Interrupt = 103u,}
+\DoxyCodeLine{151     \_32\_64\_Bit\_Timer\_5A\_Interrupt = 104u,}
+\DoxyCodeLine{152     \_32\_64\_Bit\_Timer\_5B\_Interrupt = 105u,}
+\DoxyCodeLine{153     System\_Exception\_Interrupt = 106u,}
+\DoxyCodeLine{154     PWM\_1\_Generator\_0\_Interrupt = 134u,}
+\DoxyCodeLine{155     PWM\_1\_Generator\_1\_Interrupt = 135u,}
+\DoxyCodeLine{156     PWM\_1\_Generator\_2\_Interrupt = 136u,}
+\DoxyCodeLine{157     PWM\_1\_Generator\_3\_Interrupt = 137u,}
+\DoxyCodeLine{158     PWM\_1\_Fault\_Interrupt = 138u}
+\DoxyCodeLine{159 \};}
+
+\end{DoxyCode}

@@ -1,0 +1,58 @@
+\hypertarget{classQei}{}\doxysection{Qei Class Reference}
+\label{classQei}\index{Qei@{Qei}}
+
+
+T\+M4\+C123\+G\+H6\+PM Q\+EI Driver.  
+
+
+
+
+{\ttfamily \#include $<$qei.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classQei_a0da245652ee4461dbd5b689200d0b900}\label{classQei_a0da245652ee4461dbd5b689200d0b900}} 
+\mbox{\hyperlink{classQei_a0da245652ee4461dbd5b689200d0b900}{Qei}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classQei_a97a14bf11c1bc9fc93645f4a8f40b2b0}\label{classQei_a97a14bf11c1bc9fc93645f4a8f40b2b0}} 
+\mbox{\hyperlink{classQei_a97a14bf11c1bc9fc93645f4a8f40b2b0}{$\sim$\+Qei}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM Q\+EI Driver. 
+
+\hypertarget{classQei_qeiDescription}{}\doxysubsection{Q\+E\+I Description}\label{classQei_qeiDescription}
+The T\+M4\+C123\+G\+H6\+PM microcontroller has two Q\+EI modules. The Q\+EI module is used to calculate linar displacement, direction of rotation and speed. This is useful for robotics to provide control of motors. The Q\+EI has the following features\+:
+\begin{DoxyItemize}
+\item Position integrator that tracks the encoder position
+\item Programmable noise filter on the inputs
+\item Velocity capture using built-\/in timer
+\item The input frequency of the Q\+EI inputs may be as high as 1/4 of the processor frequency (for example, 12.\+5 M\+Hz for a 50-\/M\+Hz system)
+\item Interrupt generation on\+:
+\begin{DoxyItemize}
+\item Index pulse
+\item Velocity-\/timer expiration
+\item Direction change
+\item Quadrature error detection
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+For more detailed information on the Q\+EI please see page 1305 of the T\+M4\+C123\+G\+H6\+PM datasheet @ \href{https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf}{\texttt{ https\+://www.\+ti.\+com/lit/ds/symlink/tm4c123gh6pm.\+pdf}}\hypertarget{classQei_qeiSignalDescription}{}\doxysubsubsection{Q\+E\+I Signal Description}\label{classQei_qeiSignalDescription}
+The following table lists the external signals and thier associtated pins for the Q\+EI module. The G\+P\+IO needs to be configured for the Q\+EI alternate function using the {\ttfamily A\+F\+S\+EL} bit in the G\+P\+IO Alternate Function \mbox{\hyperlink{classRegister}{Register}} (G\+P\+I\+O\+A\+F\+S\+EL). The number in parenthesis in the Pin Mux / Pin Assignment column of the table below is what is programmed into the {\ttfamily P\+M\+Cn} field in the G\+P\+IO Port Control (G\+P\+I\+O\+P\+C\+TL) register to assign a Q\+EI signal to a G\+P\+IO.
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{qeiSignalPins.png}}
+\end{DoxyImageNoCaption}
+ 
+
+Definition at line 73 of file qei.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+qei/\mbox{\hyperlink{qei_8h}{qei.\+h}}\item 
+qei/\mbox{\hyperlink{qei_8cpp}{qei.\+cpp}}\end{DoxyCompactItemize}

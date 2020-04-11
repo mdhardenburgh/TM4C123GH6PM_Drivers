@@ -1,0 +1,80 @@
+\hypertarget{classUart}{}\doxysection{Uart Class Reference}
+\label{classUart}\index{Uart@{Uart}}
+
+
+T\+M4\+C123\+G\+H6\+PM U\+A\+RT Driver.  
+
+
+
+
+{\ttfamily \#include $<$uart.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classUart_af65a6888b8a623bdc70cfb5c5e8e9957}\label{classUart_af65a6888b8a623bdc70cfb5c5e8e9957}} 
+\mbox{\hyperlink{classUart_af65a6888b8a623bdc70cfb5c5e8e9957}{Uart}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classUart_a7160154094413395a23dbaa287dbef3c}\label{classUart_a7160154094413395a23dbaa287dbef3c}} 
+\mbox{\hyperlink{classUart_a7160154094413395a23dbaa287dbef3c}{$\sim$\+Uart}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM U\+A\+RT Driver. 
+
+\hypertarget{classUart_uartDescription}{}\doxysubsection{U\+A\+R\+T Description}\label{classUart_uartDescription}
+The T\+M4\+C123\+G\+H6\+PM microcontroller has 8 U\+A\+RT modules. On the T\+M4\+C123\+G\+XL \char`\"{}\+Launch\+Pad\char`\"{} by Texas Insturments, U\+A\+RT 0 is connected to the debugger and enumerates as a virtual com port without additional programming. The debugger performs the U\+A\+RT over U\+SB conversion. U\+A\+RT has the following features\+:
+\begin{DoxyItemize}
+\item Programmable baud-\/rate generator allowing speeds up to 5 Mbps for regular speed (divide by 16) and 10 Mbps for high speed (divide by 8)
+\item Separate 16x8 transmit (TX) and receive (RX) F\+I\+F\+Os to reduce C\+PU interrupt service loading
+\item Programmable F\+I\+FO length, including 1-\/byte deep operation providing conventional double-\/buffered interface
+\item F\+I\+FO trigger levels of 1/8, 1/4, 1/2, 3/4, and 7/8
+\item Standard asynchronous communication bits for start, stop, and parity
+\item Line-\/break generation and detection
+\item Fully programmable serial interface characteristics
+\begin{DoxyItemize}
+\item 5, 6, 7, or 8 data bits
+\item Even, odd, stick, or no-\/parity bit generation/detection
+\item 1 or 2 stop bit generation
+\end{DoxyItemize}
+\item Ir\+DA serial-\/\+IR (S\+IR) encoder/decoder providing
+\begin{DoxyItemize}
+\item Programmable use of Ir\+DA Serial Infrared (S\+IR) or U\+A\+RT input/output
+\item Support of Ir\+DA S\+IR encoder/decoder functions for data rates up to 115.\+2 Kbps half-\/duplex
+\item Support of normal 3/16 and low-\/power (1.\+41-\/2.\+23 μs) bit durations
+\item Programmable internal clock generator enabling division of reference clock by 1 to 256 for low-\/power mode bit duration
+\end{DoxyItemize}
+\item Support for communication with I\+SO 7816 smart cards
+\item Modem flow control (on U\+A\+R\+T1)
+\item E\+I\+A-\/485 9-\/bit support
+\item Standard F\+I\+F\+O-\/level and End-\/of-\/\+Transmission interrupts
+\item Efficient transfers using Micro Direct Memory Access Controller (µ\+D\+MA)
+\begin{DoxyItemize}
+\item Separate channels for transmit and receive
+\item Receive single request asserted when data is in the F\+I\+FO; burst request asserted at programmed F\+I\+FO level
+\item Transmit single request asserted when there is space in the F\+I\+FO; burst request asserted at programmed F\+I\+FO level
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+Jonathan Valvano has a great tutorial on U\+A\+RT specific to the T\+M4\+C123\+G\+H6\+PM microcontroller linked here \href{https://users.ece.utexas.edu/~valvano/Volume1/E-Book/C11_SerialInterface.htm}{\texttt{ https\+://users.\+ece.\+utexas.\+edu/$\sim$valvano/\+Volume1/\+E-\/\+Book/\+C11\+\_\+\+Serial\+Interface.\+htm}}
+
+He also has a youtube lecture series on serial interfacing and U\+A\+RT linked here \href{https://www.youtube.com/watch?v=vNHHbwzKdJo&list=PLyg2vmIzGxXFZMY5nLnWPLyFLY92tVPNP}{\texttt{ https\+://www.\+youtube.\+com/watch?v=v\+N\+H\+Hbwz\+Kd\+Jo\&list=\+P\+Lyg2vm\+Iz\+Gx\+X\+F\+Z\+M\+Y5n\+Ln\+W\+P\+Ly\+F\+L\+Y92t\+V\+P\+NP}}
+
+For more detailed information on the U\+A\+RT please see page 893 of the T\+M4\+C123\+G\+H6\+PM datasheet @ \href{https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf}{\texttt{ https\+://www.\+ti.\+com/lit/ds/symlink/tm4c123gh6pm.\+pdf}}\hypertarget{classUart_uartSignalDescription}{}\doxysubsubsection{U\+A\+R\+T Signal Description}\label{classUart_uartSignalDescription}
+The following table lists the external signals and thier associtated pins for the U\+A\+RT module. U\+A\+RT is an alternate function of the G\+P\+I\+Os and the G\+P\+I\+Os default to G\+P\+IO at reset, except {\ttfamily U0\+Rx} and {\ttfamily U0\+Tx} . The G\+P\+IO needs to be configured for the U\+A\+RT alternate function using the {\ttfamily A\+F\+S\+EL} bit in the G\+P\+IO Alternate Function \mbox{\hyperlink{classRegister}{Register}} (G\+P\+I\+O\+A\+F\+S\+EL). The number in parenthesis in the Pin Mux / Pin Assignment column of the table below is what is programmed into the {\ttfamily P\+M\+Cn} field in the G\+P\+IO Port Control (G\+P\+I\+O\+P\+C\+TL) register to assign a U\+A\+RT signal to a G\+P\+IO.
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{uartSignalPins.png}}
+\end{DoxyImageNoCaption}
+ 
+
+Definition at line 102 of file uart.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+uart/\mbox{\hyperlink{uart_8h}{uart.\+h}}\item 
+uart/\mbox{\hyperlink{uart_8cpp}{uart.\+cpp}}\end{DoxyCompactItemize}

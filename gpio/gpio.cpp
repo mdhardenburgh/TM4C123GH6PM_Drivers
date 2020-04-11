@@ -1,14 +1,16 @@
 /**
  * @file gpio.cpp
- * @project RTOS
- * @engineer Matthew Hardenburgh
- * @date 12/24/2019
+ * @brief TM4C123GH6PM GPIO Driver Definition
+ * @author Matthew Hardenburgh
+ * @version 0.1
+ * @date 3/21/2020
+ * @copyright Matthew Hardenburgh 2020
  * 
- * @section LICENSE
+ * @section license LICENSE
  * 
- * RTOS
- * Copyright (C) 2019 Matthew Hardenburgh
- * mdhardenburgh@gmail.com
+ * TM4C123GH6PM Drivers
+ * Copyright (C) 2020  Matthew Hardenburgh
+ * mdhardenburgh@protonmail.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,18 +25,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see https://www.gnu.org/licenses/.
  * 
- * @section DESCRIPTION
- * 
- * Class implemnetation of the GPIO for the Texas Instruments Tiva C 
- * ARM4F microcontroller, TM4C123GH6PM.
  */
 #include "gpio.h"
 
+/**
+ * @brief empty constructor placeholder
+ */
 Gpio::Gpio()
 {
 
 }
 
+/**
+ * @brief Simple gpio initializer constructor.
+ * @param gpio pin to be initialized.
+ * @param dir of the gpio, to be an output or input.
+ */
 Gpio::Gpio(GPIO_Port_Pins gpio, direction dir)
 {   
     (*this).gpio = gpio;
@@ -67,7 +73,13 @@ Gpio::Gpio(GPIO_Port_Pins gpio, direction dir)
 
 }
 
-
+/**
+ * @brief Gpio interrupt constructor. Interrupts on both edges only.
+ * @param gpio pin to be initialized.
+ * @param dir of the gpio, to be an output or input.
+ * @param interruptPriority of the gpio, 0 being the highest priority and 7
+ *        being the lowest.
+ */
 Gpio::Gpio(GPIO_Port_Pins gpio, direction dir, uint32_t interruptPriority) : Gpio(gpio, dir)
 {
 
@@ -79,7 +91,7 @@ Gpio::Gpio(GPIO_Port_Pins gpio, direction dir, uint32_t interruptPriority) : Gpi
     Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOIM_OFFSET)), set, gpioPin, 1, RW);
 
 
-    /**
+    /*
      * If gpio is == to Port F (Port number 5) use interrupt number 30 
      * (according to interrupt table), else use interrupt number 0 -> 4 
      * (corresponding to interrupt Port A through Port E)
@@ -88,16 +100,26 @@ Gpio::Gpio(GPIO_Port_Pins gpio, direction dir, uint32_t interruptPriority) : Gpi
 
 }
 
+/**
+ * @brief empty deconstructor placeholder
+ */
 Gpio::~Gpio()
 {   
 
 }
 
+/**
+ * @brief Clears the interrupt. Generally used in an ISR.
+ */
 void Gpio::interruptClear(void)
 {
     Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOICR_OFFSET)), set, gpioPin, 1, RW);
 }
 
+/**
+ * @brief Writes to the gpio pin.
+ * @param value to write to pin. Accepted values are 1 or 0.
+ */
 void Gpio::gpioWrite(setORClear value)
 {
     if((value == 0x0) || (value == 0x1))
@@ -106,6 +128,10 @@ void Gpio::gpioWrite(setORClear value)
     }
 }
 
+/**
+ * @brief Reads from a gpio pin.
+ * @return Value of the gpio pin, either a 1 or 0.
+ */
 uint32_t Gpio::gpioRead(void)
 {
     return((Register::getRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIODATA_OFFSET)), gpioPin, 1, RW)));

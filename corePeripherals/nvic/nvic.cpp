@@ -1,14 +1,16 @@
 /**
- * @file nvic.c
- * @project RTOS
- * @engineer Matthew Hardenburgh
- * @date 11/13/2019
+ * @file nvic.cpp
+ * @brief TM4C123GH6PM NVIC Driver Definition
+ * @author Matthew Hardenburgh
+ * @version 0.1
+ * @date 3/21/2020
+ * @copyright Matthew Hardenburgh 2020
  * 
- * @section LICENSE
+ * @section license LICENSE
  * 
- * RTOS
- * Copyright (C) 2019  Matthew Hardenburgh
- * mdhardenburgh@gmail.com
+ * TM4C123GH6PM Drivers
+ * Copyright (C) 2020  Matthew Hardenburgh
+ * mdhardenburgh@protonmail.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,28 +24,6 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see https://www.gnu.org/licenses/.
- * 
- * @section DESCRIPTION
- * 
- * Class implementation for the nested vector interrupt controller for the 
- * Texas Instruments Tiva C ARM4F microcontroller, TM4C123GH6PM. 
- * 
- * This section lists and describes the NVIC registers, in numerical order by address offset.
- * 
- * The NVIC registers can only be fully accessed from privileged mode, but 
- * interrupts can be pended while in unprivileged mode by enabling the 
- * Configuration and Control (CFGCTRL) register. Any other unprivileged mode 
- * access causes a bus fault.
- * 
- * Ensure software uses correctly aligned register accesses. The processor does 
- * not support unaligned accesses to NVIC registers.
- * 
- * An interrupt can enter the pending state even if it is disabled.
- * 
- * Before programming the VTABLE register to relocate the vector table, ensure 
- * the vector table entries of the new vector table are set up for fault 
- * handlers, NMI, and all enabled exceptions such as interrupts. For more 
- * information, see page 163.
  * 
  */
 
@@ -61,18 +41,28 @@ const uint32_t Nvic::PRIn_OFFSET[35] = {PRI0_OFFSET, PRI1_OFFSET, PRI2_OFFSET, P
                                         PRI24_OFFSET, PRI25_OFFSET, PRI26_OFFSET, PRI27_OFFSET, PRI28_OFFSET, PRI29_OFFSET,
                                         PRI30_OFFSET, PRI31_OFFSET, PRI32_OFFSET, PRI33_OFFSET, PRI34_OFFSET};
 
+
+/**
+ * @brief empty constructor placeholder
+ */
 Nvic::Nvic()
 {
 
 }
 
+/**
+ * @brief empty deconstructor placeholder
+ */
 Nvic::~Nvic()
 {
 
 }
 
 /**
- * @param myInterrupt 
+ * @brief Activates an interrupt
+ * @param myInterrupt coresponds to the interrupt number of the interrupt that 
+ *        you want to activate.
+ * @param priority of the interrput that you want to activate
  */
 void Nvic::activateInterrupt(interrupt myInterrupt, uint32_t priority)
 {
@@ -90,6 +80,12 @@ void Nvic::activateInterrupt(interrupt myInterrupt, uint32_t priority)
     }
 }
 
+/**
+ * @brief Disables interrupt globally
+ * @details Used when configuring interrupts at initial bootup
+ * @return A dummy value needed to get code to work, generally cast the return 
+ *         value to void.
+ */
 #pragma GCC push_options
 #pragma GCC optimize("O0")
 uint32_t Nvic::disableInterrupts(void)
@@ -107,7 +103,12 @@ uint32_t Nvic::disableInterrupts(void)
 }
 #pragma GCC pop_options
 
-
+/**
+ * @brief Enables interrupt globally
+ * @details Used when configuring interrupts at initial bootup
+ * @return A dummy value needed to get code to work, generally cast the return 
+ *         value to void.
+ */
 #pragma GCC push_options
 #pragma GCC optimize("O0")
 uint32_t Nvic::enableInterrupts(void)
@@ -125,7 +126,10 @@ uint32_t Nvic::enableInterrupts(void)
 }
 #pragma GCC pop_options
 
-
+/**
+ * @brief Puts processer into sleep mode as configured by the system control 
+ *        module and waits for another interrupt.
+ */
 #pragma GCC push_options
 #pragma GCC optimize("O0")
 void Nvic::wfi(void)

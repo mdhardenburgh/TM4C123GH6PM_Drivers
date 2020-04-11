@@ -145,8 +145,8 @@ Default_Handler:
  2ee:	bf00      	nop
 
 000002f0 <_ZN4Nvic17disableInterruptsEv>:
-}
-
+ *         value to void.
+ */
 #pragma GCC push_options
 #pragma GCC optimize("O0")
 uint32_t Nvic::disableInterrupts(void)
@@ -175,8 +175,8 @@ uint32_t Nvic::disableInterrupts(void)
  30c:	4770      	bx	lr
 
 0000030e <_ZN4Nvic16enableInterruptsEv>:
-
-
+ *         value to void.
+ */
 #pragma GCC push_options
 #pragma GCC optimize("O0")
 uint32_t Nvic::enableInterrupts(void)
@@ -205,8 +205,8 @@ uint32_t Nvic::enableInterrupts(void)
  32a:	4770      	bx	lr
 
 0000032c <_ZN4Nvic3wfiEv>:
-
-
+ *        module and waits for another interrupt.
+ */
 #pragma GCC push_options
 #pragma GCC optimize("O0")
 void Nvic::wfi(void)
@@ -228,9 +228,9 @@ void Nvic::wfi(void)
  33a:	4770      	bx	lr
 
 0000033c <_ZN4Gpio8gpioReadEv>:
-    }
-}
-
+ * @brief Reads from a gpio pin.
+ * @return Value of the gpio pin, either a 1 or 0.
+ */
 uint32_t Gpio::gpioRead(void)
 {
     return((Register::getRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIODATA_OFFSET)), gpioPin, 1, RW)));
@@ -251,11 +251,11 @@ uint32_t Register::getRegisterBitFieldStatus(volatile uint32_t* address, uint32_
  34e:	4770      	bx	lr
 
 00000350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>:
-    {
-        return(UINT32_MAX);
-    }
-}
-
+ * @param value to be written to the bitfield
+ * @param bit to be retrieved or the first bit of the bitfield to be retrieved
+ * @param width of the bitfield
+ * @param permission of the bitfield, read-only, write-only, etc...
+ */
 void Register::setRegisterBitFieldStatus(volatile uint32_t* address, uint32_t value, uint32_t bit, uint32_t bitWidth, bitFieldPermission permission)
  350:	b510      	push	{r4, lr}
         return;
@@ -330,10 +330,10 @@ void Nvic::activateInterrupt(interrupt myInterrupt, uint32_t priority)
  3b4:	000009b8 	.word	0x000009b8
 
 000003b8 <_ZN19GeneralPurposeTimer14interruptClearEv>:
-    }
 
-}
-
+/**
+ * @brief clears the interrupt status
+ */
 void GeneralPurposeTimer::interruptClear(void)
 {
  3b8:	b410      	push	{r4}
@@ -530,7 +530,7 @@ Gpio::Gpio(GPIO_Port_Pins gpio, direction dir, uint32_t interruptPriority) : Gpi
     blueLed = new Gpio(PF2, output);
     redLed = new Gpio(PF1, output);
 }
-
+ 
 int main(void)
 {
  52c:	b508      	push	{r3, lr}
@@ -644,7 +644,9 @@ void Nvic::activateInterrupt(interrupt myInterrupt, uint32_t priority)
  5e8:	f7ff fec4 	bl	374 <_ZN4Nvic17activateInterruptE9interruptm.part.0.constprop.4>
     testTimer = new GeneralPurposeTimer(periodic, shortTimer0, 80000000, down, concatenated, 3);
  5ec:	4b13      	ldr	r3, [pc, #76]	; (63c <main+0x110>)
-
+ * @brief timers are disabled by default during intialization. This function
+ *        Enables the timers.
+ */
 void GeneralPurposeTimer::enableTimer(void)
 {
     Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMCTL_OFFSET)), set, (use%2)*8, 1, RW);

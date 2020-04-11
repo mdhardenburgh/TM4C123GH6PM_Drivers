@@ -1,0 +1,274 @@
+\hypertarget{classGpio}{}\doxysection{Gpio Class Reference}
+\label{classGpio}\index{Gpio@{Gpio}}
+
+
+T\+M4\+C123\+G\+H6\+PM G\+P\+IO Driver.  
+
+
+
+
+{\ttfamily \#include $<$gpio.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classGpio_a51a72b41aabb6df62d8cb35f1b35849a}\label{classGpio_a51a72b41aabb6df62d8cb35f1b35849a}} 
+\mbox{\hyperlink{classGpio_a51a72b41aabb6df62d8cb35f1b35849a}{Gpio}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classGpio_a0506dbc71ab38d58bb5995b649a0c25d}{Gpio}} (\mbox{\hyperlink{gpio_8h_a38f034a9c94961ab7cf8a903e0abb1e0}{G\+P\+I\+O\+\_\+\+Port\+\_\+\+Pins}} gpio, \mbox{\hyperlink{gpio_8h_a99f26e6ee9fcd62f75203b5402df8098}{direction}} dir)
+\begin{DoxyCompactList}\small\item\em Simple gpio initializer constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classGpio_a8be6d18a889f18c6a6742b96d082a72e}{Gpio}} (\mbox{\hyperlink{gpio_8h_a38f034a9c94961ab7cf8a903e0abb1e0}{G\+P\+I\+O\+\_\+\+Port\+\_\+\+Pins}} gpio, \mbox{\hyperlink{gpio_8h_a99f26e6ee9fcd62f75203b5402df8098}{direction}} dir, uint32\+\_\+t interrupt\+Priority)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classGpio}{Gpio}} interrupt constructor. Interrupts on both edges only. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classGpio_a08d5f1b18ad260f1812706057b14ee0e}\label{classGpio_a08d5f1b18ad260f1812706057b14ee0e}} 
+\mbox{\hyperlink{classGpio_a08d5f1b18ad260f1812706057b14ee0e}{$\sim$\+Gpio}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classGpio_a6285994c456f1b588a001f3859a4eb49}\label{classGpio_a6285994c456f1b588a001f3859a4eb49}} 
+void \mbox{\hyperlink{classGpio_a6285994c456f1b588a001f3859a4eb49}{interrupt\+Clear}} (void)
+\begin{DoxyCompactList}\small\item\em Clears the interrupt. Generally used in an I\+SR. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGpio_a19426fb11f3368681a7b879265506c21}{gpio\+Write}} (\mbox{\hyperlink{register_8h_a169628ed1b8cb9b2370ad4f2ace76e09}{set\+O\+R\+Clear}} value)
+\begin{DoxyCompactList}\small\item\em Writes to the gpio pin. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classGpio_a973b95516051680bc1225d505b04b701}{gpio\+Read}} (void)
+\begin{DoxyCompactList}\small\item\em Reads from a gpio pin. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM G\+P\+IO Driver. 
+
+\hypertarget{classGpio_gpioDescription}{}\doxysubsection{G\+P\+I\+O Module Description}\label{classGpio_gpioDescription}
+The G\+P\+IO module has six physical G\+P\+IO blocks, A-\/F, and each block supports upto 8 pins (with some exceptions noted in the G\+P\+I\+O\+\_\+\+Port\+\_\+\+Pins enum). There are 43 programmable G\+P\+I\+Os.
+
+The G\+P\+I\+Os can be configured for alternate functions that connect peripherals such as the A\+DC, U\+SB or S\+PI to external physical pins. The peripherals that use external pins each have a list of Signal Descriptions.
+
+Below is a list of the features of the G\+P\+IO module copied here from the T\+M4\+C123\+G\+H6\+PM datasheet for convienience.
+\begin{DoxyItemize}
+\item 5-\/V-\/tolerant in input configuration
+\item Fast toggle capable of a change every clock cycle for ports on A\+HB, every two clock cycles for ports on A\+PB
+\item Programmable control for G\+P\+IO interrupts
+\begin{DoxyItemize}
+\item Interrupt generation masking
+\item Edge-\/triggered on rising, falling, or both
+\item Level-\/sensitive on High or Low values
+\end{DoxyItemize}
+\item Bit masking in both read and write operations through address lines
+\item \mbox{\hyperlink{classCan}{Can}} be used to initiate an A\+DC sample sequence or a μ\+D\+MA transfer
+\item Pin state can be retained during Hibernation mode
+\item Pins configured as digital inputs are Schmitt-\/triggered
+\item Programmable control for G\+P\+IO pad configuration
+\begin{DoxyItemize}
+\item Weak pull-\/up or pull-\/down resistors
+\item 2-\/mA, 4-\/mA, and 8-\/mA pad drive for digital communication; up to four pads can sink 18-\/mA for high-\/current applications
+\item Slew rate control for 8-\/mA pad drive
+\item Open drain enables
+\item Digital input enables
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+These drivers I have written support only the G\+P\+IO A\+HB, not A\+PB.
+
+For more detailed information on the G\+P\+IO please see page 649 of the T\+M4\+C123\+G\+H6\+PM datasheet @ \href{https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf}{\texttt{ https\+://www.\+ti.\+com/lit/ds/symlink/tm4c123gh6pm.\+pdf}}\hypertarget{classGpio_gpioSignalDescription}{}\doxysubsubsection{G\+P\+I\+O Signal Description}\label{classGpio_gpioSignalDescription}
+The G\+P\+IO ports can be to be used by the analog and digital peripherals as inputs or outputs connecting physical pins to the peripheral. The G\+P\+I\+Os are 5V tolerant except {\ttfamily P\+D4} , {\ttfamily P\+D5} , {\ttfamily P\+B0} , and {\ttfamily P\+B1} which are 3.\+3V. Analog signals are all 5V tolerant, but analog performance specs are only guarenteed if the input signal swing at the pad is kept inside range. Pins are also programmed individually by TI\textquotesingle{}s design and no group programming is implied, unfortuntately. Entries on the table that are grey are default G\+P\+IO values.
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{gpioSignalPins.png}}
+\end{DoxyImageNoCaption}
+
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{gpioSignalPins2.png}}
+\end{DoxyImageNoCaption}
+
+
+Please note that there are special consideration pins. Most G\+P\+IO pins are configured as G\+P\+I\+Os and tri-\/stated by default, but there are some pins that are important enough to be automatically configured and protected from accidental programming. Such pins would be the J\+T\+A\+G/\+S\+WD interface, U\+A\+RT and others. The table below, copied from the T\+M4\+C123\+G\+H6\+PM datasheet, lists these pins and warnings when using them.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\+W\+A\+R\+N\+I\+N\+G!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+The J\+T\+A\+G/\+S\+WD pins can be P\+E\+R\+M\+E\+N\+T\+LY configured to disallow J\+T\+A\+G/\+S\+WD programming. Take extreme caution if using these pins!!!!!!!!!!!!!!!
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{gpioSpecialPins.png}}
+\end{DoxyImageNoCaption}
+
+
+Last, but not least, the T\+M4\+C123G Launchpad evaluation kit, E\+K-\/\+T\+M4\+C123\+G\+XL has G\+P\+I\+Os that are connected to on board L\+E\+Ds and switches. Below is a table copied from the TI User\textquotesingle{}s Guide for convenience
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{gpioLaunchPadSignalPins.png}}
+\end{DoxyImageNoCaption}
+\hypertarget{classGpio_gpioSystemControlRegisterDescription}{}\doxysubsubsection{G\+P\+I\+O System Control Register Descriptions}\label{classGpio_gpioSystemControlRegisterDescription}
+All addresses given are relative to the System Control base address of 0x400\+F.\+E000. Legacy registers not supported.\hypertarget{classGpio_gpioRegisterDescription}{}\doxysubsubsection{G\+P\+I\+O Register Description}\label{classGpio_gpioRegisterDescription}
+The \mbox{\hyperlink{classGpio}{Gpio}} class contains a list of registers listed as an offset of the hexadecimal base address of the \mbox{\hyperlink{classGpio}{Gpio}} A\+HB Port base address A -\/ F. The legacy A\+PB aperture is not used in this driver.
+
+Note that the G\+P\+IO module clock must be enabled before the registers can be programmed (see page 340). There must be a delay of 3 system clocks after the G\+P\+IO module clock is enabled before any G\+P\+IO module registers are accessed. 
+
+Definition at line 155 of file gpio.\+h.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classGpio_a0506dbc71ab38d58bb5995b649a0c25d}\label{classGpio_a0506dbc71ab38d58bb5995b649a0c25d}} 
+\index{Gpio@{Gpio}!Gpio@{Gpio}}
+\index{Gpio@{Gpio}!Gpio@{Gpio}}
+\doxysubsubsection{\texorpdfstring{Gpio()}{Gpio()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Gpio\+::\+Gpio (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gpio_8h_a38f034a9c94961ab7cf8a903e0abb1e0}{G\+P\+I\+O\+\_\+\+Port\+\_\+\+Pins}}}]{gpio,  }\item[{\mbox{\hyperlink{gpio_8h_a99f26e6ee9fcd62f75203b5402df8098}{direction}}}]{dir }\end{DoxyParamCaption})}
+
+
+
+Simple gpio initializer constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gpio} & pin to be initialized. \\
+\hline
+{\em dir} & of the gpio, to be an output or input. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 44 of file gpio.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{45 \{   }
+\DoxyCodeLine{46     (*this).gpio = gpio;}
+\DoxyCodeLine{47     (*this).gpioBaseAddress = GPIO\_Port\_AHB\_BASE + (((*this).gpio)/8) * 0x1000;}
+\DoxyCodeLine{48     (*this).gpioPin = (((*this).gpio \% 8));}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(\mbox{\hyperlink{systemControl_8h_a96c9203e5958b72d5ce82192cb6cdb12}{systemControlBase}} + RCGCGPIO\_OFFSET)), set, (uint32\_t)((*this).gpio)/8, 1, RW);}
+\DoxyCodeLine{51     \textcolor{keywordflow}{while}(\mbox{\hyperlink{classRegister_a4cf68c709a58963070d518e6b7715ea6}{Register::getRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(\mbox{\hyperlink{systemControl_8h_a96c9203e5958b72d5ce82192cb6cdb12}{systemControlBase}} + PRGPIO\_OFFSET)), (uint32\_t)((*this).gpio)/8, 1, RO) == 0)}
+\DoxyCodeLine{52     \{}
+\DoxyCodeLine{53         \textcolor{comment}{//Ready?}}
+\DoxyCodeLine{54     \}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56     \textcolor{comment}{//Unlock NMI for use.}}
+\DoxyCodeLine{57     \textcolor{keywordflow}{if}(gpio == PF0)}
+\DoxyCodeLine{58     \{}
+\DoxyCodeLine{59         \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(gpioBaseAddress + GPIOLOCK\_OFFSET)), gpioKey, 0, 32, RW);}
+\DoxyCodeLine{60         *(((\textcolor{keyword}{volatile} uint32\_t*)(gpioBaseAddress + GPIOCR\_OFFSET))) |= (0x1 << gpioPin);}
+\DoxyCodeLine{61     \}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(gpioBaseAddress + GPIODIR\_OFFSET)), dir, gpioPin, 1, RW);}
+\DoxyCodeLine{64     }
+\DoxyCodeLine{65     \textcolor{keywordflow}{if}(dir == input)}
+\DoxyCodeLine{66     \{}
+\DoxyCodeLine{67         \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(gpioBaseAddress + GPIOPUR\_OFFSET)), set, gpioPin, 1, RW);}
+\DoxyCodeLine{68     \}}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(gpioBaseAddress + GPIOAFSEl\_OFFSET)), clear, gpioPin, 1, RW);}
+\DoxyCodeLine{71     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(gpioBaseAddress + GPIODEN\_OFFSET)), set, gpioPin, 1, RW);}
+\DoxyCodeLine{72     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(gpioBaseAddress + GPIOAMSEL\_OFFSET)), clear, gpioPin, 1, RW);}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classGpio_a8be6d18a889f18c6a6742b96d082a72e}\label{classGpio_a8be6d18a889f18c6a6742b96d082a72e}} 
+\index{Gpio@{Gpio}!Gpio@{Gpio}}
+\index{Gpio@{Gpio}!Gpio@{Gpio}}
+\doxysubsubsection{\texorpdfstring{Gpio()}{Gpio()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Gpio\+::\+Gpio (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{gpio_8h_a38f034a9c94961ab7cf8a903e0abb1e0}{G\+P\+I\+O\+\_\+\+Port\+\_\+\+Pins}}}]{gpio,  }\item[{\mbox{\hyperlink{gpio_8h_a99f26e6ee9fcd62f75203b5402df8098}{direction}}}]{dir,  }\item[{uint32\+\_\+t}]{interrupt\+Priority }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classGpio}{Gpio}} interrupt constructor. Interrupts on both edges only. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gpio} & pin to be initialized. \\
+\hline
+{\em dir} & of the gpio, to be an output or input. \\
+\hline
+{\em interrupt\+Priority} & of the gpio, 0 being the highest priority and 7 being the lowest. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 83 of file gpio.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{83                                                                          : \mbox{\hyperlink{classGpio_a51a72b41aabb6df62d8cb35f1b35849a}{Gpio}}(gpio, dir)}
+\DoxyCodeLine{84 \{}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(gpioBaseAddress + GPIOIM\_OFFSET)), clear, gpioPin, 1, RW);}
+\DoxyCodeLine{88     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(gpioBaseAddress + GPIOIS\_OFFSET)), clear, gpioPin, 1, RW);}
+\DoxyCodeLine{89     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(gpioBaseAddress + GPIOIBE\_OFFSET)), set, gpioPin, 1, RW);}
+\DoxyCodeLine{90     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(gpioBaseAddress + GPIOICR\_OFFSET)), set, gpioPin, 1, RW);}
+\DoxyCodeLine{91     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(gpioBaseAddress + GPIOIM\_OFFSET)), set, gpioPin, 1, RW);}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93 }
+\DoxyCodeLine{94     \textcolor{comment}{/*}}
+\DoxyCodeLine{95 \textcolor{comment}{     * If gpio is == to Port F (Port number 5) use interrupt number 30 }}
+\DoxyCodeLine{96 \textcolor{comment}{     * (according to interrupt table), else use interrupt number 0 -\/> 4 }}
+\DoxyCodeLine{97 \textcolor{comment}{     * (corresponding to interrupt Port A through Port E)}}
+\DoxyCodeLine{98 \textcolor{comment}{     */}}
+\DoxyCodeLine{99     \mbox{\hyperlink{classNvic_ac10b867da5428824ce5cb1209b7b0d8b}{Nvic::activateInterrupt}}((\mbox{\hyperlink{nvic_8h_a83e304ff5052947728f95b6e732e25dd}{interrupt}})((((((*this).gpio)/8) == 5) ? 30 : (((*this).gpio)/8))), interruptPriority);}
+\DoxyCodeLine{100 }
+\DoxyCodeLine{101 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classGpio_a973b95516051680bc1225d505b04b701}\label{classGpio_a973b95516051680bc1225d505b04b701}} 
+\index{Gpio@{Gpio}!gpioRead@{gpioRead}}
+\index{gpioRead@{gpioRead}!Gpio@{Gpio}}
+\doxysubsubsection{\texorpdfstring{gpioRead()}{gpioRead()}}
+{\footnotesize\ttfamily uint32\+\_\+t Gpio\+::gpio\+Read (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Reads from a gpio pin. 
+
+\begin{DoxyReturn}{Returns}
+Value of the gpio pin, either a 1 or 0. 
+\end{DoxyReturn}
+
+
+Definition at line 135 of file gpio.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{136 \{}
+\DoxyCodeLine{137     \textcolor{keywordflow}{return}((\mbox{\hyperlink{classRegister_a4cf68c709a58963070d518e6b7715ea6}{Register::getRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(gpioBaseAddress + GPIODATA\_OFFSET)), gpioPin, 1, RW)));}
+\DoxyCodeLine{138 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classGpio_a19426fb11f3368681a7b879265506c21}\label{classGpio_a19426fb11f3368681a7b879265506c21}} 
+\index{Gpio@{Gpio}!gpioWrite@{gpioWrite}}
+\index{gpioWrite@{gpioWrite}!Gpio@{Gpio}}
+\doxysubsubsection{\texorpdfstring{gpioWrite()}{gpioWrite()}}
+{\footnotesize\ttfamily void Gpio\+::gpio\+Write (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{register_8h_a169628ed1b8cb9b2370ad4f2ace76e09}{set\+O\+R\+Clear}}}]{value }\end{DoxyParamCaption})}
+
+
+
+Writes to the gpio pin. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & to write to pin. Accepted values are 1 or 0. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 123 of file gpio.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{124 \{}
+\DoxyCodeLine{125     \textcolor{keywordflow}{if}((value == 0x0) || (value == 0x1))}
+\DoxyCodeLine{126     \{}
+\DoxyCodeLine{127         \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(gpioBaseAddress + GPIODATA\_OFFSET)), value, gpioPin, 1, RW);}
+\DoxyCodeLine{128     \}}
+\DoxyCodeLine{129 \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+gpio/\mbox{\hyperlink{gpio_8h}{gpio.\+h}}\item 
+gpio/\mbox{\hyperlink{gpio_8cpp}{gpio.\+cpp}}\end{DoxyCompactItemize}

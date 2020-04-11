@@ -1,0 +1,159 @@
+\hypertarget{classRegister}{}\doxysection{Register Class Reference}
+\label{classRegister}\index{Register@{Register}}
+
+
+Class used to unify the access to registers.  
+
+
+
+
+{\ttfamily \#include $<$register.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRegister_a669b96861697fb8c04bce79f04390c66}\label{classRegister_a669b96861697fb8c04bce79f04390c66}} 
+\mbox{\hyperlink{classRegister_a669b96861697fb8c04bce79f04390c66}{Register}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classRegister_a27490bda19cd4bd6ca09b48a795fc060}\label{classRegister_a27490bda19cd4bd6ca09b48a795fc060}} 
+\mbox{\hyperlink{classRegister_a27490bda19cd4bd6ca09b48a795fc060}{$\sim$\+Register}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static uint32\+\_\+t \mbox{\hyperlink{classRegister_a4cf68c709a58963070d518e6b7715ea6}{get\+Register\+Bit\+Field\+Status}} (volatile uint32\+\_\+t $\ast$address, uint32\+\_\+t bit, uint32\+\_\+t bit\+Width, \mbox{\hyperlink{register_8h_a569234f4390abbfd890ac5b6e86b5c01}{bit\+Field\+Permission}} permission)
+\item 
+static void \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{set\+Register\+Bit\+Field\+Status}} (volatile uint32\+\_\+t $\ast$address, uint32\+\_\+t value, uint32\+\_\+t bit, uint32\+\_\+t bit\+Width, \mbox{\hyperlink{register_8h_a569234f4390abbfd890ac5b6e86b5c01}{bit\+Field\+Permission}} permission)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class used to unify the access to registers. 
+
+\hypertarget{classRegister_registerDescription}{}\doxysubsection{Register Class Description}\label{classRegister_registerDescription}
+This helper class is used to unify and abstract away accessing the registers. This makes the code easier to read and more maintainable. The class\textquotesingle{}s static functions take care of clearing the bitfield before writing to it, to ensure that the correct value is alway written.
+
+Additionally, new and delete is redefined in the .cpp file for this class to eliminate exception handling, which is not needed in an embedded enviroment. 
+
+Definition at line 77 of file register.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classRegister_a4cf68c709a58963070d518e6b7715ea6}\label{classRegister_a4cf68c709a58963070d518e6b7715ea6}} 
+\index{Register@{Register}!getRegisterBitFieldStatus@{getRegisterBitFieldStatus}}
+\index{getRegisterBitFieldStatus@{getRegisterBitFieldStatus}!Register@{Register}}
+\doxysubsubsection{\texorpdfstring{getRegisterBitFieldStatus()}{getRegisterBitFieldStatus()}}
+{\footnotesize\ttfamily uint32\+\_\+t Register\+::get\+Register\+Bit\+Field\+Status (\begin{DoxyParamCaption}\item[{volatile uint32\+\_\+t $\ast$}]{address,  }\item[{uint32\+\_\+t}]{bit,  }\item[{uint32\+\_\+t}]{bit\+Width,  }\item[{\mbox{\hyperlink{register_8h_a569234f4390abbfd890ac5b6e86b5c01}{bit\+Field\+Permission}}}]{permission }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & of the register \\
+\hline
+{\em bit} & to be retrieved or the first bit of the bitfield to be retrieved \\
+\hline
+{\em width} & of the bitfield \\
+\hline
+{\em permission} & of the bitfield, read-\/only, write-\/only, etc...\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+retrieved information in the bitfield 
+\end{DoxyReturn}
+
+
+Definition at line 238 of file disasembly.\+txt.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{239 \{}
+\DoxyCodeLine{240     \textcolor{keywordflow}{if}((permission == RW) || (permission == RO) || (permission == RW1C))}
+\DoxyCodeLine{241     \{}
+\DoxyCodeLine{242         uint32\_t select = ((((0xFFFFFFFF >> (32 -\/ bitWidth)))) << bit);}
+\DoxyCodeLine{243         \textcolor{keywordflow}{return}(((*address) \& select) >> bit);}
+\DoxyCodeLine{244  340:   f8d3 23fc   ldr.w   r2, [r3, \#1020] ; 0x3fc}
+\DoxyCodeLine{245         uint32\_t select = ((((0xFFFFFFFF >> (32 -\/ bitWidth)))) << bit);}
+\DoxyCodeLine{246  344:   2301        movs    r3, \#1}
+\DoxyCodeLine{247  346:   4083        lsls    r3, r0}
+\DoxyCodeLine{248         \textcolor{keywordflow}{return}(((*address) \& select) >> bit);}
+\DoxyCodeLine{249  348:   4013        ands    r3, r2}
+\DoxyCodeLine{250  34a:   fa23 f000   lsr.w   r0, r3, r0}
+\DoxyCodeLine{251  34e:   4770        bx  lr}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253 00000350 <\_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>:}
+\DoxyCodeLine{254     \{}
+\DoxyCodeLine{255         \textcolor{keywordflow}{return}(UINT32\_MAX);}
+\DoxyCodeLine{256     \}}
+\DoxyCodeLine{257 \}}
+\DoxyCodeLine{258 }
+\DoxyCodeLine{259 \textcolor{keywordtype}{void} \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(\textcolor{keyword}{volatile} uint32\_t* address, uint32\_t value, uint32\_t bit, uint32\_t bitWidth, \mbox{\hyperlink{register_8h_a569234f4390abbfd890ac5b6e86b5c01}{bitFieldPermission}} permission)}
+\DoxyCodeLine{260  350:   b510        push    \{r4, lr\}}
+\DoxyCodeLine{261         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{262     \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRegister_a3a656301289a68ff4c631d1cb011c6f7}\label{classRegister_a3a656301289a68ff4c631d1cb011c6f7}} 
+\index{Register@{Register}!setRegisterBitFieldStatus@{setRegisterBitFieldStatus}}
+\index{setRegisterBitFieldStatus@{setRegisterBitFieldStatus}!Register@{Register}}
+\doxysubsubsection{\texorpdfstring{setRegisterBitFieldStatus()}{setRegisterBitFieldStatus()}}
+{\footnotesize\ttfamily void Register\+::set\+Register\+Bit\+Field\+Status (\begin{DoxyParamCaption}\item[{volatile uint32\+\_\+t $\ast$}]{address,  }\item[{uint32\+\_\+t}]{value,  }\item[{uint32\+\_\+t}]{bit,  }\item[{uint32\+\_\+t}]{bit\+Width,  }\item[{\mbox{\hyperlink{register_8h_a569234f4390abbfd890ac5b6e86b5c01}{bit\+Field\+Permission}}}]{permission }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & of the register \\
+\hline
+{\em value} & to be written to the bitfield \\
+\hline
+{\em bit} & to be retrieved or the first bit of the bitfield to be retrieved \\
+\hline
+{\em width} & of the bitfield \\
+\hline
+{\em permission} & of the bitfield, read-\/only, write-\/only, etc... \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 76 of file register.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{77 \{}
+\DoxyCodeLine{78     \textcolor{keywordflow}{if}((permission == RW1C) \&\& (value != 1))}
+\DoxyCodeLine{79     \{}
+\DoxyCodeLine{80         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{81     \}}
+\DoxyCodeLine{82     }
+\DoxyCodeLine{83     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((permission == RW) || (permission == WO) || (permission == RW1C))}
+\DoxyCodeLine{84     \{}
+\DoxyCodeLine{85         uint32\_t maxValue = (0xFFFFFFFF >> (32 -\/ bitWidth));}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87         \textcolor{keywordflow}{if}((value <= maxValue))}
+\DoxyCodeLine{88         \{}
+\DoxyCodeLine{89             uint32\_t clear = (\string~(maxValue << bit));}
+\DoxyCodeLine{90             value = value << bit;}
+\DoxyCodeLine{91     }
+\DoxyCodeLine{92             (*address) \&= clear;}
+\DoxyCodeLine{93             (*address) |= value;}
+\DoxyCodeLine{94         \}}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{97         \{}
+\DoxyCodeLine{98             \textcolor{keywordflow}{return};}
+\DoxyCodeLine{99         \}}
+\DoxyCodeLine{100         }
+\DoxyCodeLine{101     \}}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{104     \{}
+\DoxyCodeLine{105         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{106     \}}
+\DoxyCodeLine{107 \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+register/\mbox{\hyperlink{register_8h}{register.\+h}}\item 
+disasembly.\+txt\item 
+register/\mbox{\hyperlink{register_8cpp}{register.\+cpp}}\end{DoxyCompactItemize}

@@ -1,14 +1,16 @@
 /**
  * @file hibernate.cpp
- * @project RTOS
- * @engineer Matthew Hardenburgh
- * @date 12/15/2019
+ * @brief TM4C123GH6PM Hibernate Driver Definition
+ * @author Matthew Hardenburgh
+ * @version 0.1
+ * @date 3/21/2020
+ * @copyright Matthew Hardenburgh 2020
  * 
- * @section LICENSE
+ * @section license LICENSE
  * 
- * RTOS
- * Copyright (C) 2019  Matthew Hardenburgh
- * mdhardenburgh@gmail.com
+ * TM4C123GH6PM Drivers
+ * Copyright (C) 2020  Matthew Hardenburgh
+ * mdhardenburgh@protonmail.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,21 +25,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see https://www.gnu.org/licenses/.
  * 
- * @section DESCRIPTION
- * 
- * Class implementation for the system control unit for the Texas Instruments Tiva C 
- * ARM4F microcontroller, TM4C123GH6PM. 
- * 
- * System Control Register Descriptions
- * 
- * All addresses given are relative to the System Control base address of 
- * 0x400F.E000. Registers provided for legacy software support only are listed 
- * in “System Control Legacy Register Descriptions” on page 424.
- * 
- * Register Descriptions
- * 
- * The remainder of this section lists and describes the Hibernation module 
- * registers, in numerical order by address offset.
  */
-
 #include "hibernate.h"
+
+/**
+ * @brief empty constructor placeholder
+ */
+Hibernate::Hibernate()
+{
+
+}
+
+/**
+ * @brief empty deconstructor placeholder
+ */
+Hibernate::~Hibernate()
+{
+
+}

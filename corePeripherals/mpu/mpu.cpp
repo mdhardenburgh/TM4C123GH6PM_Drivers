@@ -1,14 +1,16 @@
 /**
- * @file mpu.c
- * @project RTOS
- * @engineer Matthew Hardenburgh
- * @date 12/03/2019
+ * @file mpu.cpp
+ * @brief TM4C123GH6PM MPU Driver Definition
+ * @author Matthew Hardenburgh
+ * @version 0.1
+ * @date 3/21/2020
+ * @copyright Matthew Hardenburgh 2020
  * 
- * @section LICENSE
+ * @section license LICENSE
  * 
- * RTOS
- * Copyright (C) 2019  Matthew Hardenburgh
- * mdhardenburgh@gmail.com
+ * TM4C123GH6PM Drivers
+ * Copyright (C) 2020  Matthew Hardenburgh
+ * mdhardenburgh@protonmail.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,24 +25,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see https://www.gnu.org/licenses/.
  * 
- * @section DESCRIPTION
- * 
- * Driver impelemtation for the memory protection unit for the Texas Instruments 
- * Tiva C ARM4F microcontroller, TM4C123GH6PM. 
- * 
- * This section lists and describes the Memory Protection Unit (MPU) registers, 
- * in numerical order by address offset.
- * 
- * The MPU registers can only be accessed from privileged mode.
  */
 
 #include "mpu.h"
 
+/**
+ * @brief empty constructor placeholder
+ */
 Mpu::Mpu()
 {
 
 }
 
+/**
+ * @brief empty deconstructor placeholder
+ */
 Mpu::~Mpu()
 {
     

@@ -1,0 +1,167 @@
+\hypertarget{classNvic}{}\doxysection{Nvic Class Reference}
+\label{classNvic}\index{Nvic@{Nvic}}
+
+
+T\+M4\+C123\+G\+H6\+PM \mbox{\hyperlink{classNvic}{Nvic}} Driver.  
+
+
+
+
+{\ttfamily \#include $<$nvic.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classNvic_a6d70d3ccb190de73fbc00397deae7a4a}\label{classNvic_a6d70d3ccb190de73fbc00397deae7a4a}} 
+\mbox{\hyperlink{classNvic_a6d70d3ccb190de73fbc00397deae7a4a}{Nvic}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classNvic_a24ef2287bacf09c0004dcf5c0667440d}\label{classNvic_a24ef2287bacf09c0004dcf5c0667440d}} 
+\mbox{\hyperlink{classNvic_a24ef2287bacf09c0004dcf5c0667440d}{$\sim$\+Nvic}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classNvic_ac10b867da5428824ce5cb1209b7b0d8b}{activate\+Interrupt}} (\mbox{\hyperlink{nvic_8h_a83e304ff5052947728f95b6e732e25dd}{interrupt}} my\+Interrupt, uint32\+\_\+t priority)
+\begin{DoxyCompactList}\small\item\em Activates an interrupt. \end{DoxyCompactList}\item 
+static uint32\+\_\+t \mbox{\hyperlink{classNvic_a0ccd8abda57f65ba306244cb7614ce7e}{disable\+Interrupts}} (void)
+\begin{DoxyCompactList}\small\item\em Disables interrupt globally. \end{DoxyCompactList}\item 
+static uint32\+\_\+t \mbox{\hyperlink{classNvic_afa349138bea6f8ac019b97eee410e285}{enable\+Interrupts}} (void)
+\begin{DoxyCompactList}\small\item\em Enables interrupt globally. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classNvic_ad26e0e306cdaaf092cd93b03da47f323}\label{classNvic_ad26e0e306cdaaf092cd93b03da47f323}} 
+static void \mbox{\hyperlink{classNvic_ad26e0e306cdaaf092cd93b03da47f323}{wfi}} (void)
+\begin{DoxyCompactList}\small\item\em Puts processer into sleep mode as configured by the system control module and waits for another interrupt. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM \mbox{\hyperlink{classNvic}{Nvic}} Driver. 
+
+\hypertarget{classNvic_nvicDescription}{}\doxysubsection{N\+V\+I\+C Description}\label{classNvic_nvicDescription}
+The T\+M4\+C123\+G\+H6\+PM microcontroller use a nested vector interrupt controller to handle exceptions and interrupts. For each interrupt listed in the {\ttfamily interrupt} enum, each has a programmable priority, with 0 being the highest priority and 7 being the lowest. The processor also automatically stacks its state on exception entry and unstacks this state on exception exit, with no instruction overhead, providing low latency exception handling.
+
+The N\+V\+IC registers can only be fully accessed from privileged mode, but interrupts can be pended while in unprivileged mode by enabling the Configuration and Control (C\+F\+G\+C\+T\+RL) register. Any other unprivileged mode access causes a bus fault.
+
+Ensure software uses correctly aligned register accesses. The processor does not support unaligned accesses to N\+V\+IC registers.
+
+An interrupt can enter the pending state even if it is disabled.
+
+Before programming the V\+T\+A\+B\+LE register to relocate the vector table, ensure the vector table entries of the new vector table are set up for fault handlers, N\+MI, and all enabled exceptions such as interrupts. For more information, see page 163.
+
+For more detailed information on the N\+V\+IC please see page 124 of the T\+M4\+C123\+G\+H6\+PM datasheet @ \href{https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf}{\texttt{ https\+://www.\+ti.\+com/lit/ds/symlink/tm4c123gh6pm.\+pdf}}\hypertarget{classNvic_nvicRegisterDescription}{}\doxysubsubsection{N\+V\+I\+C Register Description}\label{classNvic_nvicRegisterDescription}
+The N\+V\+IC class contains a list of N\+V\+IC registers listed as an offset relative to the hexadecimal base address of Core Peripherals 0x\+E000\+E000. 
+
+Definition at line 161 of file nvic.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classNvic_ac10b867da5428824ce5cb1209b7b0d8b}\label{classNvic_ac10b867da5428824ce5cb1209b7b0d8b}} 
+\index{Nvic@{Nvic}!activateInterrupt@{activateInterrupt}}
+\index{activateInterrupt@{activateInterrupt}!Nvic@{Nvic}}
+\doxysubsubsection{\texorpdfstring{activateInterrupt()}{activateInterrupt()}}
+{\footnotesize\ttfamily void Nvic\+::activate\+Interrupt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{nvic_8h_a83e304ff5052947728f95b6e732e25dd}{interrupt}}}]{my\+Interrupt,  }\item[{uint32\+\_\+t}]{priority }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Activates an interrupt. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em my\+Interrupt} & coresponds to the interrupt number of the interrupt that you want to activate. \\
+\hline
+{\em priority} & of the interrput that you want to activate \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 67 of file nvic.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{68 \{}
+\DoxyCodeLine{69     }
+\DoxyCodeLine{70     \textcolor{keywordflow}{if}((myInterrupt < 139) \&\& (priority < 8))}
+\DoxyCodeLine{71     \{   }
+\DoxyCodeLine{72         \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(\mbox{\hyperlink{register_8h_a28a66bcef9bed2b4afab843e739c9f59}{corePeripheralBase}} + PRIn\_OFFSET[myInterrupt/4])), priority, ((myInterrupt \% nvicRegisterOffset) * 8) + 5, 3, RW);}
+\DoxyCodeLine{73         \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(\mbox{\hyperlink{register_8h_a28a66bcef9bed2b4afab843e739c9f59}{corePeripheralBase}} + ENn\_OFFSET[myInterrupt/32])), (uint32\_t)set, (uint32\_t)(myInterrupt \% 32), 1, RW);}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75     \}}
+\DoxyCodeLine{76     }
+\DoxyCodeLine{77     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{78     \{}
+\DoxyCodeLine{79         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{80     \}}
+\DoxyCodeLine{81 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classNvic_a0ccd8abda57f65ba306244cb7614ce7e}\label{classNvic_a0ccd8abda57f65ba306244cb7614ce7e}} 
+\index{Nvic@{Nvic}!disableInterrupts@{disableInterrupts}}
+\index{disableInterrupts@{disableInterrupts}!Nvic@{Nvic}}
+\doxysubsubsection{\texorpdfstring{disableInterrupts()}{disableInterrupts()}}
+{\footnotesize\ttfamily uint32\+\_\+t Nvic\+::disable\+Interrupts (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Disables interrupt globally. 
+
+Used when configuring interrupts at initial bootup \begin{DoxyReturn}{Returns}
+A dummy value needed to get code to work, generally cast the return value to void. 
+\end{DoxyReturn}
+
+
+Definition at line 91 of file nvic.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{92 \{}
+\DoxyCodeLine{93     \textcolor{keyword}{volatile} uint32\_t ui32Ret;}
+\DoxyCodeLine{94     \textcolor{keyword}{asm} \textcolor{keyword}{volatile}(}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96         \textcolor{stringliteral}{"mrs     r0, PRIMASK\(\backslash\)n"}}
+\DoxyCodeLine{97         \textcolor{stringliteral}{"cpsid   i\(\backslash\)n"}}
+\DoxyCodeLine{98         \textcolor{stringliteral}{"bx      lr\(\backslash\)n"}}
+\DoxyCodeLine{99         : \textcolor{stringliteral}{"=r"} (ui32Ret)}
+\DoxyCodeLine{100     );}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102     \textcolor{keywordflow}{return}(ui32Ret);}
+\DoxyCodeLine{103 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classNvic_afa349138bea6f8ac019b97eee410e285}\label{classNvic_afa349138bea6f8ac019b97eee410e285}} 
+\index{Nvic@{Nvic}!enableInterrupts@{enableInterrupts}}
+\index{enableInterrupts@{enableInterrupts}!Nvic@{Nvic}}
+\doxysubsubsection{\texorpdfstring{enableInterrupts()}{enableInterrupts()}}
+{\footnotesize\ttfamily uint32\+\_\+t Nvic\+::enable\+Interrupts (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Enables interrupt globally. 
+
+Used when configuring interrupts at initial bootup \begin{DoxyReturn}{Returns}
+A dummy value needed to get code to work, generally cast the return value to void. 
+\end{DoxyReturn}
+
+
+Definition at line 114 of file nvic.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{115 \{}
+\DoxyCodeLine{116     \textcolor{keyword}{volatile} uint32\_t ui32Ret;}
+\DoxyCodeLine{117     \textcolor{keyword}{asm} \textcolor{keyword}{volatile}(}
+\DoxyCodeLine{118 }
+\DoxyCodeLine{119         \textcolor{stringliteral}{"mrs     r0, PRIMASK\(\backslash\)n"}}
+\DoxyCodeLine{120         \textcolor{stringliteral}{"cpsie   i\(\backslash\)n"}}
+\DoxyCodeLine{121         \textcolor{stringliteral}{"bx      lr\(\backslash\)n"}}
+\DoxyCodeLine{122         : \textcolor{stringliteral}{"=r"} (ui32Ret)}
+\DoxyCodeLine{123     );}
+\DoxyCodeLine{124 }
+\DoxyCodeLine{125     \textcolor{keywordflow}{return}(ui32Ret);}
+\DoxyCodeLine{126 \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core\+Peripherals/nvic/\mbox{\hyperlink{nvic_8h}{nvic.\+h}}\item 
+core\+Peripherals/nvic/\mbox{\hyperlink{nvic_8cpp}{nvic.\+cpp}}\end{DoxyCompactItemize}

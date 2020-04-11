@@ -1,0 +1,51 @@
+\hypertarget{classWatchdog}{}\doxysection{Watchdog Class Reference}
+\label{classWatchdog}\index{Watchdog@{Watchdog}}
+
+
+T\+M4\+C123\+G\+H6\+PM \mbox{\hyperlink{classWatchdog}{Watchdog}} Driver.  
+
+
+
+
+{\ttfamily \#include $<$watchdog.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classWatchdog_ab4aa2c62f897880ca29fd64062ab0e04}\label{classWatchdog_ab4aa2c62f897880ca29fd64062ab0e04}} 
+\mbox{\hyperlink{classWatchdog_ab4aa2c62f897880ca29fd64062ab0e04}{Watchdog}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classWatchdog_ad836a36b5eb5dbe134d4050d49a95d4e}\label{classWatchdog_ad836a36b5eb5dbe134d4050d49a95d4e}} 
+\mbox{\hyperlink{classWatchdog_ad836a36b5eb5dbe134d4050d49a95d4e}{$\sim$\+Watchdog}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM \mbox{\hyperlink{classWatchdog}{Watchdog}} Driver. 
+
+\hypertarget{classWatchdog_watchdogDescription}{}\doxysubsection{Watchdog Description}\label{classWatchdog_watchdogDescription}
+The T\+M4\+C123\+G\+H6\+PM microcontroller has 2 \mbox{\hyperlink{classWatchdog}{Watchdog}} timer modules. \mbox{\hyperlink{classWatchdog}{Watchdog}} Timer 0 is clocked by the main system clock, and \mbox{\hyperlink{classWatchdog}{Watchdog}} Timer 2 is clocked by the precision internal oscillator {\ttfamily P\+I\+O\+SC} . W\+DT 1 is in a different clock domain and requires synchronizers. To this end, there is a bit in \mbox{\hyperlink{classWatchdog}{Watchdog}} Timer Control \mbox{\hyperlink{classRegister}{Register}} (W\+D\+T\+C\+TL) to indicated that a write to W\+D\+T1 is completed. Driver software can use this bit to make sure that the previous access has completed before moving on to the nex one. The \mbox{\hyperlink{classWatchdog}{Watchdog}} Timer is used to attempt to regain control of a system that has failed. The \mbox{\hyperlink{classWatchdog}{Watchdog}} timer can generate an interrupt, N\+MI or system reset when the time out value is reached.
+
+The \mbox{\hyperlink{classWatchdog}{Watchdog}} Timer has the following features\+:
+\begin{DoxyItemize}
+\item 32-\/bit down counter with a programmable load register
+\item Separate watchdog clock with an enable
+\item Programmable interrupt generation logic with interrupt masking and optional N\+MI function
+\item Lock register protection from runaway software
+\item Reset generation logic with an enable/disable
+\item User-\/enabled stalling when the microcontroller asserts the C\+PU Halt flag during debug
+\end{DoxyItemize}
+
+The \mbox{\hyperlink{classWatchdog}{Watchdog}} Timer has a lock register to prevent the configuration from being accidentally altered.
+
+For more detailed information on the \mbox{\hyperlink{classWatchdog}{Watchdog}} please see page 774 of the T\+M4\+C123\+G\+H6\+PM datasheet @ \href{https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf}{\texttt{ https\+://www.\+ti.\+com/lit/ds/symlink/tm4c123gh6pm.\+pdf}}\hypertarget{classWatchdog_watchdogDescription}{}\doxysubsubsection{Watchdog Description}\label{classWatchdog_watchdogDescription}
+A \mbox{\hyperlink{classWatchdog}{Watchdog}} timer is like that strange timer in the bunker from the show Lost. The processor has to periodically check and reset the timer to verify that the processor is not stuck. Else the \mbox{\hyperlink{classWatchdog}{Watchdog}} resets the system in the hopes of un-\/stucking the processor. This is used in embedded enviroments where the user might not know how to fix or troubleshoot what is going wrong. In the T\+M4\+C123\+G\+H6\+PM microcontroller, the \mbox{\hyperlink{classWatchdog}{Watchdog}} timer has two countdown periods. After the first countdown an interupt is generated and a second count down begins. 
+
+Definition at line 77 of file watchdog.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+watchdog/\mbox{\hyperlink{watchdog_8h}{watchdog.\+h}}\item 
+watchdog/\mbox{\hyperlink{watchdog_8cpp}{watchdog.\+cpp}}\end{DoxyCompactItemize}

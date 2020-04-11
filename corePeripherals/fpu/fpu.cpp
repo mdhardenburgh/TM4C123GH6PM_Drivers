@@ -1,14 +1,16 @@
 /**
- * @file fpu.c
- * @project RTOS
- * @engineer Matthew Hardenburgh
- * @date 12/15/2019
+ * @file fpu.cpp
+ * @brief TM4C123GH6PM fpu Driver Definition
+ * @author Matthew Hardenburgh
+ * @version 0.1
+ * @date 3/21/2020
+ * @copyright Matthew Hardenburgh 2020
  * 
- * @section LICENSE
+ * @section license LICENSE
  * 
- * RTOS
- * Copyright (C) 2019  Matthew Hardenburgh
- * mdhardenburgh@gmail.com
+ * TM4C123GH6PM Drivers
+ * Copyright (C) 2020  Matthew Hardenburgh
+ * mdhardenburgh@protonmail.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,23 +25,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see https://www.gnu.org/licenses/.
  * 
- * @section DESCRIPTION
- * 
- * Class implementation for the floating point unit for the Texas Instruments 
- * Tiva C ARM4F microcontroller, TM4C123GH6PM. 
- * 
- * Floating-Point Unit (FPU) Register Descriptions
- * 
- * This section lists and describes the Floating-Point Unit (FPU) registers,
- * in numerical order by address offset.
  */
 #include "fpu.h"
 
+/**
+ * @brief empty constructor placeholder
+ */
 Fpu::Fpu()
 {
 
 }
 
+/**
+ * @brief empty deconstructor placeholder
+ */
 Fpu::~Fpu()
 {
     

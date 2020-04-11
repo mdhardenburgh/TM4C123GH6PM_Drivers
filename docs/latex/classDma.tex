@@ -1,0 +1,82 @@
+\hypertarget{classDma}{}\doxysection{Dma Class Reference}
+\label{classDma}\index{Dma@{Dma}}
+
+
+T\+M4\+C123\+G\+H6\+PM μ\+D\+MA Driver.  
+
+
+
+
+{\ttfamily \#include $<$udma.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classDma_a99dd733135c3a2730362402040b517de}\label{classDma_a99dd733135c3a2730362402040b517de}} 
+\mbox{\hyperlink{classDma_a99dd733135c3a2730362402040b517de}{Dma}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classDma_ae54c041c6f16ccf3648bc3b022f6ee56}\label{classDma_ae54c041c6f16ccf3648bc3b022f6ee56}} 
+\mbox{\hyperlink{classDma_ae54c041c6f16ccf3648bc3b022f6ee56}{$\sim$\+Dma}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM μ\+D\+MA Driver. 
+
+\hypertarget{classDma_udmaDescription}{}\doxysubsection{μ\+D\+M\+A Description}\label{classDma_udmaDescription}
+The T\+M4\+C123\+G\+H6\+PM a Direct Memory Access (D\+MA) controller, known as μ\+D\+MA. D\+MA provides a way to offload memory transfer tasks from the processor. the μ\+D\+MA controller transfers data between memory and peripherals and has a dedicated channel for each supported peripheral. The μ\+D\+MA controller can be programmed to automatically transfer data between peripherals and memory as soon as the peripheral is ready to transfer more data. The μ\+D\+MA controller has the following features\+:
+\begin{DoxyItemize}
+\item A\+R\+M® Prime\+Cell® 32-\/channel configurable µ\+D\+MA controller
+\item Support for memory-\/to-\/memory, memory-\/to-\/peripheral, and peripheral-\/to-\/ memory in multiple transfer modes
+\begin{DoxyItemize}
+\item Basic for simple transfer scenarios
+\item Ping-\/pong for continuous data flow
+\item Scatter-\/gather for a programmable list of up to 256 arbitrary transfers initiated from a single request
+\end{DoxyItemize}
+\item Highly flexible and configurable channel operation
+\begin{DoxyItemize}
+\item Independently configured and operated channels
+\item Dedicated channels for supported on-\/chip modules
+\item Flexible channel assignments
+\item One channel each for receive and transmit path for bidirectional modules
+\item Dedicated channel for software-\/initiated transfers
+\item Per-\/channel configurable priority scheme
+\item Optional software-\/initiated requests for any channel
+\end{DoxyItemize}
+\item Two levels of priority
+\item Design optimizations for improved bus access performance between µ\+D\+MA controller and the processor core
+\begin{DoxyItemize}
+\item µ\+D\+MA controller access is subordinate to core access
+\item R\+AM striping
+\item Peripheral bus segmentation
+\end{DoxyItemize}
+\item Data sizes of 8, 16, and 32 bits
+\item Transfer size is programmable in binary steps from 1 to 1024
+\item Source and destination address increment size of byte, half-\/word, word, or no increment
+\item Maskable peripheral requests
+\item Interrupt on transfer completion, with a separate interrupt per channel
+\end{DoxyItemize}
+
+For more detailed information on the μ\+D\+MA please see page 585 of the T\+M4\+C123\+G\+H6\+PM datasheet @ \href{https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf}{\texttt{ https\+://www.\+ti.\+com/lit/ds/symlink/tm4c123gh6pm.\+pdf}}\hypertarget{classDma_udmaSignalDescription}{}\doxysubsubsection{μ\+D\+M\+A Signal Description}\label{classDma_udmaSignalDescription}
+Each D\+MA channel can be programmed with up to 5 possible assignments. There are 4 D\+MA Channel Map Select registers (D\+M\+A\+C\+H\+M\+A\+Pn) and each register has 8 4-\/bit assignment fields, making a total of 32 assignment fields, one field each for the 32 D\+MA channels.
+
+The table below shows the μ\+D\+MA channel mappings. The {\ttfamily Enc}. column indicates the encoding the should be programmed into the D\+M\+A\+C\+H\+M\+A\+Pn bit field to use a channel with a specified peripheral. Encodings 0x5 to 0xF are reserved and not used. The {\ttfamily Type} column in the table indicates if a peripheral uses (S)ingle request, (B)urst request, or both (SB). Peripheral encodings that are \char`\"{}\+Software\char`\"{} may be assigned to peripherals in the future, but are currently available for software use. Channel 30 is dedicated to software use. U\+SB endpoints mapped to D\+MA channels 0-\/3 can be changed using the U\+SB register U\+S\+B\+D\+M\+A\+S\+EL
+
+  
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{udmaChannelAssignments.png}}
+\end{DoxyImageNoCaption}
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{udmaChannelAssignments2.png}}
+\end{DoxyImageNoCaption}
+ 
+
+Definition at line 103 of file udma.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+udma/\mbox{\hyperlink{udma_8h}{udma.\+h}}\item 
+udma/\mbox{\hyperlink{udma_8cpp}{udma.\+cpp}}\end{DoxyCompactItemize}

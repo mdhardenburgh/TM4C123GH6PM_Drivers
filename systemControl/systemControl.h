@@ -1,14 +1,16 @@
 /**
  * @file systemControl.h
- * @project RTOS
- * @engineer Matthew Hardenburgh
- * @date 12/15/2019
+ * @brief TM4C123GH6PM System Control Driver Declaration
+ * @author Matthew Hardenburgh
+ * @version 0.1
+ * @date 3/21/2020
+ * @copyright Matthew Hardenburgh 2020
  * 
- * @section LICENSE
+ * @section license LICENSE
  * 
- * RTOS
- * Copyright (C) 2019  Matthew Hardenburgh
- * mdhardenburgh@gmail.com
+ * TM4C123GH6PM Drivers
+ * Copyright (C) 2020  Matthew Hardenburgh
+ * mdhardenburgh@protonmail.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,17 +24,36 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see https://www.gnu.org/licenses/.
+ */
+
+/**
+ * @class SystemControl
+ * @brief TM4C123GH6PM System Control Driver
  * 
- * @section DESCRIPTION
+ * @section systemControlDescription System Control Description
  * 
- * Class header for the system control unit for the Texas Instruments Tiva C 
- * ARM4F microcontroller, TM4C123GH6PM. 
+ * System control configures the overall operation of the device and provides 
+ * information about the device. Configurable features include reset control, 
+ * NMI operation, power control, clock control, and low-power modes.
  * 
- * System Control Register Descriptions
+ * For more detailed information on the System Control module please see page 212 of the 
+ * TM4C123GH6PM datasheet @ https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf
  * 
- * All addresses given are relative to the System Control base address of 
- * 0x400F.E000. Registers provided for legacy software support only are listed 
- * in “System Control Legacy Register Descriptions” on page 424.
+ * @subsection systemControlSignalDescription System Control Signal Description
+ * 
+ * The Non-Maskable Interrupt ( \c NMI ) signals are alternate functions of GPIOs.
+ * Non-Maskable interrupts are controlled and configured by the System Control block.
+ * 
+ * The following table lists the external signals and thier associtated pins 
+ * for \c NMI. The GPIO needs to be configured for the \c NMI alternate
+ * function using the \c AFSEL bit in the GPIO Alternate Function Register 
+ * (GPIOAFSEL). The number in parenthesis in the Pin Mux / Pin Assignment 
+ * column of the table below is what is programmed into the \c PMCn field in
+ * the GPIO Port Control (GPIOPCTL) register to assign a \c NMI signal to a GPIO. 
+ * 
+ * @image html systemControlSignalPins.png
+ * @image latex systemControlSignalPins.png
+ * 
  */
 
 
@@ -43,9 +64,14 @@
 #include "../register/register.h"
 #include "../corePeripherals/nvic/nvic.h"
 
+/**
+ * Base address for the system control registers.
+ */
 const uint32_t systemControlBase = 0x400FE000;
 
-
+/**
+ * System clocks that the PLL can be programmed to.
+ */
 enum SYSDIV2
 {
     /* reserved = 2; //reserved = 3; //reserved = 4; */ _80MHz = 5,
@@ -82,6 +108,9 @@ enum SYSDIV2
     _3_17MHz = 126, _3_15MHz = 127, _3_12MHz = 128
 };
 
+/**
+ * Oscillator frequency
+ */
 enum XTAL_VAL
 {
     _4MHz_XTAL = 0x09u, _6MHz_XTAL = 0x0Bu, _8MHz_XTAL = 0x0Eu,
@@ -90,6 +119,9 @@ enum XTAL_VAL
     _25MHz_XTAL = 0x1Au
 };
 
+/**
+ * Oscillator source
+ */
 enum OSCSRC
 {
     MOSC = 0x0u, //Main oscillator
@@ -101,6 +133,7 @@ enum OSCSRC
     //reserved = 0x6,
     _32_768kHz = 0x7 //32.768-kHz external oscillator
 };
+
 
 class SystemControl
 {

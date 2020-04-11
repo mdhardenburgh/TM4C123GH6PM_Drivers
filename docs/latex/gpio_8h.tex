@@ -1,0 +1,148 @@
+\hypertarget{gpio_8h}{}\doxysection{gpio/gpio.h File Reference}
+\label{gpio_8h}\index{gpio/gpio.h@{gpio/gpio.h}}
+
+
+T\+M4\+C123\+G\+H6\+PM \mbox{\hyperlink{classGpio}{Gpio}} Driver Declaration.  
+
+
+{\ttfamily \#include \char`\"{}../system\+Control/system\+Control.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classGpio}{Gpio}}
+\begin{DoxyCompactList}\small\item\em T\+M4\+C123\+G\+H6\+PM G\+P\+IO Driver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{gpio_8h_a99f26e6ee9fcd62f75203b5402df8098}{direction}} \{ {\bfseries input}, 
+{\bfseries output}
+ \}
+\item 
+enum \mbox{\hyperlink{gpio_8h_a38f034a9c94961ab7cf8a903e0abb1e0}{G\+P\+I\+O\+\_\+\+Port\+\_\+\+Pins}} \{ \newline
+{\bfseries P\+A0}, 
+{\bfseries P\+A1}, 
+{\bfseries P\+A2}, 
+{\bfseries P\+A3}, 
+\newline
+{\bfseries P\+A4}, 
+{\bfseries P\+A5}, 
+{\bfseries P\+A6}, 
+{\bfseries P\+A7}, 
+\newline
+{\bfseries P\+B0}, 
+{\bfseries P\+B1}, 
+{\bfseries P\+B2}, 
+{\bfseries P\+B3}, 
+\newline
+{\bfseries P\+B4}, 
+{\bfseries P\+B5}, 
+{\bfseries P\+B6}, 
+{\bfseries P\+B7}, 
+\newline
+{\bfseries P\+C0}, 
+{\bfseries P\+C1}, 
+{\bfseries P\+C2}, 
+{\bfseries P\+C3}, 
+\newline
+{\bfseries P\+C4}, 
+{\bfseries P\+C5}, 
+{\bfseries P\+C6}, 
+{\bfseries P\+C7}, 
+\newline
+{\bfseries P\+D0}, 
+{\bfseries P\+D1}, 
+{\bfseries P\+D2}, 
+{\bfseries P\+D3}, 
+\newline
+{\bfseries P\+D4}, 
+{\bfseries P\+D5}, 
+{\bfseries P\+D6}, 
+{\bfseries P\+D7}, 
+\newline
+{\bfseries P\+E0}, 
+{\bfseries P\+E1}, 
+{\bfseries P\+E2}, 
+{\bfseries P\+E3}, 
+\newline
+{\bfseries P\+E4}, 
+{\bfseries P\+E5}, 
+{\bfseries P\+E6}, 
+{\bfseries P\+E7}, 
+\newline
+{\bfseries P\+F0}, 
+{\bfseries P\+F1}, 
+{\bfseries P\+F2}, 
+{\bfseries P\+F3}, 
+\newline
+{\bfseries P\+F4}, 
+{\bfseries P\+F5}, 
+{\bfseries P\+F6}, 
+{\bfseries P\+F7}
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM \mbox{\hyperlink{classGpio}{Gpio}} Driver Declaration. 
+
+\begin{DoxyAuthor}{Author}
+Matthew Hardenburgh 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+3/21/2020 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Matthew Hardenburgh 2020
+\end{DoxyCopyright}
+\hypertarget{watchdog_8h_license}{}\doxysubsection{L\+I\+C\+E\+N\+SE}\label{watchdog_8h_license}
+T\+M4\+C123\+G\+H6\+PM Drivers Copyright (C) 2020 Matthew Hardenburgh \href{mailto:mdhardenburgh@protonmail.com}{\texttt{ mdhardenburgh@protonmail.\+com}}
+
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program. If not, see \href{https://www.gnu.org/licenses/}{\texttt{ https\+://www.\+gnu.\+org/licenses/}}. 
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{gpio_8h_a99f26e6ee9fcd62f75203b5402df8098}\label{gpio_8h_a99f26e6ee9fcd62f75203b5402df8098}} 
+\index{gpio.h@{gpio.h}!direction@{direction}}
+\index{direction@{direction}!gpio.h@{gpio.h}}
+\doxysubsubsection{\texorpdfstring{direction}{direction}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{gpio_8h_a99f26e6ee9fcd62f75203b5402df8098}{direction}}}
+
+Direction of the signal, i.\+e. if the gpio acts as an input or output. 
+
+Definition at line 136 of file gpio.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{137 \{}
+\DoxyCodeLine{138     input, output}
+\DoxyCodeLine{139 \};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{gpio_8h_a38f034a9c94961ab7cf8a903e0abb1e0}\label{gpio_8h_a38f034a9c94961ab7cf8a903e0abb1e0}} 
+\index{gpio.h@{gpio.h}!GPIO\_Port\_Pins@{GPIO\_Port\_Pins}}
+\index{GPIO\_Port\_Pins@{GPIO\_Port\_Pins}!gpio.h@{gpio.h}}
+\doxysubsubsection{\texorpdfstring{GPIO\_Port\_Pins}{GPIO\_Port\_Pins}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{gpio_8h_a38f034a9c94961ab7cf8a903e0abb1e0}{G\+P\+I\+O\+\_\+\+Port\+\_\+\+Pins}}}
+
+The G\+P\+IO port pins. There is no P\+E6, P\+E7, P\+F5, P\+F6, or P\+F7. Only added for completeness. 
+
+Definition at line 145 of file gpio.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{146 \{}
+\DoxyCodeLine{147     PA0, PA1, PA2, PA3, PA4, PA5, PA6, PA7,}
+\DoxyCodeLine{148     PB0, PB1, PB2, PB3, PB4, PB5, PB6, PB7,}
+\DoxyCodeLine{149     PC0, PC1, PC2, PC3, PC4, PC5, PC6, PC7,}
+\DoxyCodeLine{150     PD0, PD1, PD2, PD3, PD4, PD5, PD6, PD7,}
+\DoxyCodeLine{151     PE0, PE1, PE2, PE3, PE4, PE5, PE6, PE7, \textcolor{comment}{//There is no PE6 or PE7}}
+\DoxyCodeLine{152     PF0, PF1, PF2, PF3, PF4, PF5, PF6, PF7  \textcolor{comment}{//There is no PF5, PF6, or PF7}}
+\DoxyCodeLine{153 \};}
+
+\end{DoxyCode}

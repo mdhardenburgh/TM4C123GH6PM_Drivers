@@ -1,0 +1,23 @@
+\hypertarget{md_README_autotoc_md1}{}\doxysection{A very simple R\+T\+O\+S for the Tiva T\+M4\+C123\+G\+H6\+P\+M microcontroller.}\label{md_README_autotoc_md1}
+Drivers for the Texas Instruments Tiva C T\+M4\+C123\+G\+H6\+PM microcontroller. It is designed to be easy to use, similar to an arduino, however knowledge of pointers and memory management is reccommended.
+
+A\+RM G\+NU Toolchain is required to build this project. Open\+O\+CD is required to download main.\+elf to the board. Both are freely available to download and install
+
+To compile the project use navigate to the project directory in a terminal and use the command {\ttfamily make}.
+
+Next use the command {\ttfamily openocd -\/f board/ek-\/tm4c123gxl.\+cfg -\/c \char`\"{}program main.\+elf\char`\"{}} to download the code to the board. Hit the reset switch to reset the processor to see the code in action.
+
+The command {\ttfamily arm-\/none-\/eabi-\/gdb main.\+elf} can be used to access the debugger.
+\begin{DoxyItemize}
+\item Use the command {\ttfamily target extended-\/remote\+:3333} to connect to the board
+\item Use the command {\ttfamily monitor reset halt} to halt the processor (required to load code)
+\item Use the command {\ttfamily load} to load new code onto the board
+\item Use the command {\ttfamily monitor reset init} to restart the processor
+\item The reset of the G\+DB commands are the same
+\end{DoxyItemize}
+
+G\+P\+IO is currently only fuctional and functional for simple inputs and outputs.
+
+Main contains a very simple example program of how to use the G\+P\+IO.
+
+More to come soon! 

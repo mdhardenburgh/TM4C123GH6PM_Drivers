@@ -103,7 +103,7 @@ extern "C" void SystemInit(void)
     blueLed = new Gpio(PF2, output);
     redLed = new Gpio(PF1, output);
 }
-
+ 
 int main(void)
 {
 
@@ -125,8 +125,4 @@ int main(void)
         Nvic::wfi();
     }
 
-    delete blueLed;
-    delete redLed;
-    delete swtich1;
-    delete swtich2;
 }

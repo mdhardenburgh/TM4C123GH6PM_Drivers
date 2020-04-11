@@ -1,14 +1,16 @@
 /**
  * @file nvic.h
- * @project RTOS
- * @engineer Matthew Hardenburgh
- * @date 11/07/2019
+ * @brief TM4C123GH6PM NVIC Driver Declaration
+ * @author Matthew Hardenburgh
+ * @version 0.1
+ * @date 3/21/2020
+ * @copyright Matthew Hardenburgh 2020
  * 
- * @section LICENSE
+ * @section license LICENSE
  * 
- * RTOS
- * Copyright (C) 2019  Matthew Hardenburgh
- * mdhardenburgh@gmail.com
+ * TM4C123GH6PM Drivers
+ * Copyright (C) 2020  Matthew Hardenburgh
+ * mdhardenburgh@protonmail.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,13 +24,20 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see https://www.gnu.org/licenses/.
+ */
+
+/**
+ * @class Nvic
+ * @brief TM4C123GH6PM Nvic Driver
  * 
- * @section DESCRIPTION
+ * @section nvicDescription NVIC Description
  * 
- * Class header for the nested vector interrupt controller for the Texas 
- * Instruments Tiva C ARM4F microcontroller, TM4C123GH6PM. 
- * 
- * This section lists and describes the NVIC registers, in numerical order by address offset.
+ * The TM4C123GH6PM microcontroller use a nested vector interrupt controller to
+ * handle exceptions and interrupts. For each interrupt listed in the \c interrupt
+ * enum, each has a programmable priority, with 0 being the highest priority
+ * and 7 being the lowest. The processor also automatically stacks its state on 
+ * exception entry and unstacks this state on exception exit, with no 
+ * instruction overhead, providing low latency exception handling.
  * 
  * The NVIC registers can only be fully accessed from privileged mode, but 
  * interrupts can be pended while in unprivileged mode by enabling the 
@@ -45,6 +54,14 @@
  * handlers, NMI, and all enabled exceptions such as interrupts. For more 
  * information, see page 163.
  * 
+ * For more detailed information on the NVIC please see page 124 of the 
+ * TM4C123GH6PM datasheet @ https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf
+ * 
+ * @subsection nvicRegisterDescription NVIC Register Description
+ * 
+ * The NVIC class contains a list of NVIC registers listed as an offset relative
+ * to the hexadecimal base address of Core Peripherals 0xE000E000.
+ * 
  */
 
 #ifndef NVIC_H
@@ -54,6 +71,11 @@
 // #include <stddef.h>
 #include "../../register/register.h"
 
+/**
+ * Interrupt number as according to the TM4C123GH6PM microcontroller datasheet 
+ * Table 2-9 column two starting on page 104.
+ * 
+ */
 enum interrupt
 {
     GPIO_Port_A_Interrupt = 0u,

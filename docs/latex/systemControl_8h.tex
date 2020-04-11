@@ -1,0 +1,334 @@
+\hypertarget{systemControl_8h}{}\doxysection{system\+Control/system\+Control.h File Reference}
+\label{systemControl_8h}\index{systemControl/systemControl.h@{systemControl/systemControl.h}}
+
+
+T\+M4\+C123\+G\+H6\+PM System Control Driver Declaration.  
+
+
+{\ttfamily \#include \char`\"{}../register/register.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../core\+Peripherals/nvic/nvic.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classSystemControl}{System\+Control}}
+\begin{DoxyCompactList}\small\item\em T\+M4\+C123\+G\+H6\+PM System Control Driver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{systemControl_8h_a596311dacfdb940ffd30975e312e4af2}{S\+Y\+S\+D\+I\+V2}} \{ \newline
+{\bfseries \+\_\+80\+M\+Hz} = 5, 
+{\bfseries \+\_\+66\+\_\+67\+M\+Hz} = 6, 
+{\bfseries \+\_\+50\+M\+Hz} = 8, 
+{\bfseries \+\_\+44\+\_\+44\+M\+Hz} = 9, 
+\newline
+{\bfseries \+\_\+40\+M\+Hz} = 10, 
+{\bfseries \+\_\+36\+\_\+36\+M\+Hz} = 11, 
+{\bfseries \+\_\+33\+\_\+33\+M\+Hz} = 12, 
+{\bfseries \+\_\+30\+\_\+77\+M\+Hz} = 13, 
+\newline
+{\bfseries \+\_\+28\+\_\+57\+M\+Hz} = 14, 
+{\bfseries \+\_\+26\+\_\+66\+M\+Hz} = 15, 
+{\bfseries \+\_\+25\+M\+Hz} = 16, 
+{\bfseries \+\_\+23\+\_\+53\+M\+Hz} = 17, 
+\newline
+{\bfseries \+\_\+22\+\_\+22\+M\+Hz} = 18, 
+{\bfseries \+\_\+21\+\_\+05\+M\+Hz} = 19, 
+{\bfseries \+\_\+20\+M\+Hz} = 20, 
+{\bfseries \+\_\+19\+\_\+05\+M\+Hz} = 21, 
+\newline
+{\bfseries \+\_\+18\+\_\+18\+M\+Hz} = 22, 
+{\bfseries \+\_\+17\+\_\+39\+M\+Hz} = 23, 
+{\bfseries \+\_\+16\+\_\+66\+M\+Hz} = 24, 
+{\bfseries \+\_\+16\+M\+Hz} = 25, 
+\newline
+{\bfseries \+\_\+15\+\_\+38\+M\+Hz} = 26, 
+{\bfseries \+\_\+14\+\_\+81\+M\+Hz} = 27, 
+{\bfseries \+\_\+14\+\_\+28\+M\+Hz} = 28, 
+{\bfseries \+\_\+13\+\_\+79\+M\+Hz} = 29, 
+\newline
+{\bfseries \+\_\+13\+\_\+33\+M\+Hz} = 30, 
+{\bfseries \+\_\+12\+\_\+90\+M\+Hz} = 31, 
+{\bfseries \+\_\+12\+\_\+50\+M\+Hz} = 32, 
+{\bfseries \+\_\+12\+\_\+12\+M\+Hz} = 33, 
+\newline
+{\bfseries \+\_\+11\+\_\+76\+M\+Hz} = 34, 
+{\bfseries \+\_\+11\+\_\+43\+M\+Hz} = 35, 
+{\bfseries \+\_\+11\+\_\+11\+M\+Hz} = 36, 
+{\bfseries \+\_\+10\+\_\+81\+M\+Hz} = 37, 
+\newline
+{\bfseries \+\_\+10\+\_\+53\+M\+Hz} = 38, 
+{\bfseries \+\_\+10\+\_\+25\+M\+Hz} = 39, 
+{\bfseries \+\_\+10\+M\+Hz} = 40, 
+{\bfseries \+\_\+9\+\_\+76\+M\+Hz} = 41, 
+\newline
+{\bfseries \+\_\+9\+\_\+52\+M\+Hz} = 42, 
+{\bfseries \+\_\+9\+\_\+30\+M\+Hz} = 43, 
+{\bfseries \+\_\+9\+\_\+09\+M\+Hz} = 44, 
+{\bfseries \+\_\+8\+\_\+89\+M\+Hz} = 45, 
+\newline
+{\bfseries \+\_\+8\+\_\+69\+M\+Hz} = 46, 
+{\bfseries \+\_\+8\+\_\+51\+M\+Hz} = 47, 
+{\bfseries \+\_\+8\+\_\+33\+M\+Hz} = 48, 
+{\bfseries \+\_\+8\+\_\+16\+M\+Hz} = 49, 
+\newline
+{\bfseries \+\_\+8\+M\+Hz} = 50, 
+{\bfseries \+\_\+7\+\_\+84\+M\+Hz} = 51, 
+{\bfseries \+\_\+7\+\_\+69\+M\+Hz} = 52, 
+{\bfseries \+\_\+7\+\_\+55\+M\+Hz} = 53, 
+\newline
+{\bfseries \+\_\+7\+\_\+41\+M\+Hz} = 54, 
+{\bfseries \+\_\+7\+\_\+27\+M\+Hz} = 55, 
+{\bfseries \+\_\+7\+\_\+14\+M\+Hz} = 56, 
+{\bfseries \+\_\+7\+\_\+02\+M\+Hz} = 57, 
+\newline
+{\bfseries \+\_\+6\+\_\+89\+M\+Hz} = 58, 
+{\bfseries \+\_\+6\+\_\+78\+M\+Hz} = 59, 
+{\bfseries \+\_\+6\+\_\+66\+M\+Hz} = 60, 
+{\bfseries \+\_\+6\+\_\+55\+M\+Hz} = 61, 
+\newline
+{\bfseries \+\_\+6\+\_\+45\+M\+Hz} = 62, 
+{\bfseries \+\_\+6\+\_\+34\+M\+Hz} = 63, 
+{\bfseries \+\_\+6\+\_\+25\+M\+Hz} = 64, 
+{\bfseries \+\_\+6\+\_\+15\+M\+Hz} = 65, 
+\newline
+{\bfseries \+\_\+6\+\_\+06\+M\+Hz} = 66, 
+{\bfseries \+\_\+5\+\_\+97\+M\+Hz} = 67, 
+{\bfseries \+\_\+5\+\_\+88\+M\+Hz} = 68, 
+{\bfseries \+\_\+5\+\_\+79\+M\+Hz} = 69, 
+\newline
+{\bfseries \+\_\+5\+\_\+71\+M\+Hz} = 70, 
+{\bfseries \+\_\+5\+\_\+63\+M\+Hz} = 71, 
+{\bfseries \+\_\+5\+\_\+55\+M\+Hz} = 72, 
+{\bfseries \+\_\+5\+\_\+47\+M\+Hz} = 73, 
+\newline
+{\bfseries \+\_\+5\+\_\+40\+M\+Hz} = 74, 
+{\bfseries \+\_\+5\+\_\+33\+M\+Hz} = 75, 
+{\bfseries \+\_\+5\+\_\+26\+M\+Hz} = 76, 
+{\bfseries \+\_\+5\+\_\+19\+M\+Hz} = 77, 
+\newline
+{\bfseries \+\_\+5\+\_\+12\+M\+Hz} = 78, 
+{\bfseries \+\_\+5\+\_\+06\+M\+Hz} = 79, 
+{\bfseries \+\_\+5\+M\+Hz} = 80, 
+{\bfseries \+\_\+4\+\_\+93\+M\+Hz} = 81, 
+\newline
+{\bfseries \+\_\+4\+\_\+87\+M\+Hz} = 82, 
+{\bfseries \+\_\+4\+\_\+81\+M\+Hz} = 83, 
+{\bfseries \+\_\+4\+\_\+76\+M\+Hz} = 84, 
+{\bfseries \+\_\+4\+\_\+70\+M\+Hz} = 85, 
+\newline
+{\bfseries \+\_\+4\+\_\+65\+M\+Hz} = 86, 
+{\bfseries \+\_\+4\+\_\+59\+M\+Hz} = 87, 
+{\bfseries \+\_\+4\+\_\+54\+M\+Hz} = 88, 
+{\bfseries \+\_\+4\+\_\+49\+M\+Hz} = 89, 
+\newline
+{\bfseries \+\_\+4\+\_\+44\+M\+Hz} = 90, 
+{\bfseries \+\_\+4\+\_\+39\+M\+Hz} = 91, 
+{\bfseries \+\_\+4\+\_\+34\+M\+Hz} = 92, 
+{\bfseries \+\_\+4\+\_\+30\+M\+Hz} = 93, 
+\newline
+{\bfseries \+\_\+4\+\_\+25\+M\+Hz} = 94, 
+{\bfseries \+\_\+4\+\_\+21\+M\+Hz} = 95, 
+{\bfseries \+\_\+4\+\_\+16\+M\+Hz} = 96, 
+{\bfseries \+\_\+4\+\_\+12\+M\+Hz} = 97, 
+\newline
+{\bfseries \+\_\+4\+\_\+08\+M\+Hz} = 98, 
+{\bfseries \+\_\+4\+\_\+04\+M\+Hz} = 99, 
+{\bfseries \+\_\+4\+M\+Hz} = 100, 
+{\bfseries \+\_\+3\+\_\+96\+M\+Hz} = 101, 
+\newline
+{\bfseries \+\_\+3\+\_\+92\+M\+Hz} = 102, 
+{\bfseries \+\_\+3\+\_\+88\+M\+Hz} = 103, 
+{\bfseries \+\_\+3\+\_\+84\+M\+Hz} = 104, 
+{\bfseries \+\_\+3\+\_\+81\+M\+Hz} = 105, 
+\newline
+{\bfseries \+\_\+3\+\_\+77\+M\+Hz} = 106, 
+{\bfseries \+\_\+3\+\_\+73\+M\+Hz} = 107, 
+{\bfseries \+\_\+3\+\_\+70\+M\+Hz} = 108, 
+{\bfseries \+\_\+3\+\_\+67\+M\+Hz} = 109, 
+\newline
+{\bfseries \+\_\+3\+\_\+63\+M\+Hz} = 110, 
+{\bfseries \+\_\+3\+\_\+60\+M\+Hz} = 111, 
+{\bfseries \+\_\+3\+\_\+57\+M\+Hz} = 112, 
+{\bfseries \+\_\+3\+\_\+54\+M\+Hz} = 113, 
+\newline
+{\bfseries \+\_\+3\+\_\+50\+M\+Hz} = 114, 
+{\bfseries \+\_\+3\+\_\+47\+M\+Hz} = 115, 
+{\bfseries \+\_\+3\+\_\+44\+M\+Hz} = 116, 
+{\bfseries \+\_\+3\+\_\+41\+M\+Hz} = 117, 
+\newline
+{\bfseries \+\_\+3\+\_\+90\+M\+Hz} = 118, 
+{\bfseries \+\_\+3\+\_\+36\+M\+Hz} = 119, 
+{\bfseries \+\_\+3\+\_\+33\+M\+Hz} = 120, 
+{\bfseries \+\_\+3\+\_\+30\+M\+Hz} = 121, 
+\newline
+{\bfseries \+\_\+3\+\_\+27\+M\+Hz} = 122, 
+{\bfseries \+\_\+3\+\_\+25\+M\+Hz} = 123, 
+{\bfseries \+\_\+3\+\_\+22\+M\+Hz} = 124, 
+{\bfseries \+\_\+3\+\_\+20\+M\+Hz} = 125, 
+\newline
+{\bfseries \+\_\+3\+\_\+17\+M\+Hz} = 126, 
+{\bfseries \+\_\+3\+\_\+15\+M\+Hz} = 127, 
+{\bfseries \+\_\+3\+\_\+12\+M\+Hz} = 128
+ \}
+\item 
+enum \mbox{\hyperlink{systemControl_8h_a675b1593e74de43742bb8adcc9d25a74}{X\+T\+A\+L\+\_\+\+V\+AL}} \{ \newline
+{\bfseries \+\_\+4\+M\+Hz\+\_\+\+X\+T\+AL} = 0x09u, 
+{\bfseries \+\_\+6\+M\+Hz\+\_\+\+X\+T\+AL} = 0x0\+Bu, 
+{\bfseries \+\_\+8\+M\+Hz\+\_\+\+X\+T\+AL} = 0x0\+Eu, 
+{\bfseries \+\_\+10\+M\+Hz\+\_\+\+X\+T\+AL} = 0x10u, 
+\newline
+{\bfseries \+\_\+12\+M\+Hz\+\_\+\+X\+T\+AL} = 0x11u, 
+{\bfseries \+\_\+16\+M\+Hz\+\_\+\+X\+T\+AL} = 0x15u, 
+{\bfseries \+\_\+18\+M\+Hz\+\_\+\+X\+T\+AL} = 0x17u, 
+{\bfseries \+\_\+20\+M\+Hz\+\_\+\+X\+T\+AL} = 0x18u, 
+\newline
+{\bfseries \+\_\+24\+M\+Hz\+\_\+\+X\+T\+AL} = 0x19u, 
+{\bfseries \+\_\+25\+M\+Hz\+\_\+\+X\+T\+AL} = 0x1\+Au
+ \}
+\item 
+enum \mbox{\hyperlink{systemControl_8h_a43516abdac87cb3731604da43c2d62ab}{O\+S\+C\+S\+RC}} \{ \newline
+{\bfseries M\+O\+SC} = 0x0u, 
+{\bfseries P\+I\+O\+SC} = 0x1u, 
+{\bfseries P\+I\+O\+S\+C4} = 0x2u, 
+{\bfseries L\+F\+I\+O\+SC} = 0x3u, 
+\newline
+{\bfseries \+\_\+32\+\_\+768k\+Hz} = 0x7
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const uint32\+\_\+t \mbox{\hyperlink{systemControl_8h_a96c9203e5958b72d5ce82192cb6cdb12}{system\+Control\+Base}} = 0x400\+F\+E000
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM System Control Driver Declaration. 
+
+\begin{DoxyAuthor}{Author}
+Matthew Hardenburgh 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+3/21/2020 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Matthew Hardenburgh 2020
+\end{DoxyCopyright}
+\hypertarget{watchdog_8h_license}{}\doxysubsection{L\+I\+C\+E\+N\+SE}\label{watchdog_8h_license}
+T\+M4\+C123\+G\+H6\+PM Drivers Copyright (C) 2020 Matthew Hardenburgh \href{mailto:mdhardenburgh@protonmail.com}{\texttt{ mdhardenburgh@protonmail.\+com}}
+
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program. If not, see \href{https://www.gnu.org/licenses/}{\texttt{ https\+://www.\+gnu.\+org/licenses/}}. 
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{systemControl_8h_a43516abdac87cb3731604da43c2d62ab}\label{systemControl_8h_a43516abdac87cb3731604da43c2d62ab}} 
+\index{systemControl.h@{systemControl.h}!OSCSRC@{OSCSRC}}
+\index{OSCSRC@{OSCSRC}!systemControl.h@{systemControl.h}}
+\doxysubsubsection{\texorpdfstring{OSCSRC}{OSCSRC}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{systemControl_8h_a43516abdac87cb3731604da43c2d62ab}{O\+S\+C\+S\+RC}}}
+
+Oscillator source 
+
+Definition at line 125 of file system\+Control.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{126 \{}
+\DoxyCodeLine{127     MOSC = 0x0u, \textcolor{comment}{//Main oscillator}}
+\DoxyCodeLine{128     PIOSC = 0x1u, \textcolor{comment}{//Precision internal oscillator (default)}}
+\DoxyCodeLine{129     PIOSC4 = 0x2u, \textcolor{comment}{//Precision internal oscillator / 4}}
+\DoxyCodeLine{130     LFIOSC = 0x3u, \textcolor{comment}{//Low-\/frequency internal oscillator}}
+\DoxyCodeLine{131     \textcolor{comment}{//reserved = 0x4,}}
+\DoxyCodeLine{132     \textcolor{comment}{//reserved = 0x5,}}
+\DoxyCodeLine{133     \textcolor{comment}{//reserved = 0x6,}}
+\DoxyCodeLine{134     \_32\_768kHz = 0x7 \textcolor{comment}{//32.768-\/kHz external oscillator}}
+\DoxyCodeLine{135 \};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{systemControl_8h_a596311dacfdb940ffd30975e312e4af2}\label{systemControl_8h_a596311dacfdb940ffd30975e312e4af2}} 
+\index{systemControl.h@{systemControl.h}!SYSDIV2@{SYSDIV2}}
+\index{SYSDIV2@{SYSDIV2}!systemControl.h@{systemControl.h}}
+\doxysubsubsection{\texorpdfstring{SYSDIV2}{SYSDIV2}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{systemControl_8h_a596311dacfdb940ffd30975e312e4af2}{S\+Y\+S\+D\+I\+V2}}}
+
+System clocks that the P\+LL can be programmed to. 
+
+Definition at line 75 of file system\+Control.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{76 \{}
+\DoxyCodeLine{77     \textcolor{comment}{/* reserved = 2; //reserved = 3; //reserved = 4; */} \_80MHz = 5,}
+\DoxyCodeLine{78     \_66\_67MHz = 6, \textcolor{comment}{/* reserved = 7; */} \_50MHz = 8, \_44\_44MHz = 9,}
+\DoxyCodeLine{79     \_40MHz = 10, \_36\_36MHz = 11, \_33\_33MHz = 12, \_30\_77MHz = 13,}
+\DoxyCodeLine{80     \_28\_57MHz = 14, \_26\_66MHz = 15, \_25MHz = 16, \_23\_53MHz = 17,}
+\DoxyCodeLine{81     \_22\_22MHz = 18, \_21\_05MHz = 19, \_20MHz = 20, \_19\_05MHz = 21,}
+\DoxyCodeLine{82     \_18\_18MHz = 22, \_17\_39MHz = 23, \_16\_66MHz = 24, \_16MHz = 25,}
+\DoxyCodeLine{83     \_15\_38MHz = 26, \_14\_81MHz = 27, \_14\_28MHz = 28, \_13\_79MHz = 29,}
+\DoxyCodeLine{84     \_13\_33MHz = 30, \_12\_90MHz = 31, \_12\_50MHz = 32, \_12\_12MHz = 33,}
+\DoxyCodeLine{85     \_11\_76MHz = 34, \_11\_43MHz = 35, \_11\_11MHz = 36,\_10\_81MHz = 37,}
+\DoxyCodeLine{86     \_10\_53MHz = 38, \_10\_25MHz = 39, \_10MHz = 40, \_9\_76MHz = 41,}
+\DoxyCodeLine{87     \_9\_52MHz = 42, \_9\_30MHz = 43, \_9\_09MHz = 44, \_8\_89MHz = 45,}
+\DoxyCodeLine{88     \_8\_69MHz = 46, \_8\_51MHz = 47, \_8\_33MHz = 48, \_8\_16MHz = 49,}
+\DoxyCodeLine{89     \_8MHz = 50, \_7\_84MHz = 51, \_7\_69MHz = 52, \_7\_55MHz = 53,}
+\DoxyCodeLine{90     \_7\_41MHz = 54, \_7\_27MHz = 55, \_7\_14MHz = 56, \_7\_02MHz = 57,}
+\DoxyCodeLine{91     \_6\_89MHz = 58, \_6\_78MHz = 59, \_6\_66MHz = 60, \_6\_55MHz = 61,}
+\DoxyCodeLine{92     \_6\_45MHz = 62, \_6\_34MHz = 63, \_6\_25MHz = 64, \_6\_15MHz = 65,}
+\DoxyCodeLine{93     \_6\_06MHz = 66, \_5\_97MHz = 67, \_5\_88MHz = 68, \_5\_79MHz = 69,}
+\DoxyCodeLine{94     \_5\_71MHz = 70, \_5\_63MHz = 71, \_5\_55MHz = 72, \_5\_47MHz = 73,}
+\DoxyCodeLine{95     \_5\_40MHz = 74, \_5\_33MHz = 75, \_5\_26MHz = 76, \_5\_19MHz = 77,}
+\DoxyCodeLine{96     \_5\_12MHz = 78, \_5\_06MHz = 79, \_5MHz = 80, \_4\_93MHz = 81,}
+\DoxyCodeLine{97     \_4\_87MHz = 82, \_4\_81MHz = 83, \_4\_76MHz = 84, \_4\_70MHz = 85,}
+\DoxyCodeLine{98     \_4\_65MHz = 86, \_4\_59MHz = 87, \_4\_54MHz = 88, \_4\_49MHz = 89,}
+\DoxyCodeLine{99     \_4\_44MHz = 90, \_4\_39MHz = 91, \_4\_34MHz = 92, \_4\_30MHz = 93,}
+\DoxyCodeLine{100     \_4\_25MHz = 94, \_4\_21MHz = 95, \_4\_16MHz = 96, \_4\_12MHz = 97,}
+\DoxyCodeLine{101     \_4\_08MHz = 98, \_4\_04MHz = 99, \_4MHz = 100, \_3\_96MHz = 101,}
+\DoxyCodeLine{102     \_3\_92MHz = 102, \_3\_88MHz = 103, \_3\_84MHz = 104, \_3\_81MHz = 105,}
+\DoxyCodeLine{103     \_3\_77MHz = 106, \_3\_73MHz = 107, \_3\_70MHz = 108, \_3\_67MHz = 109,}
+\DoxyCodeLine{104     \_3\_63MHz = 110, \_3\_60MHz = 111, \_3\_57MHz = 112,\_3\_54MHz = 113,}
+\DoxyCodeLine{105     \_3\_50MHz = 114, \_3\_47MHz = 115, \_3\_44MHz = 116, \_3\_41MHz = 117,}
+\DoxyCodeLine{106     \_3\_90MHz = 118, \_3\_36MHz = 119, \_3\_33MHz = 120, \_3\_30MHz = 121,}
+\DoxyCodeLine{107     \_3\_27MHz = 122, \_3\_25MHz = 123, \_3\_22MHz = 124,\_3\_20MHz = 125,}
+\DoxyCodeLine{108     \_3\_17MHz = 126, \_3\_15MHz = 127, \_3\_12MHz = 128}
+\DoxyCodeLine{109 \};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{systemControl_8h_a675b1593e74de43742bb8adcc9d25a74}\label{systemControl_8h_a675b1593e74de43742bb8adcc9d25a74}} 
+\index{systemControl.h@{systemControl.h}!XTAL\_VAL@{XTAL\_VAL}}
+\index{XTAL\_VAL@{XTAL\_VAL}!systemControl.h@{systemControl.h}}
+\doxysubsubsection{\texorpdfstring{XTAL\_VAL}{XTAL\_VAL}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{systemControl_8h_a675b1593e74de43742bb8adcc9d25a74}{X\+T\+A\+L\+\_\+\+V\+AL}}}
+
+Oscillator frequency 
+
+Definition at line 114 of file system\+Control.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{115 \{}
+\DoxyCodeLine{116     \_4MHz\_XTAL = 0x09u, \_6MHz\_XTAL = 0x0Bu, \_8MHz\_XTAL = 0x0Eu,}
+\DoxyCodeLine{117     \_10MHz\_XTAL = 0x10u, \_12MHz\_XTAL = 0x11u, \_16MHz\_XTAL = 0x15u,}
+\DoxyCodeLine{118     \_18MHz\_XTAL = 0x17u, \_20MHz\_XTAL = 0x18u, \_24MHz\_XTAL = 0x19u,}
+\DoxyCodeLine{119     \_25MHz\_XTAL = 0x1Au}
+\DoxyCodeLine{120 \};}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{systemControl_8h_a96c9203e5958b72d5ce82192cb6cdb12}\label{systemControl_8h_a96c9203e5958b72d5ce82192cb6cdb12}} 
+\index{systemControl.h@{systemControl.h}!systemControlBase@{systemControlBase}}
+\index{systemControlBase@{systemControlBase}!systemControl.h@{systemControl.h}}
+\doxysubsubsection{\texorpdfstring{systemControlBase}{systemControlBase}}
+{\footnotesize\ttfamily const uint32\+\_\+t system\+Control\+Base = 0x400\+F\+E000}
+
+Base address for the system control registers. 
+
+Definition at line 70 of file system\+Control.\+h.
+

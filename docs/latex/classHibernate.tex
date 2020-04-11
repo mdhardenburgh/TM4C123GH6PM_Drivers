@@ -1,0 +1,69 @@
+\hypertarget{classHibernate}{}\doxysection{Hibernate Class Reference}
+\label{classHibernate}\index{Hibernate@{Hibernate}}
+
+
+T\+M4\+C123\+G\+H6\+PM \mbox{\hyperlink{classHibernate}{Hibernate}} Driver.  
+
+
+
+
+{\ttfamily \#include $<$hibernate.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classHibernate_a97e240b393a0f473094ea4103b5e2628}\label{classHibernate_a97e240b393a0f473094ea4103b5e2628}} 
+\mbox{\hyperlink{classHibernate_a97e240b393a0f473094ea4103b5e2628}{Hibernate}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classHibernate_acfc2020ff46be53c7ab52e17be0cb771}\label{classHibernate_acfc2020ff46be53c7ab52e17be0cb771}} 
+\mbox{\hyperlink{classHibernate_acfc2020ff46be53c7ab52e17be0cb771}{$\sim$\+Hibernate}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM \mbox{\hyperlink{classHibernate}{Hibernate}} Driver. 
+
+\hypertarget{classHibernate_hibernateDescription}{}\doxysubsection{Hibernate Module Description}\label{classHibernate_hibernateDescription}
+The hibernatation module allows for power to be removed from the the processor and peripherals to reduce system power consumption. The hibernation module can be independently powered, seperately from system main power. Main power can be restored based on an external signal or after a certian time using the R\+TC. The hibernation module has the following features
+\begin{DoxyItemize}
+\item A 32-\/bit real time counter (R\+TC)
+\item System power control using discrete external regulator
+\item On-\/chip power control using internal switches under register control
+\item Dedicated pin for waking using an external signal
+\item R\+TC operational and hibernation memory valid as long as V\+DD or V\+B\+AT is valid
+\item Low-\/battery detection, signaling, and interrupt generation, with optional wake on low battery
+\item G\+P\+IO pin state can be retained during hibernation
+\item Clock source from a 32.\+768-\/k\+Hz external crystal or oscillator
+\item Sixteen 32-\/bit words of battery-\/backed memory to save state during hibernation
+\item Programmable interrupts for R\+TC match, External wake, and/or Low battery
+\end{DoxyItemize}
+
+For more detailed information on the \mbox{\hyperlink{classHibernate}{Hibernate}} please see page 493 of the T\+M4\+C123\+G\+H6\+PM datasheet @ \href{https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf}{\texttt{ https\+://www.\+ti.\+com/lit/ds/symlink/tm4c123gh6pm.\+pdf}}\hypertarget{classHibernate_hibernateSignalDescription}{}\doxysubsubsection{Hibernate Signal Description}\label{classHibernate_hibernateSignalDescription}
+The following table lists the hibernate module\textquotesingle{}s external signals. The \mbox{\hyperlink{classHibernate}{Hibernate}} module has no G\+P\+IO connections.
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{hibernateSignalPins.png}}
+\end{DoxyImageNoCaption}
+
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{hibernateSignalPins2.png}}
+\end{DoxyImageNoCaption}
+\hypertarget{classHibernate_hibernateSystemControlRegisterDescription}{}\doxysubsubsection{Hibernate System Control Register Descriptions}\label{classHibernate_hibernateSystemControlRegisterDescription}
+All addresses given are relative to the System Control base address of 0x400\+F.\+E000. Legacy registers not supported.\hypertarget{classHibernate_hibernateRegisterDescription}{}\doxysubsubsection{Hibernate Register Description}\label{classHibernate_hibernateRegisterDescription}
+The \mbox{\hyperlink{classHibernate}{Hibernate}} class lists registers as an offset of the hexadecimal base address 0x400\+F\+C000. Note that the \mbox{\hyperlink{classHibernate}{Hibernate}} module clock must be enabled before the registers can be programmed (see page 343). There must be a delay of 3 system clocks after the \mbox{\hyperlink{classHibernate}{Hibernate}} module clock is enabled before any \mbox{\hyperlink{classHibernate}{Hibernate}} module registers are accessed. In addition, the {\ttfamily C\+L\+K32\+EN} bit in the H\+I\+B\+C\+TL register must be set before accessing any other Hibernation module register.
+
+Important Note
+
+The Hibernation module registers are on the Hibernation module clock domain and have special timing requirements. Software should make use of the {\ttfamily W\+RC} bit in the H\+I\+B\+C\+TL register to ensure that the required timing gap has elapsed. If the {\ttfamily W\+RC} bit is clear, any attempted write access is ignored. See “\+Register Access Timing” on page 495. 
+
+Definition at line 97 of file hibernate.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+hibernate/\mbox{\hyperlink{hibernate_8h}{hibernate.\+h}}\item 
+hibernate/\mbox{\hyperlink{hibernate_8cpp}{hibernate.\+cpp}}\end{DoxyCompactItemize}

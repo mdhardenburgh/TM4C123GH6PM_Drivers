@@ -1,0 +1,77 @@
+\hypertarget{classSsi}{}\doxysection{Ssi Class Reference}
+\label{classSsi}\index{Ssi@{Ssi}}
+
+
+T\+M4\+C123\+G\+H6\+PM S\+SI Driver.  
+
+
+
+
+{\ttfamily \#include $<$ssi.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classSsi_a62c397da3d033099bf62505e201705ae}\label{classSsi_a62c397da3d033099bf62505e201705ae}} 
+\mbox{\hyperlink{classSsi_a62c397da3d033099bf62505e201705ae}{Ssi}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classSsi_a2d452e446c0e70aedbc87477ba3285e8}\label{classSsi_a2d452e446c0e70aedbc87477ba3285e8}} 
+\mbox{\hyperlink{classSsi_a2d452e446c0e70aedbc87477ba3285e8}{$\sim$\+Ssi}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM S\+SI Driver. 
+
+\hypertarget{classSsi_ssiDescription}{}\doxysubsection{S\+S\+I Description}\label{classSsi_ssiDescription}
+The T\+M4\+C123\+G\+H6\+PM microcontroller has four S\+SI modules. The S\+SI is used to communicate with peripheral devices that have the Freescale S\+PI, Microwire or TI S\+SI interfaces. Each S\+SI module can act as a master or slave. The T\+M4\+C123\+G\+H6\+PM microcontroller S\+SI modules have the following features\+:
+\begin{DoxyItemize}
+\item Programmable interface operation for Freescale S\+PI, M\+I\+C\+R\+O\+W\+I\+RE, or Texas Instruments synchronous serial interfaces
+\item Master or slave operation
+\item Programmable clock bit rate and prescaler
+\item Separate transmit and receive F\+I\+F\+Os, each 16 bits wide and 8 locations deep
+\item Programmable data frame size from 4 to 16 bits
+\item Internal loopback test mode for diagnostic/debug testing
+\item Standard F\+I\+F\+O-\/based interrupts and End-\/of-\/\+Transmission interrupt
+\item Efficient transfers using Micro Direct Memory Access Controller (µ\+D\+MA)
+\begin{DoxyItemize}
+\item Separate channels for transmit and receive
+\item Receive single request asserted when data is in the F\+I\+FO; burst request asserted when F\+I\+FO contains 4 entries
+\item Transmit single request asserted when there is space in the F\+I\+FO; burst request asserted when four or more entries are available to be written in the F\+I\+FO
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{classSsi_spiCompatability}{}\doxysubsubsection{Freescale S\+P\+I Compatability Information}\label{classSsi_spiCompatability}
+Background information first, Freescale is a spinoff of Motorolla and was purchased by N\+XP Semiconductor. Motorola developed S\+PI in the mid 80s. "The Serial Peripheral Interface (S\+PI) bus was put together by Motorola (Freescale/\+N\+X\+P/\+Qualcomm) in the 1980s for communicating between a processor and one or more external peripherals. S\+PI is intended for short distance communication, typically between chips on the same board." \href{https://embedded.fm/blog/2017/3/24/i-spi}{\texttt{ https\+://embedded.\+fm/blog/2017/3/24/i-\/spi}}
+
+Generally, S\+PI is a name given to 4-\/wire serial communication protocol that is full duplex and uses a master-\/slave communication architecture with a single master (with the option of multiple slaves). While most S\+PI interfaces and protocol impelementations are the same and compatable with each other, {\bfseries{ S\+O\+ME A\+RE N\+O\+T!!! }} Care must be taken to ensure that the S\+PI interfaces are compatable. According to Wikipedia, "the S\+PI bus is a de facto standard but not officially established. The lack of a formal standard is reflected in a wide variety of protocol options. Different word sizes are common. Every device defines its own protocol, including whether it supports commands at all. Some devices are transmit-\/only; others are receive-\/only."
+
+For more info on S\+PI compatability see the link to the following forum discussion \href{https://www.embeddedrelated.com/showthread/comp.arch.embedded/67876-1.php}{\texttt{ https\+://www.\+embeddedrelated.\+com/showthread/comp.\+arch.\+embedded/67876-\/1.\+php}}
+
+Link to Freescale Semiconductor S\+PI application note \href{https://www.nxp.com/docs/en/application-note/AN3020.pdf}{\texttt{ https\+://www.\+nxp.\+com/docs/en/application-\/note/\+A\+N3020.\+pdf}}
+
+Link to another Freescale Semiconductor S\+PI application note that uses a Freescale Microcontroller in the example. \href{https://www.nxp.com/docs/en/application-note/AN3904.pdf}{\texttt{ https\+://www.\+nxp.\+com/docs/en/application-\/note/\+A\+N3904.\+pdf}}
+
+For more information on S\+PI please see the folliwing Wikipeida link \href{https://en.wikipedia.org/wiki/Serial_Peripheral_Interface}{\texttt{ https\+://en.\+wikipedia.\+org/wiki/\+Serial\+\_\+\+Peripheral\+\_\+\+Interface}}
+
+S\+PI is different from the Microwire TI S\+SI interfaces and implementations. According to Wikipedia, "The S\+PI may be accurately described as a synchronous serial interface, but it is different from the Synchronous Serial Interface (S\+SI) protocol, which is also a four-\/wire synchronous serial communication protocol."
+
+For information on Microwire see this Wikipedia link \href{https://en.wikipedia.org/wiki/Serial_Peripheral_Interface\#Microwire}{\texttt{ https\+://en.\+wikipedia.\+org/wiki/\+Serial\+\_\+\+Peripheral\+\_\+\+Interface\#\+Microwire}}
+
+For information on Synchronous Serial Interfaces (S\+SI) see this Wikipedia link \href{https://en.wikipedia.org/wiki/Synchronous_Serial_Interface}{\texttt{ https\+://en.\+wikipedia.\+org/wiki/\+Synchronous\+\_\+\+Serial\+\_\+\+Interface}}
+
+For more detailed information on the S\+SI module please see page 952 of the T\+M4\+C123\+G\+H6\+PM datasheet @ \href{https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf}{\texttt{ https\+://www.\+ti.\+com/lit/ds/symlink/tm4c123gh6pm.\+pdf}}\hypertarget{classSsi_ssiSignalDescription}{}\doxysubsubsection{S\+S\+I Signal Description}\label{classSsi_ssiSignalDescription}
+The following table lists the external signals and thier associtated pins for the S\+SI module. The G\+P\+IO needs to be configured for the S\+SI alternate function using the {\ttfamily A\+F\+S\+EL} bit in the G\+P\+IO Alternate Function \mbox{\hyperlink{classRegister}{Register}} (G\+P\+I\+O\+A\+F\+S\+EL). The number in parenthesis in the Pin Mux / Pin Assignment column of the table below is what is programmed into the {\ttfamily P\+M\+Cn} field in the G\+P\+IO Port Control (G\+P\+I\+O\+P\+C\+TL) register to assign a S\+SI signal to a G\+P\+IO.
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{ssiSignalPins.png}}
+\end{DoxyImageNoCaption}
+ 
+
+Definition at line 124 of file ssi.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ssi/\mbox{\hyperlink{ssi_8h}{ssi.\+h}}\item 
+ssi/\mbox{\hyperlink{ssi_8cpp}{ssi.\+cpp}}\end{DoxyCompactItemize}

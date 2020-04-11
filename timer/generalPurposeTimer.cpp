@@ -1,14 +1,16 @@
 /**
- * @file generalPurposeTimer.h
- * @project RTOS
- * @engineer Matthew Hardenburgh
- * @date 12/28/2019
+ * @file generalPurposeTimer.cpp
+ * @brief TM4C123GH6PM General Purpose Timer Driver Definition
+ * @author Matthew Hardenburgh
+ * @version 0.1
+ * @date 3/21/2020
+ * @copyright Matthew Hardenburgh 2020
  * 
- * @section LICENSE
+ * @section license LICENSE
  * 
- * RTOS
- * Copyright (C) 2019 Matthew Hardenburgh
- * mdhardenburgh@gmail.com
+ * TM4C123GH6PM Drivers
+ * Copyright (C) 2020  Matthew Hardenburgh
+ * mdhardenburgh@protonmail.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,14 +25,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see https://www.gnu.org/licenses/.
  * 
- * @section DESCRIPTION
- * 
- * Class implementation of the Timer for the Texas Instruments Tiva C 
- * ARM4F microcontroller, TM4C123GH6PM.
- * 
- * General timer 
- * 
  */
+
 #include "generalPurposeTimer.h"
 
 const uint32_t GeneralPurposeTimer::timerBaseAddresses[12] = {_16_32_bit_Timer_0_base, _16_32_bit_Timer_1_base, _16_32_bit_Timer_2_base, _16_32_bit_Timer_3_base, _16_32_bit_Timer_4_base, _16_32_bit_Timer_5_base,
@@ -53,14 +49,17 @@ const uint32_t GeneralPurposeTimer::GPTMTnV_OFFSET[2] = {GPTMTAV_OFFSET, GPTMTBV
 const uint32_t GeneralPurposeTimer::GPTMTnPS_OFFSET[2] = {GPTMTAPS_OFFSET, GPTMTBPS_OFFSET};
 const uint32_t GeneralPurposeTimer::GPTMTnPV_OFFSET[2] = {GPTMTAPV_OFFSET, GPTMTBPV_OFFSET};
 
+/**
+ * @brief empty constructor placeholder
+ */
 GeneralPurposeTimer::GeneralPurposeTimer()
 {
   
 }
 
 /**
- * @brief Simple initialization of the timer. Instantiates an individual 
- *        countdown timer
+ * @brief Initializes a timer in which the status of the timer is polled,
+ *        rather than an NVIC interrupt being generated.
  * 
  * @param mode of the timer. Can be one-shot, periodic, RTC, input edge count,
  *        time capture, or PWM
@@ -158,14 +157,17 @@ GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint3
 }
 
 /**
- * @brief Simple initialization of the timer. Instantiates an individual 
- *        countdown timer
+ * @brief Initializes a timer in which an NVIC interrupt is generated and 
+ *        the status does not have to be constantly polled.
  * 
  * @param mode of the timer. Can be one-shot, periodic, RTC, input edge count,
  *        time capture, or PWM
  * @param block of the timer used. There are six A&B short timers and six A&B
  *        wide timers.
- * @param period of the timer
+ * @param period of the timer in clock ticks
+ * @param direction of the timer count
+ * @param use of timer. Timer A, Timer B, or concatonated
+ * @param interuptPriority of the interrupt. Lower numbers have higher priority.
  *  
  */
 GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint32_t period, countDirection dir, timerUse use, uint32_t interuptPriority) : GeneralPurposeTimer(mode, block, period, dir, use)
@@ -229,11 +231,19 @@ GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint3
     
 }
 
+/**
+ * @brief empty deconstructor placeholder
+ */
 GeneralPurposeTimer::~GeneralPurposeTimer()
 {
 
 }
 
+/**
+ * @brief To be used in a poll loop. Checks the Raw Interrupt Status of the timer.
+ * 
+ * @param action to be taken if the RIS is set.
+ */
 void GeneralPurposeTimer::pollStatus(void(*action)(void))
 {
     
@@ -244,11 +254,18 @@ void GeneralPurposeTimer::pollStatus(void(*action)(void))
 
 }
 
+/**
+ * @brief clears the interrupt status
+ */
 void GeneralPurposeTimer::interruptClear(void)
 {
     Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMICR_OFFSET)), set, interruptBit, 1, RW1C);
 }
 
+/**
+ * @brief timers are disabled by default during intialization. This function
+ *        Enables the timers.
+ */
 void GeneralPurposeTimer::enableTimer(void)
 {
     Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMCTL_OFFSET)), set, (use%2)*8, 1, RW);

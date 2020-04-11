@@ -1,0 +1,86 @@
+\hypertarget{classPwm}{}\doxysection{Pwm Class Reference}
+\label{classPwm}\index{Pwm@{Pwm}}
+
+
+T\+M4\+C123\+G\+H6\+PM P\+WM Driver.  
+
+
+
+
+{\ttfamily \#include $<$pwm.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPwm_a17739e797dbddd69aa5cb1a299408b73}\label{classPwm_a17739e797dbddd69aa5cb1a299408b73}} 
+\mbox{\hyperlink{classPwm_a17739e797dbddd69aa5cb1a299408b73}{Pwm}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPwm_ac97d5b9a021ea218147206706e368a22}\label{classPwm_ac97d5b9a021ea218147206706e368a22}} 
+\mbox{\hyperlink{classPwm_ac97d5b9a021ea218147206706e368a22}{$\sim$\+Pwm}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM P\+WM Driver. 
+
+\hypertarget{classPwm_pwmDescription}{}\doxysubsection{P\+W\+M Description}\label{classPwm_pwmDescription}
+The T\+M4\+C123\+G\+H6\+PM microcontroller has two P\+WM modules. Each module has 4 P\+WM generator blocks and each generator block produces 2 P\+WM signals that share the same P\+WM timer and frequency. The 2 P\+WM signals can be programmed to operate independently or as a pair of complementary signals and a dead-\/band delay can be inserted. The two output signals {\ttfamily pwmA} and {\ttfamily pwmB} of the device generation are managed by an output control block before they reach the device pins as {\ttfamily Mn\+P\+W\+M0} , {\ttfamily Mn\+P\+W\+M1} , {\ttfamily Mn\+P\+W\+M2} etc...
+
+Each P\+WM generator block has the following features\+:
+\begin{DoxyItemize}
+\item One fault-\/condition handling inputs to quickly provide low-\/latency shutdown and prevent damage to the motor being controlled, for a total of two inputs
+\item One 16-\/bit counter
+\begin{DoxyItemize}
+\item Runs in Down or Up/\+Down mode
+\item Output frequency controlled by a 16-\/bit load value
+\item Load value updates can be synchronized
+\item Produces output signals at zero and load value
+\end{DoxyItemize}
+\item Two P\+WM comparators
+\begin{DoxyItemize}
+\item \mbox{\hyperlink{classComparator}{Comparator}} value updates can be synchronized
+\item Produces output signals on match
+\end{DoxyItemize}
+\item P\+WM signal generator
+\begin{DoxyItemize}
+\item Output P\+WM signal is constructed based on actions taken as a result of the counter and P\+WM comparator output signals
+\item Produces two independent P\+WM signals
+\end{DoxyItemize}
+\item Dead-\/band generator
+\begin{DoxyItemize}
+\item Produces two P\+WM signals with programmable dead-\/band delays suitable for driving a half-\/H bridge
+\item \mbox{\hyperlink{classCan}{Can}} be bypassed, leaving input P\+WM signals unmodified
+\end{DoxyItemize}
+\item \mbox{\hyperlink{classCan}{Can}} initiate an A\+DC sample sequence
+\end{DoxyItemize}
+
+The P\+WM control block determines the polarity of the P\+WM signals that are passed through to the external microcontroller pins. The P\+WM control block has the following options\+:
+\begin{DoxyItemize}
+\item P\+WM output enable of each P\+WM signal
+\item Optional output inversion of each P\+WM signal (polarity control)
+\item Optional fault handling for each P\+WM signal
+\item Synchronization of timers in the P\+WM generator blocks
+\item Synchronization of timer/comparator updates across the P\+WM generator blocks
+\item Extended P\+WM synchronization of timer/comparator updates across the P\+WM generator blocks
+\item Interrupt status summary of the P\+WM generator blocks
+\item Extended P\+WM fault handling, with multiple fault signals, programmable polarities, and filtering
+\item P\+WM generators can be operated independently or synchronized with other generators
+\end{DoxyItemize}
+
+For more detailed information on the P\+WM please see page 1230 of the T\+M4\+C123\+G\+H6\+PM datasheet @ \href{https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf}{\texttt{ https\+://www.\+ti.\+com/lit/ds/symlink/tm4c123gh6pm.\+pdf}}\hypertarget{classPwm_pwmSignalDescription}{}\doxysubsubsection{P\+W\+M Signal Description}\label{classPwm_pwmSignalDescription}
+The following table lists the external signals and thier associtated pins for the P\+WM module. The G\+P\+IO needs to be configured for the P\+WM alternate function using the {\ttfamily A\+F\+S\+EL} bit in the G\+P\+IO Alternate Function \mbox{\hyperlink{classRegister}{Register}} (G\+P\+I\+O\+A\+F\+S\+EL). The number in parenthesis in the Pin Mux / Pin Assignment column of the table below is what is programmed into the {\ttfamily P\+M\+Cn} field in the G\+P\+IO Port Control (G\+P\+I\+O\+P\+C\+TL) register to assign a P\+WM signal to a G\+P\+IO.
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{pwmSignalPins.png}}
+\end{DoxyImageNoCaption}
+ 
+
+Definition at line 104 of file pwm.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+pwm/\mbox{\hyperlink{pwm_8h}{pwm.\+h}}\item 
+pwm/\mbox{\hyperlink{pwm_8cpp}{pwm.\+cpp}}\end{DoxyCompactItemize}

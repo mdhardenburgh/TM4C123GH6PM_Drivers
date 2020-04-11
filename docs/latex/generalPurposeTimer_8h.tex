@@ -1,0 +1,148 @@
+\hypertarget{generalPurposeTimer_8h}{}\doxysection{timer/general\+Purpose\+Timer.h File Reference}
+\label{generalPurposeTimer_8h}\index{timer/generalPurposeTimer.h@{timer/generalPurposeTimer.h}}
+
+
+T\+M4\+C123\+G\+H6\+PM General Purpose Timer Driver Declaration.  
+
+
+{\ttfamily \#include \char`\"{}../system\+Control/system\+Control.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classGeneralPurposeTimer}{General\+Purpose\+Timer}}
+\begin{DoxyCompactList}\small\item\em T\+M4\+C123\+G\+H6\+PM General Purpose Timer Driver. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{generalPurposeTimer_8h_a5747cbc424ddee0f510749490692d1fd}{timer\+Mode}} \{ \newline
+{\bfseries one\+Shot}, 
+{\bfseries periodic}, 
+{\bfseries real\+Time\+Clock}, 
+{\bfseries edge\+Count}, 
+\newline
+{\bfseries edge\+Time}, 
+{\bfseries P\+WM}
+ \}
+\item 
+enum \mbox{\hyperlink{generalPurposeTimer_8h_a42b1a0a59f1c04b116b692167887fea6}{timer\+Block}} \{ \newline
+{\bfseries short\+Timer0}, 
+{\bfseries short\+Timer1}, 
+{\bfseries short\+Timer2}, 
+{\bfseries short\+Timer3}, 
+\newline
+{\bfseries short\+Timer4}, 
+{\bfseries short\+Timer5}, 
+{\bfseries wide\+Timer0}, 
+{\bfseries wide\+Timer1}, 
+\newline
+{\bfseries wide\+Timer2}, 
+{\bfseries wide\+Timer3}, 
+{\bfseries wide\+Timer4}, 
+{\bfseries wide\+Timer5}
+ \}
+\item 
+enum \mbox{\hyperlink{generalPurposeTimer_8h_ab642bd81c44c6f47b7b6def941a28f8f}{count\+Direction}} \{ {\bfseries up}, 
+{\bfseries down}
+ \}
+\item 
+enum \mbox{\hyperlink{generalPurposeTimer_8h_a15fc2b62c0786a15aa47530a425196f0}{timer\+Use}} \{ {\bfseries timerA}, 
+{\bfseries timerB}, 
+{\bfseries concatenated}
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM General Purpose Timer Driver Declaration. 
+
+\begin{DoxyAuthor}{Author}
+Matthew Hardenburgh 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+3/21/2020 
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Matthew Hardenburgh 2020
+\end{DoxyCopyright}
+\hypertarget{watchdog_8h_license}{}\doxysubsection{L\+I\+C\+E\+N\+SE}\label{watchdog_8h_license}
+T\+M4\+C123\+G\+H6\+PM Drivers Copyright (C) 2020 Matthew Hardenburgh \href{mailto:mdhardenburgh@protonmail.com}{\texttt{ mdhardenburgh@protonmail.\+com}}
+
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program. If not, see \href{https://www.gnu.org/licenses/}{\texttt{ https\+://www.\+gnu.\+org/licenses/}}. 
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{generalPurposeTimer_8h_ab642bd81c44c6f47b7b6def941a28f8f}\label{generalPurposeTimer_8h_ab642bd81c44c6f47b7b6def941a28f8f}} 
+\index{generalPurposeTimer.h@{generalPurposeTimer.h}!countDirection@{countDirection}}
+\index{countDirection@{countDirection}!generalPurposeTimer.h@{generalPurposeTimer.h}}
+\doxysubsubsection{\texorpdfstring{countDirection}{countDirection}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{generalPurposeTimer_8h_ab642bd81c44c6f47b7b6def941a28f8f}{count\+Direction}}}
+
+Count direction of the timer. 
+
+Definition at line 117 of file general\+Purpose\+Timer.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{118 \{}
+\DoxyCodeLine{119     up, down}
+\DoxyCodeLine{120 \};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{generalPurposeTimer_8h_a42b1a0a59f1c04b116b692167887fea6}\label{generalPurposeTimer_8h_a42b1a0a59f1c04b116b692167887fea6}} 
+\index{generalPurposeTimer.h@{generalPurposeTimer.h}!timerBlock@{timerBlock}}
+\index{timerBlock@{timerBlock}!generalPurposeTimer.h@{generalPurposeTimer.h}}
+\doxysubsubsection{\texorpdfstring{timerBlock}{timerBlock}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{generalPurposeTimer_8h_a42b1a0a59f1c04b116b692167887fea6}{timer\+Block}}}
+
+Which timer block to use. 
+
+Definition at line 108 of file general\+Purpose\+Timer.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{109 \{}
+\DoxyCodeLine{110     shortTimer0, shortTimer1, shortTimer2, shortTimer3, shortTimer4, shortTimer5,}
+\DoxyCodeLine{111     wideTimer0, wideTimer1, wideTimer2, wideTimer3, wideTimer4, wideTimer5}
+\DoxyCodeLine{112 \};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{generalPurposeTimer_8h_a5747cbc424ddee0f510749490692d1fd}\label{generalPurposeTimer_8h_a5747cbc424ddee0f510749490692d1fd}} 
+\index{generalPurposeTimer.h@{generalPurposeTimer.h}!timerMode@{timerMode}}
+\index{timerMode@{timerMode}!generalPurposeTimer.h@{generalPurposeTimer.h}}
+\doxysubsubsection{\texorpdfstring{timerMode}{timerMode}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{generalPurposeTimer_8h_a5747cbc424ddee0f510749490692d1fd}{timer\+Mode}}}
+
+Mode of the timer. 
+
+Definition at line 100 of file general\+Purpose\+Timer.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{101 \{}
+\DoxyCodeLine{102     oneShot, periodic, realTimeClock, edgeCount, edgeTime, PWM}
+\DoxyCodeLine{103 \};}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{generalPurposeTimer_8h_a15fc2b62c0786a15aa47530a425196f0}\label{generalPurposeTimer_8h_a15fc2b62c0786a15aa47530a425196f0}} 
+\index{generalPurposeTimer.h@{generalPurposeTimer.h}!timerUse@{timerUse}}
+\index{timerUse@{timerUse}!generalPurposeTimer.h@{generalPurposeTimer.h}}
+\doxysubsubsection{\texorpdfstring{timerUse}{timerUse}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{generalPurposeTimer_8h_a15fc2b62c0786a15aa47530a425196f0}{timer\+Use}}}
+
+Which subtimer to use or both in concatenated mode. 
+
+Definition at line 125 of file general\+Purpose\+Timer.\+h.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{126 \{}
+\DoxyCodeLine{127     timerA, timerB, concatenated}
+\DoxyCodeLine{128 \};}
+
+\end{DoxyCode}

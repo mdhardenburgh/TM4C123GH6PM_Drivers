@@ -47,7 +47,7 @@ Archive member included to satisfy reference by file (symbol)
 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-reent.o)
                               /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-sbrkr.o) (errno)
 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
-                              /tmp/cc5b6iFi.ltrans0.ltrans.o (malloc)
+                              /tmp/cc8vDIOb.ltrans0.ltrans.o (malloc)
 
 Allocating common symbols
 Common symbol       size              file
@@ -86,14 +86,14 @@ Discarded input sections
                 0x0000000000000000       0x1c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/rdimon-crt0.o
  .data          0x0000000000000000        0x0 startup_ARMCM4.o
  .bss           0x0000000000000000        0x0 startup_ARMCM4.o
- .comment       0x0000000000000000      0x4a6 /tmp/ccdIactYdebugobj
- .text          0x0000000000000000        0x0 /tmp/cc5b6iFi.ltrans0.ltrans.o
- .data          0x0000000000000000        0x0 /tmp/cc5b6iFi.ltrans0.ltrans.o
- .bss           0x0000000000000000        0x0 /tmp/cc5b6iFi.ltrans0.ltrans.o
- .text._ZdaPv   0x0000000000000000        0x4 /tmp/cc5b6iFi.ltrans0.ltrans.o
- .text._ZdlPv   0x0000000000000000        0x4 /tmp/cc5b6iFi.ltrans0.ltrans.o
- .text._Znaj    0x0000000000000000        0x4 /tmp/cc5b6iFi.ltrans0.ltrans.o
- .text._Znwj    0x0000000000000000        0x4 /tmp/cc5b6iFi.ltrans0.ltrans.o
+ .comment       0x0000000000000000      0x4a6 /tmp/cczGyjkxdebugobj
+ .text          0x0000000000000000        0x0 /tmp/cc8vDIOb.ltrans0.ltrans.o
+ .data          0x0000000000000000        0x0 /tmp/cc8vDIOb.ltrans0.ltrans.o
+ .bss           0x0000000000000000        0x0 /tmp/cc8vDIOb.ltrans0.ltrans.o
+ .text._ZdaPv   0x0000000000000000        0x4 /tmp/cc8vDIOb.ltrans0.ltrans.o
+ .text._ZdlPv   0x0000000000000000        0x4 /tmp/cc8vDIOb.ltrans0.ltrans.o
+ .text._Znaj    0x0000000000000000        0x4 /tmp/cc8vDIOb.ltrans0.ltrans.o
+ .text._Znwj    0x0000000000000000        0x4 /tmp/cc8vDIOb.ltrans0.ltrans.o
  .text          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-exit.o)
  .data          0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-exit.o)
  .bss           0x0000000000000000        0x0 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-exit.o)
@@ -367,8 +367,8 @@ LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-no
 LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtbegin.o
 LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/rdimon-crt0.o
 LOAD startup_ARMCM4.o
-LOAD /tmp/ccdIactYdebugobj
-LOAD /tmp/cc5b6iFi.ltrans0.ltrans.o
+LOAD /tmp/cczGyjkxdebugobj
+LOAD /tmp/cc8vDIOb.ltrans0.ltrans.o
 LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libstdc++_nano.a
 LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libm.a
 START GROUP
@@ -484,38 +484,38 @@ LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-no
                 0x00000000000002ec                CAN_1_Handler
                 0x00000000000002ec                _16_32_Bit_Timer_4B_Handler
  .text._ZN4Nvic17disableInterruptsEv
-                0x00000000000002f0       0x1e /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x00000000000002f0       0x1e /tmp/cc8vDIOb.ltrans0.ltrans.o
  .text._ZN4Nvic16enableInterruptsEv
-                0x000000000000030e       0x1e /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x000000000000030e       0x1e /tmp/cc8vDIOb.ltrans0.ltrans.o
  .text._ZN4Nvic3wfiEv
-                0x000000000000032c       0x10 /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x000000000000032c       0x10 /tmp/cc8vDIOb.ltrans0.ltrans.o
  .text._ZN4Gpio8gpioReadEv
-                0x000000000000033c       0x14 /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x000000000000033c       0x14 /tmp/cc8vDIOb.ltrans0.ltrans.o
  .text._ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0
-                0x0000000000000350       0x24 /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x0000000000000350       0x24 /tmp/cc8vDIOb.ltrans0.ltrans.o
  .text._ZN4Nvic17activateInterruptE9interruptm.part.0.constprop.4
-                0x0000000000000374       0x44 /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x0000000000000374       0x44 /tmp/cc8vDIOb.ltrans0.ltrans.o
  .text._ZN19GeneralPurposeTimer14interruptClearEv
-                0x00000000000003b8       0x16 /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x00000000000003b8       0x16 /tmp/cc8vDIOb.ltrans0.ltrans.o
  .text._ZN4Gpio9gpioWriteE10setORClear.part.0
-                0x00000000000003ce       0x14 /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x00000000000003ce       0x14 /tmp/cc8vDIOb.ltrans0.ltrans.o
  .text._ZN4Gpio14interruptClearEv
-                0x00000000000003e2       0x16 /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x00000000000003e2       0x16 /tmp/cc8vDIOb.ltrans0.ltrans.o
  .text._ZN4GpioC2E14GPIO_Port_Pins9direction
-                0x00000000000003f8       0xc4 /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x00000000000003f8       0xc4 /tmp/cc8vDIOb.ltrans0.ltrans.o
  .text._ZN4GpioC2E14GPIO_Port_Pins9directionm.constprop.0
-                0x00000000000004bc       0x70 /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x00000000000004bc       0x70 /tmp/cc8vDIOb.ltrans0.ltrans.o
  .text.startup.main
-                0x000000000000052c      0x11c /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x000000000000052c      0x11c /tmp/cc8vDIOb.ltrans0.ltrans.o
                 0x000000000000052c                main
  .text.SystemInit
-                0x0000000000000648      0x144 /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x0000000000000648      0x144 /tmp/cc8vDIOb.ltrans0.ltrans.o
                 0x0000000000000648                SystemInit
  .text._16_32_Bit_Timer_0A_Handler
-                0x000000000000078c       0x3c /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x000000000000078c       0x3c /tmp/cc8vDIOb.ltrans0.ltrans.o
                 0x000000000000078c                _16_32_Bit_Timer_0A_Handler
  .text.GPIO_Port_F_Handler
-                0x00000000000007c8       0x84 /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x00000000000007c8       0x84 /tmp/cc8vDIOb.ltrans0.ltrans.o
                 0x00000000000007c8                GPIO_Port_F_Handler
  .text.malloc   0x000000000000084c       0x10 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
                 0x000000000000084c                malloc
@@ -560,9 +560,9 @@ LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-no
  *(.dtors)
  *(.rodata*)
  .rodata._ZN4Nvic10ENn_OFFSETE
-                0x00000000000009b8       0x14 /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x00000000000009b8       0x14 /tmp/cc8vDIOb.ltrans0.ltrans.o
  .rodata._ZN4Nvic11PRIn_OFFSETE
-                0x00000000000009cc       0x8c /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x00000000000009cc       0x8c /tmp/cc8vDIOb.ltrans0.ltrans.o
  .rodata.__sf_fake_stderr
                 0x0000000000000a58       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-findfp.o)
                 0x0000000000000a58                __sf_fake_stderr
@@ -643,13 +643,13 @@ LOAD /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-no
                 0x0000000020000070                __bss_start__ = .
  *(.bss*)
  .bss           0x0000000020000070       0x1c /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtbegin.o
- .bss.blueLed   0x000000002000008c        0x4 /tmp/cc5b6iFi.ltrans0.ltrans.o
- .bss.greenLed  0x0000000020000090        0x4 /tmp/cc5b6iFi.ltrans0.ltrans.o
- .bss.redLed    0x0000000020000094        0x4 /tmp/cc5b6iFi.ltrans0.ltrans.o
- .bss.swtich1   0x0000000020000098        0x4 /tmp/cc5b6iFi.ltrans0.ltrans.o
- .bss.swtich2   0x000000002000009c        0x4 /tmp/cc5b6iFi.ltrans0.ltrans.o
+ .bss.blueLed   0x000000002000008c        0x4 /tmp/cc8vDIOb.ltrans0.ltrans.o
+ .bss.greenLed  0x0000000020000090        0x4 /tmp/cc8vDIOb.ltrans0.ltrans.o
+ .bss.redLed    0x0000000020000094        0x4 /tmp/cc8vDIOb.ltrans0.ltrans.o
+ .bss.swtich1   0x0000000020000098        0x4 /tmp/cc8vDIOb.ltrans0.ltrans.o
+ .bss.swtich2   0x000000002000009c        0x4 /tmp/cc8vDIOb.ltrans0.ltrans.o
  .bss.testTimer
-                0x00000000200000a0        0x4 /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x00000000200000a0        0x4 /tmp/cc8vDIOb.ltrans0.ltrans.o
  .bss.heap_end.7697
                 0x00000000200000a4        0x4 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
  .bss.__malloc_free_list
@@ -700,7 +700,7 @@ OUTPUT(main.elf elf32-littlearm)
  .ARM.attributes
                 0x0000000000000052       0x20 startup_ARMCM4.o
  .ARM.attributes
-                0x0000000000000072       0x32 /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x0000000000000072       0x32 /tmp/cc8vDIOb.ltrans0.ltrans.o
  .ARM.attributes
                 0x00000000000000a4       0x32 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-impure.o)
  .ARM.attributes
@@ -727,55 +727,55 @@ OUTPUT(main.elf elf32-littlearm)
                 0x00000000000002dc       0x1e /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/thumb/v7e-m+fp/hard/crtn.o
 
 .comment        0x0000000000000000       0x76
- .comment       0x0000000000000000       0x76 /tmp/cc5b6iFi.ltrans0.ltrans.o
+ .comment       0x0000000000000000       0x76 /tmp/cc8vDIOb.ltrans0.ltrans.o
                                          0x77 (size before relaxing)
 
-.debug_line     0x0000000000000000     0x3741
+.debug_line     0x0000000000000000     0x36c6
  .debug_line    0x0000000000000000       0x60 startup_ARMCM4.o
- .debug_line    0x0000000000000060     0x2cc2 /tmp/ccdIactYdebugobj
- .debug_line    0x0000000000002d22      0xa1f /tmp/cc5b6iFi.ltrans0.ltrans.o
+ .debug_line    0x0000000000000060     0x2c8e /tmp/cczGyjkxdebugobj
+ .debug_line    0x0000000000002cee      0x9d8 /tmp/cc8vDIOb.ltrans0.ltrans.o
 
-.debug_info     0x0000000000000000    0x16fea
+.debug_info     0x0000000000000000    0x16f9c
  .debug_info    0x0000000000000000       0x26 startup_ARMCM4.o
- .debug_info    0x0000000000000026    0x14ad8 /tmp/ccdIactYdebugobj
-                0x0000000000000026                main.cpp.a846c75f
-                0x0000000000002db7                register.cpp.19d618b6
-                0x0000000000004783                systick.cpp.4b402531
-                0x0000000000005f65                nvic.cpp.71cbcff9
-                0x0000000000007ea1                sbc.cpp.f20dcb88
-                0x0000000000009616                mpu.cpp.bd088b56
-                0x000000000000ca28                fpu.cpp.901e5a4c
-                0x000000000000e1f4                systemControl.cpp.30aab8c1
-                0x000000000000ff9f                gpio.cpp.1c04de2f
-                0x0000000000012441                generalPurposeTimer.cpp.dd321c4f
- .debug_info    0x0000000000014afe     0x24ec /tmp/cc5b6iFi.ltrans0.ltrans.o
+ .debug_info    0x0000000000000026    0x14a8a /tmp/cczGyjkxdebugobj
+                0x0000000000000026                main.cpp.b72ea0c2
+                0x0000000000002d90                register.cpp.6863de19
+                0x000000000000475c                systick.cpp.64e6df31
+                0x0000000000005f17                nvic.cpp.d19e35be
+                0x0000000000007e53                sbc.cpp.09cf99d2
+                0x00000000000095c8                mpu.cpp.dbce2fca
+                0x000000000000c9da                fpu.cpp.7825afd2
+                0x000000000000e1a6                systemControl.cpp.94e11f0e
+                0x000000000000ff51                gpio.cpp.c8e69635
+                0x00000000000123f3                generalPurposeTimer.cpp.9b4894fb
+ .debug_info    0x0000000000014ab0     0x24ec /tmp/cc8vDIOb.ltrans0.ltrans.o
 
-.debug_abbrev   0x0000000000000000     0x3467
+.debug_abbrev   0x0000000000000000     0x3445
  .debug_abbrev  0x0000000000000000       0x14 startup_ARMCM4.o
- .debug_abbrev  0x0000000000000014     0x3288 /tmp/ccdIactYdebugobj
- .debug_abbrev  0x000000000000329c      0x1cb /tmp/cc5b6iFi.ltrans0.ltrans.o
+ .debug_abbrev  0x0000000000000014     0x3266 /tmp/cczGyjkxdebugobj
+ .debug_abbrev  0x000000000000327a      0x1cb /tmp/cc8vDIOb.ltrans0.ltrans.o
 
 .debug_aranges  0x0000000000000000       0xc0
  .debug_aranges
                 0x0000000000000000       0x20 startup_ARMCM4.o
  .debug_aranges
-                0x0000000000000020       0xa0 /tmp/cc5b6iFi.ltrans0.ltrans.o
+                0x0000000000000020       0xa0 /tmp/cc8vDIOb.ltrans0.ltrans.o
 
 .debug_str      0x0000000000000000     0x40a6
  .debug_str     0x0000000000000000       0x3d startup_ARMCM4.o
- .debug_str     0x000000000000003d     0x3f2e /tmp/ccdIactYdebugobj
-                                       0xfe0e (size before relaxing)
- .debug_str     0x0000000000003f6b      0x13b /tmp/cc5b6iFi.ltrans0.ltrans.o
+ .debug_str     0x000000000000003d     0x3f2e /tmp/cczGyjkxdebugobj
+                                       0xfddf (size before relaxing)
+ .debug_str     0x0000000000003f6b      0x13b /tmp/cc8vDIOb.ltrans0.ltrans.o
                                         0x159 (size before relaxing)
 
 .debug_loc      0x0000000000000000     0x1f5b
- .debug_loc     0x0000000000000000     0x1f5b /tmp/cc5b6iFi.ltrans0.ltrans.o
+ .debug_loc     0x0000000000000000     0x1f5b /tmp/cc8vDIOb.ltrans0.ltrans.o
 
 .debug_ranges   0x0000000000000000      0x720
- .debug_ranges  0x0000000000000000      0x720 /tmp/cc5b6iFi.ltrans0.ltrans.o
+ .debug_ranges  0x0000000000000000      0x720 /tmp/cc8vDIOb.ltrans0.ltrans.o
 
 .debug_frame    0x0000000000000000      0x8d8
- .debug_frame   0x0000000000000000      0x1fc /tmp/cc5b6iFi.ltrans0.ltrans.o
+ .debug_frame   0x0000000000000000      0x1fc /tmp/cc8vDIOb.ltrans0.ltrans.o
  .debug_frame   0x00000000000001fc       0x30 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg_nano.a(lib_a-malloc.o)
  .debug_frame   0x000000000000022c      0x3a8 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/librdimon_nano.a(rdimon-syscalls.o)
  .debug_frame   0x00000000000005d4       0x20 /home/mhardenburgh/gcc-arm-none-eabi-8-2019-q3-update/bin/../lib/gcc/arm-none-eabi/8.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libc_nano.a(lib_a-errno.o)

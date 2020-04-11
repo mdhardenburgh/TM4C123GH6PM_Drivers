@@ -1,0 +1,47 @@
+\hypertarget{classFpu}{}\doxysection{Fpu Class Reference}
+\label{classFpu}\index{Fpu@{Fpu}}
+
+
+T\+M4\+C123\+G\+H6\+PM F\+PU Driver.  
+
+
+
+
+{\ttfamily \#include $<$fpu.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classFpu_a9c0f52e8cabb1e6fc84d9d14575e964e}\label{classFpu_a9c0f52e8cabb1e6fc84d9d14575e964e}} 
+\mbox{\hyperlink{classFpu_a9c0f52e8cabb1e6fc84d9d14575e964e}{Fpu}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classFpu_a2ebf69fda6691346cd99f50a80de4b30}\label{classFpu_a2ebf69fda6691346cd99f50a80de4b30}} 
+\mbox{\hyperlink{classFpu_a2ebf69fda6691346cd99f50a80de4b30}{$\sim$\+Fpu}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM F\+PU Driver. 
+
+\hypertarget{classFpu_fpuDescription}{}\doxysubsection{F\+P\+U Description}\label{classFpu_fpuDescription}
+The T\+M4\+C123\+G\+H6\+PM microcontroller supports a floating point unit (F\+PU). The F\+PU fully supports single-\/precision add, subtract, multiply, divide, multiply and accumulate, and square root operations. It also provides conversions between fixed-\/point and floating-\/point data formats, and floating-\/point constant instructions. The F\+PU provides floating-\/point computation functionality that is compliant with the A\+N\+S\+I/\+I\+E\+EE Std 754-\/2008, I\+E\+EE Standard for Binary Floating-\/\+Point Arithmetic, referred to as the I\+E\+EE 754 standard. The F\+PU\textquotesingle{}s single-\/precision extension registers can also be accessed as 16 doubleword registers for load, store, and move operations. The F\+PU provides\+:
+\begin{DoxyItemize}
+\item 32-\/bit instructions for single-\/precision (C float) data-\/processing operations
+\item Combined multiply and accumulate instructions for increased precision (Fused M\+AC)
+\item Hardware support for conversion, addition, subtraction, multiplication with optional accumulate, division, and square-\/root
+\item Hardware support for denormals and all I\+E\+EE rounding modes
+\item 32 dedicated 32-\/bit single-\/precision registers, also addressable as 16 double-\/word registers
+\item Decoupled three stage pipeline
+\end{DoxyItemize}
+
+For more detailed information on the F\+PU please see page 130 of the T\+M4\+C123\+G\+H6\+PM datasheet @ \href{https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf}{\texttt{ https\+://www.\+ti.\+com/lit/ds/symlink/tm4c123gh6pm.\+pdf}}\hypertarget{classFpu_fpuRegisterDescription}{}\doxysubsubsection{F\+P\+U Register Description}\label{classFpu_fpuRegisterDescription}
+The F\+PU class contains a list of F\+PU registers listed as an offset relative to the hexadecimal base address of Core Peripherals 0x\+E000\+E000. 
+
+Definition at line 68 of file fpu.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core\+Peripherals/fpu/\mbox{\hyperlink{fpu_8h}{fpu.\+h}}\item 
+core\+Peripherals/fpu/\mbox{\hyperlink{fpu_8cpp}{fpu.\+cpp}}\end{DoxyCompactItemize}

@@ -1,14 +1,16 @@
 /**
  * @file gpio.h
- * @project RTOS
- * @engineer Matthew Hardenburgh
- * @date 12/24/2019
+ * @brief TM4C123GH6PM Gpio Driver Declaration
+ * @author Matthew Hardenburgh
+ * @version 0.1
+ * @date 3/21/2020
+ * @copyright Matthew Hardenburgh 2020
  * 
- * @section LICENSE
+ * @section license LICENSE
  * 
- * RTOS
- * Copyright (C) 2019 Matthew Hardenburgh
- * mdhardenburgh@gmail.com
+ * TM4C123GH6PM Drivers
+ * Copyright (C) 2020  Matthew Hardenburgh
+ * mdhardenburgh@protonmail.com
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,65 +24,124 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see https://www.gnu.org/licenses/.
+ */
+
+/**
+ * @class Gpio
+ * @brief TM4C123GH6PM GPIO Driver
  * 
- * @section DESCRIPTION
+ * @section gpioDescription GPIO Module Description
  * 
- * Class header of the GPIO for the Texas Instruments Tiva C 
- * ARM4F microcontroller, TM4C123GH6PM.
+ * The GPIO module has six physical GPIO blocks, A-F, and each block supports
+ * upto 8 pins (with some exceptions noted in the GPIO_Port_Pins enum). There 
+ * are 43 programmable GPIOs. 
  * 
- * The standard Tiva C devboard has the following pins connect to the switches
- * and LEDs
- * _____________________________________________
- * | GPIO Pin | Pin Function |     Device      |
- * |----------|--------------|-----------------|
- * |   PF4    |     GPIO     |       SW1       |
- * |----------|--------------|-----------------|
- * |   PF0    |     GPIO     |       SW2       |
- * |----------|--------------|-----------------|
- * |   PF1    |     GPIO     |  RGB LED (Red)  |
- * |----------|--------------|-----------------|
- * |   PF2    |     GPIO     |  RGB LED (Blue) |
- * |----------|--------------|-----------------|
- * |   PF3    |     GPIO     | RGB LED (Green) |
- * |----------|--------------|-----------------|
+ * The GPIOs can be configured for alternate 
+ * functions that connect peripherals such as the ADC, USB or SPI to external 
+ * physical pins. The peripherals that use external pins each have a list of 
+ * Signal Descriptions. 
  * 
- * The table below shows special consideration GPIO pins. Most GPIO pins are 
- * configured as GPIOs and tri-stated by default (GPIOAFSEL=0, GPIODEN=0, 
- * GPIOPDR=0, GPIOPUR=0, and GPIOPCTL=0). Special consideration pins may be 
- * programed to a non-GPIO function or may have special commit controls out of 
- * reset. In addition, a Power-On-Reset (POR) or asserting RST returns these 
- * GPIO to their original special consideration state.
+ * Below is a list of the features of the GPIO module copied here from the 
+ * TM4C123GH6PM datasheet for convienience.
+ *      - 5-V-tolerant in input configuration
+ *      - Fast toggle capable of a change every clock cycle for ports on AHB, 
+ *        every two clock cycles for ports on APB
+ *      - Programmable control for GPIO interrupts
+ *          - Interrupt generation masking
+ *          - Edge-triggered on rising, falling, or both
+ *          - Level-sensitive on High or Low values
+ *      - Bit masking in both read and write operations through address lines
+ *      - Can be used to initiate an ADC sample sequence or a μDMA transfer
+ *      - Pin state can be retained during Hibernation mode
+ *      - Pins configured as digital inputs are Schmitt-triggered
+ *      - Programmable control for GPIO pad configuration
+ *          - Weak pull-up or pull-down resistors
+ *          - 2-mA, 4-mA, and 8-mA pad drive for digital communication; up to 
+ *            four pads can sink 18-mA for high-current applications
+ *          - Slew rate control for 8-mA pad drive
+ *          - Open drain enables
+ *          - Digital input enables
  * 
- * ____________________________
- * | GPIO Pin | Default Reset |
- * |          |     State     |
- * |----------|---------------|
- * |  PA[1:0] |     UART0     |
- * |----------|---------------|
- * |  PA[5:2] |     SSI0      |
- * |----------|---------------|
- * |  PB[3:2] |     I2C0      |
- * |----------|---------------|
- * |  PC[3:0] |    JTAG/SWD   |
- * |----------|---------------|
- * |   PD[7]  |     GPIO      |
- * |----------|---------------|
- * |   PF[0]  |     GPIO      |
- * |----------|---------------|
+ * These drivers I have written support only the GPIO AHB, not APB.
+ * 
+ * For more detailed information on the GPIO please see page 649 of the 
+ * TM4C123GH6PM datasheet @ https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf
+ * 
+ * @subsection gpioSignalDescription GPIO Signal Description
+ * 
+ * The GPIO ports can be to be used by the analog and digital peripherals as 
+ * inputs or outputs connecting physical pins to the peripheral. The GPIOs are 
+ * 5V tolerant except \c PD4 , \c PD5 , \c PB0 , and \c PB1 which are 3.3V. 
+ * Analog signals are all 5V tolerant, but analog performance specs are only
+ * guarenteed if the input signal swing at the pad is kept inside range. Pins 
+ * are also programmed individually by TI's design and no group programming is
+ * implied, unfortuntately. Entries on the table that are grey are default GPIO 
+ * values.
+ * 
+ * @image html gpioSignalPins.png
+ * @image latex gpioSignalPins.png
+ * 
+ * @image html gpioSignalPins2.png
+ * @image latex gpioSignalPins2.png
+ * 
+ * Please note that there are special consideration pins. Most GPIO pins are 
+ * configured as GPIOs and tri-stated by default, but there are some pins that
+ * are important enough to be automatically configured and protected from 
+ * accidental programming. Such pins would be the JTAG/SWD interface, UART and
+ * others. The table below, copied from the TM4C123GH6PM datasheet, lists these 
+ * pins and warnings when using them. 
+ * 
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!WARNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * 
+ * The JTAG/SWD pins can be PERMENTLY configured to disallow JTAG/SWD 
+ * programming. Take extreme caution if using these pins!!!!!!!!!!!!!!!
+ * 
+ * @image html gpioSpecialPins.png
+ * @image latex gpioSpecialPins.png
+ * 
+ * Last, but not least, the TM4C123G Launchpad evaluation kit, EK-TM4C123GXL has
+ * GPIOs that are connected to on board LEDs and switches. Below is a table 
+ * copied from the TI User's Guide for convenience
+ * 
+ * @image html gpioLaunchPadSignalPins.png
+ * @image latex gpioLaunchPadSignalPins.png
+ * 
+ * @subsection gpioSystemControlRegisterDescription GPIO System Control Register Descriptions
+ * 
+ * All addresses given are relative to the System Control base address of 
+ * 0x400F.E000. Legacy registers not supported.
+ * 
+ * @subsection gpioRegisterDescription GPIO Register Description
+ * 
+ * The Gpio class contains a list of registers listed as an offset of the 
+ * hexadecimal base address of the Gpio AHB Port base address A - F. The
+ * legacy APB aperture is not used in this driver. 
+ *  
+ * Note that the GPIO module clock must be enabled before the registers can be 
+ * programmed (see page 340). There must be a delay of 3 system clocks after the 
+ * GPIO module clock is enabled before any GPIO module registers are accessed.
  * 
  */
+
+
 
 #ifndef GPIO_H
 #define GPIO_H
 
 #include "../systemControl/systemControl.h"
 
-
+/**
+ * Direction of the signal, i.e. if the gpio acts as an input or output.
+ */
 enum direction
 {
     input, output
 };
 
+/**
+ * The GPIO port pins. There is no PE6, PE7, PF5, PF6, or PF7. Only added for
+ * completeness.
+ */
 enum GPIO_Port_Pins
 {
     PA0, PA1, PA2, PA3, PA4, PA5, PA6, PA7,

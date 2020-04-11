@@ -1,0 +1,62 @@
+\hypertarget{classUsb}{}\doxysection{Usb Class Reference}
+\label{classUsb}\index{Usb@{Usb}}
+
+
+T\+M4\+C123\+G\+H6\+PM U\+SB Driver.  
+
+
+
+
+{\ttfamily \#include $<$usb.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classUsb_ad932fef75a91a0584b37cd5fc416be59}\label{classUsb_ad932fef75a91a0584b37cd5fc416be59}} 
+\mbox{\hyperlink{classUsb_ad932fef75a91a0584b37cd5fc416be59}{Usb}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classUsb_a11a84b59b3dc10b73877bec786d4dd95}\label{classUsb_a11a84b59b3dc10b73877bec786d4dd95}} 
+\mbox{\hyperlink{classUsb_a11a84b59b3dc10b73877bec786d4dd95}{$\sim$\+Usb}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM U\+SB Driver. 
+
+\hypertarget{classUsb_usbDescription}{}\doxysubsection{U\+S\+B Description}\label{classUsb_usbDescription}
+The T\+M4\+C123\+G\+H6\+PM microcontroller has a built in U\+SB controller that enables the microcontroller to have U\+SB Host, Device or O\+TG functions. The controller complies with the U\+SB 2.\+0 standard. The U\+SB controller supports μ\+D\+MA access to allow large data transfers without the processor. The U\+SB controller supports the following features\+:
+\begin{DoxyItemize}
+\item Complies with U\+S\+B-\/\+IF (Implementer\textquotesingle{}s Forum) certification standards
+\item U\+SB 2.\+0 full-\/speed (12 Mbps) and low-\/speed (1.\+5 Mbps) operation with integrated P\+HY
+\item 4 transfer types\+: Control, Interrupt, Bulk, and Isochronous
+\item 16 endpoints
+\begin{DoxyItemize}
+\item 1 dedicated control IN endpoint and 1 dedicated control O\+UT endpoint
+\item 7 configurable IN endpoints and 7 configurable O\+UT endpoints
+\end{DoxyItemize}
+\item 4 KB dedicated endpoint memory\+: one endpoint may be defined for double-\/buffered 1023-\/byte isochronous packet size
+\item V\+B\+US droop and valid ID detection and interrupt
+\item Efficient transfers using Micro Direct Memory Access Controller (µ\+D\+MA)
+\begin{DoxyItemize}
+\item Separate channels for transmit and receive for up to three IN endpoints and three O\+UT endpoints
+\item Channel requests asserted when F\+I\+FO contains required amount of data
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+For more detailed information on the U\+SB please see page 1099 of the T\+M4\+C123\+G\+H6\+PM datasheet @ \href{https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf}{\texttt{ https\+://www.\+ti.\+com/lit/ds/symlink/tm4c123gh6pm.\+pdf}}\hypertarget{classUsb_usbSignalDescription}{}\doxysubsubsection{U\+S\+B Signal Description}\label{classUsb_usbSignalDescription}
+The following table lists the external signals and thier associtated pins for the U\+SB module. The G\+P\+IO needs to be configured for the U\+SB alternate function using the {\ttfamily A\+F\+S\+EL} bit in the G\+P\+IO Alternate Function \mbox{\hyperlink{classRegister}{Register}} (G\+P\+I\+O\+A\+F\+S\+EL). The number in parenthesis in the Pin Mux / Pin Assignment column of the table below is what is programmed into the {\ttfamily P\+M\+Cn} field in the G\+P\+IO Port Control (G\+P\+I\+O\+P\+C\+TL) register to assign a S\+SI signal to a G\+P\+IO. The {\ttfamily U\+S\+B0\+V\+B\+US} and {\ttfamily U\+S\+B0\+ID} signals are configured by clearing the correct {\ttfamily D\+EN} bit in the G\+P\+I\+O\+D\+EN register.
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{usbSignalPins.png}}
+\end{DoxyImageNoCaption}
+ 
+
+Definition at line 80 of file usb.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+usb/\mbox{\hyperlink{usb_8h}{usb.\+h}}\item 
+usb/\mbox{\hyperlink{usb_8cpp}{usb.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,43 @@
+\hypertarget{classSbc}{}\doxysection{Sbc Class Reference}
+\label{classSbc}\index{Sbc@{Sbc}}
+
+
+T\+M4\+C123\+G\+H6\+PM S\+BC Driver.  
+
+
+
+
+{\ttfamily \#include $<$sbc.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classSbc_a1f3c24c84ba27fb6b7f435f169d3eb3e}\label{classSbc_a1f3c24c84ba27fb6b7f435f169d3eb3e}} 
+\mbox{\hyperlink{classSbc_a1f3c24c84ba27fb6b7f435f169d3eb3e}{Sbc}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classSbc_a6c122698c517f7e4f9ecdf0df0397ea0}\label{classSbc_a6c122698c517f7e4f9ecdf0df0397ea0}} 
+\mbox{\hyperlink{classSbc_a6c122698c517f7e4f9ecdf0df0397ea0}{$\sim$\+Sbc}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM S\+BC Driver. 
+
+\hypertarget{classSbc_sbcDescription}{}\doxysubsection{S\+B\+C Description}\label{classSbc_sbcDescription}
+The S\+BC Provides system implementation information and system control, including configuration, control, and reporting of system exceptions.
+
+For more detailed information on the S\+BC please see page 125 of the T\+M4\+C123\+G\+H6\+PM datasheet @ \href{https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf}{\texttt{ https\+://www.\+ti.\+com/lit/ds/symlink/tm4c123gh6pm.\+pdf}}\hypertarget{classSbc_sbcRegisterDescription}{}\doxysubsubsection{S\+B\+C Register Description}\label{classSbc_sbcRegisterDescription}
+The S\+BC class contains a list of S\+BC registers listed as an offset relative to the hexadecimal base address of Core Peripherals 0x\+E000\+E000.
+
+This Class lists and describes the System Control Block (S\+CB) registers, in numerical order by address offset. The S\+CB registers can only be accessed from privileged mode.
+
+All registers must be accessed with aligned word accesses except for the F\+A\+U\+L\+T\+S\+T\+AT and S\+Y\+S\+P\+R\+I1-\/\+S\+Y\+S\+P\+R\+I3 registers, which can be accessed with byte or aligned halfword or word accesses. The processor does not support unaligned accesses to system control block registers. 
+
+Definition at line 64 of file sbc.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+core\+Peripherals/sbc/\mbox{\hyperlink{sbc_8h}{sbc.\+h}}\item 
+core\+Peripherals/sbc/\mbox{\hyperlink{sbc_8cpp}{sbc.\+cpp}}\end{DoxyCompactItemize}

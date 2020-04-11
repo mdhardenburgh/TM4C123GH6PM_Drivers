@@ -1,0 +1,69 @@
+\hypertarget{classAdc}{}\doxysection{Adc Class Reference}
+\label{classAdc}\index{Adc@{Adc}}
+
+
+T\+M4\+C123\+G\+H6\+PM A\+DC Driver.  
+
+
+
+
+{\ttfamily \#include $<$adc.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAdc_a506db05c758ef5a7cd233a7a5f770510}\label{classAdc_a506db05c758ef5a7cd233a7a5f770510}} 
+\mbox{\hyperlink{classAdc_a506db05c758ef5a7cd233a7a5f770510}{Adc}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classAdc_ab045888f1de9a19375000c3ab99ab092}\label{classAdc_ab045888f1de9a19375000c3ab99ab092}} 
+\mbox{\hyperlink{classAdc_ab045888f1de9a19375000c3ab99ab092}{$\sim$\+Adc}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM A\+DC Driver. 
+
+\hypertarget{classAdc_adcDescription}{}\doxysubsection{A\+D\+C Description}\label{classAdc_adcDescription}
+The T\+M4\+C123\+G\+H6\+PM microcontroller A\+DC has 12-\/bit resolution at 1Msps. There are two A\+DC blocks and they share the 12 input channels. Other features include\+:
+\begin{DoxyItemize}
+\item Single-\/ended and differential-\/input configurations
+\item On-\/chip internal temperature sensor
+\item Optional phase shift in sample time programmable from 22.\+5º to 337.\+5º
+\item Four programmable sample conversion sequencers from one to eight entries long, with corresponding conversion result F\+I\+F\+Os
+\item Flexible trigger control
+\begin{DoxyItemize}
+\item Controller (software)
+\item Timers
+\item Analog Comparators
+\item P\+WM
+\item G\+P\+IO
+\end{DoxyItemize}
+\item Hardware averaging of up to 64 samples
+\item Eight digital comparators
+\item Power and ground for the analog circuitry is separate from the digital power and ground
+\item Efficient transfers using Micro Direct Memory Access Controller (µ\+D\+MA)
+\begin{DoxyItemize}
+\item Dedicated channel for each sample sequencer
+\item A\+DC module uses burst requests for D\+MA
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+For more detailed information on the A\+DC please see page 799 of the T\+M4\+C123\+G\+H6\+PM datasheet @ \href{https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf}{\texttt{ https\+://www.\+ti.\+com/lit/ds/symlink/tm4c123gh6pm.\+pdf}}\hypertarget{classAdc_adcSignalDescription}{}\doxysubsubsection{A\+D\+C Signal Description}\label{classAdc_adcSignalDescription}
+The following table lists the G\+P\+IO pin mux and physical pin number of the pins that can be muxed for use by the A\+DC. To configure a pin for analog use clear the coresponding G\+P\+IO\textquotesingle{}s {\ttfamily D\+EN} bit in the G\+P\+IO Digital Enable (G\+P\+I\+O\+D\+EN) register and set the coresponding {\ttfamily A\+M\+S\+EL} bit in the G\+P\+IO Analog Mode Select (G\+P\+I\+O\+A\+M\+S\+EL) register.
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{adcSignalPins.PNG}}
+\end{DoxyImageNoCaption}
+\hypertarget{classAdc_adcSystemControlRegisterDescription}{}\doxysubsubsection{A\+D\+C System Control Register Descriptions}\label{classAdc_adcSystemControlRegisterDescription}
+All addresses given are relative to the System Control base address of 0x400\+F.\+E000. Legacy registers not supported.\hypertarget{classAdc_adcRegisterDescription}{}\doxysubsubsection{A\+D\+C Register Description}\label{classAdc_adcRegisterDescription}
+The \mbox{\hyperlink{classAdc}{Adc}} class contains a list of A\+DC registers listed as an offset relative to the hexadecimal base address of the A\+DC module block, A\+D\+C0 or A\+D\+C1. Note that the A\+DC module clock must be enabled before the registers can be programmed (see page 352). There must be a delay of 3 system clocks after the A\+DC module clock is enabled before any A\+DC module registers are accessed. 
+
+Definition at line 90 of file adc.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+adc/\mbox{\hyperlink{adc_8h}{adc.\+h}}\item 
+adc/\mbox{\hyperlink{adc_8cpp}{adc.\+cpp}}\end{DoxyCompactItemize}

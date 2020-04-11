@@ -1,0 +1,109 @@
+\hypertarget{classSystemControl}{}\doxysection{System\+Control Class Reference}
+\label{classSystemControl}\index{SystemControl@{SystemControl}}
+
+
+T\+M4\+C123\+G\+H6\+PM System Control Driver.  
+
+
+
+
+{\ttfamily \#include $<$system\+Control.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classSystemControl_ae07ba4f7b5ee117619f376efd3b60fa9}\label{classSystemControl_ae07ba4f7b5ee117619f376efd3b60fa9}} 
+\mbox{\hyperlink{classSystemControl_ae07ba4f7b5ee117619f376efd3b60fa9}{System\+Control}} ()
+\begin{DoxyCompactList}\small\item\em empty constructor placeholder \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classSystemControl_a431eb4f5fbb81a358a345653c7444874}\label{classSystemControl_a431eb4f5fbb81a358a345653c7444874}} 
+\mbox{\hyperlink{classSystemControl_a431eb4f5fbb81a358a345653c7444874}{$\sim$\+System\+Control}} ()
+\begin{DoxyCompactList}\small\item\em empty deconstructor placeholder \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classSystemControl_a69ad744b0b2647884872612221851931}\label{classSystemControl_a69ad744b0b2647884872612221851931}} 
+static void \mbox{\hyperlink{classSystemControl_a69ad744b0b2647884872612221851931}{initialize\+G\+P\+I\+O\+HB}} (void)
+\begin{DoxyCompactList}\small\item\em Initializes the system to use G\+P\+IO A\+HB for use instead of the A\+PB. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classSystemControl_a7c31cef366530340d0cfe0fcf686037d}{initialize\+Clock}} (\mbox{\hyperlink{systemControl_8h_a596311dacfdb940ffd30975e312e4af2}{S\+Y\+S\+D\+I\+V2}} frequency)
+\begin{DoxyCompactList}\small\item\em Initializes the P\+LL for system clock use. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+T\+M4\+C123\+G\+H6\+PM System Control Driver. 
+
+\hypertarget{classSystemControl_systemControlDescription}{}\doxysubsection{System Control Description}\label{classSystemControl_systemControlDescription}
+System control configures the overall operation of the device and provides information about the device. Configurable features include reset control, N\+MI operation, power control, clock control, and low-\/power modes.
+
+For more detailed information on the System Control module please see page 212 of the T\+M4\+C123\+G\+H6\+PM datasheet @ \href{https://www.ti.com/lit/ds/symlink/tm4c123gh6pm.pdf}{\texttt{ https\+://www.\+ti.\+com/lit/ds/symlink/tm4c123gh6pm.\+pdf}}\hypertarget{classSystemControl_systemControlSignalDescription}{}\doxysubsubsection{System Control Signal Description}\label{classSystemControl_systemControlSignalDescription}
+The Non-\/\+Maskable Interrupt ( {\ttfamily N\+MI} ) signals are alternate functions of G\+P\+I\+Os. Non-\/\+Maskable interrupts are controlled and configured by the System Control block.
+
+The following table lists the external signals and thier associtated pins for {\ttfamily N\+MI}. The G\+P\+IO needs to be configured for the {\ttfamily N\+MI} alternate function using the {\ttfamily A\+F\+S\+EL} bit in the G\+P\+IO Alternate Function \mbox{\hyperlink{classRegister}{Register}} (G\+P\+I\+O\+A\+F\+S\+EL). The number in parenthesis in the Pin Mux / Pin Assignment column of the table below is what is programmed into the {\ttfamily P\+M\+Cn} field in the G\+P\+IO Port Control (G\+P\+I\+O\+P\+C\+TL) register to assign a {\ttfamily N\+MI} signal to a G\+P\+IO.
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth,height=\textheight/2,keepaspectratio=true]{systemControlSignalPins.png}}
+\end{DoxyImageNoCaption}
+ 
+
+Definition at line 138 of file system\+Control.\+h.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSystemControl_a7c31cef366530340d0cfe0fcf686037d}\label{classSystemControl_a7c31cef366530340d0cfe0fcf686037d}} 
+\index{SystemControl@{SystemControl}!initializeClock@{initializeClock}}
+\index{initializeClock@{initializeClock}!SystemControl@{SystemControl}}
+\doxysubsubsection{\texorpdfstring{initializeClock()}{initializeClock()}}
+{\footnotesize\ttfamily void System\+Control\+::initialize\+Clock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{systemControl_8h_a596311dacfdb940ffd30975e312e4af2}{S\+Y\+S\+D\+I\+V2}}}]{frequency }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Initializes the P\+LL for system clock use. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em frequency} & of the new system clock. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 67 of file system\+Control.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{68 \{}
+\DoxyCodeLine{69     }
+\DoxyCodeLine{70     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(\mbox{\hyperlink{systemControl_8h_a96c9203e5958b72d5ce82192cb6cdb12}{systemControlBase}} + RCC2\_OFFSET)), set, 31, 1, RW); \textcolor{comment}{//0. Use RCC2.}}
+\DoxyCodeLine{71     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(\mbox{\hyperlink{systemControl_8h_a96c9203e5958b72d5ce82192cb6cdb12}{systemControlBase}} + RCC2\_OFFSET)), set, 11, 1, RW); \textcolor{comment}{//1. Bypass PLL while initiializing}}
+\DoxyCodeLine{72     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(\mbox{\hyperlink{systemControl_8h_a96c9203e5958b72d5ce82192cb6cdb12}{systemControlBase}} + RCC\_OFFSET)), \_16MHz\_XTAL, 6, 5, RW); \textcolor{comment}{// 2. Select the crystal value and the oscillator source, configure for 16MHz crystal.}}
+\DoxyCodeLine{73     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(\mbox{\hyperlink{systemControl_8h_a96c9203e5958b72d5ce82192cb6cdb12}{systemControlBase}} + RCC2\_OFFSET)), MOSC, 4, 3, RW);  \textcolor{comment}{//Confgure for main oscillator source.}}
+\DoxyCodeLine{74     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(\mbox{\hyperlink{systemControl_8h_a96c9203e5958b72d5ce82192cb6cdb12}{systemControlBase}} + RCC2\_OFFSET)), clear, 13, 1, RW); \textcolor{comment}{// 3. Activate PLL by clearing PWRDN.}}
+\DoxyCodeLine{75     }
+\DoxyCodeLine{76     \textcolor{comment}{/*}}
+\DoxyCodeLine{77 \textcolor{comment}{     * 4.Set the desired system divider.}}
+\DoxyCodeLine{78 \textcolor{comment}{     */}}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     \textcolor{comment}{/*}}
+\DoxyCodeLine{81 \textcolor{comment}{     * Append the SYSDIV2LSB bit to the SYSDIV2 field to create a 7 bit divisor }}
+\DoxyCodeLine{82 \textcolor{comment}{     * using the 400 MHz PLL output.}}
+\DoxyCodeLine{83 \textcolor{comment}{     */}}
+\DoxyCodeLine{84     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(\mbox{\hyperlink{systemControl_8h_a96c9203e5958b72d5ce82192cb6cdb12}{systemControlBase}} + RCC2\_OFFSET)), set, 30, 1, RW);}
+\DoxyCodeLine{85     }
+\DoxyCodeLine{86     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(\mbox{\hyperlink{systemControl_8h_a96c9203e5958b72d5ce82192cb6cdb12}{systemControlBase}} + RCC2\_OFFSET)), ((frequency -\/ 1) \& 0x01), 22, 1, RW);}
+\DoxyCodeLine{87     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(\mbox{\hyperlink{systemControl_8h_a96c9203e5958b72d5ce82192cb6cdb12}{systemControlBase}} + RCC2\_OFFSET)), ((frequency -\/ 1) >> 1), 23, 6, RW);}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89     \textcolor{keywordflow}{while}((\mbox{\hyperlink{classRegister_a4cf68c709a58963070d518e6b7715ea6}{Register::getRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(\mbox{\hyperlink{systemControl_8h_a96c9203e5958b72d5ce82192cb6cdb12}{systemControlBase}} + RIS\_OFFSET)), 6, 1, RO)) == 0)  \textcolor{comment}{// 5. Wait for the PLL to lock by polling PLLRIS.}}
+\DoxyCodeLine{90     \{}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92     \}}
+\DoxyCodeLine{93     }
+\DoxyCodeLine{94     \mbox{\hyperlink{classRegister_a3a656301289a68ff4c631d1cb011c6f7}{Register::setRegisterBitFieldStatus}}(((\textcolor{keyword}{volatile} uint32\_t*)(\mbox{\hyperlink{systemControl_8h_a96c9203e5958b72d5ce82192cb6cdb12}{systemControlBase}} + RCC2\_OFFSET)), clear, 11, 1, RW); \textcolor{comment}{// 6. Enable use of the PLL by clearing BYPASS.}}
+\DoxyCodeLine{95 \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+system\+Control/\mbox{\hyperlink{systemControl_8h}{system\+Control.\+h}}\item 
+system\+Control/\mbox{\hyperlink{systemControl_8cpp}{system\+Control.\+cpp}}\end{DoxyCompactItemize}
