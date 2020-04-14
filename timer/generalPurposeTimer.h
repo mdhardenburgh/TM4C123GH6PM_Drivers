@@ -132,8 +132,8 @@ class GeneralPurposeTimer
 {
     public:
         GeneralPurposeTimer();
-        GeneralPurposeTimer(timerMode mode, timerBlock block, uint32_t period, countDirection dir, timerUse use);
-        GeneralPurposeTimer(timerMode mode, timerBlock block, uint32_t period, countDirection dir, timerUse use, uint32_t interuptPriority);
+        GeneralPurposeTimer(timerMode mode, timerBlock block, uint32_t clockCycles, countDirection dir, timerUse use);
+        GeneralPurposeTimer(timerMode mode, timerBlock block, uint32_t clockCycles, countDirection dir, timerUse use, uint32_t interuptPriority);
         ~GeneralPurposeTimer();
 
         void pollStatus(void(*action)(void));

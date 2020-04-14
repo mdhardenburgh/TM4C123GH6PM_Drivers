@@ -38,6 +38,27 @@ Pwm::Pwm()
 }
 
 /**
+ * @brief Initialize PWM with a specified period and duty cycle
+ * @param clockCycles period in clock ticks/cycles
+ * @param dutyCycle duty cycle of the PWM in clock ticks. Must be less than the
+ *                  period
+ */
+Pwm::Pwm(pwmGenerator myPwmGen, pwmModule module, uint32_t clockCycles, uint32_t dutyCycle)
+{
+    if(dutyCycle > clockCycles)
+    {
+        return;
+    }
+
+    else
+    {
+        
+    }
+    
+}
+
+
+/**
  * @brief empty deconstructor placeholder
  */
 Pwm::~Pwm()

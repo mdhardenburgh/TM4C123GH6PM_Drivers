@@ -127,7 +127,10 @@ class Ssi
         Ssi();
         ~Ssi();
 
+        
+
     private:
+
         static const uint32_t ssi0BaseAddress = 0x40008000;
         static const uint32_t ssi1BaseAddress = 0x40009000;
         static const uint32_t ssi2BaseAddress = 0x4000A000;

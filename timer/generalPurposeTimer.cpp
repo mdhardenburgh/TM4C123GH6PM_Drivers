@@ -65,16 +65,16 @@ GeneralPurposeTimer::GeneralPurposeTimer()
  *        time capture, or PWM
  * @param block of the timer used. There are six A&B short timers and six A&B
  *        wide timers.
- * @param period of the timer in clock ticks
+ * @param clockCycles period in clock ticks/cycles
  * @param direction of the timer count
  * @param use of timer. Timer A, Timer B, or concatonated
  *  
  */
-GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint32_t period, countDirection dir, timerUse use)
+GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint32_t clockCycles, countDirection dir, timerUse use)
 {
     (*this).use = use;
     (*this).mode = mode;
-    period = period - 1;
+    clockCycles = clockCycles - 1;
     baseAddress = timerBaseAddresses[block];
 
 
@@ -103,12 +103,12 @@ GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint3
         //5. Interval load
         if(use == timerA)
         {
-            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTAILR_OFFSET)), period, 0, 16, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTAILR_OFFSET)), clockCycles, 0, 16, RW);
         }
 
         else if(use == timerB)
         {
-            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTBILR_OFFSET)), period, 0, 16, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTBILR_OFFSET)), clockCycles, 0, 16, RW);
         }
 
         else if(use == concatenated)
@@ -116,8 +116,8 @@ GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint3
             //concatenated short timer
             if((block/6) == 0)
             {
-                // GPTMTAILR.setRegisterBitFieldStatus(GPTMTAILR_TAILR, period);
-                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTAILR_OFFSET)), period, 0, 32, RW); //This is where the problems begin with reg B
+                // GPTMTAILR.setRegisterBitFieldStatus(GPTMTAILR_TAILR, clockCycles);
+                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTAILR_OFFSET)), clockCycles, 0, 32, RW); //This is where the problems begin with reg B
                 Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTAPR_OFFSET)), clear, 0, 8, RW);
 
             }
@@ -125,8 +125,8 @@ GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint3
             //concatenated wide timer
             else
             {
-                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTBILR_OFFSET)), ((period & 0xFFFFFFFF00000000) >> 32), 0, 32, RW);
-                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTAILR_OFFSET)), (period & 0x00000000FFFFFFFF), 0, 32, RW);
+                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTBILR_OFFSET)), ((clockCycles & 0xFFFFFFFF00000000) >> 32), 0, 32, RW);
+                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTAILR_OFFSET)), (clockCycles & 0x00000000FFFFFFFF), 0, 32, RW);
             }
         }
 
@@ -164,13 +164,13 @@ GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint3
  *        time capture, or PWM
  * @param block of the timer used. There are six A&B short timers and six A&B
  *        wide timers.
- * @param period of the timer in clock ticks
+ * @param clockCycles period in clock ticks/cycles
  * @param direction of the timer count
  * @param use of timer. Timer A, Timer B, or concatonated
  * @param interuptPriority of the interrupt. Lower numbers have higher priority.
  *  
  */
-GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint32_t period, countDirection dir, timerUse use, uint32_t interuptPriority) : GeneralPurposeTimer(mode, block, period, dir, use)
+GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint32_t clockCycles, countDirection dir, timerUse use, uint32_t interuptPriority) : GeneralPurposeTimer(mode, block, clockCycles, dir, use)
 {
     Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMIMR_OFFSET)), set, interruptBit, 1, RW);
 

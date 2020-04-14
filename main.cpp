@@ -99,17 +99,17 @@ extern "C" void SystemInit(void)
     SystemControl::initializeGPIOHB();
     SystemControl::initializeClock(_80MHz);
 
-    greenLed = new Gpio(PF3, output);
-    blueLed = new Gpio(PF2, output);
-    redLed = new Gpio(PF1, output);
+    greenLed = new Gpio((uint32_t)PF3::GPIO, output);
+    blueLed = new Gpio((uint32_t)PF2::GPIO, output);
+    redLed = new Gpio((uint32_t)PF1::GPIO, output);
 }
  
 int main(void)
 {
 
     Nvic::disableInterrupts();
-    swtich1 = new Gpio(PF4, input, 3);
-    swtich2 = new Gpio(PF0, input, 3);
+    swtich1 = new Gpio((uint32_t)PF4::GPIO, input, 3);
+    swtich2 = new Gpio((uint32_t)PF0::GPIO, input, 3);
     testTimer = new GeneralPurposeTimer(periodic, shortTimer0, 80000000, down, concatenated, 3);
     (*testTimer).enableTimer();
     Nvic::enableInterrupts();
@@ -117,8 +117,7 @@ int main(void)
     // (*greenLed).gpioWrite(set);
     (*blueLed).gpioWrite(set);
     (*redLed).gpioWrite(set);
-    
-    
+        
 
     while(1)
     {

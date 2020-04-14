@@ -101,10 +101,27 @@
 
 #include "../systemControl/systemControl.h"
 
+/**
+ * Which PWM generator to use
+ */
+enum pwmGenerator
+{
+    pwmGen0, pwmGen1, pwmGen2, pwmGen3
+};
+
+/**
+ * Which module is being used
+ */
+enum pwmModule
+{
+    module1, module2
+};
+
 class Pwm
 {
     public:
         Pwm();
+        Pwm(pwmGenerator myPwmGen, pwmModule module, uint32_t clockCycles, uint32_t dutyCycle);
         ~Pwm();
 
     private:

@@ -93,6 +93,16 @@ class Adc
         Adc();
         ~Adc();
 
+        static const uint32_t AIN0_PE3_AF = 0; // AIN0 6 PE3 I Analog Analog-to-digital converter input 0.
+        static const uint32_t AIN1_PE4_AF = 0; // AIN1 7 PE2 I Analog Analog-to-digital converter input 1.
+        static const uint32_t AIN2_PE1_AF = 0; // AIN2 8 PE1 I Analog Analog-to-digital converter input 2.
+        static const uint32_t AIN3_PE0_AF = 0; // AIN3 9 PE0 I Analog Analog-to-digital converter input 3.
+        static const uint32_t AIN4_PD3_AF = 0; // AIN4 64 PD3 I Analog Analog-to-digital converter input 4.
+        static const uint32_t AIN5_PD2_AF = 0; // AIN5 63 PD2 I Analog Analog-to-digital converter input 5.
+        static const uint32_t AIN6_PD1_AF = 0; // AIN6 62 PD1 I Analog Analog-to-digital converter input 6.
+        static const uint32_t AIN7_PD0_AF = 0; // AIN7 61 PD0 I Analog Analog-to-digital converter input 7.
+        static const uint32_t AIN8_PE5_AF = 0; // AIN8 60 PE5 I Analog Analog-to-digital converter input 8.
+
     private:
 
         static const uint32_t adc0BaseAddress = 0x40038000; // ADC block 0 base address

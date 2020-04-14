@@ -67,7 +67,7 @@
 /**
  * Base address for the system control registers.
  */
-const uint32_t systemControlBase = 0x400FE000;
+static const uint32_t systemControlBase = 0x400FE000;
 
 /**
  * System clocks that the PLL can be programmed to.

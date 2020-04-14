@@ -41,7 +41,7 @@ Gpio::Gpio()
  * @param gpio pin to be initialized.
  * @param dir of the gpio, to be an output or input.
  */
-Gpio::Gpio(GPIO_Port_Pins gpio, direction dir)
+Gpio::Gpio(uint32_t gpio, direction dir)
 {   
     (*this).gpio = gpio;
     (*this).gpioBaseAddress = GPIO_Port_AHB_BASE + (((*this).gpio)/8) * 0x1000;
@@ -54,7 +54,7 @@ Gpio::Gpio(GPIO_Port_Pins gpio, direction dir)
     }
 
     //Unlock NMI for use.
-    if(gpio == PF0)
+    if(gpio == (uint32_t)PF0::GPIO)
     {
         Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOLOCK_OFFSET)), gpioKey, 0, 32, RW);
         *(((volatile uint32_t*)(gpioBaseAddress + GPIOCR_OFFSET))) |= (0x1 << gpioPin);
@@ -80,7 +80,7 @@ Gpio::Gpio(GPIO_Port_Pins gpio, direction dir)
  * @param interruptPriority of the gpio, 0 being the highest priority and 7
  *        being the lowest.
  */
-Gpio::Gpio(GPIO_Port_Pins gpio, direction dir, uint32_t interruptPriority) : Gpio(gpio, dir)
+Gpio::Gpio(uint32_t gpio, direction dir, uint32_t interruptPriority) : Gpio(gpio, dir)
 {
 
 

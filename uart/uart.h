@@ -105,6 +105,7 @@ class Uart
         Uart();
         ~Uart();
 
+
     private:
 
         static const uint32_t uart0BaseAddress = 0x4000C000;
