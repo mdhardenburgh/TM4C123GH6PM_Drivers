@@ -69,7 +69,7 @@ uint32_t Register::getRegisterBitFieldStatus(volatile uint32_t* address, uint32_
 /**
  * @param address of the register
  * @param value to be written to the bitfield
- * @param bit to be retrieved or the first bit of the bitfield to be retrieved
+ * @param bit to be set or the first bit of the bitfield to be set
  * @param width of the bitfield
  * @param permission of the bitfield, read-only, write-only, etc...
  */

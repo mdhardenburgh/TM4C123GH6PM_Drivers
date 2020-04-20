@@ -29,12 +29,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/.
 
 #include "main.h"
 
-Gpio* greenLed = NULL;
-Gpio* blueLed = NULL;
-Gpio* redLed = NULL;
-Gpio* swtich1 = NULL;
-Gpio* swtich2 = NULL;
-GeneralPurposeTimer* testTimer = NULL;
+Gpio greenLed;
+Gpio blueLed;
+Gpio redLed;
+
+Gpio swtich1;
+Gpio swtich2;
+
+Pwm greenPwm;
+
+// GeneralPurposeTimer myTimer;
 
 /**
  * These functions further help eliminate unwanted exceptions
@@ -53,72 +57,76 @@ void __gnu_cxx::__verbose_terminate_handler()
 extern "C" void GPIO_Port_F_Handler(void)
 {
     
-    if((*swtich1).gpioRead() == 1)
+    if(swtich1.read() == 1)
     {
-        (*redLed).gpioWrite(clear);
-        (*swtich1).interruptClear();
+        redLed.write(clear);
+        swtich1.interruptClear();
     }
 
-    if((*swtich1).gpioRead() == 0)
+    if(swtich1.read() == 0)
     {
-        (*redLed).gpioWrite(set);
-        (*swtich1).interruptClear();
+        redLed.write(set);
+        swtich1.interruptClear();
     }
 
-    if((*swtich2).gpioRead() == 1)
+    if(swtich2.read() == 1)
     {
-        (*blueLed).gpioWrite(clear);
-        (*swtich2).interruptClear();
+        blueLed.write(clear);
+        swtich2.interruptClear();
     }
 
-    if((*swtich2).gpioRead() == 0)
+    if(swtich2.read() == 0)
     {
-        (*blueLed).gpioWrite(set);
-        (*swtich2).interruptClear();
+        blueLed.write(set);
+        swtich2.interruptClear();
     }
 
 }
 
-extern "C" void _16_32_Bit_Timer_0A_Handler(void)
-{
-    if((*greenLed).gpioRead() == set)
-    {
-        (*greenLed).gpioWrite(clear);
-        (*testTimer).interruptClear();
-    }
-    else if((*greenLed).gpioRead() == clear)
-    {
-        (*greenLed).gpioWrite(set);
-        (*testTimer).interruptClear();
-    }
-    
-}
+// extern "C" void _16_32_Bit_Timer_0A_Handler(void)
+// {
+//     if(greenLed.read() == set)
+//     {
+//         greenLed.write(clear);
+//         myTimer.interruptClear();
+//     }
+
+//     else if(greenLed.read() == clear)
+//     {
+//         greenLed.write(set);
+//         myTimer.interruptClear();
+//     } 
+// }
 
 extern "C" void SystemInit(void)
 {
     SystemControl::initializeGPIOHB();
     SystemControl::initializeClock(_80MHz);
 
-    greenLed = new Gpio((uint32_t)PF3::GPIO, output);
-    blueLed = new Gpio((uint32_t)PF2::GPIO, output);
-    redLed = new Gpio((uint32_t)PF1::GPIO, output);
+    greenLed.initialize((uint32_t)PF3::M1PWM7, output);
+    blueLed.initialize((uint32_t)PF2::GPIO, output);
+    redLed.initialize((uint32_t)PF1::GPIO, output);
+
+    greenPwm.initializeSingle(pwmGen3, module1, 80000000, 40000000, countDirectionPwm::down, 0x8C, pwmOutput::pwmA, false, 1);
 }
  
 int main(void)
 {
 
     Nvic::disableInterrupts();
-    swtich1 = new Gpio((uint32_t)PF4::GPIO, input, 3);
-    swtich2 = new Gpio((uint32_t)PF0::GPIO, input, 3);
-    testTimer = new GeneralPurposeTimer(periodic, shortTimer0, 80000000, down, concatenated, 3);
-    (*testTimer).enableTimer();
+
+    swtich1.initialize((uint32_t)PF4::GPIO, input, 3);
+    swtich2.initialize((uint32_t)PF0::GPIO, input, 3);
+
+    // myTimer.initializeForInterupt(periodic, shortTimer0, 80000000, down, concatenated, 3);
+    // myTimer.enableTimer();
+
     Nvic::enableInterrupts();
     
-    // (*greenLed).gpioWrite(set);
-    (*blueLed).gpioWrite(set);
-    (*redLed).gpioWrite(set);
+    
+    blueLed.write(set);
+    redLed.write(set);
         
-
     while(1)
     {
         Nvic::wfi();

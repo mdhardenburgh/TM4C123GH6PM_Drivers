@@ -37,18 +37,30 @@ Gpio::Gpio()
 }
 
 /**
+ * @brief empty deconstructor placeholder
+ */
+Gpio::~Gpio()
+{   
+
+}
+
+/**
  * @brief Simple gpio initializer constructor.
  * @param gpio pin to be initialized.
  * @param dir of the gpio, to be an output or input.
  */
-Gpio::Gpio(uint32_t gpio, direction dir)
-{   
-    (*this).gpio = gpio;
-    (*this).gpioBaseAddress = GPIO_Port_AHB_BASE + (((*this).gpio)/8) * 0x1000;
-    (*this).gpioPin = (((*this).gpio % 8));
+void Gpio::initialize(uint32_t gpio, direction dir)
+{  
+    alternateFunction = gpio%100; //get encoding for alternate function
+    gpio = gpio/100; //get rid of gpio encoding
 
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RCGCGPIO_OFFSET)), set, (uint32_t)((*this).gpio)/8, 1, RW);
-    while(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + PRGPIO_OFFSET)), (uint32_t)((*this).gpio)/8, 1, RO) == 0)
+    gpioPort = (gpio/8);
+    (*this).gpio = (gpio%8);
+    (*this).dir = dir;
+    baseAddress = GPIO_Port_AHB_BASE + (gpioPort) * 0x1000;
+
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RCGCGPIO_OFFSET)), set, (uint32_t)(gpioPort), 1, RW);
+    while(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + PRGPIO_OFFSET)), (uint32_t)(gpioPort), 1, RO) == 0)
     {
         //Ready?
     }
@@ -56,21 +68,52 @@ Gpio::Gpio(uint32_t gpio, direction dir)
     //Unlock NMI for use.
     if(gpio == (uint32_t)PF0::GPIO)
     {
-        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOLOCK_OFFSET)), gpioKey, 0, 32, RW);
-        *(((volatile uint32_t*)(gpioBaseAddress + GPIOCR_OFFSET))) |= (0x1 << gpioPin);
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOLOCK_OFFSET)), gpioKey, 0, 32, RW);
+        *(((volatile uint32_t*)(baseAddress + GPIOCR_OFFSET))) |= (0x1 << (*this).gpio);
     }
 
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIODIR_OFFSET)), dir, gpioPin, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIODIR_OFFSET)), (*this).dir, (*this).gpio, 1, RW);
     
-    if(dir == input)
+    //If no alternate function encoding
+    if(alternateFunction == 0)
     {
-        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOPUR_OFFSET)), set, gpioPin, 1, RW);
+        if((*this).dir == input)
+        {
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOPUR_OFFSET)), set, (*this).gpio, 1, RW);
+        }
+
+
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOAFSEl_OFFSET)), clear, (*this).gpio, 1, RW);
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIODEN_OFFSET)), set, (*this).gpio, 1, RW);
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOAMSEL_OFFSET)), clear, (*this).gpio, 1, RW);
+
     }
 
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOAFSEl_OFFSET)), clear, gpioPin, 1, RW);
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIODEN_OFFSET)), set, gpioPin, 1, RW);
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOAMSEL_OFFSET)), clear, gpioPin, 1, RW);
+    //I have a note to fix this, is it fixed?
+    //If alternate function is encoded
+    else
+    {
+        alternateFunction = alternateFunction - 1; //Get rid of encoding offset
 
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOAFSEl_OFFSET)), set, gpio, 1, RW); //Enable alternate function for GPIO pin
+
+        //Analog alternate function
+        if(alternateFunction == 0)
+        {
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIODEN_OFFSET)), clear, gpio, 1, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOAMSEL_OFFSET)), set, gpio, 1, RW);
+        }
+
+        //Digital alternate Function
+        else
+        {
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOPCTL_OFFSET)), alternateFunction, gpio * 4, 4, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIODEN_OFFSET)), set, gpio, 1, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOAMSEL_OFFSET)), clear, gpio, 1, RW);
+        }
+
+
+    }
 }
 
 /**
@@ -80,51 +123,45 @@ Gpio::Gpio(uint32_t gpio, direction dir)
  * @param interruptPriority of the gpio, 0 being the highest priority and 7
  *        being the lowest.
  */
-Gpio::Gpio(uint32_t gpio, direction dir, uint32_t interruptPriority) : Gpio(gpio, dir)
+void Gpio::initialize(uint32_t gpio, direction dir, uint32_t interruptPriority)
 {
-
-
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOIM_OFFSET)), clear, gpioPin, 1, RW);
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOIS_OFFSET)), clear, gpioPin, 1, RW);
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOIBE_OFFSET)), set, gpioPin, 1, RW);
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOICR_OFFSET)), set, gpioPin, 1, RW);
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOIM_OFFSET)), set, gpioPin, 1, RW);
+    (*this).interruptPriority = interruptPriority;
+    
+    initialize(gpio, dir);
+    
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOIM_OFFSET)), clear, (*this).gpio, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOIS_OFFSET)), clear, (*this).gpio, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOIBE_OFFSET)), set, (*this).gpio, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOICR_OFFSET)), set, (*this).gpio, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOIM_OFFSET)), set, (*this).gpio, 1, RW);
 
 
     /*
-     * If gpio is == to Port F (Port number 5) use interrupt number 30 
-     * (according to interrupt table), else use interrupt number 0 -> 4 
-     * (corresponding to interrupt Port A through Port E)
-     */
-    Nvic::activateInterrupt((interrupt)((((((*this).gpio)/8) == 5) ? 30 : (((*this).gpio)/8))), interruptPriority);
-
-}
-
-/**
- * @brief empty deconstructor placeholder
- */
-Gpio::~Gpio()
-{   
-
+    * If gpio is == to Port F (Port number 5) use interrupt number 30 
+    * (according to interrupt table), else use interrupt number 0 -> 4 
+    * (corresponding to interrupt Port A through Port E)
+    */
+    Nvic::activateInterrupt((interrupt)((((gpioPort) == 5) ? 30 : (gpioPort))), (*this).interruptPriority);
 }
 
 /**
  * @brief Clears the interrupt. Generally used in an ISR.
  */
-void Gpio::interruptClear(void)
+void Gpio::interruptClear()
 {
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOICR_OFFSET)), set, gpioPin, 1, RW);
+
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOICR_OFFSET)), set, gpio, 1, RW);
 }
 
 /**
  * @brief Writes to the gpio pin.
  * @param value to write to pin. Accepted values are 1 or 0.
  */
-void Gpio::gpioWrite(setORClear value)
+void Gpio::write(setORClear value)
 {
     if((value == 0x0) || (value == 0x1))
     {
-        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIODATA_OFFSET)), value, gpioPin, 1, RW);
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIODATA_OFFSET)), value, gpio, 1, RW);
     }
 }
 
@@ -132,7 +169,7 @@ void Gpio::gpioWrite(setORClear value)
  * @brief Reads from a gpio pin.
  * @return Value of the gpio pin, either a 1 or 0.
  */
-uint32_t Gpio::gpioRead(void)
+uint32_t Gpio::read()
 {
-    return((Register::getRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIODATA_OFFSET)), gpioPin, 1, RW)));
+    return((Register::getRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIODATA_OFFSET)), gpio, 1, RW)));
 }

@@ -58,6 +58,14 @@ GeneralPurposeTimer::GeneralPurposeTimer()
 }
 
 /**
+ * @brief empty deconstructor placeholder
+ */
+GeneralPurposeTimer::~GeneralPurposeTimer()
+{
+
+}
+
+/**
  * @brief Initializes a timer in which the status of the timer is polled,
  *        rather than an NVIC interrupt being generated.
  * 
@@ -70,13 +78,11 @@ GeneralPurposeTimer::GeneralPurposeTimer()
  * @param use of timer. Timer A, Timer B, or concatonated
  *  
  */
-GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint32_t clockCycles, countDirection dir, timerUse use)
+void GeneralPurposeTimer::initialize(timerMode mode, timerBlock block, uint32_t clockCycles, countDirection dir, timerUse use)
 {
     (*this).use = use;
-    (*this).mode = mode;
     clockCycles = clockCycles - 1;
     baseAddress = timerBaseAddresses[block];
-
 
     //0. Enable the clock for the timer
     Register::setRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RCGCnTIMER_OFFSET[block/6])), set, (block%6), 1, RW);
@@ -89,7 +95,7 @@ GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint3
     Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMCTL_OFFSET)), clear, (use%2)*8, 1, RW); //disable the timer
     if((mode == oneShot) || (mode == periodic))
     {
-        interruptBit = ((use == timerB) ? 8 : 0);
+        rawInterruptStatusBit = ((use == timerB) ? 8 : 0);
         
         //2. Configure for single or concatenated mode 
         Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMCFG_OFFSET)), ((use == concatenated) ? 0x0 : 0x4), 0, 3, RW);
@@ -134,26 +140,46 @@ GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint3
 
     else if(mode == realTimeClock)
     {
-        interruptBit = 3;
+        rawInterruptStatusBit = 3;
     }
 
     else if(mode == edgeCount)
     {
-        interruptBit = ((use == timerB) ? 9 : 1);
+        rawInterruptStatusBit = ((use == timerB) ? 9 : 1);
     }
 
     else if(mode == edgeTime)
     {
-        interruptBit = ((use == timerB) ? 10 : 2);
+        rawInterruptStatusBit = ((use == timerB) ? 10 : 2);
     }
 
     else if(mode == PWM)
     {
-        interruptBit = ((use == timerB) ? 10 : 2);
+        rawInterruptStatusBit = ((use == timerB) ? 10 : 2);
     }
 
     interruptClear();
 
+}
+
+/**
+ * @brief Initializes a timer in which the status of the timer is polled,
+ *        rather than an NVIC interrupt being generated.
+ * 
+ * @param mode of the timer. Can be one-shot, periodic, RTC, input edge count,
+ *        time capture, or PWM
+ * @param block of the timer used. There are six A&B short timers and six A&B
+ *        wide timers.
+ * @param clockCycles period in clock ticks/cycles
+ * @param direction of the timer count
+ * @param use of timer. Timer A, Timer B, or concatonated
+ *  
+ */
+void GeneralPurposeTimer::initializeForPolling(timerMode mode, timerBlock block, uint32_t clockCycles, countDirection dir, timerUse use, void (*action)(void))
+{
+    
+    (*this).action = action;
+    initialize(mode, block, clockCycles, dir, use);
 }
 
 /**
@@ -170,9 +196,11 @@ GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint3
  * @param interuptPriority of the interrupt. Lower numbers have higher priority.
  *  
  */
-GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint32_t clockCycles, countDirection dir, timerUse use, uint32_t interuptPriority) : GeneralPurposeTimer(mode, block, clockCycles, dir, use)
+void GeneralPurposeTimer::initializeForInterupt(timerMode mode, timerBlock block, uint32_t clockCycles, countDirection dir, timerUse use, uint32_t interuptPriority)
 {
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMIMR_OFFSET)), set, interruptBit, 1, RW);
+    initialize(mode, block, clockCycles, dir, use);
+    
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMIMR_OFFSET)), set, rawInterruptStatusBit, 1, RW);
 
     switch (block)
     {
@@ -231,23 +259,13 @@ GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint3
     
 }
 
-/**
- * @brief empty deconstructor placeholder
- */
-GeneralPurposeTimer::~GeneralPurposeTimer()
-{
-
-}
 
 /**
  * @brief To be used in a poll loop. Checks the Raw Interrupt Status of the timer.
- * 
- * @param action to be taken if the RIS is set.
  */
-void GeneralPurposeTimer::pollStatus(void(*action)(void))
+void GeneralPurposeTimer::pollStatus(void)
 {
-    
-    if(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMRIS_OFFSET)), interruptBit, 1, RO) == set)
+    if(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMRIS_OFFSET)), rawInterruptStatusBit, 1, RO) == set)
     {
         action();
     }
@@ -259,7 +277,7 @@ void GeneralPurposeTimer::pollStatus(void(*action)(void))
  */
 void GeneralPurposeTimer::interruptClear(void)
 {
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMICR_OFFSET)), set, interruptBit, 1, RW1C);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMICR_OFFSET)), set, rawInterruptStatusBit, 1, RW1C);
 }
 
 /**

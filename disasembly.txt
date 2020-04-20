@@ -14,9 +14,9 @@ Disassembly of section .text:
   5c:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
   6c:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
   7c:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
-  8c:	95 07 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
+  8c:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
   9c:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
-  ac:	00 00 00 00 ed 02 00 00 ed 02 00 00 d1 07 00 00     ................
+  ac:	00 00 00 00 ed 02 00 00 ed 02 00 00 cd 07 00 00     ................
 	...
   c4:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
   d4:	ed 02 00 00 ed 02 00 00 ed 02 00 00 ed 02 00 00     ................
@@ -50,9 +50,9 @@ Disassembly of section .text:
  27e:	2301      	movs	r3, #1
  280:	7023      	strb	r3, [r4, #0]
  282:	bd10      	pop	{r4, pc}
- 284:	20000070 	.word	0x20000070
+ 284:	20000010 	.word	0x20000010
  288:	00000000 	.word	0x00000000
- 28c:	00000ac0 	.word	0x00000ac0
+ 28c:	00000920 	.word	0x00000920
 
 00000290 <frame_dummy>:
  290:	b508      	push	{r3, lr}
@@ -63,8 +63,8 @@ Disassembly of section .text:
  29a:	f3af 8000 	nop.w
  29e:	bd08      	pop	{r3, pc}
  2a0:	00000000 	.word	0x00000000
- 2a4:	20000074 	.word	0x20000074
- 2a8:	00000ac0 	.word	0x00000ac0
+ 2a4:	20000014 	.word	0x20000014
+ 2a8:	00000920 	.word	0x00000920
 
 000002ac <Reset_Handler>:
  *    __data_start__: VMA of start of the section to copy to
@@ -115,24 +115,24 @@ Disassembly of section .text:
 
 #ifndef __NO_SYSTEM_INIT
 	bl	SystemInit
- 2d0:	f000 f9be 	bl	650 <SystemInit>
+ 2d0:	f000 f998 	bl	604 <SystemInit>
 #endif
 
 #ifndef __START
 #define __START _start
 #endif
 	bl	__START
- 2d4:	f000 f92e 	bl	534 <main>
+ 2d4:	f000 f974 	bl	5c0 <main>
 	ldr	r1, =__etext
- 2d8:	00000ac4 	.word	0x00000ac4
+ 2d8:	00000924 	.word	0x00000924
 	ldr	r2, =__data_start__
  2dc:	20000000 	.word	0x20000000
 	ldr	r3, =__data_end__
- 2e0:	20000070 	.word	0x20000070
+ 2e0:	20000010 	.word	0x20000010
 	ldr	r1, =__bss_start__
- 2e4:	20000070 	.word	0x20000070
+ 2e4:	20000010 	.word	0x20000010
 	ldr	r2, =__bss_end__
- 2e8:	200000c0 	.word	0x200000c0
+ 2e8:	200000a8 	.word	0x200000a8
 
 000002ec <ADC_0_Sequence_0_Handler>:
 	.align	1
@@ -227,939 +227,756 @@ void Nvic::wfi(void)
  336:	f85d 7b04 	ldr.w	r7, [sp], #4
  33a:	4770      	bx	lr
 
-0000033c <_ZN4Gpio8gpioReadEv>:
+0000033c <_ZN3PwmD1Ev>:
+ * @brief empty deconstructor placeholder
+ */
+Pwm::~Pwm()
+{
+
+}
+ 33c:	4770      	bx	lr
+
+0000033e <_ZN4Gpio4readEv>:
  * @brief Reads from a gpio pin.
  * @return Value of the gpio pin, either a 1 or 0.
  */
-uint32_t Gpio::gpioRead(void)
+uint32_t Gpio::read()
 {
-    return((Register::getRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIODATA_OFFSET)), gpioPin, 1, RW)));
- 33c:	e9d0 3001 	ldrd	r3, r0, [r0, #4]
+    return((Register::getRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIODATA_OFFSET)), gpio, 1, RW)));
+ 33e:	6903      	ldr	r3, [r0, #16]
+ 340:	6800      	ldr	r0, [r0, #0]
 uint32_t Register::getRegisterBitFieldStatus(volatile uint32_t* address, uint32_t bit, uint32_t bitWidth, bitFieldPermission permission)
 {
     if((permission == RW) || (permission == RO) || (permission == RW1C))
     {
         uint32_t select = ((((0xFFFFFFFF >> (32 - bitWidth)))) << bit);
         return(((*address) & select) >> bit);
- 340:	f8d3 23fc 	ldr.w	r2, [r3, #1020]	; 0x3fc
+ 342:	f8d3 23fc 	ldr.w	r2, [r3, #1020]	; 0x3fc
         uint32_t select = ((((0xFFFFFFFF >> (32 - bitWidth)))) << bit);
- 344:	2301      	movs	r3, #1
- 346:	4083      	lsls	r3, r0
+ 346:	2301      	movs	r3, #1
+ 348:	4083      	lsls	r3, r0
         return(((*address) & select) >> bit);
- 348:	4013      	ands	r3, r2
- 34a:	fa23 f000 	lsr.w	r0, r3, r0
- 34e:	4770      	bx	lr
+ 34a:	4013      	ands	r3, r2
+ 34c:	fa23 f000 	lsr.w	r0, r3, r0
+ 350:	4770      	bx	lr
 
-00000350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>:
+00000352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>:
  * @param value to be written to the bitfield
- * @param bit to be retrieved or the first bit of the bitfield to be retrieved
+ * @param bit to be set or the first bit of the bitfield to be set
  * @param width of the bitfield
  * @param permission of the bitfield, read-only, write-only, etc...
  */
 void Register::setRegisterBitFieldStatus(volatile uint32_t* address, uint32_t value, uint32_t bit, uint32_t bitWidth, bitFieldPermission permission)
- 350:	b510      	push	{r4, lr}
+ 352:	b510      	push	{r4, lr}
         return;
     }
     
     else if((permission == RW) || (permission == WO) || (permission == RW1C))
     {
         uint32_t maxValue = (0xFFFFFFFF >> (32 - bitWidth));
- 352:	f1c3 0420 	rsb	r4, r3, #32
- 356:	f04f 33ff 	mov.w	r3, #4294967295	; 0xffffffff
- 35a:	40e3      	lsrs	r3, r4
+ 354:	f1c3 0420 	rsb	r4, r3, #32
+ 358:	f04f 33ff 	mov.w	r3, #4294967295	; 0xffffffff
+ 35c:	40e3      	lsrs	r3, r4
 
         if((value <= maxValue))
- 35c:	428b      	cmp	r3, r1
- 35e:	d308      	bcc.n	372 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0+0x22>
+ 35e:	428b      	cmp	r3, r1
+ 360:	d308      	bcc.n	374 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0+0x22>
         {
             uint32_t clear = (~(maxValue << bit));
             value = value << bit;
     
             (*address) &= clear;
- 360:	6804      	ldr	r4, [r0, #0]
+ 362:	6804      	ldr	r4, [r0, #0]
             uint32_t clear = (~(maxValue << bit));
- 362:	4093      	lsls	r3, r2
+ 364:	4093      	lsls	r3, r2
             (*address) &= clear;
- 364:	ea24 0303 	bic.w	r3, r4, r3
- 368:	6003      	str	r3, [r0, #0]
+ 366:	ea24 0303 	bic.w	r3, r4, r3
+ 36a:	6003      	str	r3, [r0, #0]
             (*address) |= value;
- 36a:	6803      	ldr	r3, [r0, #0]
+ 36c:	6803      	ldr	r3, [r0, #0]
             value = value << bit;
- 36c:	4091      	lsls	r1, r2
+ 36e:	4091      	lsls	r1, r2
             (*address) |= value;
- 36e:	4319      	orrs	r1, r3
- 370:	6001      	str	r1, [r0, #0]
+ 370:	4319      	orrs	r1, r3
+ 372:	6001      	str	r1, [r0, #0]
 
     else
     {
         return;
     }
 }
- 372:	bd10      	pop	{r4, pc}
+ 374:	bd10      	pop	{r4, pc}
 
-00000374 <_ZN4Nvic17activateInterruptE9interruptm.part.0.constprop.4>:
-        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(corePeripheralBase + PRIn_OFFSET[myInterrupt/4])), priority, ((myInterrupt % nvicRegisterOffset) * 8) + 5, 3, RW);
- 374:	0881      	lsrs	r1, r0, #2
- 376:	4b0e      	ldr	r3, [pc, #56]	; (3b0 <_ZN4Nvic17activateInterruptE9interruptm.part.0.constprop.4+0x3c>)
-void Nvic::activateInterrupt(interrupt myInterrupt, uint32_t priority)
- 378:	b510      	push	{r4, lr}
-        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(corePeripheralBase + PRIn_OFFSET[myInterrupt/4])), priority, ((myInterrupt % nvicRegisterOffset) * 8) + 5, 3, RW);
- 37a:	f000 0203 	and.w	r2, r0, #3
-void Nvic::activateInterrupt(interrupt myInterrupt, uint32_t priority)
- 37e:	4604      	mov	r4, r0
-        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(corePeripheralBase + PRIn_OFFSET[myInterrupt/4])), priority, ((myInterrupt % nvicRegisterOffset) * 8) + 5, 3, RW);
- 380:	f853 0021 	ldr.w	r0, [r3, r1, lsl #2]
- 384:	00d2      	lsls	r2, r2, #3
- 386:	2303      	movs	r3, #3
- 388:	4619      	mov	r1, r3
- 38a:	3205      	adds	r2, #5
- 38c:	f100 20e0 	add.w	r0, r0, #3758153728	; 0xe000e000
- 390:	f7ff ffde 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(corePeripheralBase + ENn_OFFSET[myInterrupt/32])), (uint32_t)set, (uint32_t)(myInterrupt % 32), 1, RW);
- 394:	0962      	lsrs	r2, r4, #5
- 396:	4b07      	ldr	r3, [pc, #28]	; (3b4 <_ZN4Nvic17activateInterruptE9interruptm.part.0.constprop.4+0x40>)
- 398:	f853 0022 	ldr.w	r0, [r3, r2, lsl #2]
- 39c:	2301      	movs	r3, #1
- 39e:	f004 021f 	and.w	r2, r4, #31
- 3a2:	4619      	mov	r1, r3
- 3a4:	f100 20e0 	add.w	r0, r0, #3758153728	; 0xe000e000
+00000376 <_ZN4Gpio5writeE10setORClear.part.0>:
+void Gpio::write(setORClear value)
+ 376:	b410      	push	{r4}
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIODATA_OFFSET)), value, gpio, 1, RW);
+ 378:	6904      	ldr	r4, [r0, #16]
+ 37a:	6802      	ldr	r2, [r0, #0]
+ 37c:	2301      	movs	r3, #1
+ 37e:	f504 707f 	add.w	r0, r4, #1020	; 0x3fc
 }
- 3a8:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
- 3ac:	f7ff bfd0 	b.w	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
- 3b0:	000009d4 	.word	0x000009d4
- 3b4:	000009c0 	.word	0x000009c0
+ 382:	f85d 4b04 	ldr.w	r4, [sp], #4
+ 386:	f7ff bfe4 	b.w	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
 
-000003b8 <_ZN19GeneralPurposeTimer14interruptClearEv>:
-
-/**
- * @brief clears the interrupt status
- */
-void GeneralPurposeTimer::interruptClear(void)
+0000038a <_ZN4Gpio14interruptClearEv>:
 {
- 3b8:	b410      	push	{r4}
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMICR_OFFSET)), set, interruptBit, 1, RW1C);
- 3ba:	6884      	ldr	r4, [r0, #8]
- 3bc:	6842      	ldr	r2, [r0, #4]
- 3be:	2301      	movs	r3, #1
- 3c0:	f104 0024 	add.w	r0, r4, #36	; 0x24
- 3c4:	4619      	mov	r1, r3
+ 38a:	b410      	push	{r4}
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOICR_OFFSET)), set, gpio, 1, RW);
+ 38c:	6904      	ldr	r4, [r0, #16]
+ 38e:	6802      	ldr	r2, [r0, #0]
+ 390:	2301      	movs	r3, #1
+ 392:	f204 401c 	addw	r0, r4, #1052	; 0x41c
+ 396:	4619      	mov	r1, r3
 }
- 3c6:	f85d 4b04 	ldr.w	r4, [sp], #4
- 3ca:	f7ff bfc1 	b.w	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+ 398:	f85d 4b04 	ldr.w	r4, [sp], #4
+ 39c:	f7ff bfd9 	b.w	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
 
-000003ce <_ZN4Gpio9gpioWriteE10setORClear.part.0>:
-void Gpio::gpioWrite(setORClear value)
- 3ce:	b410      	push	{r4}
-        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIODATA_OFFSET)), value, gpioPin, 1, RW);
- 3d0:	6844      	ldr	r4, [r0, #4]
- 3d2:	6882      	ldr	r2, [r0, #8]
- 3d4:	2301      	movs	r3, #1
- 3d6:	f504 707f 	add.w	r0, r4, #1020	; 0x3fc
-}
- 3da:	f85d 4b04 	ldr.w	r4, [sp], #4
- 3de:	f7ff bfb7 	b.w	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-
-000003e2 <_ZN4Gpio14interruptClearEv>:
-{
- 3e2:	b410      	push	{r4}
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOICR_OFFSET)), set, gpioPin, 1, RW);
- 3e4:	6844      	ldr	r4, [r0, #4]
- 3e6:	6882      	ldr	r2, [r0, #8]
- 3e8:	2301      	movs	r3, #1
- 3ea:	f204 401c 	addw	r0, r4, #1052	; 0x41c
- 3ee:	4619      	mov	r1, r3
-}
- 3f0:	f85d 4b04 	ldr.w	r4, [sp], #4
- 3f4:	f7ff bfac 	b.w	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-
-000003f8 <_ZN4GpioC1Em9direction>:
-Gpio::Gpio(uint32_t gpio, direction dir)
- 3f8:	b570      	push	{r4, r5, r6, lr}
- 3fa:	4b2c      	ldr	r3, [pc, #176]	; (4ac <Stack_Size+0xac>)
- 3fc:	60c3      	str	r3, [r0, #12]
- 3fe:	4604      	mov	r4, r0
-    (*this).gpioBaseAddress = GPIO_Port_AHB_BASE + (((*this).gpio)/8) * 0x1000;
- 400:	4b2b      	ldr	r3, [pc, #172]	; (4b0 <Stack_Size+0xb0>)
-    (*this).gpio = gpio;
- 402:	6021      	str	r1, [r4, #0]
-    (*this).gpioBaseAddress = GPIO_Port_AHB_BASE + (((*this).gpio)/8) * 0x1000;
- 404:	6043      	str	r3, [r0, #4]
-    (*this).gpioPin = (((*this).gpio % 8));
- 406:	f001 0307 	and.w	r3, r1, #7
- 40a:	6083      	str	r3, [r0, #8]
-    else if((permission == RW) || (permission == WO) || (permission == RW1C))
- 40c:	2301      	movs	r3, #1
- 40e:	4829      	ldr	r0, [pc, #164]	; (4b4 <Stack_Size+0xb4>)
-Gpio::Gpio(uint32_t gpio, direction dir)
- 410:	460e      	mov	r6, r1
- 412:	4615      	mov	r5, r2
- 414:	4619      	mov	r1, r3
- 416:	2205      	movs	r2, #5
- 418:	f7ff ff9a 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-    while(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + PRGPIO_OFFSET)), (uint32_t)((*this).gpio)/8, 1, RO) == 0)
- 41c:	6823      	ldr	r3, [r4, #0]
+000003a0 <_ZN4Gpio10initializeEm9direction>:
+    alternateFunction = gpio%100; //get encoding for alternate function
+ 3a0:	2364      	movs	r3, #100	; 0x64
+{  
+ 3a2:	b570      	push	{r4, r5, r6, lr}
+    alternateFunction = gpio%100; //get encoding for alternate function
+ 3a4:	fbb1 f5f3 	udiv	r5, r1, r3
+ 3a8:	fb03 1315 	mls	r3, r3, r5, r1
+ 3ac:	60c3      	str	r3, [r0, #12]
+    (*this).gpio = (gpio%8);
+ 3ae:	f005 0307 	and.w	r3, r5, #7
+ 3b2:	6003      	str	r3, [r0, #0]
+    baseAddress = GPIO_Port_AHB_BASE + (gpioPort) * 0x1000;
+ 3b4:	4b33      	ldr	r3, [pc, #204]	; (484 <Stack_Size+0x84>)
+ 3b6:	6103      	str	r3, [r0, #16]
+    gpioPort = (gpio/8);
+ 3b8:	2105      	movs	r1, #5
+{  
+ 3ba:	4604      	mov	r4, r0
+ 3bc:	2301      	movs	r3, #1
+    gpioPort = (gpio/8);
+ 3be:	6141      	str	r1, [r0, #20]
+    (*this).dir = dir;
+ 3c0:	7102      	strb	r2, [r0, #4]
+void Register::setRegisterBitFieldStatus(volatile uint32_t* address, uint32_t value, uint32_t bit, uint32_t bitWidth, bitFieldPermission permission)
+ 3c2:	460a      	mov	r2, r1
+ 3c4:	4830      	ldr	r0, [pc, #192]	; (488 <Stack_Size+0x88>)
+ 3c6:	4619      	mov	r1, r3
+ 3c8:	f7ff ffc3 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+    while(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + PRGPIO_OFFSET)), (uint32_t)(gpioPort), 1, RO) == 0)
+ 3cc:	6961      	ldr	r1, [r4, #20]
         return(((*address) & select) >> bit);
- 41e:	4826      	ldr	r0, [pc, #152]	; (4b8 <Stack_Size+0xb8>)
- 420:	08db      	lsrs	r3, r3, #3
+ 3ce:	482f      	ldr	r0, [pc, #188]	; (48c <Stack_Size+0x8c>)
         uint32_t select = ((((0xFFFFFFFF >> (32 - bitWidth)))) << bit);
- 422:	2101      	movs	r1, #1
- 424:	4099      	lsls	r1, r3
+ 3d0:	2201      	movs	r2, #1
+ 3d2:	408a      	lsls	r2, r1
         return(((*address) & select) >> bit);
- 426:	6802      	ldr	r2, [r0, #0]
- 428:	400a      	ands	r2, r1
- 42a:	40da      	lsrs	r2, r3
- 42c:	d0fb      	beq.n	426 <Stack_Size+0x26>
-    if(gpio == (uint32_t)PF0::GPIO)
- 42e:	2e28      	cmp	r6, #40	; 0x28
- 430:	d110      	bne.n	454 <Stack_Size+0x54>
-        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOLOCK_OFFSET)), gpioKey, 0, 32, RW);
- 432:	6860      	ldr	r0, [r4, #4]
- 434:	68e1      	ldr	r1, [r4, #12]
- 436:	2320      	movs	r3, #32
- 438:	2200      	movs	r2, #0
- 43a:	f500 60a4 	add.w	r0, r0, #1312	; 0x520
- 43e:	f7ff ff87 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-        *(((volatile uint32_t*)(gpioBaseAddress + GPIOCR_OFFSET))) |= (0x1 << gpioPin);
- 442:	6862      	ldr	r2, [r4, #4]
- 444:	68a0      	ldr	r0, [r4, #8]
- 446:	f8d2 1524 	ldr.w	r1, [r2, #1316]	; 0x524
- 44a:	2301      	movs	r3, #1
- 44c:	4083      	lsls	r3, r0
- 44e:	430b      	orrs	r3, r1
- 450:	f8c2 3524 	str.w	r3, [r2, #1316]	; 0x524
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIODIR_OFFSET)), dir, gpioPin, 1, RW);
- 454:	6860      	ldr	r0, [r4, #4]
- 456:	68a2      	ldr	r2, [r4, #8]
- 458:	2301      	movs	r3, #1
- 45a:	4629      	mov	r1, r5
- 45c:	f500 6080 	add.w	r0, r0, #1024	; 0x400
- 460:	f7ff ff76 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-    if(dir == input)
- 464:	b93d      	cbnz	r5, 476 <Stack_Size+0x76>
-        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOPUR_OFFSET)), set, gpioPin, 1, RW);
- 466:	6860      	ldr	r0, [r4, #4]
- 468:	68a2      	ldr	r2, [r4, #8]
- 46a:	2301      	movs	r3, #1
- 46c:	4619      	mov	r1, r3
- 46e:	f500 60a2 	add.w	r0, r0, #1296	; 0x510
- 472:	f7ff ff6d 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOAFSEl_OFFSET)), clear, gpioPin, 1, RW);
- 476:	6860      	ldr	r0, [r4, #4]
- 478:	68a2      	ldr	r2, [r4, #8]
- 47a:	2301      	movs	r3, #1
- 47c:	2100      	movs	r1, #0
- 47e:	f500 6084 	add.w	r0, r0, #1056	; 0x420
- 482:	f7ff ff65 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIODEN_OFFSET)), set, gpioPin, 1, RW);
- 486:	6860      	ldr	r0, [r4, #4]
- 488:	68a2      	ldr	r2, [r4, #8]
- 48a:	2301      	movs	r3, #1
- 48c:	4619      	mov	r1, r3
- 48e:	f200 501c 	addw	r0, r0, #1308	; 0x51c
- 492:	f7ff ff5d 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOAMSEL_OFFSET)), clear, gpioPin, 1, RW);
- 496:	6860      	ldr	r0, [r4, #4]
- 498:	68a2      	ldr	r2, [r4, #8]
- 49a:	2301      	movs	r3, #1
- 49c:	2100      	movs	r1, #0
- 49e:	f500 60a5 	add.w	r0, r0, #1320	; 0x528
- 4a2:	f7ff ff55 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+ 3d4:	6803      	ldr	r3, [r0, #0]
+ 3d6:	4013      	ands	r3, r2
+ 3d8:	40cb      	lsrs	r3, r1
+ 3da:	d0fb      	beq.n	3d4 <_ZN4Gpio10initializeEm9direction+0x34>
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIODIR_OFFSET)), (*this).dir, (*this).gpio, 1, RW);
+ 3dc:	6920      	ldr	r0, [r4, #16]
+ 3de:	6822      	ldr	r2, [r4, #0]
+ 3e0:	7921      	ldrb	r1, [r4, #4]
+ 3e2:	2301      	movs	r3, #1
+ 3e4:	f500 6080 	add.w	r0, r0, #1024	; 0x400
+ 3e8:	f7ff ffb3 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+    if(alternateFunction == 0)
+ 3ec:	e9d4 3003 	ldrd	r3, r0, [r4, #12]
+ 3f0:	b9eb      	cbnz	r3, 42e <Stack_Size+0x2e>
+        if((*this).dir == input)
+ 3f2:	7923      	ldrb	r3, [r4, #4]
+ 3f4:	b933      	cbnz	r3, 404 <Stack_Size+0x4>
+void Register::setRegisterBitFieldStatus(volatile uint32_t* address, uint32_t value, uint32_t bit, uint32_t bitWidth, bitFieldPermission permission)
+ 3f6:	2301      	movs	r3, #1
+ 3f8:	6822      	ldr	r2, [r4, #0]
+ 3fa:	4619      	mov	r1, r3
+ 3fc:	f500 60a2 	add.w	r0, r0, #1296	; 0x510
+ 400:	f7ff ffa7 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOAFSEl_OFFSET)), clear, (*this).gpio, 1, RW);
+ 404:	6920      	ldr	r0, [r4, #16]
+ 406:	6822      	ldr	r2, [r4, #0]
+ 408:	2301      	movs	r3, #1
+ 40a:	2100      	movs	r1, #0
+ 40c:	f500 6084 	add.w	r0, r0, #1056	; 0x420
+ 410:	f7ff ff9f 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIODEN_OFFSET)), set, (*this).gpio, 1, RW);
+ 414:	6920      	ldr	r0, [r4, #16]
+ 416:	6822      	ldr	r2, [r4, #0]
+ 418:	2301      	movs	r3, #1
+ 41a:	4619      	mov	r1, r3
+ 41c:	f200 501c 	addw	r0, r0, #1308	; 0x51c
+ 420:	f7ff ff97 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOAMSEL_OFFSET)), clear, (*this).gpio, 1, RW);
+ 424:	6920      	ldr	r0, [r4, #16]
+ 426:	6822      	ldr	r2, [r4, #0]
+ 428:	2301      	movs	r3, #1
+ 42a:	2100      	movs	r1, #0
+ 42c:	e013      	b.n	456 <Stack_Size+0x56>
+        alternateFunction = alternateFunction - 1; //Get rid of encoding offset
+ 42e:	3b01      	subs	r3, #1
+ 430:	60e3      	str	r3, [r4, #12]
+ 432:	2301      	movs	r3, #1
+ 434:	4619      	mov	r1, r3
+ 436:	f500 6084 	add.w	r0, r0, #1056	; 0x420
+ 43a:	462a      	mov	r2, r5
+ 43c:	f7ff ff89 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+        if(alternateFunction == 0)
+ 440:	e9d4 1003 	ldrd	r1, r0, [r4, #12]
+ 444:	b969      	cbnz	r1, 462 <Stack_Size+0x62>
+ 446:	2301      	movs	r3, #1
+ 448:	f200 501c 	addw	r0, r0, #1308	; 0x51c
+ 44c:	f7ff ff81 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+ 450:	2301      	movs	r3, #1
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOAMSEL_OFFSET)), set, gpio, 1, RW);
+ 452:	6920      	ldr	r0, [r4, #16]
+ 454:	4619      	mov	r1, r3
+ 456:	f500 60a5 	add.w	r0, r0, #1320	; 0x528
 }
- 4a6:	4620      	mov	r0, r4
- 4a8:	bd70      	pop	{r4, r5, r6, pc}
- 4aa:	bf00      	nop
- 4ac:	4c4f434b 	.word	0x4c4f434b
- 4b0:	4005d000 	.word	0x4005d000
- 4b4:	400fe608 	.word	0x400fe608
- 4b8:	400fea08 	.word	0x400fea08
+ 45a:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
+ 45e:	f7ff bf78 	b.w	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+ 462:	2304      	movs	r3, #4
+ 464:	00aa      	lsls	r2, r5, #2
+ 466:	f200 502c 	addw	r0, r0, #1324	; 0x52c
+ 46a:	f7ff ff72 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIODEN_OFFSET)), set, gpio, 1, RW);
+ 46e:	6920      	ldr	r0, [r4, #16]
+ 470:	2301      	movs	r3, #1
+ 472:	4619      	mov	r1, r3
+ 474:	f200 501c 	addw	r0, r0, #1308	; 0x51c
+ 478:	462a      	mov	r2, r5
+ 47a:	f7ff ff6a 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOAMSEL_OFFSET)), clear, gpio, 1, RW);
+ 47e:	6920      	ldr	r0, [r4, #16]
+ 480:	2301      	movs	r3, #1
+ 482:	e7d2      	b.n	42a <Stack_Size+0x2a>
+ 484:	4005d000 	.word	0x4005d000
+ 488:	400fe608 	.word	0x400fe608
+ 48c:	400fea08 	.word	0x400fea08
 
-000004bc <_ZN4GpioC2Em9directionm.constprop.0>:
-Gpio::Gpio(uint32_t gpio, direction dir, uint32_t interruptPriority) : Gpio(gpio, dir)
- 4bc:	b510      	push	{r4, lr}
- 4be:	4604      	mov	r4, r0
- 4c0:	2200      	movs	r2, #0
- 4c2:	f7ff ff99 	bl	3f8 <_ZN4GpioC1Em9direction>
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOIM_OFFSET)), clear, gpioPin, 1, RW);
- 4c6:	6860      	ldr	r0, [r4, #4]
- 4c8:	68a2      	ldr	r2, [r4, #8]
- 4ca:	2301      	movs	r3, #1
- 4cc:	2100      	movs	r1, #0
- 4ce:	f500 6082 	add.w	r0, r0, #1040	; 0x410
- 4d2:	f7ff ff3d 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOIS_OFFSET)), clear, gpioPin, 1, RW);
- 4d6:	6860      	ldr	r0, [r4, #4]
- 4d8:	68a2      	ldr	r2, [r4, #8]
- 4da:	2301      	movs	r3, #1
- 4dc:	2100      	movs	r1, #0
- 4de:	f200 4004 	addw	r0, r0, #1028	; 0x404
- 4e2:	f7ff ff35 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOIBE_OFFSET)), set, gpioPin, 1, RW);
- 4e6:	6860      	ldr	r0, [r4, #4]
- 4e8:	68a2      	ldr	r2, [r4, #8]
- 4ea:	2301      	movs	r3, #1
- 4ec:	4619      	mov	r1, r3
- 4ee:	f500 6081 	add.w	r0, r0, #1032	; 0x408
- 4f2:	f7ff ff2d 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOICR_OFFSET)), set, gpioPin, 1, RW);
- 4f6:	6860      	ldr	r0, [r4, #4]
- 4f8:	68a2      	ldr	r2, [r4, #8]
- 4fa:	2301      	movs	r3, #1
- 4fc:	4619      	mov	r1, r3
- 4fe:	f200 401c 	addw	r0, r0, #1052	; 0x41c
- 502:	f7ff ff25 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(gpioBaseAddress + GPIOIM_OFFSET)), set, gpioPin, 1, RW);
- 506:	6860      	ldr	r0, [r4, #4]
- 508:	68a2      	ldr	r2, [r4, #8]
- 50a:	2301      	movs	r3, #1
- 50c:	4619      	mov	r1, r3
- 50e:	f500 6082 	add.w	r0, r0, #1040	; 0x410
- 512:	f7ff ff1d 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-    Nvic::activateInterrupt((interrupt)((((((*this).gpio)/8) == 5) ? 30 : (((*this).gpio)/8))), interruptPriority);
- 516:	6820      	ldr	r0, [r4, #0]
- 518:	f1a0 0328 	sub.w	r3, r0, #40	; 0x28
- 51c:	2b07      	cmp	r3, #7
- 51e:	d907      	bls.n	530 <_ZN4GpioC2Em9directionm.constprop.0+0x74>
- 520:	f3c0 00c7 	ubfx	r0, r0, #3, #8
+00000490 <_ZN4Gpio10initializeEm9directionm.constprop.0>:
+void Gpio::initialize(uint32_t gpio, direction dir, uint32_t interruptPriority)
+ 490:	b510      	push	{r4, lr}
+    (*this).interruptPriority = interruptPriority;
+ 492:	2303      	movs	r3, #3
+void Gpio::initialize(uint32_t gpio, direction dir, uint32_t interruptPriority)
+ 494:	4604      	mov	r4, r0
+    (*this).interruptPriority = interruptPriority;
+ 496:	6083      	str	r3, [r0, #8]
+    initialize(gpio, dir);
+ 498:	2200      	movs	r2, #0
+ 49a:	f7ff ff81 	bl	3a0 <_ZN4Gpio10initializeEm9direction>
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOIM_OFFSET)), clear, (*this).gpio, 1, RW);
+ 49e:	6920      	ldr	r0, [r4, #16]
+ 4a0:	6822      	ldr	r2, [r4, #0]
+ 4a2:	2301      	movs	r3, #1
+ 4a4:	2100      	movs	r1, #0
+ 4a6:	f500 6082 	add.w	r0, r0, #1040	; 0x410
+ 4aa:	f7ff ff52 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOIS_OFFSET)), clear, (*this).gpio, 1, RW);
+ 4ae:	6920      	ldr	r0, [r4, #16]
+ 4b0:	6822      	ldr	r2, [r4, #0]
+ 4b2:	2301      	movs	r3, #1
+ 4b4:	2100      	movs	r1, #0
+ 4b6:	f200 4004 	addw	r0, r0, #1028	; 0x404
+ 4ba:	f7ff ff4a 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOIBE_OFFSET)), set, (*this).gpio, 1, RW);
+ 4be:	6920      	ldr	r0, [r4, #16]
+ 4c0:	6822      	ldr	r2, [r4, #0]
+ 4c2:	2301      	movs	r3, #1
+ 4c4:	4619      	mov	r1, r3
+ 4c6:	f500 6081 	add.w	r0, r0, #1032	; 0x408
+ 4ca:	f7ff ff42 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOICR_OFFSET)), set, (*this).gpio, 1, RW);
+ 4ce:	6920      	ldr	r0, [r4, #16]
+ 4d0:	6822      	ldr	r2, [r4, #0]
+ 4d2:	2301      	movs	r3, #1
+ 4d4:	4619      	mov	r1, r3
+ 4d6:	f200 401c 	addw	r0, r0, #1052	; 0x41c
+ 4da:	f7ff ff3a 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPIOIM_OFFSET)), set, (*this).gpio, 1, RW);
+ 4de:	6920      	ldr	r0, [r4, #16]
+ 4e0:	6822      	ldr	r2, [r4, #0]
+ 4e2:	2301      	movs	r3, #1
+ 4e4:	4619      	mov	r1, r3
+ 4e6:	f500 6082 	add.w	r0, r0, #1040	; 0x410
+ 4ea:	f7ff ff32 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+    Nvic::activateInterrupt((interrupt)((((gpioPort) == 5) ? 30 : (gpioPort))), (*this).interruptPriority);
+ 4ee:	6963      	ldr	r3, [r4, #20]
+ 4f0:	68a1      	ldr	r1, [r4, #8]
+ 4f2:	2b05      	cmp	r3, #5
+ 4f4:	d11d      	bne.n	532 <_ZN4Gpio10initializeEm9directionm.constprop.0+0xa2>
+ 4f6:	241e      	movs	r4, #30
     if((myInterrupt < 139) && (priority < 8))
- 524:	288a      	cmp	r0, #138	; 0x8a
- 526:	d801      	bhi.n	52c <_ZN4GpioC2Em9directionm.constprop.0+0x70>
- 528:	f7ff ff24 	bl	374 <_ZN4Nvic17activateInterruptE9interruptm.part.0.constprop.4>
+ 4f8:	2907      	cmp	r1, #7
+ 4fa:	d81d      	bhi.n	538 <_ZN4Gpio10initializeEm9directionm.constprop.0+0xa8>
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(corePeripheralBase + PRIn_OFFSET[myInterrupt/4])), priority, ((myInterrupt % nvicRegisterOffset) * 8) + 5, 3, RW);
+ 4fc:	08a0      	lsrs	r0, r4, #2
+ 4fe:	4b0f      	ldr	r3, [pc, #60]	; (53c <_ZN4Gpio10initializeEm9directionm.constprop.0+0xac>)
+ 500:	f004 0203 	and.w	r2, r4, #3
+ 504:	f853 0020 	ldr.w	r0, [r3, r0, lsl #2]
+ 508:	00d2      	lsls	r2, r2, #3
+ 50a:	2303      	movs	r3, #3
+ 50c:	3205      	adds	r2, #5
+ 50e:	f100 20e0 	add.w	r0, r0, #3758153728	; 0xe000e000
+ 512:	f7ff ff1e 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(corePeripheralBase + ENn_OFFSET[myInterrupt/32])), (uint32_t)set, (uint32_t)(myInterrupt % 32), 1, RW);
+ 516:	0962      	lsrs	r2, r4, #5
+ 518:	4b09      	ldr	r3, [pc, #36]	; (540 <_ZN4Gpio10initializeEm9directionm.constprop.0+0xb0>)
+ 51a:	f853 0022 	ldr.w	r0, [r3, r2, lsl #2]
+ 51e:	2301      	movs	r3, #1
+ 520:	f004 021f 	and.w	r2, r4, #31
+ 524:	4619      	mov	r1, r3
+ 526:	f100 20e0 	add.w	r0, r0, #3758153728	; 0xe000e000
 }
- 52c:	4620      	mov	r0, r4
- 52e:	bd10      	pop	{r4, pc}
-    Nvic::activateInterrupt((interrupt)((((((*this).gpio)/8) == 5) ? 30 : (((*this).gpio)/8))), interruptPriority);
- 530:	201e      	movs	r0, #30
- 532:	e7f9      	b.n	528 <_ZN4GpioC2Em9directionm.constprop.0+0x6c>
-
-00000534 <main>:
-    blueLed = new Gpio((uint32_t)PF2::GPIO, output);
-    redLed = new Gpio((uint32_t)PF1::GPIO, output);
+ 52a:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
+ 52e:	f7ff bf10 	b.w	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+    Nvic::activateInterrupt((interrupt)((((gpioPort) == 5) ? 30 : (gpioPort))), (*this).interruptPriority);
+ 532:	b2dc      	uxtb	r4, r3
+    if((myInterrupt < 139) && (priority < 8))
+ 534:	2c8a      	cmp	r4, #138	; 0x8a
+ 536:	d9df      	bls.n	4f8 <_ZN4Gpio10initializeEm9directionm.constprop.0+0x68>
 }
- 
-int main(void)
-{
- 534:	b508      	push	{r3, lr}
+ 538:	bd10      	pop	{r4, pc}
+ 53a:	bf00      	nop
+ 53c:	00000894 	.word	0x00000894
+ 540:	00000880 	.word	0x00000880
 
-    Nvic::disableInterrupts();
- 536:	f7ff fedb 	bl	2f0 <_ZN4Nvic17disableInterruptsEv>
+00000544 <_ZN4GpioD1Ev>:
+}
+ 544:	4770      	bx	lr
+	...
 
-
-void* operator new(size_t size) noexcept 
-{ 
-    return malloc(size); 
- 53a:	2010      	movs	r0, #16
- 53c:	f000 f98a 	bl	854 <malloc>
-    swtich1 = new Gpio((uint32_t)PF4::GPIO, input, 3);
- 540:	212c      	movs	r1, #44	; 0x2c
- 542:	4604      	mov	r4, r0
- 544:	f7ff ffba 	bl	4bc <_ZN4GpioC2Em9directionm.constprop.0>
- 548:	4b38      	ldr	r3, [pc, #224]	; (62c <main+0xf8>)
- 54a:	2010      	movs	r0, #16
- 54c:	601c      	str	r4, [r3, #0]
- 54e:	f000 f981 	bl	854 <malloc>
-    swtich2 = new Gpio((uint32_t)PF0::GPIO, input, 3);
- 552:	2128      	movs	r1, #40	; 0x28
- 554:	4604      	mov	r4, r0
- 556:	f7ff ffb1 	bl	4bc <_ZN4GpioC2Em9directionm.constprop.0>
- 55a:	4b35      	ldr	r3, [pc, #212]	; (630 <main+0xfc>)
- 55c:	200c      	movs	r0, #12
- 55e:	601c      	str	r4, [r3, #0]
- 560:	f000 f978 	bl	854 <malloc>
-    (*this).use = use;
- 564:	f44f 7381 	mov.w	r3, #258	; 0x102
- 568:	8003      	strh	r3, [r0, #0]
-    baseAddress = timerBaseAddresses[block];
- 56a:	4b32      	ldr	r3, [pc, #200]	; (634 <main+0x100>)
- 56c:	6083      	str	r3, [r0, #8]
-GeneralPurposeTimer::GeneralPurposeTimer(timerMode mode, timerBlock block, uint32_t clockCycles, countDirection dir, timerUse use)
- 56e:	2200      	movs	r2, #0
- 570:	2301      	movs	r3, #1
- 572:	6042      	str	r2, [r0, #4]
- 574:	4604      	mov	r4, r0
-    else if((permission == RW) || (permission == WO) || (permission == RW1C))
- 576:	4619      	mov	r1, r3
- 578:	482f      	ldr	r0, [pc, #188]	; (638 <main+0x104>)
- 57a:	f7ff fee9 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-        return(((*address) & select) >> bit);
- 57e:	4a2f      	ldr	r2, [pc, #188]	; (63c <main+0x108>)
- 580:	6813      	ldr	r3, [r2, #0]
-    while(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + PRnTIMER_OFFSET[block/6])), (block%6), 1, RO) == 0)
- 582:	07db      	lsls	r3, r3, #31
- 584:	d5fc      	bpl.n	580 <main+0x4c>
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMCTL_OFFSET)), clear, (use%2)*8, 1, RW); //disable the timer
- 586:	68a0      	ldr	r0, [r4, #8]
- 588:	2200      	movs	r2, #0
-        interruptBit = ((use == timerB) ? 8 : 0);
- 58a:	2500      	movs	r5, #0
- 58c:	4611      	mov	r1, r2
- 58e:	2301      	movs	r3, #1
- 590:	300c      	adds	r0, #12
- 592:	f7ff fedd 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
- 596:	462a      	mov	r2, r5
- 598:	2303      	movs	r3, #3
- 59a:	4629      	mov	r1, r5
- 59c:	68a0      	ldr	r0, [r4, #8]
- 59e:	6065      	str	r5, [r4, #4]
-    else if((permission == RW) || (permission == WO) || (permission == RW1C))
- 5a0:	f7ff fed6 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTnMR_OFFSET[(use%2)])), mode + 1, 0, 2, RW);
- 5a4:	68a0      	ldr	r0, [r4, #8]
- 5a6:	2302      	movs	r3, #2
- 5a8:	4619      	mov	r1, r3
- 5aa:	3004      	adds	r0, #4
- 5ac:	f7ff fed0 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTnMR_OFFSET[(use%2)])), dir, 4, 1, RW);
- 5b0:	68a0      	ldr	r0, [r4, #8]
- 5b2:	2301      	movs	r3, #1
- 5b4:	2204      	movs	r2, #4
- 5b6:	4619      	mov	r1, r3
- 5b8:	4410      	add	r0, r2
- 5ba:	f7ff fec9 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTAILR_OFFSET)), clockCycles, 0, 32, RW); //This is where the problems begin with reg B
- 5be:	68a3      	ldr	r3, [r4, #8]
-            (*address) &= clear;
- 5c0:	6a9a      	ldr	r2, [r3, #40]	; 0x28
- 5c2:	629d      	str	r5, [r3, #40]	; 0x28
-            (*address) |= value;
- 5c4:	6a99      	ldr	r1, [r3, #40]	; 0x28
- 5c6:	4a1e      	ldr	r2, [pc, #120]	; (640 <main+0x10c>)
- 5c8:	430a      	orrs	r2, r1
- 5ca:	629a      	str	r2, [r3, #40]	; 0x28
-                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTAPR_OFFSET)), clear, 0, 8, RW);
- 5cc:	68a3      	ldr	r3, [r4, #8]
-            (*address) &= clear;
- 5ce:	6b9a      	ldr	r2, [r3, #56]	; 0x38
- 5d0:	f022 02ff 	bic.w	r2, r2, #255	; 0xff
- 5d4:	639a      	str	r2, [r3, #56]	; 0x38
-            (*address) |= value;
- 5d6:	6b9a      	ldr	r2, [r3, #56]	; 0x38
- 5d8:	639a      	str	r2, [r3, #56]	; 0x38
-    interruptClear();
- 5da:	4620      	mov	r0, r4
- 5dc:	f7ff feec 	bl	3b8 <_ZN19GeneralPurposeTimer14interruptClearEv>
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMIMR_OFFSET)), set, interruptBit, 1, RW);
- 5e0:	68a0      	ldr	r0, [r4, #8]
- 5e2:	6862      	ldr	r2, [r4, #4]
- 5e4:	2301      	movs	r3, #1
- 5e6:	4619      	mov	r1, r3
- 5e8:	3018      	adds	r0, #24
- 5ea:	f7ff feb1 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-void Nvic::activateInterrupt(interrupt myInterrupt, uint32_t priority)
- 5ee:	2013      	movs	r0, #19
- 5f0:	f7ff fec0 	bl	374 <_ZN4Nvic17activateInterruptE9interruptm.part.0.constprop.4>
-    testTimer = new GeneralPurposeTimer(periodic, shortTimer0, 80000000, down, concatenated, 3);
- 5f4:	4b13      	ldr	r3, [pc, #76]	; (644 <main+0x110>)
- * @brief timers are disabled by default during intialization. This function
- *        Enables the timers.
- */
-void GeneralPurposeTimer::enableTimer(void)
-{
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMCTL_OFFSET)), set, (use%2)*8, 1, RW);
- 5f6:	7822      	ldrb	r2, [r4, #0]
- 5f8:	68a0      	ldr	r0, [r4, #8]
- 5fa:	601c      	str	r4, [r3, #0]
- 5fc:	f002 0201 	and.w	r2, r2, #1
- 600:	2301      	movs	r3, #1
- 602:	4619      	mov	r1, r3
- 604:	00d2      	lsls	r2, r2, #3
- 606:	300c      	adds	r0, #12
- 608:	f7ff fea2 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
-    (*testTimer).enableTimer();
-    Nvic::enableInterrupts();
- 60c:	f7ff fe7f 	bl	30e <_ZN4Nvic16enableInterruptsEv>
-    if((value == 0x0) || (value == 0x1))
- 610:	4b0d      	ldr	r3, [pc, #52]	; (648 <main+0x114>)
- 612:	2101      	movs	r1, #1
- 614:	6818      	ldr	r0, [r3, #0]
- 616:	f7ff feda 	bl	3ce <_ZN4Gpio9gpioWriteE10setORClear.part.0>
- 61a:	4b0c      	ldr	r3, [pc, #48]	; (64c <main+0x118>)
- 61c:	2101      	movs	r1, #1
- 61e:	6818      	ldr	r0, [r3, #0]
- 620:	f7ff fed5 	bl	3ce <_ZN4Gpio9gpioWriteE10setORClear.part.0>
-    (*redLed).gpioWrite(set);
-        
-
+00000548 <_GLOBAL__sub_I_greenLed>:
     while(1)
     {
         Nvic::wfi();
- 624:	f7ff fe82 	bl	32c <_ZN4Nvic3wfiEv>
- 628:	e7fc      	b.n	624 <main+0xf0>
- 62a:	bf00      	nop
- 62c:	20000098 	.word	0x20000098
- 630:	2000009c 	.word	0x2000009c
- 634:	40030000 	.word	0x40030000
- 638:	400fe604 	.word	0x400fe604
- 63c:	400fea04 	.word	0x400fea04
- 640:	04c4b3ff 	.word	0x04c4b3ff
- 644:	200000a0 	.word	0x200000a0
- 648:	2000008c 	.word	0x2000008c
- 64c:	20000094 	.word	0x20000094
+    }
 
-00000650 <SystemInit>:
-            (*address) &= clear;
- 650:	4b49      	ldr	r3, [pc, #292]	; (778 <SystemInit+0x128>)
- 652:	681a      	ldr	r2, [r3, #0]
- 654:	f022 0201 	bic.w	r2, r2, #1
+}
+ 548:	b570      	push	{r4, r5, r6, lr}
+Gpio greenLed;
+ 54a:	4c14      	ldr	r4, [pc, #80]	; (59c <_GLOBAL__sub_I_greenLed+0x54>)
+ 54c:	4d14      	ldr	r5, [pc, #80]	; (5a0 <_GLOBAL__sub_I_greenLed+0x58>)
+Gpio::Gpio()
+ 54e:	4815      	ldr	r0, [pc, #84]	; (5a4 <_GLOBAL__sub_I_greenLed+0x5c>)
+ 550:	f04f 36ff 	mov.w	r6, #4294967295	; 0xffffffff
+ 554:	4622      	mov	r2, r4
+ 556:	4629      	mov	r1, r5
+ 558:	60c6      	str	r6, [r0, #12]
+ 55a:	f000 f971 	bl	840 <__aeabi_atexit>
+ 55e:	4812      	ldr	r0, [pc, #72]	; (5a8 <_GLOBAL__sub_I_greenLed+0x60>)
+Gpio blueLed;
+ 560:	4622      	mov	r2, r4
+ 562:	4629      	mov	r1, r5
+ 564:	60c6      	str	r6, [r0, #12]
+ 566:	f000 f96b 	bl	840 <__aeabi_atexit>
+ 56a:	4810      	ldr	r0, [pc, #64]	; (5ac <_GLOBAL__sub_I_greenLed+0x64>)
+Gpio redLed;
+ 56c:	4622      	mov	r2, r4
+ 56e:	4629      	mov	r1, r5
+ 570:	60c6      	str	r6, [r0, #12]
+ 572:	f000 f965 	bl	840 <__aeabi_atexit>
+ 576:	480e      	ldr	r0, [pc, #56]	; (5b0 <_GLOBAL__sub_I_greenLed+0x68>)
+Gpio swtich1;
+ 578:	4622      	mov	r2, r4
+ 57a:	4629      	mov	r1, r5
+ 57c:	60c6      	str	r6, [r0, #12]
+ 57e:	f000 f95f 	bl	840 <__aeabi_atexit>
+ 582:	480c      	ldr	r0, [pc, #48]	; (5b4 <_GLOBAL__sub_I_greenLed+0x6c>)
+Gpio swtich2;
+ 584:	4622      	mov	r2, r4
+ 586:	4629      	mov	r1, r5
+ 588:	60c6      	str	r6, [r0, #12]
+ 58a:	f000 f959 	bl	840 <__aeabi_atexit>
+Pwm greenPwm;
+ 58e:	4622      	mov	r2, r4
+ 590:	4909      	ldr	r1, [pc, #36]	; (5b8 <_GLOBAL__sub_I_greenLed+0x70>)
+ 592:	480a      	ldr	r0, [pc, #40]	; (5bc <_GLOBAL__sub_I_greenLed+0x74>)
+}
+ 594:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
+Pwm greenPwm;
+ 598:	f000 b952 	b.w	840 <__aeabi_atexit>
+ 59c:	20000000 	.word	0x20000000
+ 5a0:	00000545 	.word	0x00000545
+ 5a4:	20000044 	.word	0x20000044
+ 5a8:	2000002c 	.word	0x2000002c
+ 5ac:	20000060 	.word	0x20000060
+ 5b0:	20000078 	.word	0x20000078
+ 5b4:	20000090 	.word	0x20000090
+ 5b8:	0000033d 	.word	0x0000033d
+ 5bc:	2000005c 	.word	0x2000005c
+
+000005c0 <main>:
 {
- 658:	b510      	push	{r4, lr}
- 65a:	601a      	str	r2, [r3, #0]
-            (*address) |= value;
- 65c:	681a      	ldr	r2, [r3, #0]
+ 5c0:	b508      	push	{r3, lr}
+    Nvic::disableInterrupts();
+ 5c2:	f7ff fe95 	bl	2f0 <_ZN4Nvic17disableInterruptsEv>
+    swtich1.initialize((uint32_t)PF4::GPIO, input, 3);
+ 5c6:	f241 1130 	movw	r1, #4400	; 0x1130
+ 5ca:	480a      	ldr	r0, [pc, #40]	; (5f4 <main+0x34>)
+ 5cc:	f7ff ff60 	bl	490 <_ZN4Gpio10initializeEm9directionm.constprop.0>
+    swtich2.initialize((uint32_t)PF0::GPIO, input, 3);
+ 5d0:	f44f 617a 	mov.w	r1, #4000	; 0xfa0
+ 5d4:	4808      	ldr	r0, [pc, #32]	; (5f8 <main+0x38>)
+ 5d6:	f7ff ff5b 	bl	490 <_ZN4Gpio10initializeEm9directionm.constprop.0>
+    Nvic::enableInterrupts();
+ 5da:	f7ff fe98 	bl	30e <_ZN4Nvic16enableInterruptsEv>
+    if((value == 0x0) || (value == 0x1))
+ 5de:	2101      	movs	r1, #1
+ 5e0:	4806      	ldr	r0, [pc, #24]	; (5fc <main+0x3c>)
+ 5e2:	f7ff fec8 	bl	376 <_ZN4Gpio5writeE10setORClear.part.0>
+ 5e6:	2101      	movs	r1, #1
+ 5e8:	4805      	ldr	r0, [pc, #20]	; (600 <main+0x40>)
+ 5ea:	f7ff fec4 	bl	376 <_ZN4Gpio5writeE10setORClear.part.0>
+        Nvic::wfi();
+ 5ee:	f7ff fe9d 	bl	32c <_ZN4Nvic3wfiEv>
+ 5f2:	e7fc      	b.n	5ee <main+0x2e>
+ 5f4:	20000078 	.word	0x20000078
+ 5f8:	20000090 	.word	0x20000090
+ 5fc:	2000002c 	.word	0x2000002c
+ 600:	20000060 	.word	0x20000060
+
+00000604 <SystemInit>:
             (*address) &= clear;
- 65e:	4c47      	ldr	r4, [pc, #284]	; (77c <SystemInit+0x12c>)
+ 604:	4b64      	ldr	r3, [pc, #400]	; (798 <SystemInit+0x194>)
+ 606:	681a      	ldr	r2, [r3, #0]
+ 608:	f022 0201 	bic.w	r2, r2, #1
+{
+ 60c:	b570      	push	{r4, r5, r6, lr}
+ 60e:	601a      	str	r2, [r3, #0]
             (*address) |= value;
- 660:	f042 0201 	orr.w	r2, r2, #1
- 664:	601a      	str	r2, [r3, #0]
+ 610:	681a      	ldr	r2, [r3, #0]
             (*address) &= clear;
- 666:	681a      	ldr	r2, [r3, #0]
- 668:	f022 0202 	bic.w	r2, r2, #2
- 66c:	601a      	str	r2, [r3, #0]
+ 612:	4c62      	ldr	r4, [pc, #392]	; (79c <SystemInit+0x198>)
             (*address) |= value;
- 66e:	681a      	ldr	r2, [r3, #0]
- 670:	f042 0202 	orr.w	r2, r2, #2
- 674:	601a      	str	r2, [r3, #0]
+ 614:	f042 0201 	orr.w	r2, r2, #1
+ 618:	601a      	str	r2, [r3, #0]
             (*address) &= clear;
- 676:	681a      	ldr	r2, [r3, #0]
- 678:	f022 0204 	bic.w	r2, r2, #4
- 67c:	601a      	str	r2, [r3, #0]
+ 61a:	681a      	ldr	r2, [r3, #0]
+ 61c:	f022 0202 	bic.w	r2, r2, #2
+ 620:	601a      	str	r2, [r3, #0]
             (*address) |= value;
- 67e:	681a      	ldr	r2, [r3, #0]
- 680:	f042 0204 	orr.w	r2, r2, #4
- 684:	601a      	str	r2, [r3, #0]
+ 622:	681a      	ldr	r2, [r3, #0]
+ 624:	f042 0202 	orr.w	r2, r2, #2
+ 628:	601a      	str	r2, [r3, #0]
             (*address) &= clear;
- 686:	681a      	ldr	r2, [r3, #0]
- 688:	f022 0208 	bic.w	r2, r2, #8
- 68c:	601a      	str	r2, [r3, #0]
+ 62a:	681a      	ldr	r2, [r3, #0]
+ 62c:	f022 0204 	bic.w	r2, r2, #4
+ 630:	601a      	str	r2, [r3, #0]
             (*address) |= value;
- 68e:	681a      	ldr	r2, [r3, #0]
- 690:	f042 0208 	orr.w	r2, r2, #8
- 694:	601a      	str	r2, [r3, #0]
+ 632:	681a      	ldr	r2, [r3, #0]
+ 634:	f042 0204 	orr.w	r2, r2, #4
+ 638:	601a      	str	r2, [r3, #0]
             (*address) &= clear;
- 696:	681a      	ldr	r2, [r3, #0]
- 698:	f022 0210 	bic.w	r2, r2, #16
- 69c:	601a      	str	r2, [r3, #0]
+ 63a:	681a      	ldr	r2, [r3, #0]
+ 63c:	f022 0208 	bic.w	r2, r2, #8
+ 640:	601a      	str	r2, [r3, #0]
             (*address) |= value;
- 69e:	681a      	ldr	r2, [r3, #0]
- 6a0:	f042 0210 	orr.w	r2, r2, #16
- 6a4:	601a      	str	r2, [r3, #0]
+ 642:	681a      	ldr	r2, [r3, #0]
+ 644:	f042 0208 	orr.w	r2, r2, #8
+ 648:	601a      	str	r2, [r3, #0]
             (*address) &= clear;
- 6a6:	681a      	ldr	r2, [r3, #0]
- 6a8:	f022 0220 	bic.w	r2, r2, #32
- 6ac:	601a      	str	r2, [r3, #0]
+ 64a:	681a      	ldr	r2, [r3, #0]
+ 64c:	f022 0210 	bic.w	r2, r2, #16
+ 650:	601a      	str	r2, [r3, #0]
             (*address) |= value;
- 6ae:	681a      	ldr	r2, [r3, #0]
- 6b0:	f042 0220 	orr.w	r2, r2, #32
- 6b4:	601a      	str	r2, [r3, #0]
+ 652:	681a      	ldr	r2, [r3, #0]
+ 654:	f042 0210 	orr.w	r2, r2, #16
+ 658:	601a      	str	r2, [r3, #0]
             (*address) &= clear;
- 6b6:	6823      	ldr	r3, [r4, #0]
- 6b8:	f023 4300 	bic.w	r3, r3, #2147483648	; 0x80000000
- 6bc:	6023      	str	r3, [r4, #0]
+ 65a:	681a      	ldr	r2, [r3, #0]
+ 65c:	f022 0220 	bic.w	r2, r2, #32
+ 660:	601a      	str	r2, [r3, #0]
             (*address) |= value;
- 6be:	6823      	ldr	r3, [r4, #0]
- 6c0:	f043 4300 	orr.w	r3, r3, #2147483648	; 0x80000000
- 6c4:	6023      	str	r3, [r4, #0]
+ 662:	681a      	ldr	r2, [r3, #0]
+ 664:	f042 0220 	orr.w	r2, r2, #32
+ 668:	601a      	str	r2, [r3, #0]
             (*address) &= clear;
- 6c6:	6823      	ldr	r3, [r4, #0]
- 6c8:	f423 6300 	bic.w	r3, r3, #2048	; 0x800
- 6cc:	6023      	str	r3, [r4, #0]
+ 66a:	6823      	ldr	r3, [r4, #0]
+ 66c:	f023 4300 	bic.w	r3, r3, #2147483648	; 0x80000000
+ 670:	6023      	str	r3, [r4, #0]
             (*address) |= value;
- 6ce:	6823      	ldr	r3, [r4, #0]
- 6d0:	f443 6300 	orr.w	r3, r3, #2048	; 0x800
- 6d4:	6023      	str	r3, [r4, #0]
+ 672:	6823      	ldr	r3, [r4, #0]
+ 674:	f043 4300 	orr.w	r3, r3, #2147483648	; 0x80000000
+ 678:	6023      	str	r3, [r4, #0]
             (*address) &= clear;
- 6d6:	4b2a      	ldr	r3, [pc, #168]	; (780 <SystemInit+0x130>)
- 6d8:	681a      	ldr	r2, [r3, #0]
- 6da:	f422 62f8 	bic.w	r2, r2, #1984	; 0x7c0
- 6de:	601a      	str	r2, [r3, #0]
+ 67a:	6823      	ldr	r3, [r4, #0]
+ 67c:	f423 6300 	bic.w	r3, r3, #2048	; 0x800
+ 680:	6023      	str	r3, [r4, #0]
             (*address) |= value;
- 6e0:	681a      	ldr	r2, [r3, #0]
- 6e2:	f442 62a8 	orr.w	r2, r2, #1344	; 0x540
- 6e6:	601a      	str	r2, [r3, #0]
+ 682:	6823      	ldr	r3, [r4, #0]
+ 684:	f443 6300 	orr.w	r3, r3, #2048	; 0x800
+ 688:	6023      	str	r3, [r4, #0]
             (*address) &= clear;
- 6e8:	6823      	ldr	r3, [r4, #0]
- 6ea:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 6ee:	6023      	str	r3, [r4, #0]
+ 68a:	4b45      	ldr	r3, [pc, #276]	; (7a0 <SystemInit+0x19c>)
+ 68c:	681a      	ldr	r2, [r3, #0]
+ 68e:	f422 62f8 	bic.w	r2, r2, #1984	; 0x7c0
+ 692:	601a      	str	r2, [r3, #0]
             (*address) |= value;
- 6f0:	6823      	ldr	r3, [r4, #0]
- 6f2:	6023      	str	r3, [r4, #0]
+ 694:	681a      	ldr	r2, [r3, #0]
+ 696:	f442 62a8 	orr.w	r2, r2, #1344	; 0x540
+ 69a:	601a      	str	r2, [r3, #0]
             (*address) &= clear;
- 6f4:	6823      	ldr	r3, [r4, #0]
- 6f6:	f423 5300 	bic.w	r3, r3, #8192	; 0x2000
- 6fa:	6023      	str	r3, [r4, #0]
+ 69c:	6823      	ldr	r3, [r4, #0]
+ 69e:	f023 0370 	bic.w	r3, r3, #112	; 0x70
+ 6a2:	6023      	str	r3, [r4, #0]
             (*address) |= value;
- 6fc:	6823      	ldr	r3, [r4, #0]
- 6fe:	6023      	str	r3, [r4, #0]
+ 6a4:	6823      	ldr	r3, [r4, #0]
+ 6a6:	6023      	str	r3, [r4, #0]
             (*address) &= clear;
- 700:	6823      	ldr	r3, [r4, #0]
- 702:	f023 4380 	bic.w	r3, r3, #1073741824	; 0x40000000
- 706:	6023      	str	r3, [r4, #0]
+ 6a8:	6823      	ldr	r3, [r4, #0]
+ 6aa:	f423 5300 	bic.w	r3, r3, #8192	; 0x2000
+ 6ae:	6023      	str	r3, [r4, #0]
             (*address) |= value;
- 708:	6823      	ldr	r3, [r4, #0]
- 70a:	f043 4380 	orr.w	r3, r3, #1073741824	; 0x40000000
- 70e:	6023      	str	r3, [r4, #0]
-    else if((permission == RW) || (permission == WO) || (permission == RW1C))
- 710:	2216      	movs	r2, #22
- 712:	2301      	movs	r3, #1
- 714:	2100      	movs	r1, #0
- 716:	4620      	mov	r0, r4
- 718:	f7ff fe1a 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
- 71c:	2217      	movs	r2, #23
- 71e:	2306      	movs	r3, #6
- 720:	2102      	movs	r1, #2
- 722:	f7ff fe15 	bl	350 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+ 6b0:	6823      	ldr	r3, [r4, #0]
+ 6b2:	6023      	str	r3, [r4, #0]
+            (*address) &= clear;
+ 6b4:	6823      	ldr	r3, [r4, #0]
+ 6b6:	f023 4380 	bic.w	r3, r3, #1073741824	; 0x40000000
+ 6ba:	6023      	str	r3, [r4, #0]
+            (*address) |= value;
+ 6bc:	6823      	ldr	r3, [r4, #0]
+ 6be:	f043 4380 	orr.w	r3, r3, #1073741824	; 0x40000000
+ 6c2:	6023      	str	r3, [r4, #0]
+void Register::setRegisterBitFieldStatus(volatile uint32_t* address, uint32_t value, uint32_t bit, uint32_t bitWidth, bitFieldPermission permission)
+ 6c4:	2216      	movs	r2, #22
+ 6c6:	2301      	movs	r3, #1
+ 6c8:	2100      	movs	r1, #0
+ 6ca:	4620      	mov	r0, r4
+ 6cc:	f7ff fe41 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+ 6d0:	2217      	movs	r2, #23
+ 6d2:	2306      	movs	r3, #6
+ 6d4:	2102      	movs	r1, #2
+ 6d6:	f7ff fe3c 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
         return(((*address) & select) >> bit);
- 726:	4a17      	ldr	r2, [pc, #92]	; (784 <SystemInit+0x134>)
- 728:	6813      	ldr	r3, [r2, #0]
+ 6da:	4a32      	ldr	r2, [pc, #200]	; (7a4 <SystemInit+0x1a0>)
+ 6dc:	6813      	ldr	r3, [r2, #0]
 	Register::setRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RCC2_OFFSET)), set, 30, 1, RW);
 	
 	Register::setRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RCC2_OFFSET)), ((frequency - 1) & 0x01), 22, 1, RW);
 	Register::setRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RCC2_OFFSET)), ((frequency - 1) >> 1), 23, 6, RW);
 
 	while((Register::getRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RIS_OFFSET)), 6, 1, RO)) == 0)  // 5. Wait for the PLL to lock by polling PLLRIS.
- 72a:	065b      	lsls	r3, r3, #25
- 72c:	d5fc      	bpl.n	728 <SystemInit+0xd8>
+ 6de:	0659      	lsls	r1, r3, #25
+ 6e0:	d5fc      	bpl.n	6dc <SystemInit+0xd8>
             (*address) &= clear;
- 72e:	6823      	ldr	r3, [r4, #0]
- 730:	f423 6300 	bic.w	r3, r3, #2048	; 0x800
- 734:	6023      	str	r3, [r4, #0]
+ 6e2:	6823      	ldr	r3, [r4, #0]
+    greenLed.initialize((uint32_t)PF3::M1PWM7, output);
+ 6e4:	4830      	ldr	r0, [pc, #192]	; (7a8 <SystemInit+0x1a4>)
+ 6e6:	f423 6300 	bic.w	r3, r3, #2048	; 0x800
+ 6ea:	6023      	str	r3, [r4, #0]
             (*address) |= value;
- 736:	6823      	ldr	r3, [r4, #0]
- 738:	6023      	str	r3, [r4, #0]
-    return malloc(size); 
- 73a:	2010      	movs	r0, #16
- 73c:	f000 f88a 	bl	854 <malloc>
-    greenLed = new Gpio((uint32_t)PF3::GPIO, output);
- 740:	2201      	movs	r2, #1
- 742:	212b      	movs	r1, #43	; 0x2b
- 744:	4604      	mov	r4, r0
- 746:	f7ff fe57 	bl	3f8 <_ZN4GpioC1Em9direction>
- 74a:	4b0f      	ldr	r3, [pc, #60]	; (788 <SystemInit+0x138>)
- 74c:	2010      	movs	r0, #16
- 74e:	601c      	str	r4, [r3, #0]
- 750:	f000 f880 	bl	854 <malloc>
-    blueLed = new Gpio((uint32_t)PF2::GPIO, output);
- 754:	2201      	movs	r2, #1
- 756:	212a      	movs	r1, #42	; 0x2a
- 758:	4604      	mov	r4, r0
- 75a:	f7ff fe4d 	bl	3f8 <_ZN4GpioC1Em9direction>
- 75e:	4b0b      	ldr	r3, [pc, #44]	; (78c <SystemInit+0x13c>)
- 760:	2010      	movs	r0, #16
- 762:	601c      	str	r4, [r3, #0]
- 764:	f000 f876 	bl	854 <malloc>
-    redLed = new Gpio((uint32_t)PF1::GPIO, output);
- 768:	2201      	movs	r2, #1
- 76a:	2129      	movs	r1, #41	; 0x29
- 76c:	4604      	mov	r4, r0
- 76e:	f7ff fe43 	bl	3f8 <_ZN4GpioC1Em9direction>
- 772:	4b07      	ldr	r3, [pc, #28]	; (790 <SystemInit+0x140>)
- 774:	601c      	str	r4, [r3, #0]
-}
- 776:	bd10      	pop	{r4, pc}
- 778:	400fe06c 	.word	0x400fe06c
- 77c:	400fe070 	.word	0x400fe070
- 780:	400fe060 	.word	0x400fe060
- 784:	400fe050 	.word	0x400fe050
- 788:	20000090 	.word	0x20000090
- 78c:	2000008c 	.word	0x2000008c
- 790:	20000094 	.word	0x20000094
+ 6ec:	6823      	ldr	r3, [r4, #0]
+ 6ee:	6023      	str	r3, [r4, #0]
+ 6f0:	2201      	movs	r2, #1
+ 6f2:	f241 01d2 	movw	r1, #4306	; 0x10d2
+ 6f6:	f7ff fe53 	bl	3a0 <_ZN4Gpio10initializeEm9direction>
+    blueLed.initialize((uint32_t)PF2::GPIO, output);
+ 6fa:	2201      	movs	r2, #1
+ 6fc:	f241 0168 	movw	r1, #4200	; 0x1068
+ 700:	482a      	ldr	r0, [pc, #168]	; (7ac <SystemInit+0x1a8>)
 
-00000794 <_16_32_Bit_Timer_0A_Handler>:
-    if((*greenLed).gpioRead() == set)
- 794:	4b0c      	ldr	r3, [pc, #48]	; (7c8 <_16_32_Bit_Timer_0A_Handler+0x34>)
+void Pwm::initialize(pwmGenerator myPwmGen, pwmModule module, uint32_t period, countDirectionPwm countDir, bool enablePwmDiv, uint32_t divisor)
 {
- 796:	b510      	push	{r4, lr}
-    if((*greenLed).gpioRead() == set)
- 798:	681c      	ldr	r4, [r3, #0]
- 79a:	4620      	mov	r0, r4
- 79c:	f7ff fdce 	bl	33c <_ZN4Gpio8gpioReadEv>
- 7a0:	2801      	cmp	r0, #1
- 7a2:	d109      	bne.n	7b8 <_16_32_Bit_Timer_0A_Handler+0x24>
- 7a4:	2100      	movs	r1, #0
- 7a6:	4620      	mov	r0, r4
- 7a8:	f7ff fe11 	bl	3ce <_ZN4Gpio9gpioWriteE10setORClear.part.0>
-        (*testTimer).interruptClear();
- 7ac:	4b07      	ldr	r3, [pc, #28]	; (7cc <_16_32_Bit_Timer_0A_Handler+0x38>)
-}
- 7ae:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
-        (*testTimer).interruptClear();
- 7b2:	6818      	ldr	r0, [r3, #0]
- 7b4:	f7ff be00 	b.w	3b8 <_ZN19GeneralPurposeTimer14interruptClearEv>
-    else if((*greenLed).gpioRead() == clear)
- 7b8:	4620      	mov	r0, r4
- 7ba:	f7ff fdbf 	bl	33c <_ZN4Gpio8gpioReadEv>
- 7be:	b908      	cbnz	r0, 7c4 <_16_32_Bit_Timer_0A_Handler+0x30>
- 7c0:	2101      	movs	r1, #1
- 7c2:	e7f0      	b.n	7a6 <_16_32_Bit_Timer_0A_Handler+0x12>
-}
- 7c4:	bd10      	pop	{r4, pc}
- 7c6:	bf00      	nop
- 7c8:	20000090 	.word	0x20000090
- 7cc:	200000a0 	.word	0x200000a0
+    countDir = countDir;
+    
+    baseAddress = pwm0BaseAddress + (module * 0x1000);
+ 702:	4c2b      	ldr	r4, [pc, #172]	; (7b0 <SystemInit+0x1ac>)
+ 704:	f7ff fe4c 	bl	3a0 <_ZN4Gpio10initializeEm9direction>
+    redLed.initialize((uint32_t)PF1::GPIO, output);
+ 708:	2201      	movs	r2, #1
+ 70a:	f241 0104 	movw	r1, #4100	; 0x1004
+ 70e:	4829      	ldr	r0, [pc, #164]	; (7b4 <SystemInit+0x1b0>)
+ 710:	f7ff fe46 	bl	3a0 <_ZN4Gpio10initializeEm9direction>
+ 714:	4b28      	ldr	r3, [pc, #160]	; (7b8 <SystemInit+0x1b4>)
+ 716:	6023      	str	r3, [r4, #0]
+void Register::setRegisterBitFieldStatus(volatile uint32_t* address, uint32_t value, uint32_t bit, uint32_t bitWidth, bitFieldPermission permission)
+ 718:	2301      	movs	r3, #1
+ 71a:	461a      	mov	r2, r3
+ 71c:	4619      	mov	r1, r3
+ 71e:	4827      	ldr	r0, [pc, #156]	; (7bc <SystemInit+0x1b8>)
+ 720:	f7ff fe17 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+        return(((*address) & select) >> bit);
+ 724:	4a26      	ldr	r2, [pc, #152]	; (7c0 <SystemInit+0x1bc>)
+ 726:	6813      	ldr	r3, [r2, #0]
+    
+    //0. Enable the clock for PWM
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RCGCPWM_OFFSET)), set, module, 1, RW);
+    while(Register::getRegisterBitFieldStatus((volatile uint32_t*)(systemControlBase + PRPWM_OFFSET), module, 1, RO) == 0)
+ 728:	079b      	lsls	r3, r3, #30
+ 72a:	d5fc      	bpl.n	726 <SystemInit+0x122>
+    }
 
-000007d0 <GPIO_Port_F_Handler>:
-    if((*swtich1).gpioRead() == 1)
- 7d0:	4b1c      	ldr	r3, [pc, #112]	; (844 <GPIO_Port_F_Handler+0x74>)
+    //2. Configure the PWM generator for countdown mode with immediate updates to the parameters.
+
+    //2a. Write the PWMnCTL register with a value of 0x0000.0000 to clear it.
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CTL_OFFSET + (0x40 * myPwmGen))), 0x00000, 0, 18+1, RW);
+ 72c:	6823      	ldr	r3, [r4, #0]
+            (*address) &= clear;
+ 72e:	4d25      	ldr	r5, [pc, #148]	; (7c4 <SystemInit+0x1c0>)
+ 730:	f8d3 2100 	ldr.w	r2, [r3, #256]	; 0x100
+ 734:	4824      	ldr	r0, [pc, #144]	; (7c8 <SystemInit+0x1c4>)
+ 736:	402a      	ands	r2, r5
+ 738:	f8c3 2100 	str.w	r2, [r3, #256]	; 0x100
+            (*address) |= value;
+ 73c:	f8d3 2100 	ldr.w	r2, [r3, #256]	; 0x100
+ 740:	f8c3 2100 	str.w	r2, [r3, #256]	; 0x100
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0GENA_OFFSET + (0x40 * myPwmGen) + (uint32_t)output)), genOptions, 0, 11+1, RW);
+ 744:	6822      	ldr	r2, [r4, #0]
+            (*address) &= clear;
+ 746:	f8d2 3120 	ldr.w	r3, [r2, #288]	; 0x120
+ 74a:	f423 637f 	bic.w	r3, r3, #4080	; 0xff0
+ 74e:	f023 030f 	bic.w	r3, r3, #15
+ 752:	f8c2 3120 	str.w	r3, [r2, #288]	; 0x120
+            (*address) |= value;
+ 756:	f8d2 3120 	ldr.w	r3, [r2, #288]	; 0x120
+ 75a:	f043 038c 	orr.w	r3, r3, #140	; 0x8c
+ 75e:	f8c2 3120 	str.w	r3, [r2, #288]	; 0x120
+void Register::setRegisterBitFieldStatus(volatile uint32_t* address, uint32_t value, uint32_t bit, uint32_t bitWidth, bitFieldPermission permission)
+ 762:	2301      	movs	r3, #1
+ 764:	461a      	mov	r2, r3
+ 766:	4619      	mov	r1, r3
+ 768:	f7ff fdf3 	bl	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CTL_OFFSET + (0x40 * myPwmGen))), 0x00001, 0, 18+1, RW);
+ 76c:	6823      	ldr	r3, [r4, #0]
+            (*address) &= clear;
+ 76e:	f8d3 2100 	ldr.w	r2, [r3, #256]	; 0x100
+ 772:	402a      	ands	r2, r5
+ 774:	f8c3 2100 	str.w	r2, [r3, #256]	; 0x100
+            (*address) |= value;
+ 778:	f8d3 2100 	ldr.w	r2, [r3, #256]	; 0x100
+ 77c:	f042 0201 	orr.w	r2, r2, #1
+ 780:	f8c3 2100 	str.w	r2, [r3, #256]	; 0x100
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWMENABLE_OFFSET + (0x40 * myPwmGen))), 0x1, 0 + ((myPwmGen*2)+(((uint32_t)output)/4)), 1, RW); //(uint32_t)output >> 2
+ 784:	6820      	ldr	r0, [r4, #0]
+ 786:	2301      	movs	r3, #1
+ 788:	2206      	movs	r2, #6
+ 78a:	4619      	mov	r1, r3
+ 78c:	30c8      	adds	r0, #200	; 0xc8
+}
+ 78e:	e8bd 4070 	ldmia.w	sp!, {r4, r5, r6, lr}
+ 792:	f7ff bdde 	b.w	352 <_ZN8Register25setRegisterBitFieldStatusEPVmmmm18bitFieldPermission.part.0>
+ 796:	bf00      	nop
+ 798:	400fe06c 	.word	0x400fe06c
+ 79c:	400fe070 	.word	0x400fe070
+ 7a0:	400fe060 	.word	0x400fe060
+ 7a4:	400fe050 	.word	0x400fe050
+ 7a8:	20000044 	.word	0x20000044
+ 7ac:	2000002c 	.word	0x2000002c
+ 7b0:	2000005c 	.word	0x2000005c
+ 7b4:	20000060 	.word	0x20000060
+ 7b8:	40029000 	.word	0x40029000
+ 7bc:	400fe640 	.word	0x400fe640
+ 7c0:	400fea40 	.word	0x400fea40
+ 7c4:	fff80000 	.word	0xfff80000
+ 7c8:	400fe540 	.word	0x400fe540
+
+000007cc <GPIO_Port_F_Handler>:
 {
- 7d2:	b510      	push	{r4, lr}
-    if((*swtich1).gpioRead() == 1)
- 7d4:	681c      	ldr	r4, [r3, #0]
- 7d6:	4620      	mov	r0, r4
- 7d8:	f7ff fdb0 	bl	33c <_ZN4Gpio8gpioReadEv>
- 7dc:	2801      	cmp	r0, #1
- 7de:	d107      	bne.n	7f0 <GPIO_Port_F_Handler+0x20>
- 7e0:	4b19      	ldr	r3, [pc, #100]	; (848 <GPIO_Port_F_Handler+0x78>)
- 7e2:	2100      	movs	r1, #0
- 7e4:	6818      	ldr	r0, [r3, #0]
- 7e6:	f7ff fdf2 	bl	3ce <_ZN4Gpio9gpioWriteE10setORClear.part.0>
-        (*swtich1).interruptClear();
- 7ea:	4620      	mov	r0, r4
- 7ec:	f7ff fdf9 	bl	3e2 <_ZN4Gpio14interruptClearEv>
-    if((*swtich1).gpioRead() == 0)
- 7f0:	4620      	mov	r0, r4
- 7f2:	f7ff fda3 	bl	33c <_ZN4Gpio8gpioReadEv>
- 7f6:	b938      	cbnz	r0, 808 <GPIO_Port_F_Handler+0x38>
- 7f8:	4b13      	ldr	r3, [pc, #76]	; (848 <GPIO_Port_F_Handler+0x78>)
- 7fa:	2101      	movs	r1, #1
- 7fc:	6818      	ldr	r0, [r3, #0]
- 7fe:	f7ff fde6 	bl	3ce <_ZN4Gpio9gpioWriteE10setORClear.part.0>
-        (*swtich1).interruptClear();
- 802:	4620      	mov	r0, r4
- 804:	f7ff fded 	bl	3e2 <_ZN4Gpio14interruptClearEv>
-    if((*swtich2).gpioRead() == 1)
- 808:	4b10      	ldr	r3, [pc, #64]	; (84c <GPIO_Port_F_Handler+0x7c>)
- 80a:	681c      	ldr	r4, [r3, #0]
- 80c:	4620      	mov	r0, r4
- 80e:	f7ff fd95 	bl	33c <_ZN4Gpio8gpioReadEv>
- 812:	2801      	cmp	r0, #1
- 814:	d107      	bne.n	826 <GPIO_Port_F_Handler+0x56>
- 816:	4b0e      	ldr	r3, [pc, #56]	; (850 <GPIO_Port_F_Handler+0x80>)
- 818:	2100      	movs	r1, #0
- 81a:	6818      	ldr	r0, [r3, #0]
- 81c:	f7ff fdd7 	bl	3ce <_ZN4Gpio9gpioWriteE10setORClear.part.0>
-        (*swtich2).interruptClear();
- 820:	4620      	mov	r0, r4
- 822:	f7ff fdde 	bl	3e2 <_ZN4Gpio14interruptClearEv>
-    if((*swtich2).gpioRead() == 0)
- 826:	4620      	mov	r0, r4
- 828:	f7ff fd88 	bl	33c <_ZN4Gpio8gpioReadEv>
- 82c:	b948      	cbnz	r0, 842 <GPIO_Port_F_Handler+0x72>
- 82e:	4b08      	ldr	r3, [pc, #32]	; (850 <GPIO_Port_F_Handler+0x80>)
- 830:	2101      	movs	r1, #1
- 832:	6818      	ldr	r0, [r3, #0]
- 834:	f7ff fdcb 	bl	3ce <_ZN4Gpio9gpioWriteE10setORClear.part.0>
-        (*swtich2).interruptClear();
- 838:	4620      	mov	r0, r4
+ 7cc:	b508      	push	{r3, lr}
+    if(swtich1.read() == 1)
+ 7ce:	4818      	ldr	r0, [pc, #96]	; (830 <GPIO_Port_F_Handler+0x64>)
+ 7d0:	f7ff fdb5 	bl	33e <_ZN4Gpio4readEv>
+ 7d4:	2801      	cmp	r0, #1
+ 7d6:	d106      	bne.n	7e6 <GPIO_Port_F_Handler+0x1a>
+ 7d8:	4816      	ldr	r0, [pc, #88]	; (834 <GPIO_Port_F_Handler+0x68>)
+ 7da:	2100      	movs	r1, #0
+ 7dc:	f7ff fdcb 	bl	376 <_ZN4Gpio5writeE10setORClear.part.0>
+        swtich1.interruptClear();
+ 7e0:	4813      	ldr	r0, [pc, #76]	; (830 <GPIO_Port_F_Handler+0x64>)
+ 7e2:	f7ff fdd2 	bl	38a <_ZN4Gpio14interruptClearEv>
+    if(swtich1.read() == 0)
+ 7e6:	4812      	ldr	r0, [pc, #72]	; (830 <GPIO_Port_F_Handler+0x64>)
+ 7e8:	f7ff fda9 	bl	33e <_ZN4Gpio4readEv>
+ 7ec:	b930      	cbnz	r0, 7fc <GPIO_Port_F_Handler+0x30>
+ 7ee:	4811      	ldr	r0, [pc, #68]	; (834 <GPIO_Port_F_Handler+0x68>)
+ 7f0:	2101      	movs	r1, #1
+ 7f2:	f7ff fdc0 	bl	376 <_ZN4Gpio5writeE10setORClear.part.0>
+        swtich1.interruptClear();
+ 7f6:	480e      	ldr	r0, [pc, #56]	; (830 <GPIO_Port_F_Handler+0x64>)
+ 7f8:	f7ff fdc7 	bl	38a <_ZN4Gpio14interruptClearEv>
+    if(swtich2.read() == 1)
+ 7fc:	480e      	ldr	r0, [pc, #56]	; (838 <GPIO_Port_F_Handler+0x6c>)
+ 7fe:	f7ff fd9e 	bl	33e <_ZN4Gpio4readEv>
+ 802:	2801      	cmp	r0, #1
+ 804:	d106      	bne.n	814 <GPIO_Port_F_Handler+0x48>
+ 806:	480d      	ldr	r0, [pc, #52]	; (83c <GPIO_Port_F_Handler+0x70>)
+ 808:	2100      	movs	r1, #0
+ 80a:	f7ff fdb4 	bl	376 <_ZN4Gpio5writeE10setORClear.part.0>
+        swtich2.interruptClear();
+ 80e:	480a      	ldr	r0, [pc, #40]	; (838 <GPIO_Port_F_Handler+0x6c>)
+ 810:	f7ff fdbb 	bl	38a <_ZN4Gpio14interruptClearEv>
+    if(swtich2.read() == 0)
+ 814:	4808      	ldr	r0, [pc, #32]	; (838 <GPIO_Port_F_Handler+0x6c>)
+ 816:	f7ff fd92 	bl	33e <_ZN4Gpio4readEv>
+ 81a:	b940      	cbnz	r0, 82e <GPIO_Port_F_Handler+0x62>
+ 81c:	4807      	ldr	r0, [pc, #28]	; (83c <GPIO_Port_F_Handler+0x70>)
+ 81e:	2101      	movs	r1, #1
+ 820:	f7ff fda9 	bl	376 <_ZN4Gpio5writeE10setORClear.part.0>
+        swtich2.interruptClear();
+ 824:	4804      	ldr	r0, [pc, #16]	; (838 <GPIO_Port_F_Handler+0x6c>)
 }
- 83a:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
-        (*swtich2).interruptClear();
- 83e:	f7ff bdd0 	b.w	3e2 <_ZN4Gpio14interruptClearEv>
+ 826:	e8bd 4008 	ldmia.w	sp!, {r3, lr}
+        swtich2.interruptClear();
+ 82a:	f7ff bdae 	b.w	38a <_ZN4Gpio14interruptClearEv>
 }
- 842:	bd10      	pop	{r4, pc}
- 844:	20000098 	.word	0x20000098
- 848:	20000094 	.word	0x20000094
- 84c:	2000009c 	.word	0x2000009c
- 850:	2000008c 	.word	0x2000008c
+ 82e:	bd08      	pop	{r3, pc}
+ 830:	20000078 	.word	0x20000078
+ 834:	20000060 	.word	0x20000060
+ 838:	20000090 	.word	0x20000090
+ 83c:	2000002c 	.word	0x2000002c
 
-00000854 <malloc>:
- 854:	4b02      	ldr	r3, [pc, #8]	; (860 <malloc+0xc>)
+00000840 <__aeabi_atexit>:
+ 840:	460b      	mov	r3, r1
+ 842:	4601      	mov	r1, r0
+ 844:	4618      	mov	r0, r3
+ 846:	f000 b801 	b.w	84c <__cxa_atexit>
+	...
+
+0000084c <__cxa_atexit>:
+ 84c:	b510      	push	{r4, lr}
+ 84e:	4c05      	ldr	r4, [pc, #20]	; (864 <__cxa_atexit+0x18>)
+ 850:	4613      	mov	r3, r2
+ 852:	b12c      	cbz	r4, 860 <__cxa_atexit+0x14>
+ 854:	460a      	mov	r2, r1
  856:	4601      	mov	r1, r0
- 858:	6818      	ldr	r0, [r3, #0]
- 85a:	f000 b82f 	b.w	8bc <_malloc_r>
- 85e:	bf00      	nop
- 860:	20000000 	.word	0x20000000
+ 858:	2002      	movs	r0, #2
+ 85a:	f3af 8000 	nop.w
+ 85e:	bd10      	pop	{r4, pc}
+ 860:	4620      	mov	r0, r4
+ 862:	e7fc      	b.n	85e <__cxa_atexit+0x12>
+ 864:	00000000 	.word	0x00000000
 
-00000864 <_sbrk>:
- 864:	4b0d      	ldr	r3, [pc, #52]	; (89c <_sbrk+0x38>)
- 866:	6819      	ldr	r1, [r3, #0]
- 868:	b510      	push	{r4, lr}
- 86a:	4602      	mov	r2, r0
- 86c:	b909      	cbnz	r1, 872 <_sbrk+0xe>
- 86e:	490c      	ldr	r1, [pc, #48]	; (8a0 <_sbrk+0x3c>)
- 870:	6019      	str	r1, [r3, #0]
- 872:	6818      	ldr	r0, [r3, #0]
- 874:	4669      	mov	r1, sp
- 876:	4402      	add	r2, r0
- 878:	428a      	cmp	r2, r1
- 87a:	d806      	bhi.n	88a <_sbrk+0x26>
- 87c:	4909      	ldr	r1, [pc, #36]	; (8a4 <_sbrk+0x40>)
- 87e:	4c0a      	ldr	r4, [pc, #40]	; (8a8 <_sbrk+0x44>)
- 880:	6809      	ldr	r1, [r1, #0]
- 882:	42a1      	cmp	r1, r4
- 884:	d008      	beq.n	898 <_sbrk+0x34>
- 886:	428a      	cmp	r2, r1
- 888:	d906      	bls.n	898 <_sbrk+0x34>
- 88a:	f000 f80f 	bl	8ac <__errno>
- 88e:	230c      	movs	r3, #12
- 890:	6003      	str	r3, [r0, #0]
- 892:	f04f 30ff 	mov.w	r0, #4294967295	; 0xffffffff
- 896:	bd10      	pop	{r4, pc}
- 898:	601a      	str	r2, [r3, #0]
- 89a:	e7fc      	b.n	896 <_sbrk+0x32>
- 89c:	200000a4 	.word	0x200000a4
- 8a0:	200000c0 	.word	0x200000c0
- 8a4:	20000064 	.word	0x20000064
- 8a8:	cafedead 	.word	0xcafedead
+00000868 <_init>:
+ 868:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 86a:	bf00      	nop
+ 86c:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 86e:	bc08      	pop	{r3}
+ 870:	469e      	mov	lr, r3
+ 872:	4770      	bx	lr
 
-000008ac <__errno>:
- 8ac:	4b01      	ldr	r3, [pc, #4]	; (8b4 <__errno+0x8>)
- 8ae:	6818      	ldr	r0, [r3, #0]
- 8b0:	4770      	bx	lr
- 8b2:	bf00      	nop
- 8b4:	20000000 	.word	0x20000000
+00000874 <_fini>:
+ 874:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 876:	bf00      	nop
+ 878:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 87a:	bc08      	pop	{r3}
+ 87c:	469e      	mov	lr, r3
+ 87e:	4770      	bx	lr
 
-000008b8 <__retarget_lock_acquire_recursive>:
- 8b8:	4770      	bx	lr
+00000880 <_ZN4Nvic10ENn_OFFSETE>:
+ 880:	0100 0000 0104 0000 0108 0000 010c 0000     ................
+ 890:	0110 0000                                   ....
 
-000008ba <__retarget_lock_release_recursive>:
- 8ba:	4770      	bx	lr
+00000894 <_ZN4Nvic11PRIn_OFFSETE>:
+ 894:	0400 0000 0404 0000 0408 0000 040c 0000     ................
+ 8a4:	040c 0000 0414 0000 0418 0000 041c 0000     ................
+ 8b4:	0420 0000 0424 0000 0428 0000 042c 0000      ...$...(...,...
+ 8c4:	0430 0000 0434 0000 0438 0000 043c 0000     0...4...8...<...
+ 8d4:	0440 0000 0444 0000 0448 0000 044c 0000     @...D...H...L...
+ 8e4:	0450 0000 0454 0000 0458 0000 045c 0000     P...T...X...\...
+ 8f4:	0460 0000 0464 0000 0468 0000 046c 0000     `...d...h...l...
+ 904:	0470 0000 0474 0000 0478 0000 047c 0000     p...t...x...|...
+ 914:	0480 0000 0484 0000 0488 0000               ............
 
-000008bc <_malloc_r>:
- 8bc:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 8be:	1ccd      	adds	r5, r1, #3
- 8c0:	f025 0503 	bic.w	r5, r5, #3
- 8c4:	3508      	adds	r5, #8
- 8c6:	2d0c      	cmp	r5, #12
- 8c8:	bf38      	it	cc
- 8ca:	250c      	movcc	r5, #12
- 8cc:	2d00      	cmp	r5, #0
- 8ce:	4606      	mov	r6, r0
- 8d0:	db01      	blt.n	8d6 <_malloc_r+0x1a>
- 8d2:	42a9      	cmp	r1, r5
- 8d4:	d903      	bls.n	8de <_malloc_r+0x22>
- 8d6:	230c      	movs	r3, #12
- 8d8:	6033      	str	r3, [r6, #0]
- 8da:	2000      	movs	r0, #0
- 8dc:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
- 8de:	f000 f857 	bl	990 <__malloc_lock>
- 8e2:	4921      	ldr	r1, [pc, #132]	; (968 <_malloc_r+0xac>)
- 8e4:	680a      	ldr	r2, [r1, #0]
- 8e6:	4614      	mov	r4, r2
- 8e8:	b99c      	cbnz	r4, 912 <_malloc_r+0x56>
- 8ea:	4f20      	ldr	r7, [pc, #128]	; (96c <_malloc_r+0xb0>)
- 8ec:	683b      	ldr	r3, [r7, #0]
- 8ee:	b923      	cbnz	r3, 8fa <_malloc_r+0x3e>
- 8f0:	4621      	mov	r1, r4
- 8f2:	4630      	mov	r0, r6
- 8f4:	f000 f83c 	bl	970 <_sbrk_r>
- 8f8:	6038      	str	r0, [r7, #0]
- 8fa:	4629      	mov	r1, r5
- 8fc:	4630      	mov	r0, r6
- 8fe:	f000 f837 	bl	970 <_sbrk_r>
- 902:	1c43      	adds	r3, r0, #1
- 904:	d123      	bne.n	94e <_malloc_r+0x92>
- 906:	230c      	movs	r3, #12
- 908:	6033      	str	r3, [r6, #0]
- 90a:	4630      	mov	r0, r6
- 90c:	f000 f846 	bl	99c <__malloc_unlock>
- 910:	e7e3      	b.n	8da <_malloc_r+0x1e>
- 912:	6823      	ldr	r3, [r4, #0]
- 914:	1b5b      	subs	r3, r3, r5
- 916:	d417      	bmi.n	948 <_malloc_r+0x8c>
- 918:	2b0b      	cmp	r3, #11
- 91a:	d903      	bls.n	924 <_malloc_r+0x68>
- 91c:	6023      	str	r3, [r4, #0]
- 91e:	441c      	add	r4, r3
- 920:	6025      	str	r5, [r4, #0]
- 922:	e004      	b.n	92e <_malloc_r+0x72>
- 924:	6863      	ldr	r3, [r4, #4]
- 926:	42a2      	cmp	r2, r4
- 928:	bf0c      	ite	eq
- 92a:	600b      	streq	r3, [r1, #0]
- 92c:	6053      	strne	r3, [r2, #4]
- 92e:	4630      	mov	r0, r6
- 930:	f000 f834 	bl	99c <__malloc_unlock>
- 934:	f104 000b 	add.w	r0, r4, #11
- 938:	1d23      	adds	r3, r4, #4
- 93a:	f020 0007 	bic.w	r0, r0, #7
- 93e:	1ac2      	subs	r2, r0, r3
- 940:	d0cc      	beq.n	8dc <_malloc_r+0x20>
- 942:	1a1b      	subs	r3, r3, r0
- 944:	50a3      	str	r3, [r4, r2]
- 946:	e7c9      	b.n	8dc <_malloc_r+0x20>
- 948:	4622      	mov	r2, r4
- 94a:	6864      	ldr	r4, [r4, #4]
- 94c:	e7cc      	b.n	8e8 <_malloc_r+0x2c>
- 94e:	1cc4      	adds	r4, r0, #3
- 950:	f024 0403 	bic.w	r4, r4, #3
- 954:	42a0      	cmp	r0, r4
- 956:	d0e3      	beq.n	920 <_malloc_r+0x64>
- 958:	1a21      	subs	r1, r4, r0
- 95a:	4630      	mov	r0, r6
- 95c:	f000 f808 	bl	970 <_sbrk_r>
- 960:	3001      	adds	r0, #1
- 962:	d1dd      	bne.n	920 <_malloc_r+0x64>
- 964:	e7cf      	b.n	906 <_malloc_r+0x4a>
- 966:	bf00      	nop
- 968:	200000a8 	.word	0x200000a8
- 96c:	200000ac 	.word	0x200000ac
-
-00000970 <_sbrk_r>:
- 970:	b538      	push	{r3, r4, r5, lr}
- 972:	4c06      	ldr	r4, [pc, #24]	; (98c <_sbrk_r+0x1c>)
- 974:	2300      	movs	r3, #0
- 976:	4605      	mov	r5, r0
- 978:	4608      	mov	r0, r1
- 97a:	6023      	str	r3, [r4, #0]
- 97c:	f7ff ff72 	bl	864 <_sbrk>
- 980:	1c43      	adds	r3, r0, #1
- 982:	d102      	bne.n	98a <_sbrk_r+0x1a>
- 984:	6823      	ldr	r3, [r4, #0]
- 986:	b103      	cbz	r3, 98a <_sbrk_r+0x1a>
- 988:	602b      	str	r3, [r5, #0]
- 98a:	bd38      	pop	{r3, r4, r5, pc}
- 98c:	200000bc 	.word	0x200000bc
-
-00000990 <__malloc_lock>:
- 990:	4801      	ldr	r0, [pc, #4]	; (998 <__malloc_lock+0x8>)
- 992:	f7ff bf91 	b.w	8b8 <__retarget_lock_acquire_recursive>
- 996:	bf00      	nop
- 998:	200000b4 	.word	0x200000b4
-
-0000099c <__malloc_unlock>:
- 99c:	4801      	ldr	r0, [pc, #4]	; (9a4 <__malloc_unlock+0x8>)
- 99e:	f7ff bf8c 	b.w	8ba <__retarget_lock_release_recursive>
- 9a2:	bf00      	nop
- 9a4:	200000b4 	.word	0x200000b4
-
-000009a8 <_init>:
- 9a8:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 9aa:	bf00      	nop
- 9ac:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 9ae:	bc08      	pop	{r3}
- 9b0:	469e      	mov	lr, r3
- 9b2:	4770      	bx	lr
-
-000009b4 <_fini>:
- 9b4:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 9b6:	bf00      	nop
- 9b8:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 9ba:	bc08      	pop	{r3}
- 9bc:	469e      	mov	lr, r3
- 9be:	4770      	bx	lr
-
-000009c0 <_ZN4Nvic10ENn_OFFSETE>:
- 9c0:	0100 0000 0104 0000 0108 0000 010c 0000     ................
- 9d0:	0110 0000                                   ....
-
-000009d4 <_ZN4Nvic11PRIn_OFFSETE>:
- 9d4:	0400 0000 0404 0000 0408 0000 040c 0000     ................
- 9e4:	040c 0000 0414 0000 0418 0000 041c 0000     ................
- 9f4:	0420 0000 0424 0000 0428 0000 042c 0000      ...$...(...,...
- a04:	0430 0000 0434 0000 0438 0000 043c 0000     0...4...8...<...
- a14:	0440 0000 0444 0000 0448 0000 044c 0000     @...D...H...L...
- a24:	0450 0000 0454 0000 0458 0000 045c 0000     P...T...X...\...
- a34:	0460 0000 0464 0000 0468 0000 046c 0000     `...d...h...l...
- a44:	0470 0000 0474 0000 0478 0000 047c 0000     p...t...x...|...
- a54:	0480 0000 0484 0000 0488 0000               ............
-
-00000a60 <__sf_fake_stderr>:
-	...
-
-00000a80 <__sf_fake_stdin>:
-	...
-
-00000aa0 <__sf_fake_stdout>:
-	...
-
-00000ac0 <__EH_FRAME_BEGIN__>:
- ac0:	0000 0000                                   ....
+00000920 <__EH_FRAME_BEGIN__>:
+ 920:	0000 0000                                   ....

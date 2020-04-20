@@ -30,14 +30,14 @@ main.bin: main.elf
 	arm-none-eabi-size main.elf
 
 
-main.elf: startup_ARMCM4.o main.o register/register.o $(CORE_PERIPHERALS) systemControl/systemControl.o gpio/gpio.o timer/generalPurposeTimer.o
+main.elf: startup_ARMCM4.o main.o register/register.o $(CORE_PERIPHERALS) systemControl/systemControl.o gpio/gpio.o timer/generalPurposeTimer.o pwm/pwm.o
 	$(CXX) $^ $(ARCH_FLAGS) $(STARTUP_DEFS) -g -std=c++11 -Wall -W -Werror -pedantic -Os -flto -ffunction-sections -fdata-sections -fno-exceptions $(LFLAGS) -o $@
 	# $(CXX) $^ $(ARCH_FLAGS) $(STARTUP_DEFS) -g -std=c++11 -Wall -W -Werror -pedantic  $(LFLAGS) -o $@
 
 startup_ARMCM4.o: startup_ARMCM4.S
 	$(CXX) $^ $(CXXFLAGS)
 
-main.o: main.cpp register/register.h
+main.o: main.cpp main.h register/register.h
 	$(CXX) $^ $(CXXFLAGS)
 
 register.o: register.cpp register/register.h
@@ -65,6 +65,9 @@ gpio.o: gpio/gpio.cpp gpio/gpio.h register/register.h
 	$(CXX) $^ $(CXXFLAGS) -o $@
 
 generalPurposeTimer.o: timer/generalPurposeTimer.cpp timer/generalPurposeTimer.h register/register.h
+	$(CXX) $^ $(CXXFLAGS) -o $@
+
+pwm.o: pwm/pwm.cpp pwm/pwm.h register/register.h
 	$(CXX) $^ $(CXXFLAGS) -o $@
 
 clean:

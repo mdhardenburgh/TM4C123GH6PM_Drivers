@@ -132,20 +132,22 @@ class GeneralPurposeTimer
 {
     public:
         GeneralPurposeTimer();
-        GeneralPurposeTimer(timerMode mode, timerBlock block, uint32_t clockCycles, countDirection dir, timerUse use);
-        GeneralPurposeTimer(timerMode mode, timerBlock block, uint32_t clockCycles, countDirection dir, timerUse use, uint32_t interuptPriority);
         ~GeneralPurposeTimer();
 
-        void pollStatus(void(*action)(void));
+        void initializeForPolling(timerMode mode, timerBlock block, uint32_t clockCycles, countDirection dir, timerUse use, void (*action)(void));
+        void initializeForInterupt(timerMode mode, timerBlock block, uint32_t clockCycles, countDirection dir, timerUse use, uint32_t interuptPriority);
+
+        void pollStatus(void);
         void interruptClear(void);
         void enableTimer(void);
 
     private:
 
-        timerUse use;
-        timerMode mode;
-        uint32_t interruptBit = 0;
+        void initialize(timerMode mode, timerBlock block, uint32_t clockCycles, countDirection dir, timerUse use);
 
+        void (*action)(void);
+        timerUse use;
+        uint32_t rawInterruptStatusBit;
         uint32_t baseAddress;
 
         static const uint32_t _16_32_bit_Timer_0_base = 0x40030000;
@@ -222,22 +224,6 @@ class GeneralPurposeTimer
         static const uint32_t GPTMTnV_OFFSET[2];
         static const uint32_t GPTMTnPS_OFFSET[2];
         static const uint32_t GPTMTnPV_OFFSET[2];
-
-        // volatile uint32_t* RCGCnTIMER;
-        // volatile uint32_t* PRnTIMER;
-        // volatile uint32_t* GPTMCTL;
-        // volatile uint32_t* GPTMCFG;
-        // volatile uint32_t* GPTMTnMR;
-        // volatile uint32_t* GPTMTAILR;
-        // volatile uint32_t* GPTMTBILR;
-        // volatile uint32_t* GPTMIMR;
-        // volatile uint32_t* GPTMTAMATCHR;
-        // volatile uint32_t* GPTMTBMATCHR;
-        // volatile uint32_t* GPTMTAPR;
-        // volatile uint32_t* GPTMTBPR;
-        // volatile uint32_t* GPTMRIS;
-        // volatile uint32_t* GPTMICR;
-
 
 };
 

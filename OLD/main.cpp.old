@@ -1,0 +1,132 @@
+/*
+
+RTOS
+Copyright (C) 2019  Matthew Hardenburgh
+mdhardenburgh@gmail.com
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/.
+
+*/
+
+/**
+ * @file main.c
+ * @project RTOS
+ * @engineer Matthew Hardenburgh
+ * @license GPL v3
+ * @date 11/04/2019
+ */
+
+#include "main.h"
+
+Gpio greenLed((uint32_t)PF3::GPIO, output);
+
+// const uint32_t greenLed = (uint32_t)PF3::GPIO;
+const uint32_t blueLed = (uint32_t)PF2::GPIO;
+const uint32_t redLed = (uint32_t)PF1::GPIO;
+
+const uint32_t swtich1 = (uint32_t)PF4::GPIO;
+const uint32_t swtich2 = (uint32_t)PF0::GPIO;
+
+uint32_t timerRawStatusBit;
+
+/**
+ * These functions further help eliminate unwanted exceptions
+ */
+
+extern "C" void __cxa_pure_virtual() 
+{ 
+    while(1); 
+}
+
+void __gnu_cxx::__verbose_terminate_handler()
+{
+    while(1);
+}
+
+extern "C" void GPIO_Port_F_Handler(void)
+{
+    
+    if(Gpio::read(swtich1) == 1)
+    {
+        Gpio::write(redLed, clear);
+        Gpio::interruptClear(swtich1);
+    }
+
+    if(Gpio::read(swtich1) == 0)
+    {
+        Gpio::write(redLed, set);
+        Gpio::interruptClear(swtich1);
+    }
+
+    if(Gpio::read(swtich2) == 1)
+    {
+        Gpio::write(blueLed, clear);
+        Gpio::interruptClear(swtich2);
+    }
+
+    if(Gpio::read(swtich2) == 0)
+    {
+        Gpio::write(blueLed, set);
+        Gpio::interruptClear(swtich2);
+    }
+
+}
+
+extern "C" void _16_32_Bit_Timer_0A_Handler(void)
+{
+    if(Gpio::read((uint32_t)PF3::GPIO) == set)
+    {
+        Gpio::write((uint32_t)PF3::GPIO, clear);
+        GeneralPurposeTimer::interruptClear(timerRawStatusBit, shortTimer0);
+    }
+
+    else if(Gpio::read((uint32_t)PF3::GPIO) == clear)
+    {
+        Gpio::write((uint32_t)PF3::GPIO, set);
+        GeneralPurposeTimer::interruptClear(timerRawStatusBit, shortTimer0);
+    } 
+}
+
+extern "C" void SystemInit(void)
+{
+    SystemControl::initializeGPIOHB();
+    SystemControl::initializeClock(_80MHz);
+
+    greenLed.initialize();
+    // Gpio::initialize(greenLed, output);
+    Gpio::initialize(blueLed, output);
+    Gpio::initialize(redLed, output);
+}
+ 
+int main(void)
+{
+
+    Nvic::disableInterrupts();
+
+    Gpio::initialize(swtich1, input, 3);
+    Gpio::initialize(swtich2, input, 3);
+    timerRawStatusBit = GeneralPurposeTimer::initialize(periodic, shortTimer0, 80000000, down, concatenated, 3);
+    GeneralPurposeTimer::enableTimer(shortTimer0, concatenated);
+
+    Nvic::enableInterrupts();
+    
+    Gpio::write(blueLed, set);
+    Gpio::write(redLed, set);
+        
+    while(1)
+    {
+        Nvic::wfi();
+    }
+
+}

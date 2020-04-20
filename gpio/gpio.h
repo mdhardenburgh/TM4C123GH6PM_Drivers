@@ -130,22 +130,24 @@
 
 #include "../systemControl/systemControl.h"
 
-enum class PA0 {GPIO = 0, U0Rx = 1, CAN1Rx = 8};
-enum class PA1 {GPIO = 1, U0Tx = 1, CAN1Tx = 8};
-enum class PA2 {GPIO = 2, SSI0Clk = 2};
-enum class PA3 {GPIO = 3, SSI0Fss = 2};
-enum class PA4 {GPIO = 4, SSI0Rx = 2};
-enum class PA5 {GPIO = 5, SSI0Tx = 2};
-enum class PA6 {GPIO = 6, I2C1SCL = 3, M1PWM2 = 5};
-enum class PA7 {GPIO = 7, I2C1SDA = 3, M1PWM3 = 5};
-enum class PB0 {GPIO = 8, USB0ID = 0, U1Rx = 1, T2CCP0 = 7};
-enum class PB1 {GPIO = 9, USB0VBUS = 0, U1Tx = 1, T2CCP1 = 7};
-enum class PB2 {GPIO = 10, I2C0SCL = 3, T3CCP0 = 7};
-enum class PB3 {GPIO = 11, I2C0SDA = 3, T3CCP1 = 7};
-enum class PB4 {GPIO = 12, AIN10 = 0, SSI2Clk = 2, M0PWM2 = 4, T1CCP0 = 7, CAN0Rx = 8};
-enum class PB5 {GPIO = 13, AIN11 = 0, SSI2Fss = 2, M0PWM3 = 4, T1CCP1 = 7, CAN0Tx = 8};
-enum class PB6 {GPIO = 14, SSI2Rx = 2, M0PWM0 = 4, T0CCP0 = 7};
-enum class PB7 {GPIO = 15, SSI2Tx = 2, M0PWM1 = 4, T0CCP1 = 7};
+static const uint32_t gpioOffset = 100;
+
+enum class PA0 {GPIO = 0 * gpioOffset, U0Rx = 1 + GPIO + 1, CAN1Rx = 8 + GPIO + 1};
+enum class PA1 {GPIO = 1 * gpioOffset, U0Tx = 1 + GPIO + 1, CAN1Tx = 8 + GPIO + 1};
+enum class PA2 {GPIO = 2 * gpioOffset, SSI0Clk = 2 + GPIO + 1};
+enum class PA3 {GPIO = 3 * gpioOffset, SSI0Fss = 2 + GPIO + 1};
+enum class PA4 {GPIO = 4 * gpioOffset, SSI0Rx = 2 + GPIO + 1};
+enum class PA5 {GPIO = 5 * gpioOffset, SSI0Tx = 2 + GPIO + 1};
+enum class PA6 {GPIO = 6 * gpioOffset, I2C1SCL = 3 + GPIO + 1, M1PWM2 = 5 + GPIO + 1};
+enum class PA7 {GPIO = 7 * gpioOffset, I2C1SDA = 3 + GPIO + 1, M1PWM3 = 5 + GPIO + 1};
+enum class PB0 {GPIO = 8 * gpioOffset, USB0ID = 0 + GPIO + 1, U1Rx = 1 + GPIO + 1, T2CCP0 = 7 + GPIO + 1};
+enum class PB1 {GPIO = 9 * gpioOffset, USB0VBUS = 0 + GPIO + 1, U1Tx = 1 + GPIO + 1, T2CCP1 = 7 + GPIO + 1};
+enum class PB2 {GPIO = 10 * gpioOffset, I2C0SCL = 3 + GPIO + 1, T3CCP0 = 7 + GPIO + 1};
+enum class PB3 {GPIO = 11 * gpioOffset, I2C0SDA = 3 + GPIO + 1, T3CCP1 = 7 + GPIO + 1};
+enum class PB4 {GPIO = 12 * gpioOffset, AIN10 = 0 + GPIO + 1, SSI2Clk = 2 + GPIO + 1, M0PWM2 = 4 + GPIO + 1, T1CCP0 = 7 + GPIO + 1, CAN0Rx = 8 + GPIO + 1};
+enum class PB5 {GPIO = 13 * gpioOffset, AIN11 = 0 + GPIO + 1, SSI2Fss = 2 + GPIO + 1, M0PWM3 = 4 + GPIO + 1, T1CCP1 = 7 + GPIO + 1, CAN0Tx = 8 + GPIO + 1};
+enum class PB6 {GPIO = 14 * gpioOffset, SSI2Rx = 2 + GPIO + 1, M0PWM0 = 4 + GPIO + 1, T0CCP0 = 7 + GPIO + 1};
+enum class PB7 {GPIO = 15 * gpioOffset, SSI2Tx = 2 + GPIO + 1, M0PWM1 = 4 + GPIO + 1, T0CCP1 = 7 + GPIO + 1};
 
 /** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!WARNING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  * 
@@ -154,39 +156,39 @@ enum class PB7 {GPIO = 15, SSI2Tx = 2, M0PWM1 = 4, T0CCP1 = 7};
  * 
  */
 
-// enum class PC0 {GPIO = 16, TCK_SWCLK = 1, T4CCP0 = 7};
-// enum class PC1 {GPIO = 17, TMS_SWDIO = 1, T4CCP1 = 7};
-// enum class PC2 {GPIO = 18, TDI = 1, T5CCP0 = 7};
-// enum class PC3 {GPIO = 19, TDO_SWO = 1, T5CCP1 = 7};
+// enum class PC0 {GPIO = 16 * gpioOffset, TCK_SWCLK = 1 + GPIO + 1, T4CCP0 = 7 + GPIO + 1};
+// enum class PC1 {GPIO = 17 * gpioOffset, TMS_SWDIO = 1 + GPIO + 1, T4CCP1 = 7 + GPIO + 1};
+// enum class PC2 {GPIO = 18 * gpioOffset, TDI = 1 + GPIO + 1, T5CCP0 = 7 + GPIO + 1};
+// enum class PC3 {GPIO = 19 * gpioOffset, TDO_SWO = 1 + GPIO + 1, T5CCP1 = 7 + GPIO + 1};
 
-enum class PC4 {GPIO = 20, C1_MINUS = 0, U4Rx = 1, U1Rx = 2, M0PWM6 = 4, IDX1 = 6, WT0CCP0 = 7, U1RTS = 8};
-enum class PC5 {GPIO = 21, C1_PLUS = 0, U4Tx = 1, U1Tx = 2, M0PWM7 = 4, PhA1 = 6, WT0CCP1 = 7, U1CTS = 8};
-enum class PC6 {GPIO = 22, C0_PLUS = 0, U3Rx = 1, PhB1 = 6, WT1CCP0 = 7, USB0EPEN = 8};
-enum class PC7 {GPIO = 23, C0_MINUS = 0, U3Tx = 1, WT1CCP1 = 7, USB0PFLT = 8};
-enum class PD0 {GPIO = 24, AIN7 = 0, SSI3Clk = 1, SSI1Clk = 2, I2C3SCL = 3, M0PWM6 = 4, M1PWM0 = 5, WT2CCP0 = 7};
-enum class PD1 {GPIO = 25, AIN6 = 0, SSI3Fss = 1, SSI1Fss = 2, I2C3SDA = 3, M0PWM7 = 4, M1PWM1 = 5, WT2CCP1 = 7};
-enum class PD2 {GPIO = 26, AIN5 = 0, SSI3Rx = 1, SSI1Rx = 2, M0FAULT0 = 4, WT3CCP0 = 7, USB0EPEN = 8};
-enum class PD3 {GPIO = 27, AIN4 = 0, SSI3Tx = 1, SSI1Tx = 2, IDX0 = 6, WT3CCP1 = 7, USB0PFLT = 8};
-enum class PD4 {GPIO = 28, USB0DM = 0, U6Rx = 1, WT4CCP0 = 8};
-enum class PD5 {GPIO = 29, USB0DP = 0, U6Tx = 1, WT4CCP1 = 7};
-enum class PD6 {GPIO = 30, U2Rx = 1, M0FAULT0 = 4, PhA0 = 6, WT5CCP0 = 7};
-enum class PD7 {GPIO = 31, U2Tx = 1, PhB0 = 6, WT5CCP1 = 7, NMI = 8};
-enum class PE0 {GPIO = 32, AIN3 = 0, U7Rx = 1};
-enum class PE1 {GPIO = 33, AIN2 = 0, U7Tx = 1};
-enum class PE2 {GPIO = 34, AIN1 = 0};
-enum class PE3 {GPIO = 35, AIN0 = 0};
-enum class PE4 {GPIO = 36, AIN9 = 0, U5Rx = 1, I2C2SCL = 3, M0PWM4 = 4, M1PWM2 = 5, CAN0Rx = 8};
-enum class PE5 {GPIO = 37, AIN8 = 0, U5Tx = 1, I2C2SDA = 3, M0PWM5 = 4, M1PWM3 = 5, CAN0Tx = 8};
-// enum class PE6 {GPIO = 38}; // There is no PE6 on the microcontroller, only added for completeness.
-// enum class PE7 {GPIO = 39}; // There is no PE7 on the microcontroller, only added for completeness.
-enum class PF0 {GPIO = 40, U1RTS = 1, SSI1Rx = 2, CAN0Rx = 3, M1PWM4 = 5, PhA0 = 6, T0CCP0 = 7, NMI = 8, C0o = 9};
-enum class PF1 {GPIO = 41, U1CTS = 1, SSI1Tx = 2, M1PWM5 = 5, PhB0 = 6, T0CCP1 = 7, C1o = 9, TRD1 = 14};
-enum class PF2 {GPIO = 42, SSI1Clk = 2, M0FAULT0 = 4, M1PWM6 = 5, T1CCP0 = 7, TRD0 = 14};
-enum class PF3 {GPIO = 43, SSI1Fss = 2, CAN0Tx = 3, M1PWM7 = 5, T1CCP1 = 7, TRCLK = 14};
-enum class PF4 {GPIO = 44, M1FAULT0 = 5, IDX0 = 6, T2CCP0 = 7, USB0EPEN = 8};
-// enum class PF5 {GPIO = 45}; // There is no PF5 on the microcontroller, only added for completeness.
-// enum class PF6 {GPIO = 46}; // There is no PF6 on the microcontroller, only added for completeness.
-// enum class PF7 {GPIO = 47}; // There is no PF7 on the microcontroller, only added for completeness.
+enum class PC4 {GPIO = 20 * gpioOffset, C1_MINUS = 0 + GPIO + 1, U4Rx = 1 + GPIO + 1, U1Rx = 2 + GPIO + 1, M0PWM6 = 4 + GPIO + 1, IDX1 = 6 + GPIO + 1, WT0CCP0 = 7 + GPIO + 1, U1RTS = 8 + GPIO + 1};
+enum class PC5 {GPIO = 21 * gpioOffset, C1_PLUS = 0 + GPIO + 1, U4Tx = 1 + GPIO + 1, U1Tx = 2 + GPIO + 1, M0PWM7 = 4 + GPIO + 1, PhA1 = 6 + GPIO + 1, WT0CCP1 = 7 + GPIO + 1, U1CTS = 8 + GPIO + 1};
+enum class PC6 {GPIO = 22 * gpioOffset, C0_PLUS = 0  + GPIO + 1, U3Rx = 1 + GPIO + 1, PhB1 = 6 + GPIO + 1, WT1CCP0 = 7 + GPIO + 1, USB0EPEN = 8 + GPIO + 1};
+enum class PC7 {GPIO = 23 * gpioOffset, C0_MINUS = 0 + GPIO + 1, U3Tx = 1 + GPIO + 1, WT1CCP1 = 7 + GPIO + 1, USB0PFLT = 8 + GPIO + 1};
+enum class PD0 {GPIO = 24 * gpioOffset, AIN7 = 0 + GPIO + 1, SSI3Clk = 1 + GPIO + 1, SSI1Clk = 2 + GPIO + 1, I2C3SCL = 3 + GPIO + 1, M0PWM6 = 4 + GPIO + 1, M1PWM0 = 5 + GPIO + 1, WT2CCP0 = 7 + GPIO + 1};
+enum class PD1 {GPIO = 25 * gpioOffset, AIN6 = 0 + GPIO + 1, SSI3Fss = 1 + GPIO + 1, SSI1Fss = 2 + GPIO + 1, I2C3SDA = 3 + GPIO + 1, M0PWM7 = 4 + GPIO + 1, M1PWM1 = 5 + GPIO + 1, WT2CCP1 = 7 + GPIO + 1};
+enum class PD2 {GPIO = 26 * gpioOffset, AIN5 = 0 + GPIO + 1, SSI3Rx = 1 + GPIO + 1, SSI1Rx = 2 + GPIO + 1, M0FAULT0 = 4 + GPIO + 1, WT3CCP0 = 7 + GPIO + 1, USB0EPEN = 8 + GPIO + 1};
+enum class PD3 {GPIO = 27 * gpioOffset, AIN4 = 0 + GPIO + 1, SSI3Tx = 1 + GPIO + 1, SSI1Tx = 2 + GPIO + 1, IDX0 = 6 + GPIO + 1, WT3CCP1 = 7 + GPIO + 1, USB0PFLT = 8 + GPIO + 1};
+enum class PD4 {GPIO = 28 * gpioOffset, USB0DM = 0 + GPIO + 1, U6Rx = 1 + GPIO + 1, WT4CCP0 = 8 + GPIO + 1};
+enum class PD5 {GPIO = 29 * gpioOffset, USB0DP = 0 + GPIO + 1, U6Tx = 1 + GPIO + 1, WT4CCP1 = 7 + GPIO + 1};
+enum class PD6 {GPIO = 30 * gpioOffset, U2Rx = 1 + GPIO + 1, M0FAULT0 = 4 + GPIO + 1, PhA0 = 6 + GPIO + 1, WT5CCP0 = 7 + GPIO + 1};
+enum class PD7 {GPIO = 31 * gpioOffset, U2Tx = 1 + GPIO + 1, PhB0 = 6 + GPIO + 1, WT5CCP1 = 7 + GPIO + 1, NMI = 8 + GPIO + 1};
+enum class PE0 {GPIO = 32 * gpioOffset, AIN3 = 0 + GPIO + 1, U7Rx = 1 + GPIO + 1};
+enum class PE1 {GPIO = 33 * gpioOffset, AIN2 = 0 + GPIO + 1, U7Tx = 1 + GPIO + 1};
+enum class PE2 {GPIO = 34 * gpioOffset, AIN1 = 0 + GPIO + 1};
+enum class PE3 {GPIO = 35 * gpioOffset, AIN0 = 0 + GPIO + 1};
+enum class PE4 {GPIO = 36 * gpioOffset, AIN9 = 0 + GPIO + 1, U5Rx = 1 + GPIO + 1, I2C2SCL = 3 + GPIO + 1, M0PWM4 = 4 + GPIO + 1, M1PWM2 = 5 + GPIO + 1, CAN0Rx = 8 + GPIO + 1};
+enum class PE5 {GPIO = 37 * gpioOffset, AIN8 = 0 + GPIO + 1, U5Tx = 1 + GPIO + 1, I2C2SDA = 3 + GPIO + 1, M0PWM5 = 4 + GPIO + 1, M1PWM3 = 5 + GPIO + 1, CAN0Tx = 8 + GPIO + 1};
+// enum class PE6 {GPIO = 38 * gpioOffset}; // There is no PE6 on the microcontroller, only added for completeness.
+// enum class PE7 {GPIO = 39 * gpioOffset}; // There is no PE7 on the microcontroller, only added for completeness.
+enum class PF0 {GPIO = 40 * gpioOffset, U1RTS = 1 + GPIO + 1, SSI1Rx = 2 + GPIO + 1, CAN0Rx = 3 + GPIO + 1, M1PWM4 = 5 + GPIO + 1, PhA0 = 6 + GPIO + 1, T0CCP0 = 7 + GPIO + 1, NMI = 8 + GPIO + 1, C0o = 9 + GPIO + 1};
+enum class PF1 {GPIO = 41 * gpioOffset, U1CTS = 1 + GPIO + 1, SSI1Tx = 2 + GPIO + 1, M1PWM5 = 5 + GPIO + 1, PhB0 = 6 + GPIO + 1, T0CCP1 = 7 + GPIO + 1, C1o = 9 + GPIO + 1, TRD1 = 14 + GPIO + 1};
+enum class PF2 {GPIO = 42 * gpioOffset, SSI1Clk = 2 + GPIO + 1, M0FAULT0 = 4 + GPIO + 1, M1PWM6 = 5 + GPIO + 1, T1CCP0 = 7 + GPIO + 1, TRD0 = 14 + GPIO + 1};
+enum class PF3 {GPIO = 43 * gpioOffset, SSI1Fss = 2 + GPIO + 1, CAN0Tx = 3 + GPIO + 1, M1PWM7 = 5 + GPIO + 1, T1CCP1 = 7 + GPIO + 1, TRCLK = 14 + GPIO + 1};
+enum class PF4 {GPIO = 44 * gpioOffset, M1FAULT0 = 5 + GPIO + 1, IDX0 = 6 + GPIO + 1, T2CCP0 = 7 + GPIO + 1, USB0EPEN = 8 + GPIO + 1};
+// enum class PF5 {GPIO = 45 * gpioOffset}; // There is no PF5 on the microcontroller, only added for completeness.
+// enum class PF6 {GPIO = 46 * gpioOffset}; // There is no PF6 on the microcontroller, only added for completeness.
+// enum class PF7 {GPIO = 47 * gpioOffset}; // There is no PF7 on the microcontroller, only added for completeness.
 
 /**
  * Direction of the signal, i.e. if the gpio acts as an input or output.
@@ -200,22 +202,25 @@ class Gpio
 {
     public:
         Gpio();
-        Gpio(uint32_t gpio, direction dir);
-        Gpio(uint32_t gpio, direction dir, uint32_t interruptPriority);
         ~Gpio();
 
-        void interruptClear(void);
-
-        void gpioWrite(setORClear value);
-        uint32_t gpioRead(void);
+        void initialize(uint32_t gpio, direction dir);
+        void initialize(uint32_t gpio, direction dir, uint32_t interruptPriority);
+        void interruptClear();
+        void write(setORClear value);
+        uint32_t read();
 
     private:
 
-        uint32_t gpio = uint32_t(PA0::GPIO);
-        uint32_t gpioBaseAddress;
-        uint32_t gpioPin;
+        uint32_t gpio;
+        direction dir;
+        uint32_t interruptPriority;
+        int alternateFunction = -1; //This value should cause an error
 
-        uint32_t gpioKey = 0x4C4F434B;
+        uint32_t baseAddress;
+        uint32_t gpioPort;
+
+        static const uint32_t gpioKey = 0x4C4F434B;
 
         static const uint32_t PPGPIO_OFFSET = 0x308; //0x308 PPGPIO RO 0x0000.003F General-Purpose Input/Output Peripheral Present 290
         static const uint32_t SRGPIO_OFFSET = 0x508; //0x508 SRGPIO RW 0x0000.0000 General-Purpose Input/Output Software Reset 314

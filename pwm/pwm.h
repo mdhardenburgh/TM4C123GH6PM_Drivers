@@ -101,6 +101,19 @@
 
 #include "../systemControl/systemControl.h"
 
+enum class generatorOptions{doNothing, invertPwm, drivePwmLow, drivPwmHigh};
+
+enum class countDirectionPwm{upAndDown, down};
+
+/**
+ * From the TM4C123GH6PM Datasheet p. 255:
+ * 
+ * "This field specifies the binary divisor used to predivide the system clock
+ * down for use as the timing reference for the PWM module. The rising edge of 
+ * this clock is synchronous with the system clock."
+ */
+enum class pwmUnitClockDivisor{_2, _4, _8, _16, _32, _64};
+
 /**
  * Which PWM generator to use
  */
@@ -114,20 +127,31 @@ enum pwmGenerator
  */
 enum pwmModule
 {
-    module1, module2
+    module0, module1
 };
+
+enum class pwmOutput{pwmA = 0x000, pwmB = 0x004};
+
 
 class Pwm
 {
     public:
         Pwm();
-        Pwm(pwmGenerator myPwmGen, pwmModule module, uint32_t clockCycles, uint32_t dutyCycle);
         ~Pwm();
 
+        void initializeSingle(pwmGenerator myPwmGen, pwmModule module, uint32_t period, uint32_t dutyCycle, countDirectionPwm countDir, uint32_t genOptions, pwmOutput output, bool enablePwmDiv, uint32_t divisor);
+        void initializePair(pwmGenerator myPwmGen, pwmModule module, uint32_t period, uint32_t dutyCycleA, uint32_t dutyCycleB, countDirectionPwm countDir, uint32_t genAOptions, uint32_t genBOptions, bool enablePwmDiv, uint32_t divisor);
+    
     private:
         
+        void initialize(pwmGenerator myPwmGen, pwmModule module, uint32_t period, countDirectionPwm countDir, bool enablePwmDiv, uint32_t divisor);
+
+        uint32_t baseAddress;
+
         static const uint32_t pwm0BaseAddress = 0x40028000;
-        static const uint32_t pwm1BaseAddress = 0x40029000;
+        // static const uint32_t pwm1BaseAddress = 0x40029000;
+
+        static const uint32_t RCC_OFFSET = 0x060; //RCC RW 0x078E.3AD1 Run-Mode Clock Configuration 254
 
         static const uint32_t PPPWM_OFFSET = 0x340; //0x340 PPPWM RO 0x0000.0003 Pulse Width Modulator Peripheral Present 305
         static const uint32_t SRPWM_OFFSET = 0x540; //0x540 SRPWM RW 0x0000.0000 Pulse Width Modulator Software Reset 330
