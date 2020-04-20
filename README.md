@@ -1,5 +1,5 @@
-# RTOS
-## A very simple RTOS for the Tiva TM4C123GH6PM microcontroller.
+# TM4C123GH6PM Drivers
+## Drivers for the Texas Instruments Tiva C TM4C123GH6PM microcontroller.
 
 Drivers for the Texas Instruments Tiva C TM4C123GH6PM 
 microcontroller. It is designed to be easy to use, similar to an arduino,
@@ -22,9 +22,32 @@ The command `arm-none-eabi-gdb main.elf` can be used to access the debugger.
 * Use the command `monitor reset init` to restart the processor
 * The reset of the GDB commands are the same
 
-GPIO is currently only fuctional and functional for simple inputs and outputs.
+## Functional Peripherals
+* NVIC Interrupts
+* PLL system clock for different clock speeds
+* GPIO, GPIO interrupt on both edges
+* 16/32-bit and 32/64-bit General Purpose Timer in oneshot and periodic mode
 
-Main contains a very simple example program of how to use the GPIO.
+## In Progress
+* PWM: not function needs debugging
 
-More to come soon!
+## Planned in no specific order
+* USB
+* UART
+* ADC
+* SPI
+* I2C
+* Systick
+* MPU
+* FPU
+* SBC
+* Comparator
+* Memory
+* Hibernate
+* Watchdog
+
+# Test program
+
+Main contains a very simple example program of how to use the drivers.
+
 
