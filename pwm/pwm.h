@@ -151,6 +151,9 @@ enum class ACTLOAD{doNothing = 0x0<<2, invertPwm = 0x1<<2, drivePwmLow = 0x2<<2,
  */
 enum class ACTZERO{doNothing, invertPwm, drivePwmLow, drivPwmHigh};
 
+/**
+ * Counter direction for the PWM.
+ */
 enum class countDirectionPwm{down, upAndDown};
 
 /**
@@ -178,9 +181,6 @@ enum pwmModule
     module0, module1
 };
 
-enum class pwmOutput{pwmA = 0x000, pwmB = 0x004};
-
-
 class Pwm
 {
     public:
@@ -188,11 +188,11 @@ class Pwm
         ~Pwm();
 
         void initializeSingle(uint32_t pwmPin, pwmModule module, uint32_t period, uint32_t compA, uint32_t compB, countDirectionPwm countDir, uint32_t genOptions, bool enablePwmDiv, uint32_t divisor);
-        void initializePair(uint32_t pwmPin, pwmModule module, uint32_t period, uint32_t dutyCycleA, uint32_t dutyCycleB, countDirectionPwm countDir, uint32_t genAOptions, uint32_t genBOptions, bool enablePwmDiv, uint32_t divisor);
+        void initializePair(uint32_t pwmPin, pwmModule module, uint32_t period, uint32_t compA, uint32_t compB, countDirectionPwm countDir, uint32_t genOptionsA, uint32_t genOptionsB, bool enablePwmDiv, uint32_t divisor);
     
     private:
         
-        void initialize(uint32_t pwmPin, pwmModule module, uint32_t period, countDirectionPwm countDir, bool enablePwmDiv, uint32_t divisor);
+        void initialize(pwmModule module, uint32_t period, countDirectionPwm countDir, bool enablePwmDiv, uint32_t divisor);
 
         uint32_t baseAddress;
         uint32_t myPwmGen;

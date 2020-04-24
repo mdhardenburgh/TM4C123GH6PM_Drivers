@@ -46,24 +46,18 @@ Pwm::~Pwm()
 }
 
 /**
- * If a zero or load event coincides with a compare A or compare B event, the 
- * zero or load action is taken and the compare A or compare B action is 
- * ignored. If a compare A event coincides with a compare B event, the compare 
- * B action is taken and the compare A action is ignored.
- */
-
-//Clean up, add gen options using ORs of 12 bit numbers. Add documentation
-
-
-/**
  * @brief Init single ended PWM with a specified duty cycle
  * 
  * @details MnPWMn Indicated on the signals description page indicates the
  *          module and PWM generator associated with the GPIO pin. For example
- *          M1PWM7 indicates module1 pwmPin 7.
+ *          M1PWM7 indicates module1 pwmPin 7. If a zero or load event 
+ *          coincides with a compare A or compare B event, the zero or load 
+ *          action is taken and the compare A or compare B action is ignored. 
+ *          If a compare A event coincides with a compare B event, the compare
+ *          B action is taken and the compare A action is ignored.
  * 
  * @param pwmPin Output pin of the PWM module.
- * @param module that controlls the pin.
+ * @param module to which the \c pwmPin belongs.
  * @param period of the PWM in clock ticks.
  * @param compA Number that in clock ticks that is compared against the 
  *              counter. When the counter matches what is in the comparator,
@@ -75,23 +69,28 @@ Pwm::~Pwm()
  *                 or count up then down.
  * @param genOptions Pwm generator control options. Can make the output go 
  *                   high or low based upon the options chosen using the ACTCMP
- *                   enums defined in the pwm.h file.
+ *                   enums defined in the pwm.h file. Gen options are defined
+ *                   in the pwm.h file and can be ORed together to enable 
+ *                   multiple actions based upon when the counter reaches 
+ *                   \c compA and \c compB.
  * @param enablePwmDiv Enable the PWM peripheral clock pre-divider to 
  *                     pre-divide the system clock before it reaches the PWM
  *                     peripheral
  * @param divisor Binary divisor used to pre-divide the system clock. Must be
- *                enabled with the \c enablePwmDiv first
+ *                enabled with the \c enablePwmDiv first.
  */
 void Pwm::initializeSingle(uint32_t pwmPin, pwmModule module, uint32_t period, uint32_t compA, uint32_t compB, countDirectionPwm countDir, uint32_t genOptions, bool enablePwmDiv, uint32_t divisor)
 {
-    initialize(pwmPin, module, period, countDir, enablePwmDiv, divisor);
+    myPwmGen = pwmPin/2;
+    
+    initialize(module, period, countDir, enablePwmDiv, divisor);
     
     //2. Configure the PWM generator for countdown mode with immediate updates to the parameters.
     
     //2b. Write the PWMnGENn register. 
     Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0GENA_OFFSET + (0x40 * myPwmGen) + ((pwmPin%2) * 4))), genOptions, 0, 11+1, RW);
 
-    //4. Set timer comparators
+    //4. Set counter comparators
     Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CMPA_OFFSET + (0x40 * myPwmGen))), compA, 0, 15+1, RW);
     Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CMPB_OFFSET + (0x40 * myPwmGen))), compB, 0, 15+1, RW);
 
@@ -99,52 +98,93 @@ void Pwm::initializeSingle(uint32_t pwmPin, pwmModule module, uint32_t period, u
     Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CTL_OFFSET + (0x40 * myPwmGen))), set, 0, 1, RW);
 
     //7. Enable PWM output.
-    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + PWMENABLE_OFFSET), set, 0 + ((myPwmGen*2)+(((pwmPin%2) * 4)/4)), 1, RW); //(uint32_t)output >> 2
+    // Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + PWMENABLE_OFFSET), set, 0 + ((myPwmGen*2)+(((pwmPin%2) * 4)/4)), 1, RW); //(uint32_t)output >> 2
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + PWMENABLE_OFFSET), set, pwmPin, 1, RW); //(uint32_t)output >> 2
+
 }
 
-
-//Fix this using init single. fix the documentation
-
 /**
- * @brief Initialize PWM with a specified period and duty cycle
- * @param clockCycles period in clock ticks/cycles
- * @param dutyCycle duty cycle of the PWM in clock ticks. Must be less than the
- *                  period
+ * @brief Initialize a pair of complemtary PWM signals
+ * 
+ * @param pwmPin Pin A of the complementary signals.
+ * @param pwmModule to which the \c pwmPin belongs.
+ * @param period of the PWM in clock ticks. This is shared between the two
+ *               complementary pins.
+* @param compA Number that in clock ticks that is compared against the 
+ *             counter. When the counter matches what is in comparator A, it 
+ *             can trigger an action based on genOptionsA and genOptionsB.
+ * 
+ * @param compB Number that in clock ticks that is compared against the 
+ *             counter. When the counter matches what is in comparator B, it 
+ *             can trigger an action based on genOptionsA and genOptionsB.
+ * 
+ * @param countDir Direction to count, either down (load from \c load value and
+ *                 then count down to 0 to load again from the \c load value)
+ *                 or count up then down. Controls both complementary signals.
+ * 
+ * @param genOptionsA Pwm generator control options. Can make \c pwmA go 
+ *                    high or low based upon the options chosen using the 
+ *                    ACTCMP enums defined in the pwm.h file. Gen options are 
+ *                    defined in the pwm.h file and can be ORed together to 
+ *                    enable multiple actions based upon when the counter
+ *                    reaches \c compA and \c compB.
+ * 
+ * @param genOptionsB Pwm generator control options. Can make \c pwmB go 
+ *                    high or low based upon the options chosen using the 
+ *                    ACTCMP enums defined in the pwm.h file. Gen options are 
+ *                    defined in the pwm.h file and can be ORed together to 
+ *                    enable multiple actions based upon when the counter 
+ *                    reaches \c compA and \c compB.
+ * 
+ * @param enablePwmDiv Enable the PWM peripheral clock pre-divider to 
+ *                     pre-divide the system clock before it reaches the PWM
+ *                     peripheral
+ * 
+ * @param divisor Binary divisor used to pre-divide the system clock. Must be
+ *                enabled with the \c enablePwmDiv first.
  */
 
-void Pwm::initializePair(uint32_t pwmPin, pwmModule module, uint32_t period, uint32_t dutyCycleA, uint32_t dutyCycleB, countDirectionPwm countDir, uint32_t genAOptions, uint32_t genBOptions, bool enablePwmDiv, uint32_t divisor)
+void Pwm::initializePair(uint32_t pwmPin, pwmModule module, uint32_t period, uint32_t compA, uint32_t compB, countDirectionPwm countDir, uint32_t genOptionsA, uint32_t genOptionsB, bool enablePwmDiv, uint32_t divisor)
 {
+    myPwmGen = pwmPin/2;
 
-    initialize(pwmPin, module, period, countDir, enablePwmDiv, divisor);
+    initialize(module, period, countDir, enablePwmDiv, divisor);
     
     //2. Configure the PWM generator for countdown mode with immediate updates to the parameters.
     
     //2b. Write the PWMnGENA register.
-    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0GENA_OFFSET + (0x40 * myPwmGen))), genAOptions, 0, 11+1, RW);
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0GENA_OFFSET + (0x40 * myPwmGen))), genOptionsA, 0, 11+1, RW);
 
     //2c. Write the PWMnGENB register.
-    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0GENB_OFFSET + (0x40 * myPwmGen))), genBOptions, 0, 11+1, RW);
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0GENB_OFFSET + (0x40 * myPwmGen))), genOptionsB, 0, 11+1, RW);
 
-    //4. Set pulse width for pwmA
-    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CMPA_OFFSET + (0x40 * myPwmGen))), dutyCycleA, 0, 15+1, RW);
+    //4. Set counter comparator for pwmA
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CMPA_OFFSET + (0x40 * myPwmGen))), compA, 0, 15+1, RW);
 
-    //5. Set pulse width for pwmB
-    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CMPB_OFFSET + (0x40 * myPwmGen))), dutyCycleB, 0, 15+1, RW);
+    //5. Set counter comparator for pwmB
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CMPB_OFFSET + (0x40 * myPwmGen))), compB, 0, 15+1, RW);
 
     //6. Enable PWM
-    Register::setRegisterBitFieldStatus((volatile uint32_t*)(systemControlBase + SRPWM_OFFSET), set, module, 1, RW);
-    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CTL_OFFSET + (0x40 * myPwmGen))), 0x00001, 0, 1, RW);
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CTL_OFFSET + (0x40 * myPwmGen))), set, 0, 1, RW);
 
     //7. Enable PWM output.
-    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWMENABLE_OFFSET + (0x40 * myPwmGen))), 0x3, 0 + (2*myPwmGen), 2, RW); 
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWMENABLE_OFFSET + (0x40 * myPwmGen))), 0x3, pwmPin, 2, RW); 
 }
 
-//clean up, add count direction option
-
-void Pwm::initialize(uint32_t pwmPin, pwmModule module, uint32_t period, countDirectionPwm countDir, bool enablePwmDiv, uint32_t divisor)
+/**
+ * @brief Private init function that takes care of common init code
+ * 
+ * @param module to use. Either pwm0 or pwm1.
+ * @param period of the pulse in clock ticks
+ * @param countDir of the PWM. The PWM can either just count down, or up and
+ *                 down repeatedly.
+ * @param enablePwmDiv Enables the PWM peripheral clock pre-divider
+ * @param divisor The value of the PWM clock pre-divider chosen by enum
+ *                pwmUnitClockDivisor.       
+ */
+void Pwm::initialize(pwmModule module, uint32_t period, countDirectionPwm countDir, bool enablePwmDiv, uint32_t divisor)
 {    
     baseAddress = pwm0BaseAddress + (module * 0x1000);
-    myPwmGen = pwmPin/2;
     
     //0. Enable the clock for PWM
     Register::setRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RCGCPWM_OFFSET)), set, module, 1, RW);
