@@ -27,15 +27,15 @@ The command `arm-none-eabi-gdb main.elf` can be used to access the debugger.
 * PLL system clock for different clock speeds
 * GPIO, GPIO interrupt on both edges
 * 16/32-bit and 32/64-bit General Purpose Timer in oneshot and periodic mode
+* PWM can be initilized for single and double ended complementary mode.
 
 ## In Progress
-* PWM: not function needs debugging
+* ADC: Planning implementation
 
 ## Planned in no specific order
 * GPIO interrupt on a single edge
 * USB
 * UART
-* ADC
 * SPI
 * I2C
 * Systick
@@ -50,5 +50,3 @@ The command `arm-none-eabi-gdb main.elf` can be used to access the debugger.
 # Test program
 
 Main contains a very simple example program of how to use the drivers.
-
-
