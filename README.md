@@ -32,6 +32,7 @@ The command `arm-none-eabi-gdb main.elf` can be used to access the debugger.
 * PWM: not function needs debugging
 
 ## Planned in no specific order
+* GPIO interrupt on a single edge
 * USB
 * UART
 * ADC

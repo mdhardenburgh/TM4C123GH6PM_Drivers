@@ -104,15 +104,16 @@ extern "C" void SystemInit(void)
     SystemControl::initializeClock(_80MHz);
 
     greenLed.initialize((uint32_t)PF3::M1PWM7, output);
-    blueLed.initialize((uint32_t)PF2::GPIO, output);
+    blueLed.initialize((uint32_t)PF2::GPIO, output); 
     redLed.initialize((uint32_t)PF1::GPIO, output);
 
-    greenPwm.initializeSingle(pwmGen3, module1, 80000000, 40000000, countDirectionPwm::down, 0x8C, pwmOutput::pwmA, false, 1);
+    greenPwm.initializeSingle(7, module1, 0xFFFF, 0xFFFF/2, 0x1, countDirectionPwm::down, (uint32_t)ACTZERO::invertPwm, true, (uint32_t)pwmUnitClockDivisor::_64);
+    // greenPwm.initializeSingle(pwmGen2, module0, 0xFFFF, 0xFFFF/2, 0xFFFF/2, countDirectionPwm::down, 0x08C, pwmOutput::pwmA, false, 1);
 }
  
 int main(void)
 {
-
+    
     Nvic::disableInterrupts();
 
     swtich1.initialize((uint32_t)PF4::GPIO, input, 3);
@@ -122,7 +123,6 @@ int main(void)
     // myTimer.enableTimer();
 
     Nvic::enableInterrupts();
-    
     
     blueLed.write(set);
     redLed.write(set);

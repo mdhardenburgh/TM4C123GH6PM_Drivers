@@ -101,9 +101,57 @@
 
 #include "../systemControl/systemControl.h"
 
-enum class generatorOptions{doNothing, invertPwm, drivePwmLow, drivPwmHigh};
 
-enum class countDirectionPwm{upAndDown, down};
+/**
+ * Action for Comparator B Down
+ * 
+ * This field specifies the action to be taken when the counter matches
+ * comparator B while counting down.
+ */
+enum class ACTCMPBD{doNothing = 0x0<<10, invertPwm = 0x1<<10, drivePwmLow = 0x2<<10, drivPwmHigh = 0x3<<10};
+
+/**
+ * Action for Comparator B Up.
+ * 
+ * This field specifies the action to be taken when the counter matches
+ * comparator B while counting up. This action can only occur when the
+ * \c MODE bit in the PWMnCTL register is set.
+ */
+enum class ACTCMPBU{doNothing = 0x0<<8, invertPwm = 0x1<<8, drivePwmLow = 0x2<<8, drivPwmHigh = 0x3<<8};
+
+/**
+ * Action for Comparator A Down.
+ * 
+ * This field specifies the action to be taken when the counter matches
+ * comparator A while counting down.
+ */
+enum class ACTCMPAD{doNothing = 0x0<<6, invertPwm = 0x1<<6, drivePwmLow = 0x2<<6, drivPwmHigh = 0x3<<6};
+
+/**
+ * Action for Comparator A Up.
+ * 
+ * This field specifies the action to be taken when the counter matches
+ * comparator A while counting up. This action can only occur when the
+ * \c MODE bit in the PWMnCTL register is set.
+ */
+enum class ACTCMPAU{doNothing = 0x0<<4, invertPwm = 0x1<<4, drivePwmLow = 0x2<<4, drivPwmHigh = 0x3<<4};
+
+/**
+ * Action for Counter=LOAD.
+ * 
+ * This field specifies the action to be taken when the counter matches the 
+ * load value.
+ */
+enum class ACTLOAD{doNothing = 0x0<<2, invertPwm = 0x1<<2, drivePwmLow = 0x2<<2, drivPwmHigh = 0x3<<2};
+
+/**
+ * Action for Counter=0.
+ * 
+ * This field specifies the action to be taken when the counter is 0.
+ */
+enum class ACTZERO{doNothing, invertPwm, drivePwmLow, drivPwmHigh};
+
+enum class countDirectionPwm{down, upAndDown};
 
 /**
  * From the TM4C123GH6PM Datasheet p. 255:
@@ -139,14 +187,15 @@ class Pwm
         Pwm();
         ~Pwm();
 
-        void initializeSingle(pwmGenerator myPwmGen, pwmModule module, uint32_t period, uint32_t dutyCycle, countDirectionPwm countDir, uint32_t genOptions, pwmOutput output, bool enablePwmDiv, uint32_t divisor);
-        void initializePair(pwmGenerator myPwmGen, pwmModule module, uint32_t period, uint32_t dutyCycleA, uint32_t dutyCycleB, countDirectionPwm countDir, uint32_t genAOptions, uint32_t genBOptions, bool enablePwmDiv, uint32_t divisor);
+        void initializeSingle(uint32_t pwmPin, pwmModule module, uint32_t period, uint32_t compA, uint32_t compB, countDirectionPwm countDir, uint32_t genOptions, bool enablePwmDiv, uint32_t divisor);
+        void initializePair(uint32_t pwmPin, pwmModule module, uint32_t period, uint32_t dutyCycleA, uint32_t dutyCycleB, countDirectionPwm countDir, uint32_t genAOptions, uint32_t genBOptions, bool enablePwmDiv, uint32_t divisor);
     
     private:
         
-        void initialize(pwmGenerator myPwmGen, pwmModule module, uint32_t period, countDirectionPwm countDir, bool enablePwmDiv, uint32_t divisor);
+        void initialize(uint32_t pwmPin, pwmModule module, uint32_t period, countDirectionPwm countDir, bool enablePwmDiv, uint32_t divisor);
 
         uint32_t baseAddress;
+        uint32_t myPwmGen;
 
         static const uint32_t pwm0BaseAddress = 0x40028000;
         // static const uint32_t pwm1BaseAddress = 0x40029000;
