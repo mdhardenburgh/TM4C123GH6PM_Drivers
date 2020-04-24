@@ -33,6 +33,7 @@ The command `arm-none-eabi-gdb main.elf` can be used to access the debugger.
 * ADC: Planning implementation
 
 ## Planned in no specific order
+* µDMA
 * GPIO interrupt on a single edge
 * USB
 * UART
@@ -44,6 +45,8 @@ The command `arm-none-eabi-gdb main.elf` can be used to access the debugger.
 * SBC
 * Comparator
 * Memory
+    * EEPROM
+    * Flash
 * Hibernate
 * Watchdog
 
