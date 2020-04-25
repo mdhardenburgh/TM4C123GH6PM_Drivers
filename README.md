@@ -5,7 +5,7 @@ Drivers for the Texas Instruments Tiva C TM4C123GH6PM
 microcontroller. It is designed to be easy to use, similar to an arduino,
 however knowledge of pointers and memory management is reccommended.
 
-ARM GNU Toolchain is required to build this project. OpenOCD is required to 
+[ARM GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads) is required to build this project. [OpenOCD](http://openocd.org/) is required to 
 download main.elf to the board. Both are freely available to download and install
 
 To compile the project use navigate to the project directory in a terminal and
@@ -20,7 +20,7 @@ The command `arm-none-eabi-gdb main.elf` can be used to access the debugger.
 * Use the command `monitor reset halt` to halt the processor (required to load code)
 * Use the command `load` to load new code onto the board
 * Use the command `monitor reset init` to restart the processor
-* The reset of the GDB commands are the same
+* The rest of the GDB commands are the same
 
 ## Functional Peripherals
 * NVIC Interrupts
@@ -34,7 +34,8 @@ The command `arm-none-eabi-gdb main.elf` can be used to access the debugger.
 
 ## Planned in no specific order
 * µDMA
-* GPIO interrupt on a single edge
+* GPIO: Poll raw interrupt status
+* GPIO: interrupt on a single edge
 * USB
 * UART
 * SPI
@@ -43,7 +44,7 @@ The command `arm-none-eabi-gdb main.elf` can be used to access the debugger.
 * MPU
 * FPU
 * SBC
-* Comparator
+* Analog Comparator
 * Memory
     * EEPROM
     * Flash
