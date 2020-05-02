@@ -6,7 +6,7 @@
 
 STARTUP_DEFS=-D__STARTUP_CLEAR_BSS -D__START=main 
 ARCH_FLAGS=-mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16
-CORE_PERIPHERALS=corePeripherals/systick/systick.o corePeripherals/nvic/nvic.o corePeripherals/sbc/sbc.o corePeripherals/mpu/mpu.o corePeripherals/fpu/fpu.o
+CORE_PERIPHERALS=corePeripherals/systick/systick.o corePeripherals/nvic/nvic.o corePeripherals/sbc/sbc.o corePeripherals/mpu/mpu.o corePeripherals/fpu/fpu.o adc/adc.o
 # CXXFLAGS=$(ARCH_FLAGS) $(STARTUP_DEFS) -c -g -std=c++11 -Wall -W -Werror -pedantic -Os -flto -ffunction-sections -fdata-sections -fno-exceptions 
 CXXFLAGS=$(ARCH_FLAGS) $(STARTUP_DEFS) -c -g -std=c++11 -Wall -W -Werror -pedantic 
 CXX=arm-none-eabi-g++
@@ -68,6 +68,9 @@ generalPurposeTimer.o: timer/generalPurposeTimer.cpp timer/generalPurposeTimer.h
 	$(CXX) $^ $(CXXFLAGS) -o $@
 
 pwm.o: pwm/pwm.cpp pwm/pwm.h register/register.h
+	$(CXX) $^ $(CXXFLAGS) -o $@
+
+adc.o: adc/adc.cpp adc/adc.h
 	$(CXX) $^ $(CXXFLAGS) -o $@
 
 clean:

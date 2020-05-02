@@ -138,7 +138,7 @@ class GeneralPurposeTimer
         void initializeForInterupt(timerMode mode, timerBlock block, uint32_t clockCycles, countDirection dir, timerUse use, uint32_t interuptPriority);
 
         void pollStatus(void);
-        void interruptClear(void);
+        void clearInterrupt(void);
         void enableTimer(void);
 
     private:

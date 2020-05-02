@@ -29,6 +29,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/.
 
 #include "main.h"
 
+int readme = -1;
+
 Gpio greenLed;
 Gpio blueLed;
 Gpio redLed;
@@ -36,7 +38,11 @@ Gpio redLed;
 Gpio swtich1;
 Gpio swtich2;
 
+Gpio adcPin;
+
 Pwm greenPwm;
+
+Adc testAdc;
 
 // GeneralPurposeTimer myTimer;
 
@@ -88,15 +94,21 @@ extern "C" void GPIO_Port_F_Handler(void)
 //     if(greenLed.read() == set)
 //     {
 //         greenLed.write(clear);
-//         myTimer.interruptClear();
+//         myTimer.clearInterrupt();
 //     }
 
 //     else if(greenLed.read() == clear)
 //     {
 //         greenLed.write(set);
-//         myTimer.interruptClear();
+//         myTimer.clearInterrupt();
 //     } 
 // }
+
+void pollTest(void)
+{
+    readme = testAdc.getAdcSample();
+    testAdc.clearInterrupt();
+}
 
 extern "C" void SystemInit(void)
 {
@@ -106,9 +118,11 @@ extern "C" void SystemInit(void)
     greenLed.initialize((uint32_t)PF3::M1PWM7, output);
     blueLed.initialize((uint32_t)PF2::GPIO, output); 
     redLed.initialize((uint32_t)PF1::GPIO, output);
+    adcPin.initialize((uint32_t)PE3::AIN0, input);
 
     greenPwm.initializeSingle(7, module1, 0xFFFF, 0xFFFF/2, 0x1, countDirectionPwm::down, (uint32_t)ACTZERO::invertPwm, true, (uint32_t)pwmUnitClockDivisor::_64);
-    // greenPwm.initializeSingle(pwmGen2, module0, 0xFFFF, 0xFFFF/2, 0xFFFF/2, countDirectionPwm::down, 0x08C, pwmOutput::pwmA, false, 1);
+
+    testAdc.initializeModule((uint32_t)adcModule::module0, (uint32_t)ssPriority0::third|(uint32_t)ssPriority1::second|(uint32_t)ssPriority2::first|(uint32_t)ssPriority3::zeroth, false, false);
 }
  
 int main(void)
@@ -123,13 +137,17 @@ int main(void)
     // myTimer.enableTimer();
 
     Nvic::enableInterrupts();
-    
+
+    testAdc.initializeForPolling((uint32_t)sampleSequencer::SS3, (uint32_t)ssTriggerSource::continousSampling, (uint32_t)ssInputSrc0::AIN0, (uint32_t)ssControl0::END0|(uint32_t)ssControl0::IE0, pollTest);
+    testAdc.enableSampleSequencer();
+
     blueLed.write(set);
     redLed.write(set);
         
     while(1)
     {
-        Nvic::wfi();
+        // Nvic::wfi();
+        testAdc.pollStatus();
     }
 
 }

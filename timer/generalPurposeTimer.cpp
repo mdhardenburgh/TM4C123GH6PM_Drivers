@@ -158,7 +158,7 @@ void GeneralPurposeTimer::initialize(timerMode mode, timerBlock block, uint32_t 
         rawInterruptStatusBit = ((use == timerB) ? 10 : 2);
     }
 
-    interruptClear();
+    clearInterrupt();
 
 }
 
@@ -275,7 +275,7 @@ void GeneralPurposeTimer::pollStatus(void)
 /**
  * @brief clears the interrupt status
  */
-void GeneralPurposeTimer::interruptClear(void)
+void GeneralPurposeTimer::clearInterrupt(void)
 {
     Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMICR_OFFSET)), set, rawInterruptStatusBit, 1, RW1C);
 }

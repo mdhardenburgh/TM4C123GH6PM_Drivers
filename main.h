@@ -9,6 +9,7 @@
 #include "gpio/gpio.h"
 #include "timer/generalPurposeTimer.h"
 #include "pwm/pwm.h"
+#include "adc/adc.h"
 
 
 // Gpio blueLed;

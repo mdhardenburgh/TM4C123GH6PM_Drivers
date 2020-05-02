@@ -87,23 +87,80 @@
 
 #include "../systemControl/systemControl.h"
 
+enum class adcModule : uint32_t{module0, module1};
+
+enum class ssPriority0 : uint32_t{zeroth, first, second, third};
+enum class ssPriority1 : uint32_t{zeroth = 0 << 4, first = 1 << 4, second = 2 << 4, third = 3 << 4};
+enum class ssPriority2 : uint32_t{zeroth = 0 << (2 * 4), first = 1 << (2 * 4), second = 2 << (2 * 4), third = 3 << (2 * 4)};
+enum class ssPriority3 : uint32_t{zeroth = 0 << (3 * 4), first = 1 << (3 * 4), second = 2 << (3 * 4), third = 3 << (3 * 4)};
+
+/**
+ * Samples and FIFO Depth
+ * SS0 = 8, SS1 = 4, SS2 = 4, SS3 = 1
+ */
+enum class sampleSequencer : uint32_t{SS0, SS1, SS2, SS3};
+
+enum class ssTriggerSource : uint32_t{processor = 0x0, analogComparator0 = 0x1, analogComparator1 = 0x2, gpio = 0x4, timer = 0x5, pwmGen0 = 0x6, pwmGen1 = 0x7, pwmGen2 = 0x8, pwmGen3 = 0x9, continousSampling = 0xF};
+// enum class ssTriggerSource1 : uint32_t{processor = 0x0 << 4, analogComparator0 = 0x1 << 4, analogComparator1 = 0x2 << 4, gpio = 0x4 << 4, timer = 0x5 << 4, pwmGen0 = 0x6 << 4, pwmGen1 = 0x7 << 4, pwmGen2 = 0x8 << 4, pwmGen3 = 0x9 << 4, continousSampling = 0xF << 4};
+// enum class ssTriggerSource2 : uint32_t{processor = 0x0 << (4*2), analogComparator0 = 0x1 << (4*2), analogComparator1 = 0x2 << (4*2), gpio = 0x4 << (4*2), timer = 0x5 << (4*2), pwmGen0 = 0x6 << (4*2), pwmGen1 = 0x7 << (4*2), pwmGen2 = 0x8 << (4*2), pwmGen3 = 0x9 << (4*2), continousSampling = 0xF << (4*2)};
+// enum class ssTriggerSource3 : uint32_t{processor = 0x0 << (4*3), analogComparator0 = 0x1 << (4*3), analogComparator1 = 0x2 << (4*3), gpio = 0x4 << (4*3), timer = 0x5 << (4*3), pwmGen0 = 0x6 << (4*3), pwmGen1 = 0x7 << (4*3), pwmGen2 = 0x8 << (4*3), pwmGen3 = 0x9 << (4*3), continousSampling = 0xF << (4*3)};
+
+enum class ssInputSrc0 : uint32_t{AIN0, AIN1, AIN2, AIN3, AIN4, AIN5, AIN6, AIN7, AIN8, AIN9, AIN10, AIN11};
+enum class ssInputSrc1 : uint32_t{AIN0 = (uint32_t)ssInputSrc0::AIN0 << 4, AIN1 = (uint32_t)ssInputSrc0::AIN1 << 4, AIN2 = (uint32_t)ssInputSrc0::AIN2 << 4, AIN3 = (uint32_t)ssInputSrc0::AIN3 << 4, AIN4 = (uint32_t)ssInputSrc0::AIN4 << 4, AIN5 = (uint32_t)ssInputSrc0::AIN5 << 4, AIN6 = (uint32_t)ssInputSrc0::AIN6 << 4, AIN7 = (uint32_t)ssInputSrc0::AIN7 << 4, AIN8 = (uint32_t)ssInputSrc0::AIN8 << 4, AIN9 = (uint32_t)ssInputSrc0::AIN9 << 4, AIN10 = (uint32_t)ssInputSrc0::AIN10 << 4, AIN11 = (uint32_t)ssInputSrc0::AIN11 << 4};
+enum class ssInputSrc2 : uint32_t{AIN0 = (uint32_t)ssInputSrc0::AIN0 << (4*2), AIN1 = (uint32_t)ssInputSrc0::AIN1 << (4*2), AIN2 = (uint32_t)ssInputSrc0::AIN2 << (4*2), AIN3 = (uint32_t)ssInputSrc0::AIN3 << (4*2), AIN4 = (uint32_t)ssInputSrc0::AIN4 << (4*2), AIN5 = (uint32_t)ssInputSrc0::AIN5 << (4*2), AIN6 = (uint32_t)ssInputSrc0::AIN6 << (4*2), AIN7 = (uint32_t)ssInputSrc0::AIN7 << (4*2), AIN8 = (uint32_t)ssInputSrc0::AIN8 << (4*2), AIN9 = (uint32_t)ssInputSrc0::AIN9 << (4*2), AIN10 = (uint32_t)ssInputSrc0::AIN10 << (4*2), AIN11 = (uint32_t)ssInputSrc0::AIN11 << (4*2)};
+enum class ssInputSrc3 : uint32_t{AIN0 = (uint32_t)ssInputSrc0::AIN0 << (4*3), AIN1 = (uint32_t)ssInputSrc0::AIN1 << (4*3), AIN2 = (uint32_t)ssInputSrc0::AIN2 << (4*3), AIN3 = (uint32_t)ssInputSrc0::AIN3 << (4*3), AIN4 = (uint32_t)ssInputSrc0::AIN4 << (4*3), AIN5 = (uint32_t)ssInputSrc0::AIN5 << (4*3), AIN6 = (uint32_t)ssInputSrc0::AIN6 << (4*3), AIN7 = (uint32_t)ssInputSrc0::AIN7 << (4*3), AIN8 = (uint32_t)ssInputSrc0::AIN8 << (4*3), AIN9 = (uint32_t)ssInputSrc0::AIN9 << (4*3), AIN10 = (uint32_t)ssInputSrc0::AIN10 << (4*3), AIN11 = (uint32_t)ssInputSrc0::AIN11 << (4*3)};
+enum class ssInputSrc4 : uint32_t{AIN0 = (uint32_t)ssInputSrc0::AIN0 << (4*4), AIN1 = (uint32_t)ssInputSrc0::AIN1 << (4*4), AIN2 = (uint32_t)ssInputSrc0::AIN2 << (4*4), AIN3 = (uint32_t)ssInputSrc0::AIN3 << (4*4), AIN4 = (uint32_t)ssInputSrc0::AIN4 << (4*4), AIN5 = (uint32_t)ssInputSrc0::AIN5 << (4*4), AIN6 = (uint32_t)ssInputSrc0::AIN6 << (4*4), AIN7 = (uint32_t)ssInputSrc0::AIN7 << (4*4), AIN8 = (uint32_t)ssInputSrc0::AIN8 << (4*4), AIN9 = (uint32_t)ssInputSrc0::AIN9 << (4*4), AIN10 = (uint32_t)ssInputSrc0::AIN10 << (4*4), AIN11 = (uint32_t)ssInputSrc0::AIN11 << (4*4)};
+enum class ssInputSrc5 : uint32_t{AIN0 = (uint32_t)ssInputSrc0::AIN0 << (4*5), AIN1 = (uint32_t)ssInputSrc0::AIN1 << (4*5), AIN2 = (uint32_t)ssInputSrc0::AIN2 << (4*5), AIN3 = (uint32_t)ssInputSrc0::AIN3 << (4*5), AIN4 = (uint32_t)ssInputSrc0::AIN4 << (4*5), AIN5 = (uint32_t)ssInputSrc0::AIN5 << (4*5), AIN6 = (uint32_t)ssInputSrc0::AIN6 << (4*5), AIN7 = (uint32_t)ssInputSrc0::AIN7 << (4*5), AIN8 = (uint32_t)ssInputSrc0::AIN8 << (4*5), AIN9 = (uint32_t)ssInputSrc0::AIN9 << (4*5), AIN10 = (uint32_t)ssInputSrc0::AIN10 << (4*5), AIN11 = (uint32_t)ssInputSrc0::AIN11 << (4*5)};
+enum class ssInputSrc6 : uint32_t{AIN0 = (uint32_t)ssInputSrc0::AIN0 << (4*6), AIN1 = (uint32_t)ssInputSrc0::AIN1 << (4*6), AIN2 = (uint32_t)ssInputSrc0::AIN2 << (4*6), AIN3 = (uint32_t)ssInputSrc0::AIN3 << (4*6), AIN4 = (uint32_t)ssInputSrc0::AIN4 << (4*6), AIN5 = (uint32_t)ssInputSrc0::AIN5 << (4*6), AIN6 = (uint32_t)ssInputSrc0::AIN6 << (4*6), AIN7 = (uint32_t)ssInputSrc0::AIN7 << (4*6), AIN8 = (uint32_t)ssInputSrc0::AIN8 << (4*6), AIN9 = (uint32_t)ssInputSrc0::AIN9 << (4*6), AIN10 = (uint32_t)ssInputSrc0::AIN10 << (4*6), AIN11 = (uint32_t)ssInputSrc0::AIN11 << (4*6)};
+enum class ssInputSrc7 : uint32_t{AIN0 = (uint32_t)ssInputSrc0::AIN0 << (4*7), AIN1 = (uint32_t)ssInputSrc0::AIN1 << (4*7), AIN2 = (uint32_t)ssInputSrc0::AIN2 << (4*7), AIN3 = (uint32_t)ssInputSrc0::AIN3 << (4*7), AIN4 = (uint32_t)ssInputSrc0::AIN4 << (4*7), AIN5 = (uint32_t)ssInputSrc0::AIN5 << (4*7), AIN6 = (uint32_t)ssInputSrc0::AIN6 << (4*7), AIN7 = (uint32_t)ssInputSrc0::AIN7 << (4*7), AIN8 = (uint32_t)ssInputSrc0::AIN8 << (4*7), AIN9 = (uint32_t)ssInputSrc0::AIN9 << (4*7), AIN10 = (uint32_t)ssInputSrc0::AIN10 << (4*7), AIN11 = (uint32_t)ssInputSrc0::AIN11 << (4*7)};
+
+enum class ssControl0 : uint32_t{D0 = 0x1, END0 = 0x1 << 1, IE0 = 0x1 << 2, TS0 = 0x1 << 3};
+enum class ssControl1 : uint32_t{D1 = (uint32_t)ssControl0::D0 << 4, END1 = (uint32_t)ssControl0::END0 << 4, IE1 = (uint32_t)ssControl0::IE0 << 4, TS1 = (uint32_t)ssControl0::TS0 << 4};
+enum class ssControl2 : uint32_t{D2 = (uint32_t)ssControl0::D0 << (4*2), END2 = (uint32_t)ssControl0::END0 << (4*2), IE2 = (uint32_t)ssControl0::IE0 << (4*2), TS2 = (uint32_t)ssControl0::TS0 << (4*2)};
+enum class ssControl3 : uint32_t{D3 = (uint32_t)ssControl0::D0 << (4*3), END3 = (uint32_t)ssControl0::END0 << (4*3), IE3 = (uint32_t)ssControl0::IE0 << (4*3), TS3 = (uint32_t)ssControl0::TS0 << (4*3)};
+enum class ssControl4 : uint32_t{D4 = (uint32_t)ssControl0::D0 << (4*4), END4 = (uint32_t)ssControl0::END0 << (4*4), IE4 = (uint32_t)ssControl0::IE0 << (4*4), TS4 = (uint32_t)ssControl0::TS0 << (4*4)};
+enum class ssControl5 : uint32_t{D5 = (uint32_t)ssControl0::D0 << (4*5), END5 = (uint32_t)ssControl0::END0 << (4*5), IE5 = (uint32_t)ssControl0::IE0 << (4*5), TS5 = (uint32_t)ssControl0::TS0 << (4*5)};
+enum class ssControl6 : uint32_t{D6 = (uint32_t)ssControl0::D0 << (4*6), END6 = (uint32_t)ssControl0::END0 << (4*6), IE6 = (uint32_t)ssControl0::IE0 << (4*6), TS6 = (uint32_t)ssControl0::TS0 << (4*6)};
+enum class ssControl7 : uint32_t{D7 = (uint32_t)ssControl0::D0 << (4*7), END7 = (uint32_t)ssControl0::END0 << (4*7), IE7 = (uint32_t)ssControl0::IE0 << (4*7), TS7 = (uint32_t)ssControl0::TS0 << (4*7)};
+
 class Adc
 {
     public:
         Adc();
         ~Adc();
 
-        static const uint32_t AIN0_PE3_AF = 0; // AIN0 6 PE3 I Analog Analog-to-digital converter input 0.
-        static const uint32_t AIN1_PE4_AF = 0; // AIN1 7 PE2 I Analog Analog-to-digital converter input 1.
-        static const uint32_t AIN2_PE1_AF = 0; // AIN2 8 PE1 I Analog Analog-to-digital converter input 2.
-        static const uint32_t AIN3_PE0_AF = 0; // AIN3 9 PE0 I Analog Analog-to-digital converter input 3.
-        static const uint32_t AIN4_PD3_AF = 0; // AIN4 64 PD3 I Analog Analog-to-digital converter input 4.
-        static const uint32_t AIN5_PD2_AF = 0; // AIN5 63 PD2 I Analog Analog-to-digital converter input 5.
-        static const uint32_t AIN6_PD1_AF = 0; // AIN6 62 PD1 I Analog Analog-to-digital converter input 6.
-        static const uint32_t AIN7_PD0_AF = 0; // AIN7 61 PD0 I Analog Analog-to-digital converter input 7.
-        static const uint32_t AIN8_PE5_AF = 0; // AIN8 60 PE5 I Analog Analog-to-digital converter input 8.
+        void initializeModule(uint32_t adcModule, uint32_t sequencerPriority, uint32_t hardwareAveraging, uint32_t phaseDelay);
+
+        void initializeForPolling(uint32_t sampleSequencer, uint32_t sequencerTrigSrc, uint32_t inputSource, uint32_t sequencerControl, void (*action)(void));
+        void initializeForInterrupt(uint32_t sampleSequencer, uint32_t sequencerTrigSrc, uint32_t inputSource, uint32_t sequencerControl, uint32_t interruptPriority);
+        void enableSampleSequencer(void);
+
+        void initializeDigitalComparator(void);
+
+        void pollStatus(void);
+        // void initializeDmaOperation(void);
+
+        void softwareTriger(void);
+
+        uint32_t getAdcSample(void);
+        void clearInterrupt(void);
+
 
     private:
+
+        void initialization(void);
+
+        void (*action)(void);
+
+        uint32_t baseAddress;
+        uint32_t adcModule;
+        uint32_t sampleSequencer;
+        uint32_t sequencerPriority;
+        uint32_t sequencerTrigSrc;
+        uint32_t inputSource;
+        uint32_t sequencerControl;
+
+        static const uint32_t ssOffset = 0x20;
 
         static const uint32_t adc0BaseAddress = 0x40038000; // ADC block 0 base address
         static const uint32_t adc1BaseAddress = 0x40039000; // ADC block 1 base address
