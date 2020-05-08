@@ -1,12 +1,11 @@
 # TM4C123GH6PM Drivers
-Drivers for the Texas Instruments Tiva C ARM 4F TM4C123GH6PM 
-microcontroller. It is designed to be easy to use, similar to an arduino,
-however knowledge of pointers and memory management is reccommended. This project
-is written in C++.
+Drivers for the Texas Instruments Tiva C ARM 4F TM4C123GH6PM microcontroller. 
+It is designed to be easy to use, similar to an arduino, however knowledge of 
+pointers and memory management is reccommended. This project is written in C++.
 
 # How to use
 [ARM GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads) is required to build this project. [OpenOCD](http://openocd.org/) is required to 
-download main.elf to the board. Both are freely available to download and install
+download main.elf to the board. Both are freely available to download and install.
 
 You will probably have to add both openOCD and the ARM GNU Toolchain bin folder to your path
 
@@ -25,9 +24,10 @@ The command `arm-none-eabi-gdb main.elf` can be used to access the debugger.
 * The rest of the GDB commands are the same
 
 # Progress
+
 ## Disclaimer
 This project is a work in progress. Class names, function names, enum names, etc..
-may change with out notice at any time. 
+may change, with out notice, at any time. 
 
 ## Functional Peripherals
 * NVIC Interrupts
@@ -37,8 +37,10 @@ may change with out notice at any time.
 * PWM can be initilized for single and double ended complementary mode.
 * ADC polling
 
-## In Progress
-* ADC: more testing and complete adc interrupt implementation
+## In Progress, To Do's
+* Further test the ADC polling function
+* Test the ADC interrupt function
+* Implement the `void initializeDigitalComparator(void);` functionality
 
 ## Planned in no specific order
 * µDMA
