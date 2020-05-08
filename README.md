@@ -1,19 +1,21 @@
 # TM4C123GH6PM Drivers
-## Drivers for the Texas Instruments Tiva C TM4C123GH6PM microcontroller.
-
-Drivers for the Texas Instruments Tiva C TM4C123GH6PM 
+Drivers for the Texas Instruments Tiva C ARM 4F TM4C123GH6PM 
 microcontroller. It is designed to be easy to use, similar to an arduino,
-however knowledge of pointers and memory management is reccommended.
+however knowledge of pointers and memory management is reccommended. This project
+is written in C++.
 
+# How to use
 [ARM GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads) is required to build this project. [OpenOCD](http://openocd.org/) is required to 
 download main.elf to the board. Both are freely available to download and install
 
-To compile the project use navigate to the project directory in a terminal and
+You will probably have to add both openOCD and the ARM GNU Toolchain bin folder to your path
+
+To build the example main, navigate to the project directory in a terminal and
 use the command `make`.
 
-Next use the command `openocd -f board/ek-tm4c123gxl.cfg -c "program main.elf"`
+Use the command `openocd -f board/ek-tm4c123gxl.cfg -c "program main.elf"`
 to download the code to the board. Hit the reset switch to reset the processor to
-see the code in action.
+see the example code in action.
 
 The command `arm-none-eabi-gdb main.elf` can be used to access the debugger. 
 * Use the command `target extended-remote:3333` to connect to the board
@@ -22,15 +24,21 @@ The command `arm-none-eabi-gdb main.elf` can be used to access the debugger.
 * Use the command `monitor reset init` to restart the processor
 * The rest of the GDB commands are the same
 
+# Progress
+## Disclaimer
+This project is a work in progress. Class names, function names, enum names, etc..
+may change with out notice at any time. 
+
 ## Functional Peripherals
 * NVIC Interrupts
 * PLL system clock for different clock speeds
 * GPIO, GPIO interrupt on both edges
 * 16/32-bit and 32/64-bit General Purpose Timer in oneshot and periodic mode
 * PWM can be initilized for single and double ended complementary mode.
+* ADC polling
 
 ## In Progress
-* ADC: Planning implementation
+* ADC: more testing and complete adc interrupt implementation
 
 ## Planned in no specific order
 * µDMA
@@ -50,7 +58,27 @@ The command `arm-none-eabi-gdb main.elf` can be used to access the debugger.
     * Flash
 * Hibernate
 * Watchdog
+* Examples folder
 
 # Test program
-
 Main contains a very simple example program of how to use the drivers.
+
+# License
+All code is under the the GPl v3 License. Please the read the associated LICENSE
+file for an in depth licensing agreement
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see https://www.gnu.org/licenses/.
+
+# Copyright
+Copyright Matthew Hardenburgh 2020. All rights reserved.
