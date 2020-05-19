@@ -44,8 +44,9 @@ may change, with out notice, at any time.
 
 ## Planned in no specific order
 * µDMA
-* GPIO: Poll raw interrupt status
-* GPIO: interrupt on a single edge
+* GPIO
+    * Poll raw interrupt status
+    * interrupt on a single edge
 * USB
 * UART
 * SPI

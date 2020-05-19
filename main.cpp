@@ -42,6 +42,7 @@ Gpio adcPin;
 
 Pwm greenPwm;
 
+uint32_t sequencerPriority = (uint32_t)ssPriority0::third|(uint32_t)ssPriority1::second|(uint32_t)ssPriority2::first|(uint32_t)ssPriority3::zeroth;
 Adc testAdc;
 
 // GeneralPurposeTimer myTimer;
@@ -65,25 +66,25 @@ extern "C" void GPIO_Port_F_Handler(void)
     
     if(swtich1.read() == 1)
     {
-        redLed.write(clear);
+        redLed.write((uint32_t)setORClear::clear);
         swtich1.interruptClear();
     }
 
     if(swtich1.read() == 0)
     {
-        redLed.write(set);
+        redLed.write((uint32_t)setORClear::set);
         swtich1.interruptClear();
     }
 
     if(swtich2.read() == 1)
     {
-        blueLed.write(clear);
+        blueLed.write((uint32_t)setORClear::clear);
         swtich2.interruptClear();
     }
 
     if(swtich2.read() == 0)
     {
-        blueLed.write(set);
+        blueLed.write((uint32_t)setORClear::set);
         swtich2.interruptClear();
     }
 
@@ -122,7 +123,7 @@ extern "C" void SystemInit(void)
 
     greenPwm.initializeSingle(7, module1, 0xFFFF, 0xFFFF/2, 0x1, countDirectionPwm::down, (uint32_t)ACTZERO::invertPwm, true, (uint32_t)pwmUnitClockDivisor::_64);
 
-    testAdc.initializeModule((uint32_t)adcModule::module0, (uint32_t)ssPriority0::third|(uint32_t)ssPriority1::second|(uint32_t)ssPriority2::first|(uint32_t)ssPriority3::zeroth, false, false);
+    testAdc.initializeModule((uint32_t)adcModule::module0, sequencerPriority, false, false);
 }
  
 int main(void)
@@ -141,8 +142,8 @@ int main(void)
     testAdc.initializeForPolling((uint32_t)sampleSequencer::SS3, (uint32_t)ssTriggerSource::continousSampling, (uint32_t)ssInputSrc0::AIN0, (uint32_t)ssControl0::END0|(uint32_t)ssControl0::IE0, pollTest);
     testAdc.enableSampleSequencer();
 
-    blueLed.write(set);
-    redLed.write(set);
+    blueLed.write((uint32_t)setORClear::set);
+    redLed.write((uint32_t)setORClear::set);
         
     while(1)
     {

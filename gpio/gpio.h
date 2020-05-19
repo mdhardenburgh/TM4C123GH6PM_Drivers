@@ -207,7 +207,7 @@ class Gpio
         void initialize(uint32_t gpio, direction dir);
         void initialize(uint32_t gpio, direction dir, uint32_t interruptPriority);
         void interruptClear();
-        void write(setORClear value);
+        void write(uint32_t value);
         uint32_t read();
 
     private:

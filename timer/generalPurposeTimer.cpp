@@ -85,14 +85,14 @@ void GeneralPurposeTimer::initialize(timerMode mode, timerBlock block, uint32_t 
     baseAddress = timerBaseAddresses[block];
 
     //0. Enable the clock for the timer
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RCGCnTIMER_OFFSET[block/6])), set, (block%6), 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RCGCnTIMER_OFFSET[block/6])), (uint32_t)setORClear::set, (block%6), 1, RW);
     while(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + PRnTIMER_OFFSET[block/6])), (block%6), 1, RO) == 0)
     {
         //Ready?
     }
 
     //1. Disbale the timer before making any changes
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMCTL_OFFSET)), clear, (use%2)*8, 1, RW); //disable the timer
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMCTL_OFFSET)), (uint32_t)setORClear::clear, (use%2)*8, 1, RW); //disable the timer
     if((mode == oneShot) || (mode == periodic))
     {
         rawInterruptStatusBit = ((use == timerB) ? 8 : 0);
@@ -124,7 +124,7 @@ void GeneralPurposeTimer::initialize(timerMode mode, timerBlock block, uint32_t 
             {
                 // GPTMTAILR.setRegisterBitFieldStatus(GPTMTAILR_TAILR, clockCycles);
                 Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTAILR_OFFSET)), clockCycles, 0, 32, RW); //This is where the problems begin with reg B
-                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTAPR_OFFSET)), clear, 0, 8, RW);
+                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMTAPR_OFFSET)), (uint32_t)setORClear::clear, 0, 8, RW);
 
             }
 
@@ -200,7 +200,7 @@ void GeneralPurposeTimer::initializeForInterupt(timerMode mode, timerBlock block
 {
     initialize(mode, block, clockCycles, dir, use);
     
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMIMR_OFFSET)), set, rawInterruptStatusBit, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMIMR_OFFSET)), (uint32_t)setORClear::set, rawInterruptStatusBit, 1, RW);
 
     switch (block)
     {
@@ -265,7 +265,7 @@ void GeneralPurposeTimer::initializeForInterupt(timerMode mode, timerBlock block
  */
 void GeneralPurposeTimer::pollStatus(void)
 {
-    if(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMRIS_OFFSET)), rawInterruptStatusBit, 1, RO) == set)
+    if(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMRIS_OFFSET)), rawInterruptStatusBit, 1, RO) == (uint32_t)setORClear::set)
     {
         action();
     }
@@ -277,7 +277,7 @@ void GeneralPurposeTimer::pollStatus(void)
  */
 void GeneralPurposeTimer::clearInterrupt(void)
 {
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMICR_OFFSET)), set, rawInterruptStatusBit, 1, RW1C);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMICR_OFFSET)), (uint32_t)setORClear::set, rawInterruptStatusBit, 1, RW1C);
 }
 
 /**
@@ -286,5 +286,5 @@ void GeneralPurposeTimer::clearInterrupt(void)
  */
 void GeneralPurposeTimer::enableTimer(void)
 {
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMCTL_OFFSET)), set, (use%2)*8, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + GPTMCTL_OFFSET)), (uint32_t)setORClear::set, (use%2)*8, 1, RW);
 }

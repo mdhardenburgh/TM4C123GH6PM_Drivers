@@ -95,11 +95,11 @@ void Pwm::initializeSingle(uint32_t pwmPin, pwmModule module, uint32_t period, u
     Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CMPB_OFFSET + (0x40 * myPwmGen))), compB, 0, 15+1, RW);
 
     //6. Enable PWM
-    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CTL_OFFSET + (0x40 * myPwmGen))), set, 0, 1, RW);
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CTL_OFFSET + (0x40 * myPwmGen))), (uint32_t)setORClear::set, 0, 1, RW);
 
     //7. Enable PWM output.
     // Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + PWMENABLE_OFFSET), set, 0 + ((myPwmGen*2)+(((pwmPin%2) * 4)/4)), 1, RW); //(uint32_t)output >> 2
-    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + PWMENABLE_OFFSET), set, pwmPin, 1, RW); //(uint32_t)output >> 2
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + PWMENABLE_OFFSET), (uint32_t)setORClear::set, pwmPin, 1, RW); //(uint32_t)output >> 2
 
 }
 
@@ -165,7 +165,7 @@ void Pwm::initializePair(uint32_t pwmPin, pwmModule module, uint32_t period, uin
     Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CMPB_OFFSET + (0x40 * myPwmGen))), compB, 0, 15+1, RW);
 
     //6. Enable PWM
-    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CTL_OFFSET + (0x40 * myPwmGen))), set, 0, 1, RW);
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CTL_OFFSET + (0x40 * myPwmGen))), (uint32_t)setORClear::set, 0, 1, RW);
 
     //7. Enable PWM output.
     Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWMENABLE_OFFSET + (0x40 * myPwmGen))), 0x3, pwmPin, 2, RW); 
@@ -187,7 +187,7 @@ void Pwm::initialize(pwmModule module, uint32_t period, countDirectionPwm countD
     baseAddress = pwm0BaseAddress + (module * 0x1000);
     
     //0. Enable the clock for PWM
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RCGCPWM_OFFSET)), set, module, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RCGCPWM_OFFSET)), (uint32_t)setORClear::set, module, 1, RW);
     while(Register::getRegisterBitFieldStatus((volatile uint32_t*)(systemControlBase + PRPWM_OFFSET), module, 1, RO) == 0)
     {
         //Ready??
@@ -195,14 +195,14 @@ void Pwm::initialize(pwmModule module, uint32_t period, countDirectionPwm countD
 
     // Clear count register by reseting PWM
 
-    Register::setRegisterBitFieldStatus((volatile uint32_t*)(systemControlBase + SRPWM_OFFSET), set, module, 1, RW);
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(systemControlBase + SRPWM_OFFSET), (uint32_t)setORClear::set, module, 1, RW);
 
     for(uint32_t i = 0; i < 100; i++)
     {
         //wait
     }
 
-    Register::setRegisterBitFieldStatus((volatile uint32_t*)(systemControlBase + SRPWM_OFFSET), clear, module, 1, RW);
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(systemControlBase + SRPWM_OFFSET), (uint32_t)setORClear::clear, module, 1, RW);
 
     while(Register::getRegisterBitFieldStatus((volatile uint32_t*)(systemControlBase + PRPWM_OFFSET), module, 1, RO) == 0)
     {
@@ -212,7 +212,7 @@ void Pwm::initialize(pwmModule module, uint32_t period, countDirectionPwm countD
     if(enablePwmDiv == true)
     {
         //1a. Configure the Run-Mode Clock Configuration (RCC) register in the System Control module to use the PWM divide (USEPWMDIV).
-        Register::setRegisterBitFieldStatus((volatile uint32_t*)(systemControlBase + RCC_OFFSET), set, 20, 1, RW);
+        Register::setRegisterBitFieldStatus((volatile uint32_t*)(systemControlBase + RCC_OFFSET), (uint32_t)setORClear::set, 20, 1, RW);
         //1b. Set the divider (PWMDIV).
         Register::setRegisterBitFieldStatus((volatile uint32_t*)(systemControlBase + RCC_OFFSET), divisor, 17, (19-17)+1, RW);
     }
@@ -220,8 +220,8 @@ void Pwm::initialize(pwmModule module, uint32_t period, countDirectionPwm countD
     //2. Configure the PWM generator for countdown mode with immediate updates to the parameters.
 
     //2a. Write the PWMnCTL register with a value of 0x0000.0000 to clear it.
-    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CTL_OFFSET + (0x40 * myPwmGen))), clear, 0, 1, RW);
-    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CTL_OFFSET + (0x40 * myPwmGen))), set, 2, 1, RW);
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CTL_OFFSET + (0x40 * myPwmGen))), (uint32_t)setORClear::clear, 0, 1, RW);
+    Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CTL_OFFSET + (0x40 * myPwmGen))), (uint32_t)setORClear::set, 2, 1, RW);
 
     //Set count direction
     Register::setRegisterBitFieldStatus((volatile uint32_t*)(baseAddress + (PWM0CTL_OFFSET + (0x40 * myPwmGen))), (uint32_t)countDir, 3, 1, RW);

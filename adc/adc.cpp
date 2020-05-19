@@ -50,7 +50,7 @@ void Adc::initializeModule(uint32_t adcModule, uint32_t sequencerPriority, uint3
     baseAddress = adc0BaseAddress + (adcModule * 0x1000);
 
     //0. Enable ADC module clock
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RCGCADC_OFFSET)), set, adcModule, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RCGCADC_OFFSET)), (uint32_t)setORClear::set, adcModule, 1, RW);
     while(Register::getRegisterBitFieldStatus((volatile uint32_t*)(systemControlBase + PRADC_OFFSET), adcModule, 1, RO) == 0)
     {
         //Ready??
@@ -68,6 +68,7 @@ void Adc::initializeModule(uint32_t adcModule, uint32_t sequencerPriority, uint3
     }
 
     Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSAC_OFFSET)), hardwareAveraging, 0, 2 + 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCCTL_OFFSET)), hardwareAveraging == 0 ? 0x0 : 0x1, 6, 1, RW);
     Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSPC_OFFSET)), phaseDelay, 0, 3 + 1, RW);
     
 }
@@ -96,7 +97,7 @@ void Adc::initializeForInterrupt(uint32_t sampleSequencer, uint32_t sequencerTri
     (*this).inputSource = inputSource;
     (*this).sequencerControl = sequencerControl;
     initialization();
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCIM_OFFSET)), set, sampleSequencer, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCIM_OFFSET)), (uint32_t)setORClear::set, sampleSequencer, 1, RW);
 
     if(adcModule == (uint32_t)adcModule::module0)
     {
@@ -153,20 +154,83 @@ void Adc::initializeForInterrupt(uint32_t sampleSequencer, uint32_t sequencerTri
 
 void Adc::enableSampleSequencer(void)
 {
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCACTSS_OFFSET)), set, sampleSequencer, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCACTSS_OFFSET)), (uint32_t)setORClear::set, sampleSequencer, 1, RW);
+}
+
+void Adc::enableSampleSequencerDc(uint32_t dcOperation, uint32_t dcSelect)
+{
+    if(sampleSequencer == (uint32_t)sampleSequencer::SS0)
+    {
+        for(uint32_t i = 0; i < 8; i++)
+        {
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSSOP0_OFFSET)), dcOperation >> (4*i), 4*i, 1, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSSDC0_OFFSET)), dcSelect >> (4*i), 4*i, 4, RW);
+        }
+    }
+
+    else if(sampleSequencer == (uint32_t)sampleSequencer::SS1)
+    {
+        for(uint32_t i = 0; i < 4; i++)
+        {
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSSOP1_OFFSET)), dcOperation >> (4*i), 4*i, 1, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSSDC1_OFFSET)), dcSelect >> (4*i), 4*i, 4, RW);
+        }
+    }
+
+    else if(sampleSequencer == (uint32_t)sampleSequencer::SS2)
+    {
+        for(uint32_t i = 0; i < 4; i++)
+        {
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSSOP2_OFFSET)), dcOperation >> (4*i), 4*i, 1, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSSDC2_OFFSET)), dcSelect >> (4*i), 4*i, 4, RW);
+        }
+    }
+
+    else if(sampleSequencer == (uint32_t)sampleSequencer::SS3)
+    {
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSSOP3_OFFSET)), dcOperation, 0, 1, RW);
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSSDC3_OFFSET)), dcSelect, 0, 4, RW);
+
+    }
+}
+
+void Adc::initializeDc(uint32_t adcModule, uint32_t dc, uint32_t bitField, uint32_t highBand, uint32_t lowBand)
+{
+    uint32_t dcCtlAddress = (adc0BaseAddress + (adcModule * 0x1000) + (ADCDCCTL0_OFFSET + dc*0x4));
+    uint32_t dcCmpAddress = (adc0BaseAddress + (adcModule * 0x1000) + (ADCDCCMP0_OFFSET + dc*0x4));
+
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), bitField, 0, 2, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), bitField >> 2, 2, 2, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), bitField >> 4, 4, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), bitField >> 8, 8, 2, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), bitField >> 10, 10, 2, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), bitField >> 12, 12, 1, RW);
+
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCmpAddress), lowBand, 0, 11 + 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCmpAddress), highBand, 16, 27 - 16 + 1, RW);
+
 }
 
 void Adc::pollStatus(void)
 {
-    if(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCRIS_OFFSET)), sampleSequencer, 1, RO) == set)
+    if(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCRIS_OFFSET)), sampleSequencer, 1, RO) == (uint32_t)setORClear::set)
     {
         action();
     }
 }
 
+void Adc::pollDigitalComparator(void)
+{
+    if(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCRIS_OFFSET)), 16, 1, RO) == (uint32_t)setORClear::set)
+    {
+        action();
+    }
+}
+
+
 void Adc::softwareTriger(void)
 {
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCPSSI_OFFSET)), set, sampleSequencer, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCPSSI_OFFSET)), (uint32_t)setORClear::set, sampleSequencer, 1, RW);
 }
 
 uint32_t Adc::getAdcSample(void)
@@ -176,7 +240,17 @@ uint32_t Adc::getAdcSample(void)
 
 void Adc::clearInterrupt(void)
 {
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCISC_OFFSET)), set, sampleSequencer, 1, RW1C);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCISC_OFFSET)), (uint32_t)setORClear::set, sampleSequencer, 1, RW1C);
+}
+
+uint32_t Adc::getDcInterruptStatus(uint32_t adcModule, uint32_t digitalComparator)
+{
+    return(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(adc0BaseAddress + (adcModule * 0x1000) + ADCDCISC_OFFSET)), digitalComparator, 1, RW1C));
+}
+
+void Adc::clearDcInterrupt(uint32_t adcModule, uint32_t digitalComparator)
+{
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adc0BaseAddress + (adcModule * 0x1000) + ADCDCISC_OFFSET)), (uint32_t)setORClear::set , digitalComparator, 1, RW1C);
 }
 
 /**
@@ -207,7 +281,7 @@ void Adc::initialization(void)
      * sequencer during programming prevents erroneous execution if a trigger
      * event were to occur during the configuration process.
      */
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCACTSS_OFFSET)), clear, sampleSequencer, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCACTSS_OFFSET)), (uint32_t)setORClear::clear, sampleSequencer, 1, RW);
 
     /*
      * 1.A When using a PWM generator as the trigger source, use the ADC 

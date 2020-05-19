@@ -114,7 +114,7 @@ enum class ssInputSrc5 : uint32_t{AIN0 = (uint32_t)ssInputSrc0::AIN0 << (4*5), A
 enum class ssInputSrc6 : uint32_t{AIN0 = (uint32_t)ssInputSrc0::AIN0 << (4*6), AIN1 = (uint32_t)ssInputSrc0::AIN1 << (4*6), AIN2 = (uint32_t)ssInputSrc0::AIN2 << (4*6), AIN3 = (uint32_t)ssInputSrc0::AIN3 << (4*6), AIN4 = (uint32_t)ssInputSrc0::AIN4 << (4*6), AIN5 = (uint32_t)ssInputSrc0::AIN5 << (4*6), AIN6 = (uint32_t)ssInputSrc0::AIN6 << (4*6), AIN7 = (uint32_t)ssInputSrc0::AIN7 << (4*6), AIN8 = (uint32_t)ssInputSrc0::AIN8 << (4*6), AIN9 = (uint32_t)ssInputSrc0::AIN9 << (4*6), AIN10 = (uint32_t)ssInputSrc0::AIN10 << (4*6), AIN11 = (uint32_t)ssInputSrc0::AIN11 << (4*6)};
 enum class ssInputSrc7 : uint32_t{AIN0 = (uint32_t)ssInputSrc0::AIN0 << (4*7), AIN1 = (uint32_t)ssInputSrc0::AIN1 << (4*7), AIN2 = (uint32_t)ssInputSrc0::AIN2 << (4*7), AIN3 = (uint32_t)ssInputSrc0::AIN3 << (4*7), AIN4 = (uint32_t)ssInputSrc0::AIN4 << (4*7), AIN5 = (uint32_t)ssInputSrc0::AIN5 << (4*7), AIN6 = (uint32_t)ssInputSrc0::AIN6 << (4*7), AIN7 = (uint32_t)ssInputSrc0::AIN7 << (4*7), AIN8 = (uint32_t)ssInputSrc0::AIN8 << (4*7), AIN9 = (uint32_t)ssInputSrc0::AIN9 << (4*7), AIN10 = (uint32_t)ssInputSrc0::AIN10 << (4*7), AIN11 = (uint32_t)ssInputSrc0::AIN11 << (4*7)};
 
-enum class ssControl0 : uint32_t{D0 = 0x1, END0 = 0x1 << 1, IE0 = 0x1 << 2, TS0 = 0x1 << 3};
+enum class ssControl0 : uint32_t{D0 = (uint32_t)setORClear::set, END0 = (uint32_t)setORClear::set << 1, IE0 = (uint32_t)setORClear::set << 2, TS0 = (uint32_t)setORClear::set << 3};
 enum class ssControl1 : uint32_t{D1 = (uint32_t)ssControl0::D0 << 4, END1 = (uint32_t)ssControl0::END0 << 4, IE1 = (uint32_t)ssControl0::IE0 << 4, TS1 = (uint32_t)ssControl0::TS0 << 4};
 enum class ssControl2 : uint32_t{D2 = (uint32_t)ssControl0::D0 << (4*2), END2 = (uint32_t)ssControl0::END0 << (4*2), IE2 = (uint32_t)ssControl0::IE0 << (4*2), TS2 = (uint32_t)ssControl0::TS0 << (4*2)};
 enum class ssControl3 : uint32_t{D3 = (uint32_t)ssControl0::D0 << (4*3), END3 = (uint32_t)ssControl0::END0 << (4*3), IE3 = (uint32_t)ssControl0::IE0 << (4*3), TS3 = (uint32_t)ssControl0::TS0 << (4*3)};
@@ -122,6 +122,28 @@ enum class ssControl4 : uint32_t{D4 = (uint32_t)ssControl0::D0 << (4*4), END4 = 
 enum class ssControl5 : uint32_t{D5 = (uint32_t)ssControl0::D0 << (4*5), END5 = (uint32_t)ssControl0::END0 << (4*5), IE5 = (uint32_t)ssControl0::IE0 << (4*5), TS5 = (uint32_t)ssControl0::TS0 << (4*5)};
 enum class ssControl6 : uint32_t{D6 = (uint32_t)ssControl0::D0 << (4*6), END6 = (uint32_t)ssControl0::END0 << (4*6), IE6 = (uint32_t)ssControl0::IE0 << (4*6), TS6 = (uint32_t)ssControl0::TS0 << (4*6)};
 enum class ssControl7 : uint32_t{D7 = (uint32_t)ssControl0::D0 << (4*7), END7 = (uint32_t)ssControl0::END0 << (4*7), IE7 = (uint32_t)ssControl0::IE0 << (4*7), TS7 = (uint32_t)ssControl0::TS0 << (4*7)};
+
+enum class hardwareAvg : uint32_t{none = (uint32_t)0x0, times2 = (uint32_t)0x1, times4 = (uint32_t)0x2, times8 = (uint32_t)0x3, times16 = (uint32_t)0x4, times32 = (uint32_t)0x5, times64 = (uint32_t)0x6};
+enum class phaseDelay : uint32_t{ _0_0, _22_5, _45, _67_5, _90, _112_5, _135, _157_5, _180, _202_5, _225, _247_5, _270, _292_5, _315, _337_5};
+
+enum class ssDcOperation : uint32_t{S0DCOP = (uint32_t)setORClear::set, S1DCOP = ((uint32_t)ssDcOperation::S0DCOP) << 4, S2DCOP = ((uint32_t)ssDcOperation::S0DCOP << (4*2)), S3DCOP = ((uint32_t)ssDcOperation::S0DCOP << (4*3)), S4DCOP = ((uint32_t)ssDcOperation::S0DCOP << (4*4)), S5DCOP = ((uint32_t)ssDcOperation::S0DCOP << (4*5)), S6DCOP = ((uint32_t)ssDcOperation::S0DCOP << (4*6)), S7DCOP = ((uint32_t)ssDcOperation::S0DCOP << (4*7))};
+
+enum class ssDcSelect0 : uint32_t{dc0, dc1, dc2, dc3, dc4, dc5, dc6, dc7};
+enum class ssDcSelect1 : uint32_t{dc0 = (uint32_t)ssDcSelect0::dc0 << 4, dc1 = (uint32_t)ssDcSelect0::dc1 << 4, dc2 = (uint32_t)ssDcSelect0::dc2 << 4, dc3 = (uint32_t)ssDcSelect0::dc3 << 4, dc4 = (uint32_t)ssDcSelect0::dc4 << 4, dc5 = (uint32_t)ssDcSelect0::dc5 << 4, dc6 = (uint32_t)ssDcSelect0::dc6 << 4, dc7 = (uint32_t)ssDcSelect0::dc7 << 4};
+enum class ssDcSelect2 : uint32_t{dc0 = (uint32_t)ssDcSelect0::dc0 << (4*2), dc1 = (uint32_t)ssDcSelect0::dc1 << (4*2), dc2 = (uint32_t)ssDcSelect0::dc2 << (4*2), dc3 = (uint32_t)ssDcSelect0::dc3 << (4*2), dc4 = (uint32_t)ssDcSelect0::dc4 << (4*2), dc5 = (uint32_t)ssDcSelect0::dc5 << (4*2), dc6 = (uint32_t)ssDcSelect0::dc6 << (4*2), dc7 = (uint32_t)ssDcSelect0::dc7 << (4*2)};
+enum class ssDcSelect3 : uint32_t{dc0 = (uint32_t)ssDcSelect0::dc0 << (4*3), dc1 = (uint32_t)ssDcSelect0::dc1 << (4*3), dc2 = (uint32_t)ssDcSelect0::dc2 << (4*3), dc3 = (uint32_t)ssDcSelect0::dc3 << (4*3), dc4 = (uint32_t)ssDcSelect0::dc4 << (4*3), dc5 = (uint32_t)ssDcSelect0::dc5 << (4*3), dc6 = (uint32_t)ssDcSelect0::dc6 << (4*3), dc7 = (uint32_t)ssDcSelect0::dc7 << (4*3)};
+enum class ssDcSelect4 : uint32_t{dc0 = (uint32_t)ssDcSelect0::dc0 << (4*4), dc1 = (uint32_t)ssDcSelect0::dc1 << (4*4), dc2 = (uint32_t)ssDcSelect0::dc2 << (4*4), dc3 = (uint32_t)ssDcSelect0::dc3 << (4*4), dc4 = (uint32_t)ssDcSelect0::dc4 << (4*4), dc5 = (uint32_t)ssDcSelect0::dc5 << (4*4), dc6 = (uint32_t)ssDcSelect0::dc6 << (4*4), dc7 = (uint32_t)ssDcSelect0::dc7 << (4*4)};
+enum class ssDcSelect5 : uint32_t{dc0 = (uint32_t)ssDcSelect0::dc0 << (4*5), dc1 = (uint32_t)ssDcSelect0::dc1 << (4*5), dc2 = (uint32_t)ssDcSelect0::dc2 << (4*5), dc3 = (uint32_t)ssDcSelect0::dc3 << (4*5), dc4 = (uint32_t)ssDcSelect0::dc4 << (4*5), dc5 = (uint32_t)ssDcSelect0::dc5 << (4*5), dc6 = (uint32_t)ssDcSelect0::dc6 << (4*5), dc7 = (uint32_t)ssDcSelect0::dc7 << (4*5)};
+enum class ssDcSelect6 : uint32_t{dc0 = (uint32_t)ssDcSelect0::dc0 << (4*6), dc1 = (uint32_t)ssDcSelect0::dc1 << (4*6), dc2 = (uint32_t)ssDcSelect0::dc2 << (4*6), dc3 = (uint32_t)ssDcSelect0::dc3 << (4*6), dc4 = (uint32_t)ssDcSelect0::dc4 << (4*6), dc5 = (uint32_t)ssDcSelect0::dc5 << (4*6), dc6 = (uint32_t)ssDcSelect0::dc6 << (4*6), dc7 = (uint32_t)ssDcSelect0::dc7 << (4*6)};
+enum class ssDcSelect7 : uint32_t{dc0 = (uint32_t)ssDcSelect0::dc0 << (4*7), dc1 = (uint32_t)ssDcSelect0::dc1 << (4*7), dc2 = (uint32_t)ssDcSelect0::dc2 << (4*7), dc3 = (uint32_t)ssDcSelect0::dc3 << (4*7), dc4 = (uint32_t)ssDcSelect0::dc4 << (4*7), dc5 = (uint32_t)ssDcSelect0::dc5 << (4*7), dc6 = (uint32_t)ssDcSelect0::dc6 << (4*7), dc7 = (uint32_t)ssDcSelect0::dc7 << (4*7)};
+
+enum class dcControl_CIM : uint32_t{always, once, hysteresisAlways, hysteresisOnce};
+enum class dcControl_CIC : uint32_t{lowBand = 0x0 << 2, midBand = 0x1 << 2, highBand = 0x3 << 2};
+enum class dcControl_CIE : uint32_t{disable = ((uint32_t)setORClear::clear) << 4, enable = ((uint32_t)setORClear::set) << 4};
+enum class dcControl_CTM : uint32_t{always = 0x0 << 8, once = 0x1 << 8, hysteresisAlways = 0x2 << 8, hysteresisOnce = 0x3 << 8};
+enum class dcControl_CTC : uint32_t{owBand = 0x0 << 10, midBand = 0x1 << 10, highBand = 0x3 << 10};
+enum class dcControl_CTE : uint32_t{disable = ((uint32_t)setORClear::clear) << 12, enable = ((uint32_t)setORClear::set) << 12};
+
 
 class Adc
 {
@@ -134,10 +156,12 @@ class Adc
         void initializeForPolling(uint32_t sampleSequencer, uint32_t sequencerTrigSrc, uint32_t inputSource, uint32_t sequencerControl, void (*action)(void));
         void initializeForInterrupt(uint32_t sampleSequencer, uint32_t sequencerTrigSrc, uint32_t inputSource, uint32_t sequencerControl, uint32_t interruptPriority);
         void enableSampleSequencer(void);
+        void enableSampleSequencerDc(uint32_t dcOperation, uint32_t dcSelect);
 
-        void initializeDigitalComparator(void);
+        static void initializeDc(uint32_t adcModule, uint32_t dc, uint32_t bitField, uint32_t highBand, uint32_t lowBand);
 
         void pollStatus(void);
+        void pollDigitalComparator(void);
         // void initializeDmaOperation(void);
 
         void softwareTriger(void);
@@ -145,6 +169,8 @@ class Adc
         uint32_t getAdcSample(void);
         void clearInterrupt(void);
 
+        static uint32_t getDcInterruptStatus(uint32_t adcModule, uint32_t digitalComparator);
+        static void clearDcInterrupt(uint32_t adcModule, uint32_t digitalComparator);
 
     private:
 

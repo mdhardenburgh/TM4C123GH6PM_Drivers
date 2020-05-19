@@ -7,7 +7,15 @@
 	"settings": {
 		"files.associations": {
 			"atomic": "cpp",
-			"cstdint": "cpp"
+			"cstdint": "cpp",
+			"__hash_table": "cpp",
+			"__split_buffer": "cpp",
+			"ios": "cpp",
+			"string": "cpp",
+			"system_error": "cpp",
+			"unordered_map": "cpp",
+			"vector": "cpp",
+			"bitset": "cpp"
 		}
 	}
 }

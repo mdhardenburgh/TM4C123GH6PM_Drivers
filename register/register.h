@@ -55,11 +55,7 @@ using std::uint32_t;
 /**
  * Set or Clear a register bit
  */
-enum setORClear
-{
-    clear = 0u,
-    set = 1u
-};
+enum class setORClear : uint32_t {clear, set};
 
 /**
  * The permission of the bitfield
