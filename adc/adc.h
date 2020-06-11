@@ -164,13 +164,15 @@ class Adc
         void pollDigitalComparator(void);
         // void initializeDmaOperation(void);
 
-        void softwareTriger(void);
+        void initiateSampling(void);
 
         uint32_t getAdcSample(void);
         void clearInterrupt(void);
 
         static uint32_t getDcInterruptStatus(uint32_t adcModule, uint32_t digitalComparator);
         static void clearDcInterrupt(uint32_t adcModule, uint32_t digitalComparator);
+
+        static uint32_t getAdcResolution();
 
     private:
 

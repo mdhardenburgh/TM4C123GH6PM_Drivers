@@ -30,6 +30,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/.
 #include "main.h"
 
 int readme = -1;
+float voltageValue = -1;
+
+uint32_t adcResolution;
 
 Gpio greenLed;
 Gpio blueLed;
@@ -107,6 +110,8 @@ extern "C" void GPIO_Port_F_Handler(void)
 
 void pollTest(void)
 {
+
+    (void)testAdc.getAdcSample(); 
     readme = testAdc.getAdcSample();
     testAdc.clearInterrupt();
 }
@@ -124,6 +129,8 @@ extern "C" void SystemInit(void)
     greenPwm.initializeSingle(7, module1, 0xFFFF, 0xFFFF/2, 0x1, countDirectionPwm::down, (uint32_t)ACTZERO::invertPwm, true, (uint32_t)pwmUnitClockDivisor::_64);
 
     testAdc.initializeModule((uint32_t)adcModule::module0, sequencerPriority, false, false);
+
+    adcResolution = Adc::getAdcResolution();
 }
  
 int main(void)
@@ -139,8 +146,9 @@ int main(void)
 
     Nvic::enableInterrupts();
 
-    testAdc.initializeForPolling((uint32_t)sampleSequencer::SS3, (uint32_t)ssTriggerSource::continousSampling, (uint32_t)ssInputSrc0::AIN0, (uint32_t)ssControl0::END0|(uint32_t)ssControl0::IE0, pollTest);
+    testAdc.initializeForPolling((uint32_t)sampleSequencer::SS3, (uint32_t)ssTriggerSource::processor, (uint32_t)ssInputSrc0::AIN0, (uint32_t)ssControl0::END0|(uint32_t)ssControl0::IE0, pollTest);
     testAdc.enableSampleSequencer();
+    testAdc.initiateSampling();
 
     blueLed.write((uint32_t)setORClear::set);
     redLed.write((uint32_t)setORClear::set);
@@ -149,6 +157,8 @@ int main(void)
     {
         // Nvic::wfi();
         testAdc.pollStatus();
+        voltageValue = (3.3/(1<<adcResolution))*readme;
+        voltageValue = voltageValue;
     }
 
 }

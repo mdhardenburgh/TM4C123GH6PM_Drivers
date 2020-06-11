@@ -228,11 +228,18 @@ void Adc::pollDigitalComparator(void)
 }
 
 
-void Adc::softwareTriger(void)
+void Adc::initiateSampling(void)
 {
     Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCPSSI_OFFSET)), (uint32_t)setORClear::set, sampleSequencer, 1, RW);
 }
 
+/**
+ * @details The way the ADC works is that when the ADC FIFO is read, a new 
+ *          sample is taken. Therefore, data read from the FIFO is n sample(s) 
+ *          behind (FIFO depth depends on the sample sequencer) To get a 
+ *          current value of the signal read n+1 times from the FIFO. In the 
+ *          case of SS3, you read from the FIFO twice.
+ */
 uint32_t Adc::getAdcSample(void)
 {
     return(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + (ADCSSFIFO0_OFFSET + (ssOffset * sampleSequencer)))), 0, 11 + 1, RO));
@@ -252,6 +259,12 @@ void Adc::clearDcInterrupt(uint32_t adcModule, uint32_t digitalComparator)
 {
     Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adc0BaseAddress + (adcModule * 0x1000) + ADCDCISC_OFFSET)), (uint32_t)setORClear::set , digitalComparator, 1, RW1C);
 }
+
+uint32_t Adc::getAdcResolution()
+{
+    return(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(adc0BaseAddress + ADCPP_OFFSET)), 18, 22 - 18 + 1, RO));
+}
+
 
 /**
  * @brief initialize the Sample Sequencer
