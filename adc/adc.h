@@ -87,7 +87,7 @@
 
 #include "../systemControl/systemControl.h"
 
-enum class adcModule : uint32_t{module0, module1};
+enum class adcModules : uint32_t{module0 = 0x40038000, module1 = 0x40039000};
 
 enum class ssPriority0 : uint32_t{zeroth, first, second, third};
 enum class ssPriority1 : uint32_t{zeroth = 0 << 4, first = 1 << 4, second = 2 << 4, third = 3 << 4};
@@ -126,69 +126,35 @@ enum class ssControl7 : uint32_t{D7 = (uint32_t)ssControl0::D0 << (4*7), END7 = 
 enum class hardwareAvg : uint32_t{none = (uint32_t)0x0, times2 = (uint32_t)0x1, times4 = (uint32_t)0x2, times8 = (uint32_t)0x3, times16 = (uint32_t)0x4, times32 = (uint32_t)0x5, times64 = (uint32_t)0x6};
 enum class phaseDelay : uint32_t{ _0_0, _22_5, _45, _67_5, _90, _112_5, _135, _157_5, _180, _202_5, _225, _247_5, _270, _292_5, _315, _337_5};
 
-enum class ssDcOperation : uint32_t{S0DCOP = (uint32_t)setORClear::set, S1DCOP = ((uint32_t)ssDcOperation::S0DCOP) << 4, S2DCOP = ((uint32_t)ssDcOperation::S0DCOP << (4*2)), S3DCOP = ((uint32_t)ssDcOperation::S0DCOP << (4*3)), S4DCOP = ((uint32_t)ssDcOperation::S0DCOP << (4*4)), S5DCOP = ((uint32_t)ssDcOperation::S0DCOP << (4*5)), S6DCOP = ((uint32_t)ssDcOperation::S0DCOP << (4*6)), S7DCOP = ((uint32_t)ssDcOperation::S0DCOP << (4*7))};
+enum class setSampleDcOperation : uint32_t{S0DCOP = (uint32_t)setORClear::set, S1DCOP = ((uint32_t)setSampleDcOperation::S0DCOP) << 4, S2DCOP = ((uint32_t)setSampleDcOperation::S0DCOP << (4*2)), S3DCOP = ((uint32_t)setSampleDcOperation::S0DCOP << (4*3)), S4DCOP = ((uint32_t)setSampleDcOperation::S0DCOP << (4*4)), S5DCOP = ((uint32_t)setSampleDcOperation::S0DCOP << (4*5)), S6DCOP = ((uint32_t)setSampleDcOperation::S0DCOP << (4*6)), S7DCOP = ((uint32_t)setSampleDcOperation::S0DCOP << (4*7))};
 
-enum class ssDcSelect0 : uint32_t{dc0, dc1, dc2, dc3, dc4, dc5, dc6, dc7};
-enum class ssDcSelect1 : uint32_t{dc0 = (uint32_t)ssDcSelect0::dc0 << 4, dc1 = (uint32_t)ssDcSelect0::dc1 << 4, dc2 = (uint32_t)ssDcSelect0::dc2 << 4, dc3 = (uint32_t)ssDcSelect0::dc3 << 4, dc4 = (uint32_t)ssDcSelect0::dc4 << 4, dc5 = (uint32_t)ssDcSelect0::dc5 << 4, dc6 = (uint32_t)ssDcSelect0::dc6 << 4, dc7 = (uint32_t)ssDcSelect0::dc7 << 4};
-enum class ssDcSelect2 : uint32_t{dc0 = (uint32_t)ssDcSelect0::dc0 << (4*2), dc1 = (uint32_t)ssDcSelect0::dc1 << (4*2), dc2 = (uint32_t)ssDcSelect0::dc2 << (4*2), dc3 = (uint32_t)ssDcSelect0::dc3 << (4*2), dc4 = (uint32_t)ssDcSelect0::dc4 << (4*2), dc5 = (uint32_t)ssDcSelect0::dc5 << (4*2), dc6 = (uint32_t)ssDcSelect0::dc6 << (4*2), dc7 = (uint32_t)ssDcSelect0::dc7 << (4*2)};
-enum class ssDcSelect3 : uint32_t{dc0 = (uint32_t)ssDcSelect0::dc0 << (4*3), dc1 = (uint32_t)ssDcSelect0::dc1 << (4*3), dc2 = (uint32_t)ssDcSelect0::dc2 << (4*3), dc3 = (uint32_t)ssDcSelect0::dc3 << (4*3), dc4 = (uint32_t)ssDcSelect0::dc4 << (4*3), dc5 = (uint32_t)ssDcSelect0::dc5 << (4*3), dc6 = (uint32_t)ssDcSelect0::dc6 << (4*3), dc7 = (uint32_t)ssDcSelect0::dc7 << (4*3)};
-enum class ssDcSelect4 : uint32_t{dc0 = (uint32_t)ssDcSelect0::dc0 << (4*4), dc1 = (uint32_t)ssDcSelect0::dc1 << (4*4), dc2 = (uint32_t)ssDcSelect0::dc2 << (4*4), dc3 = (uint32_t)ssDcSelect0::dc3 << (4*4), dc4 = (uint32_t)ssDcSelect0::dc4 << (4*4), dc5 = (uint32_t)ssDcSelect0::dc5 << (4*4), dc6 = (uint32_t)ssDcSelect0::dc6 << (4*4), dc7 = (uint32_t)ssDcSelect0::dc7 << (4*4)};
-enum class ssDcSelect5 : uint32_t{dc0 = (uint32_t)ssDcSelect0::dc0 << (4*5), dc1 = (uint32_t)ssDcSelect0::dc1 << (4*5), dc2 = (uint32_t)ssDcSelect0::dc2 << (4*5), dc3 = (uint32_t)ssDcSelect0::dc3 << (4*5), dc4 = (uint32_t)ssDcSelect0::dc4 << (4*5), dc5 = (uint32_t)ssDcSelect0::dc5 << (4*5), dc6 = (uint32_t)ssDcSelect0::dc6 << (4*5), dc7 = (uint32_t)ssDcSelect0::dc7 << (4*5)};
-enum class ssDcSelect6 : uint32_t{dc0 = (uint32_t)ssDcSelect0::dc0 << (4*6), dc1 = (uint32_t)ssDcSelect0::dc1 << (4*6), dc2 = (uint32_t)ssDcSelect0::dc2 << (4*6), dc3 = (uint32_t)ssDcSelect0::dc3 << (4*6), dc4 = (uint32_t)ssDcSelect0::dc4 << (4*6), dc5 = (uint32_t)ssDcSelect0::dc5 << (4*6), dc6 = (uint32_t)ssDcSelect0::dc6 << (4*6), dc7 = (uint32_t)ssDcSelect0::dc7 << (4*6)};
-enum class ssDcSelect7 : uint32_t{dc0 = (uint32_t)ssDcSelect0::dc0 << (4*7), dc1 = (uint32_t)ssDcSelect0::dc1 << (4*7), dc2 = (uint32_t)ssDcSelect0::dc2 << (4*7), dc3 = (uint32_t)ssDcSelect0::dc3 << (4*7), dc4 = (uint32_t)ssDcSelect0::dc4 << (4*7), dc5 = (uint32_t)ssDcSelect0::dc5 << (4*7), dc6 = (uint32_t)ssDcSelect0::dc6 << (4*7), dc7 = (uint32_t)ssDcSelect0::dc7 << (4*7)};
+enum class s0_DcSelect : uint32_t{dc0, dc1, dc2, dc3, dc4, dc5, dc6, dc7};
+enum class s1_DcSelect : uint32_t{dc0 = (uint32_t)s0_DcSelect::dc0 << 4, dc1 = (uint32_t)s0_DcSelect::dc1 << 4, dc2 = (uint32_t)s0_DcSelect::dc2 << 4, dc3 = (uint32_t)s0_DcSelect::dc3 << 4, dc4 = (uint32_t)s0_DcSelect::dc4 << 4, dc5 = (uint32_t)s0_DcSelect::dc5 << 4, dc6 = (uint32_t)s0_DcSelect::dc6 << 4, dc7 = (uint32_t)s0_DcSelect::dc7 << 4};
+enum class s2_DcSelect : uint32_t{dc0 = (uint32_t)s0_DcSelect::dc0 << (4*2), dc1 = (uint32_t)s0_DcSelect::dc1 << (4*2), dc2 = (uint32_t)s0_DcSelect::dc2 << (4*2), dc3 = (uint32_t)s0_DcSelect::dc3 << (4*2), dc4 = (uint32_t)s0_DcSelect::dc4 << (4*2), dc5 = (uint32_t)s0_DcSelect::dc5 << (4*2), dc6 = (uint32_t)s0_DcSelect::dc6 << (4*2), dc7 = (uint32_t)s0_DcSelect::dc7 << (4*2)};
+enum class s3_DcSelect : uint32_t{dc0 = (uint32_t)s0_DcSelect::dc0 << (4*3), dc1 = (uint32_t)s0_DcSelect::dc1 << (4*3), dc2 = (uint32_t)s0_DcSelect::dc2 << (4*3), dc3 = (uint32_t)s0_DcSelect::dc3 << (4*3), dc4 = (uint32_t)s0_DcSelect::dc4 << (4*3), dc5 = (uint32_t)s0_DcSelect::dc5 << (4*3), dc6 = (uint32_t)s0_DcSelect::dc6 << (4*3), dc7 = (uint32_t)s0_DcSelect::dc7 << (4*3)};
+enum class s4_DcSelect : uint32_t{dc0 = (uint32_t)s0_DcSelect::dc0 << (4*4), dc1 = (uint32_t)s0_DcSelect::dc1 << (4*4), dc2 = (uint32_t)s0_DcSelect::dc2 << (4*4), dc3 = (uint32_t)s0_DcSelect::dc3 << (4*4), dc4 = (uint32_t)s0_DcSelect::dc4 << (4*4), dc5 = (uint32_t)s0_DcSelect::dc5 << (4*4), dc6 = (uint32_t)s0_DcSelect::dc6 << (4*4), dc7 = (uint32_t)s0_DcSelect::dc7 << (4*4)};
+enum class s5_DcSelect : uint32_t{dc0 = (uint32_t)s0_DcSelect::dc0 << (4*5), dc1 = (uint32_t)s0_DcSelect::dc1 << (4*5), dc2 = (uint32_t)s0_DcSelect::dc2 << (4*5), dc3 = (uint32_t)s0_DcSelect::dc3 << (4*5), dc4 = (uint32_t)s0_DcSelect::dc4 << (4*5), dc5 = (uint32_t)s0_DcSelect::dc5 << (4*5), dc6 = (uint32_t)s0_DcSelect::dc6 << (4*5), dc7 = (uint32_t)s0_DcSelect::dc7 << (4*5)};
+enum class s6_DcSelect : uint32_t{dc0 = (uint32_t)s0_DcSelect::dc0 << (4*6), dc1 = (uint32_t)s0_DcSelect::dc1 << (4*6), dc2 = (uint32_t)s0_DcSelect::dc2 << (4*6), dc3 = (uint32_t)s0_DcSelect::dc3 << (4*6), dc4 = (uint32_t)s0_DcSelect::dc4 << (4*6), dc5 = (uint32_t)s0_DcSelect::dc5 << (4*6), dc6 = (uint32_t)s0_DcSelect::dc6 << (4*6), dc7 = (uint32_t)s0_DcSelect::dc7 << (4*6)};
+enum class s7_DcSelect : uint32_t{dc0 = (uint32_t)s0_DcSelect::dc0 << (4*7), dc1 = (uint32_t)s0_DcSelect::dc1 << (4*7), dc2 = (uint32_t)s0_DcSelect::dc2 << (4*7), dc3 = (uint32_t)s0_DcSelect::dc3 << (4*7), dc4 = (uint32_t)s0_DcSelect::dc4 << (4*7), dc5 = (uint32_t)s0_DcSelect::dc5 << (4*7), dc6 = (uint32_t)s0_DcSelect::dc6 << (4*7), dc7 = (uint32_t)s0_DcSelect::dc7 << (4*7)};
 
 enum class dcControl_CIM : uint32_t{always, once, hysteresisAlways, hysteresisOnce};
 enum class dcControl_CIC : uint32_t{lowBand = 0x0 << 2, midBand = 0x1 << 2, highBand = 0x3 << 2};
 enum class dcControl_CIE : uint32_t{disable = ((uint32_t)setORClear::clear) << 4, enable = ((uint32_t)setORClear::set) << 4};
 enum class dcControl_CTM : uint32_t{always = 0x0 << 8, once = 0x1 << 8, hysteresisAlways = 0x2 << 8, hysteresisOnce = 0x3 << 8};
-enum class dcControl_CTC : uint32_t{owBand = 0x0 << 10, midBand = 0x1 << 10, highBand = 0x3 << 10};
+enum class dcControl_CTC : uint32_t{lowBand = 0x0 << 10, midBand = 0x1 << 10, highBand = 0x3 << 10};
 enum class dcControl_CTE : uint32_t{disable = ((uint32_t)setORClear::clear) << 12, enable = ((uint32_t)setORClear::set) << 12};
 
-
-class Adc
+class AdcModule
 {
     public:
-        Adc();
-        ~Adc();
-
-        void initializeModule(uint32_t adcModule, uint32_t sequencerPriority, uint32_t hardwareAveraging, uint32_t phaseDelay);
-
-        void initializeForPolling(uint32_t sampleSequencer, uint32_t sequencerTrigSrc, uint32_t inputSource, uint32_t sequencerControl, void (*action)(void));
-        void initializeForInterrupt(uint32_t sampleSequencer, uint32_t sequencerTrigSrc, uint32_t inputSource, uint32_t sequencerControl, uint32_t interruptPriority);
-        void enableSampleSequencer(void);
-        void enableSampleSequencerDc(uint32_t dcOperation, uint32_t dcSelect);
-
-        static void initializeDc(uint32_t adcModule, uint32_t dc, uint32_t bitField, uint32_t highBand, uint32_t lowBand);
-
-        void pollStatus(void);
-        void pollDigitalComparator(void);
-        // void initializeDmaOperation(void);
-
-        void initiateSampling(void);
-
-        uint32_t getAdcSample(void);
-        void clearInterrupt(void);
-
-        static uint32_t getDcInterruptStatus(uint32_t adcModule, uint32_t digitalComparator);
-        static void clearDcInterrupt(uint32_t adcModule, uint32_t digitalComparator);
-
-        static uint32_t getAdcResolution();
+        AdcModule();
+        ~AdcModule();
+        void initializeModule(uint32_t adcModule, uint32_t hardwareAveraging, uint32_t phaseDelay);
+        void initializeModule(uint32_t adcModule, uint32_t hardwareAveraging, uint32_t phaseDelay, uint32_t sequencerPriority);
+        uint32_t getAdcResolution();
 
     private:
-
-        void initialization(void);
-
-        void (*action)(void);
-
-        uint32_t baseAddress;
-        uint32_t adcModule;
-        uint32_t sampleSequencer;
-        uint32_t sequencerPriority;
-        uint32_t sequencerTrigSrc;
-        uint32_t inputSource;
-        uint32_t sequencerControl;
-
-        static const uint32_t ssOffset = 0x20;
+        uint32_t sequencerPriority = (uint32_t)ssPriority0::zeroth|(uint32_t)ssPriority1::first|(uint32_t)ssPriority2::second|(uint32_t)ssPriority3::third;
 
         static const uint32_t adc0BaseAddress = 0x40038000; // ADC block 0 base address
         static const uint32_t adc1BaseAddress = 0x40039000; // ADC block 1 base address
@@ -200,6 +166,59 @@ class Adc
         static const uint32_t DCGCADC_OFFSET = 0x838; // 0x838 DCGCADC RW 0x0000.0000 Analog-to-Digital Converter Deep-Sleep Mode Clock Gating Control 396
         static const uint32_t PRADC_OFFSET = 0xA38; // 0xA38 PRADC RO 0x0000.0000 Analog-to-Digital Converter Peripheral Ready 418
 
+        static const uint32_t ADCSSPRI_OFFSET = 0x020; // 0x020 ADCSSPRI RW 0x0000.3210 ADC Sample Sequencer Priority 841
+        static const uint32_t ADCSPC_OFFSET = 0x024; // 0x024 ADCSPC RW 0x0000.0000 ADC Sample Phase Control 843
+        static const uint32_t ADCSAC_OFFSET = 0x030; // 0x030 ADCSAC RW 0x0000.0000 ADC Sample Averaging Control 847
+        static const uint32_t ADCCTL_OFFSET = 0x038; // 0x038 ADCCTL RW 0x0000.0000 ADC Control 850
+
+        static const uint32_t ADCPP_OFFSET = 0xFC0; // 0xFC0 ADCPP RO 0x00B0.20C7 ADC Peripheral Properties 889
+        static const uint32_t ADCPC_OFFSET = 0xFC4; // 0xFC4 ADCPC RW 0x0000.0007 ADC Peripheral Configuration 891
+        static const uint32_t ADCCC_OFFSET = 0xFC8; // 0xFC8 ADCCC RW 0x0000.0000 ADC Clock Configuration 892
+
+    protected:
+
+
+};
+
+class AdcSampleSequencer
+{
+    public:
+        AdcSampleSequencer();
+        ~AdcSampleSequencer();
+
+        void initializeForPolling(uint32_t adcModule, uint32_t sampleSequencer, uint32_t sequencerTrigSrc, uint32_t inputSource, uint32_t sequencerControl, void (*action)(void));
+        void initializeForPolling(uint32_t adcModule, uint32_t sampleSequencer, uint32_t sequencerTrigSrc, uint32_t inputSource, uint32_t sequencerControl, void (*action)(void), uint32_t sampleDcOperation, uint32_t sampleDcSelect);
+        
+        void initializeForInterrupt(uint32_t adcModule, uint32_t sampleSequencer, uint32_t sequencerTrigSrc, uint32_t inputSource, uint32_t sequencerControl, uint32_t interruptPriority);
+        void initializeForInterrupt(uint32_t adcModule, uint32_t sampleSequencer, uint32_t sequencerTrigSrc, uint32_t inputSource, uint32_t sequencerControl, uint32_t interruptPriority, uint32_t sampleDcOperation, uint32_t sampleDcSelect);
+        
+        void enableSampleSequencer(void);
+
+        void pollStatus(void);
+        void pollDigitalComparator(void);
+        // void initializeDmaOperation(void);
+
+        void initiateSampling(void);
+
+        uint32_t getAdcSample(void);
+        void clearInterrupt(void);
+
+    private:
+
+        void initialization(void);
+
+        void (*action)(void);
+
+        uint32_t adcModule = 0;
+        uint32_t sampleSequencer = (uint32_t)sampleSequencer::SS0;
+        uint32_t sequencerTrigSrc = 0;
+        uint32_t inputSource = 0;
+        uint32_t sequencerControl = 0;
+        uint32_t sampleDcOperation = 0; //enables the digital comparator for a particular sample in the sample sequencer
+        uint32_t sampleDcSelect = 0; //assigns a digital comparator to a particualr sample in the sample sequencer
+
+        static const uint32_t ssOffset = 0x20;
+
         static const uint32_t ADCACTSS_OFFSET = 0x000; // 0x000 ADCACTSS RW 0x0000.0000 ADC Active Sample Sequencer 821
         static const uint32_t ADCRIS_OFFSET = 0x004; // 0x004 ADCRIS RO 0x0000.0000 ADC Raw Interrupt Status 823
         static const uint32_t ADCIM_OFFSET = 0x008; // 0x008 ADCIM RW 0x0000.0000 ADC Interrupt Mask 825
@@ -208,12 +227,8 @@ class Adc
         static const uint32_t ADCEMUX_OFFSET = 0x014; // 0x014 ADCEMUX RW 0x0000.0000 ADC Event Multiplexer Select 833
         static const uint32_t ADCUSTAT_OFFSET = 0x018; // 0x018 ADCUSTAT RW1C 0x0000.0000 ADC Underflow Status 838
         static const uint32_t ADCTSSEL_OFFSET = 0x01C; // 0x01C ADCTSSEL RW 0x0000.0000 ADC Trigger Source Select 839
-        static const uint32_t ADCSSPRI_OFFSET = 0x020; // 0x020 ADCSSPRI RW 0x0000.3210 ADC Sample Sequencer Priority 841
-        static const uint32_t ADCSPC_OFFSET = 0x024; // 0x024 ADCSPC RW 0x0000.0000 ADC Sample Phase Control 843
         static const uint32_t ADCPSSI_OFFSET = 0x028; // 0x028 ADCPSSI RW - ADC Processor Sample Sequence Initiate 845
-        static const uint32_t ADCSAC_OFFSET = 0x030; // 0x030 ADCSAC RW 0x0000.0000 ADC Sample Averaging Control 847
-        static const uint32_t ADCDCISC_OFFSET = 0x034; // 0x034 ADCDCISC RW1C 0x0000.0000 ADC Digital Comparator Interrupt Status and Clear 848
-        static const uint32_t ADCCTL_OFFSET = 0x038; // 0x038 ADCCTL RW 0x0000.0000 ADC Control 850
+
         static const uint32_t ADCSSMUX0_OFFSET = 0x040; // 0x040 ADCSSMUX0 RW 0x0000.0000 ADC Sample Sequence Input Multiplexer Select 0 851
         static const uint32_t ADCSSCTL0_OFFSET = 0x044; // 0x044 ADCSSCTL0 RW 0x0000.0000 ADC Sample Sequence Control 0 853
         static const uint32_t ADCSSFIFO0_OFFSET = 0x048; // 0x048 ADCSSFIFO0 RO - ADC Sample Sequence Result FIFO 0 860
@@ -238,6 +253,24 @@ class Adc
         static const uint32_t ADCSSFSTAT3_OFFSET = 0x0AC; // 0x0AC ADCSSFSTAT3 RO 0x0000.0100 ADC Sample Sequence FIFO 3 Status 861
         static const uint32_t ADCSSOP3_OFFSET = 0x0B0; // 0x0B0 ADCSSOP3 RW 0x0000.0000 ADC Sample Sequence 3 Operation 878
         static const uint32_t ADCSSDC3_OFFSET = 0x0B4; // 0x0B4 ADCSSDC3 RW 0x0000.0000 ADC Sample Sequence 3 Digital Comparator Select 879
+
+
+};
+
+class AdcDigitalComparator
+{
+    public:
+        AdcDigitalComparator();
+        ~AdcDigitalComparator();
+
+        void initializeDc(uint32_t adcModule, uint32_t dc, uint32_t bitField, uint32_t highBand, uint32_t lowBand);
+        uint32_t getDcInterruptStatus(uint32_t digitalComparator);
+        void clearDcInterrupt(uint32_t digitalComparator);
+
+    private:
+        uint32_t adcModule = 0;
+
+        static const uint32_t ADCDCISC_OFFSET = 0x034; // 0x034 ADCDCISC RW1C 0x0000.0000 ADC Digital Comparator Interrupt Status and Clear 848
         static const uint32_t ADCDCRIC_OFFSET = 0xD00; // 0xD00 ADCDCRIC WO 0x0000.0000 ADC Digital Comparator Reset Initial Conditions 880
         static const uint32_t ADCDCCTL0_OFFSET = 0xE00; // 0xE00 ADCDCCTL0 RW 0x0000.0000 ADC Digital Comparator Control 0 885
         static const uint32_t ADCDCCTL1_OFFSET = 0xE04; // 0xE04 ADCDCCTL1 RW 0x0000.0000 ADC Digital Comparator Control 1 885
@@ -255,10 +288,6 @@ class Adc
         static const uint32_t ADCDCCMP5_OFFSET = 0xE54; // 0xE54 ADCDCCMP5 RW 0x0000.0000 ADC Digital Comparator Range 5 888
         static const uint32_t ADCDCCMP6_OFFSET = 0xE58; // 0xE58 ADCDCCMP6 RW 0x0000.0000 ADC Digital Comparator Range 6 888
         static const uint32_t ADCDCCMP7_OFFSET = 0xE5C; // 0xE5C ADCDCCMP7 RW 0x0000.0000 ADC Digital Comparator Range 7 888
-        static const uint32_t ADCPP_OFFSET = 0xFC0; // 0xFC0 ADCPP RO 0x00B0.20C7 ADC Peripheral Properties 889
-        static const uint32_t ADCPC_OFFSET = 0xFC4; // 0xFC4 ADCPC RW 0x0000.0007 ADC Peripheral Configuration 891
-        static const uint32_t ADCCC_OFFSET = 0xFC8; // 0xFC8 ADCCC RW 0x0000.0000 ADC Clock Configuration 892
-
 };
 
 #endif //ADC_H

@@ -87,7 +87,8 @@ void Register::setRegisterBitFieldStatus(volatile uint32_t* address, uint32_t va
         if((value <= maxValue))
         {
             uint32_t clear = (~(maxValue << bit));
-            value = value << bit;
+            //value = value << bit;
+            value = (value & maxValue) << bit;
     
             (*address) &= clear;
             (*address) |= value;

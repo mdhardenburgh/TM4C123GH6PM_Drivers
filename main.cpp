@@ -108,7 +108,8 @@ extern "C" void GPIO_Port_F_Handler(void)
 //     } 
 // }
 
-void pollTest(void)
+// void pollTest(void)
+extern "C" void ADC_0_Sequence_3_Handler(void)      /* Interrupt 17 */
 {
 
     (void)testAdc.getAdcSample(); 
@@ -146,7 +147,8 @@ int main(void)
 
     Nvic::enableInterrupts();
 
-    testAdc.initializeForPolling((uint32_t)sampleSequencer::SS3, (uint32_t)ssTriggerSource::processor, (uint32_t)ssInputSrc0::AIN0, (uint32_t)ssControl0::END0|(uint32_t)ssControl0::IE0, pollTest);
+    // testAdc.initializeForPolling((uint32_t)sampleSequencer::SS3, (uint32_t)ssTriggerSource::processor, (uint32_t)ssInputSrc0::AIN0, (uint32_t)ssControl0::END0|(uint32_t)ssControl0::IE0, pollTest);
+    testAdc.initializeForInterrupt((uint32_t)sampleSequencer::SS3, (uint32_t)ssTriggerSource::processor, (uint32_t)ssInputSrc0::AIN0, (uint32_t)ssControl0::END0|(uint32_t)ssControl0::IE0, 3);
     testAdc.enableSampleSequencer();
     testAdc.initiateSampling();
 
@@ -155,10 +157,11 @@ int main(void)
         
     while(1)
     {
+        // Commented out for testing
         // Nvic::wfi();
-        testAdc.pollStatus();
-        voltageValue = (3.3/(1<<adcResolution))*readme;
-        voltageValue = voltageValue;
+        // testAdc.pollStatus();
+        // voltageValue = (3.3/(1<<adcResolution))*readme;
+        // voltageValue = voltageValue;
     }
 
 }

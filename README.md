@@ -42,9 +42,7 @@ Main contains a very simple example program of how to use the drivers.
 
 ## In Progress To Do's
 * Test the ADC interrupt function
-* Implement the `void initializeDigitalComparator(void);` functionality
 * Add ADC documentation and update existing
-* Refactor GPIO, PWM, GPT code to bring it inline with new framework
 
 ## Planned in no specific order
 * µDMA
@@ -69,6 +67,7 @@ Main contains a very simple example program of how to use the drivers.
 
 ## Completed 
 * Further test the ADC polling function
+* Implement the `void initializeDigitalComparator(void);` functionality
 
 # License
 All code is under the the GPl v3 License. Please the read the associated LICENSE

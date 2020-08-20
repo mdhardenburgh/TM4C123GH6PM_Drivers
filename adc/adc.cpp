@@ -31,7 +31,7 @@
 /**
  * @brief empty constructor placeholder
  */
-Adc::Adc()
+AdcModule::AdcModule()
 {
 
 }
@@ -39,22 +39,52 @@ Adc::Adc()
 /**
  * @brief empty deconstructor placeholder
  */
-Adc::~Adc()
+AdcModule::~AdcModule()
 {
 
 }
 
-void Adc::initializeModule(uint32_t adcModule, uint32_t sequencerPriority, uint32_t hardwareAveraging, uint32_t phaseDelay)
+/**
+ * @brief initialize an ADC module.
+ * 
+ * @param adcModule to be initialized, module 0 or 1.
+ * @param hardwareAveraging averages 2<SUP>n</SUP> samples before being sent to the FIFO
+ * @param phaseDelay of the ADC module. Phase delay can be used to increase the
+ *                   overal sample rate of the ADC module. See the datasheet for 
+ *                   more details.
+ * 
+ */
+void AdcModule::initializeModule(uint32_t adcModule, uint32_t hardwareAveraging, uint32_t phaseDelay)
 {
-    (*this).adcModule = adcModule;
-    baseAddress = adc0BaseAddress + (adcModule * 0x1000);
-
     //0. Enable ADC module clock
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RCGCADC_OFFSET)), (uint32_t)setORClear::set, adcModule, 1, RW);
-    while(Register::getRegisterBitFieldStatus((volatile uint32_t*)(systemControlBase + PRADC_OFFSET), adcModule, 1, RO) == 0)
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(systemControlBase + RCGCADC_OFFSET)), (uint32_t)setORClear::set, (adcModule == (uint32_t)adcModules::module0 ? 0 : 1), 1, RW);
+    while(Register::getRegisterBitFieldStatus((volatile uint32_t*)(systemControlBase + PRADC_OFFSET), (adcModule == (uint32_t)adcModules::module0 ? 0 : 1), 1, RO) == 0)
     {
         //Ready??
     }
+
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCSAC_OFFSET)), hardwareAveraging, 0, 2 + 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCCTL_OFFSET)), hardwareAveraging == 0 ? 0x0 : 0x1, 6, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCSPC_OFFSET)), phaseDelay, 0, 3 + 1, RW);
+}
+
+/**
+ * @brief initialize an ADC module.
+ * 
+ * @param adcModule to be initialized, module 0 or 1.
+ * @param sequencerPriority sets the priority of the sample sequencer.
+ * @param hardwareAveraging averages 2<SUP>n</SUP> samples before being sent to the FIFO
+ * @param phaseDelay of the ADC module. Phase delay can be used to increase the
+ *                   overal sample rate of the ADC module. See the datasheet for 
+ *                   more details.
+ * @param sequencerPriority sets the priority of the sample sequencer.
+ * 
+ * @return the base address of the adc module
+ */
+void AdcModule::initializeModule(uint32_t adcModule, uint32_t hardwareAveraging, uint32_t phaseDelay, uint32_t sequencerPriority)
+{
+    
+    initializeModule(adcModule, hardwareAveraging, phaseDelay);
 
     /*
      * 0.A If required by the application, reconfigure the sample sequencer 
@@ -64,42 +94,131 @@ void Adc::initializeModule(uint32_t adcModule, uint32_t sequencerPriority, uint3
      */
     for(int i = 0; i < 4; i++)
     {
-        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSSPRI_OFFSET)), sequencerPriority >> (4 * i), i * 4, 1 + 1, RW);
+        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCSSPRI_OFFSET)), sequencerPriority >> (4 * i), i * 4, 1 + 1, RW);
     }
+}
 
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSAC_OFFSET)), hardwareAveraging, 0, 2 + 1, RW);
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCCTL_OFFSET)), hardwareAveraging == 0 ? 0x0 : 0x1, 6, 1, RW);
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSPC_OFFSET)), phaseDelay, 0, 3 + 1, RW);
-    
+uint32_t AdcModule::getAdcResolution()
+{
+    return(Register::getRegisterBitFieldStatus(((volatile uint32_t*)((uint32_t)adcModules::module0 + ADCPP_OFFSET)), 18, 22 - 18 + 1, RO));
+}
+
+/******************************************************************************/
+
+/**
+ * @brief empty constructor placeholder
+ */
+AdcSampleSequencer::AdcSampleSequencer()
+{
+
 }
 
 /**
- * @brief Initialization for a particular sample sequencer and polls Raw interrupt status
- * 
- * @param adcModule Clock to be intialized for the ADC module
- * @param action when polling the adc, the action to be taken when RIS is activate
+ * @brief empty deconstructor placeholder
  */
-void Adc::initializeForPolling(uint32_t sampleSequencer, uint32_t sequencerTrigSrc, uint32_t inputSource, uint32_t sequencerControl, void (*action)(void))
+AdcSampleSequencer::~AdcSampleSequencer()
 {
-    (*this).sampleSequencer = sampleSequencer;
-    (*this).sequencerTrigSrc = sequencerTrigSrc;
-    (*this).inputSource = inputSource;
-    (*this).sequencerControl = sequencerControl;
-    initialization();
-    (*this).action = action;
 
 }
 
-void Adc::initializeForInterrupt(uint32_t sampleSequencer, uint32_t sequencerTrigSrc, uint32_t inputSource, uint32_t sequencerControl, uint32_t interruptPriority)
+/**
+ * @brief Initialization of a sample sequence and polls it for
+ *        new samples.
+ * 
+ * @details ADC samples are automatically taken when there is an available
+ *          spot in the sample sequencer FIFO. Therefore the samples read from
+ *          the ADC module sample sequencer are not raw samples from the input,
+ *          but delayed by n spots in the FIFO. Samples can only be read in 
+ *          sample sequencer order.
+ * 
+ * @param sampleSequencer to be used.
+ * @param sequencerTrigSrc sets the source that starts the particular sample sequencer
+ * @param inputSource sets the input source of a particular sample in the sample sequencer
+ * @param sequencerControl set the configuration of a particular sample in the sample sequncer
+ * @param action taken when the RIS is set.
+ */
+void AdcSampleSequencer::initializeForPolling(uint32_t adcModule, uint32_t sampleSequencer, uint32_t sequencerTrigSrc, uint32_t inputSource, uint32_t sequencerControl, void (*action)(void))
+{
+    
+    (*this).sampleSequencer = sampleSequencer;
+    (*this).sequencerTrigSrc = sequencerTrigSrc;
+    (*this).inputSource = inputSource;
+    (*this).sequencerControl = sequencerControl;
+    (*this).action = action;
+    (*this).adcModule = adcModule;
+    initialization();
+    // (*this).action = action;
+
+}
+
+/**
+ * @brief Initialization of a particular sample sequencer to either send the 
+ *       sample to the FIFO or Digital Comparator. 
+ * 
+ * @details ADC samples are automatically taken when there is an available
+ *          spot in the sample sequencer FIFO. In the case of a sample 
+ *          sequencer spot being used by a digital comparator, I am assuming
+ *          FIFO spot is empty and ignored. The samples read from
+ *          the ADC module sample sequencer are not raw samples from the input,
+ *          but delayed by n spots in the FIFO. Samples can only be read in 
+ *          sample sequencer order. 
+ * 
+ * @param sampleSequencer to be used.
+ * @param sequencerTrigSrc sets the source that starts the particular sample sequencer
+ * @param inputSource sets the input source of a particular sample in the sample sequencer
+ * @param sequencerControl set the configuration of a particular sample in the sample sequncer
+ * @param action taken when the RIS is set.
+ * @param sampleDcOperation sets if the sample is sent to the SS FIFO or DC
+ * @param sampleDcSelect encodes which DC the sample is sent to
+ * 
+ * SPECIAL STUFF HERE FOR DC
+ * For polling, the RIS INRDC bit is polled. When this bit is set, at least
+ * one bit in the ADCDCISC register is set, meaning that a digital comparator 
+ * interrupt has occurred. 
+ *
+ * The DC generates an interrupt on ADCDCISC and that is promoted to the ADCRIS INRDC bit.
+ * The ADCIM register bit DCONSSn determines which ss interrupt line the DC interrupt is
+ * sent on.
+ */
+void AdcSampleSequencer::initializeForPolling(uint32_t adcModule, uint32_t sampleSequencer, uint32_t sequencerTrigSrc, uint32_t inputSource, uint32_t sequencerControl, void (*action)(void), uint32_t sampleDcOperation, uint32_t sampleDcSelect)
+{
+    (*this).sampleDcOperation = sampleDcOperation;
+    (*this).sampleDcSelect = sampleDcSelect;
+    initializeForPolling(adcModule, sampleSequencer, sequencerTrigSrc, inputSource, sequencerControl, action);
+
+}
+
+/**
+ * @brief Initialization of a particular sample sequencer with interupt functionality
+ * 
+ * @details ADC samples are automatically taken when there is an available
+ *          spot in the sample sequencer FIFO. Therefore the samples read from
+ *          the ADC module sample sequencer are not raw samples from the input,
+ *          but delayed by n spots in the FIFO. Samples can only be read in 
+ *          sample sequencer order. 
+ * 
+ *          This function enables the interrupt on a particular sample sequencer
+ *          by enabling the interrupt mask, setting the interrupt priority and 
+ *          enabling the interrupt in NVIC. Setting the interrupt mask promotes
+ *          the RIS to the interrupt controller.
+ * 
+ * @param sampleSequencer to be used.
+ * @param sequencerTrigSrc sets the source that starts the particular sample sequencer
+ * @param inputSource sets the input source of a particular sample in the sample sequencer
+ * @param sequencerControl set the configuration of a particular sample in the sample sequncer
+ * @param interruptPriority of the interrupt. 0 is the highest and 7 is the lowest
+ */
+void AdcSampleSequencer::initializeForInterrupt(uint32_t adcModule, uint32_t sampleSequencer, uint32_t sequencerTrigSrc, uint32_t inputSource, uint32_t sequencerControl, uint32_t interruptPriority)
 {
     (*this).sampleSequencer = sampleSequencer;
     (*this).sequencerTrigSrc = sequencerTrigSrc;
     (*this).inputSource = inputSource;
     (*this).sequencerControl = sequencerControl;
+    (*this).adcModule = adcModule;
     initialization();
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCIM_OFFSET)), (uint32_t)setORClear::set, sampleSequencer, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCIM_OFFSET)), (uint32_t)setORClear::set, sampleSequencer, 1, RW);
 
-    if(adcModule == (uint32_t)adcModule::module0)
+    if(adcModule == (uint32_t)adcModules::module0) //ADC block 0 base address
     {
         switch (sampleSequencer)
         {
@@ -151,86 +270,69 @@ void Adc::initializeForInterrupt(uint32_t sampleSequencer, uint32_t sequencerTri
     
 }
 
-
-void Adc::enableSampleSequencer(void)
+/**
+ * @brief Initialization of a particular sample sequencer and polls it for
+ *        new samples.
+ * 
+ * @details ADC samples are automatically taken when there is an available
+ *          spot in the sample sequencer FIFO. Therefore the samples read from
+ *          the ADC module sample sequencer are not raw samples from the input,
+ *          but delayed by n spots in the FIFO. Samples can only be read in 
+ *          sample sequencer order. 
+ * 
+ * @param sampleSequencer to be used.
+ * @param sequencerTrigSrc sets the source that starts the particular sample sequencer
+ * @param inputSource sets the input source of a particular sample in the sample sequencer
+ * @param sequencerControl set the configuration of a particular sample in the sample sequncer
+ * @param interruptPriority of the interrupt. 0 is the highest and 7 is the lowest
+ * @param sampleDcOperation sets if the sample is sent to the SS FIFO or DC
+ * @param sampleDcSelect encodes which DC the sample is sent to
+ * 
+ * SPECIAL STUFF HERE FOR DC
+ * The DC generates an interrupt on ADCDCISC and that is promoted to the ADCRIS INRDC bit.
+ * The ADCIM register bit DCONSSn determines which ss interrupt line the DC interrupt is
+ * sent on.
+ * 
+ */
+void AdcSampleSequencer::initializeForInterrupt(uint32_t adcModule, uint32_t sampleSequencer, uint32_t sequencerTrigSrc, uint32_t inputSource, uint32_t sequencerControl, uint32_t interruptPriority, uint32_t sampleDcOperation, uint32_t sampleDcSelect)
 {
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCACTSS_OFFSET)), (uint32_t)setORClear::set, sampleSequencer, 1, RW);
+    (*this).sampleDcOperation = sampleDcOperation;
+    (*this).sampleDcSelect = sampleDcSelect;
+    initializeForInterrupt(adcModule, sampleSequencer, sequencerTrigSrc, inputSource, sequencerControl, interruptPriority);
 }
 
-void Adc::enableSampleSequencerDc(uint32_t dcOperation, uint32_t dcSelect)
+/**
+ * @brief Enables the sample sequncer associated with the adc object
+ */
+void AdcSampleSequencer::enableSampleSequencer(void)
 {
-    if(sampleSequencer == (uint32_t)sampleSequencer::SS0)
-    {
-        for(uint32_t i = 0; i < 8; i++)
-        {
-            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSSOP0_OFFSET)), dcOperation >> (4*i), 4*i, 1, RW);
-            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSSDC0_OFFSET)), dcSelect >> (4*i), 4*i, 4, RW);
-        }
-    }
-
-    else if(sampleSequencer == (uint32_t)sampleSequencer::SS1)
-    {
-        for(uint32_t i = 0; i < 4; i++)
-        {
-            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSSOP1_OFFSET)), dcOperation >> (4*i), 4*i, 1, RW);
-            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSSDC1_OFFSET)), dcSelect >> (4*i), 4*i, 4, RW);
-        }
-    }
-
-    else if(sampleSequencer == (uint32_t)sampleSequencer::SS2)
-    {
-        for(uint32_t i = 0; i < 4; i++)
-        {
-            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSSOP2_OFFSET)), dcOperation >> (4*i), 4*i, 1, RW);
-            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSSDC2_OFFSET)), dcSelect >> (4*i), 4*i, 4, RW);
-        }
-    }
-
-    else if(sampleSequencer == (uint32_t)sampleSequencer::SS3)
-    {
-        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSSOP3_OFFSET)), dcOperation, 0, 1, RW);
-        Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCSSDC3_OFFSET)), dcSelect, 0, 4, RW);
-
-    }
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCACTSS_OFFSET)), (uint32_t)setORClear::set, sampleSequencer, 1, RW);
 }
 
-void Adc::initializeDc(uint32_t adcModule, uint32_t dc, uint32_t bitField, uint32_t highBand, uint32_t lowBand)
+
+void AdcSampleSequencer::pollStatus(void)
 {
-    uint32_t dcCtlAddress = (adc0BaseAddress + (adcModule * 0x1000) + (ADCDCCTL0_OFFSET + dc*0x4));
-    uint32_t dcCmpAddress = (adc0BaseAddress + (adcModule * 0x1000) + (ADCDCCMP0_OFFSET + dc*0x4));
-
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), bitField, 0, 2, RW);
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), bitField >> 2, 2, 2, RW);
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), bitField >> 4, 4, 1, RW);
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), bitField >> 8, 8, 2, RW);
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), bitField >> 10, 10, 2, RW);
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), bitField >> 12, 12, 1, RW);
-
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCmpAddress), lowBand, 0, 11 + 1, RW);
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCmpAddress), highBand, 16, 27 - 16 + 1, RW);
-
-}
-
-void Adc::pollStatus(void)
-{
-    if(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCRIS_OFFSET)), sampleSequencer, 1, RO) == (uint32_t)setORClear::set)
+    if(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCRIS_OFFSET)), sampleSequencer, 1, RO) == (uint32_t)setORClear::set)
     {
         action();
     }
 }
 
-void Adc::pollDigitalComparator(void)
+//Interrupt cleared by writing to the ADCDCISC to the right ADC module
+//Should this be moved the digital comparator with a getDConSS function with ADCISC?
+//This needs to be merged into the regular one above this because there can be only polling function?
+void AdcSampleSequencer::pollDigitalComparator(void)
 {
-    if(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCRIS_OFFSET)), 16, 1, RO) == (uint32_t)setORClear::set)
+    if(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCRIS_OFFSET)), 16, 1, RO) == (uint32_t)setORClear::set)
     {
         action();
     }
 }
 
 
-void Adc::initiateSampling(void)
+void AdcSampleSequencer::initiateSampling(void)
 {
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCPSSI_OFFSET)), (uint32_t)setORClear::set, sampleSequencer, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCPSSI_OFFSET)), (uint32_t)setORClear::set, sampleSequencer, 1, RW);
 }
 
 /**
@@ -240,29 +342,14 @@ void Adc::initiateSampling(void)
  *          current value of the signal read n+1 times from the FIFO. In the 
  *          case of SS3, you read from the FIFO twice.
  */
-uint32_t Adc::getAdcSample(void)
+uint32_t AdcSampleSequencer::getAdcSample(void)
 {
-    return(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + (ADCSSFIFO0_OFFSET + (ssOffset * sampleSequencer)))), 0, 11 + 1, RO));
+    return(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + (ADCSSFIFO0_OFFSET + (ssOffset * sampleSequencer)))), 0, 11 + 1, RO));
 }
 
-void Adc::clearInterrupt(void)
+void AdcSampleSequencer::clearInterrupt(void)
 {
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCISC_OFFSET)), (uint32_t)setORClear::set, sampleSequencer, 1, RW1C);
-}
-
-uint32_t Adc::getDcInterruptStatus(uint32_t adcModule, uint32_t digitalComparator)
-{
-    return(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(adc0BaseAddress + (adcModule * 0x1000) + ADCDCISC_OFFSET)), digitalComparator, 1, RW1C));
-}
-
-void Adc::clearDcInterrupt(uint32_t adcModule, uint32_t digitalComparator)
-{
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adc0BaseAddress + (adcModule * 0x1000) + ADCDCISC_OFFSET)), (uint32_t)setORClear::set , digitalComparator, 1, RW1C);
-}
-
-uint32_t Adc::getAdcResolution()
-{
-    return(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(adc0BaseAddress + ADCPP_OFFSET)), 18, 22 - 18 + 1, RO));
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCISC_OFFSET)), (uint32_t)setORClear::set, sampleSequencer, 1, RW1C);
 }
 
 
@@ -274,7 +361,7 @@ uint32_t Adc::getAdcResolution()
  *          than the module initialization because each sample sequencer is 
  *          completely programmable.
  */
-void Adc::initialization(void)
+void AdcSampleSequencer::initialization(void)
 {    
 
     /*
@@ -294,7 +381,7 @@ void Adc::initialization(void)
      * sequencer during programming prevents erroneous execution if a trigger
      * event were to occur during the configuration process.
      */
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCACTSS_OFFSET)), (uint32_t)setORClear::clear, sampleSequencer, 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCACTSS_OFFSET)), (uint32_t)setORClear::clear, sampleSequencer, 1, RW);
 
     /*
      * 1.A When using a PWM generator as the trigger source, use the ADC 
@@ -305,77 +392,191 @@ void Adc::initialization(void)
 
 
     //2. Configure the trigger event for the sample sequencer in the ADCEMUX register.
-    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + ADCEMUX_OFFSET)), sequencerTrigSrc, sampleSequencer * 4, 3 + 1, RW);
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCEMUX_OFFSET)), sequencerTrigSrc, sampleSequencer * 4, 3 + 1, RW);
 
     //3. For each sample in the sample sequence, configure the corresponding input source in the ADCSSMUXn register.
     if(sampleSequencer == (uint32_t)sampleSequencer::SS0)
     {
+        //3. For each sample in the sample sequence, configure the corresponding input source in the ADCSSMUXn register.
         for(int i = 0; i < 8; i++)
         {
-            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + (ADCSSMUX0_OFFSET + (ssOffset * sampleSequencer)))), inputSource >> (i * 4), i * 4, 3 + 1, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + (ADCSSMUX0_OFFSET + (ssOffset * sampleSequencer)))), inputSource >> (i * 4), i * 4, 3 + 1, RW);
+            
+            /*
+            * 4. For each sample in the sample sequence, configure the sample control 
+            * bits in the corresponding nibble in the ADCSSCTLn register. When 
+            * programming the last nibble, ensure that the END bit is set. Failure to 
+            * set the END bit causes unpredictable behavior.
+            */
+            for(int j = 0; j < 4; j++)
+            {
+                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + (ADCSSCTL0_OFFSET + (ssOffset * sampleSequencer)))), sequencerControl >> ((i * 4) + j), (i * 4) + j, 1, RW);
+            }
+
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCSSOP0_OFFSET)), sampleDcOperation >> (4*i), 4*i, 1, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCSSDC0_OFFSET)), sampleDcSelect >> (4*i), 4*i, 4, RW);
         }
     }
 
     else if(sampleSequencer == (uint32_t)sampleSequencer::SS1)
     {
+        //3. For each sample in the sample sequence, configure the corresponding input source in the ADCSSMUXn register.
         for(int i = 0; i < 4; i++)
         {
-            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + (ADCSSMUX0_OFFSET + (ssOffset * sampleSequencer)))), inputSource >> (i * 4), i * 4, 3 + 1, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + (ADCSSMUX0_OFFSET + (ssOffset * sampleSequencer)))), inputSource >> (i * 4), i * 4, 3 + 1, RW);
+        
+            /*
+            * 4. For each sample in the sample sequence, configure the sample control 
+            * bits in the corresponding nibble in the ADCSSCTLn register. When 
+            * programming the last nibble, ensure that the END bit is set. Failure to 
+            * set the END bit causes unpredictable behavior.
+            */
+            for(int j = 0; j < 4; j++)
+            {
+                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + (ADCSSCTL0_OFFSET + (ssOffset * sampleSequencer)))), sequencerControl >> ((i * 4) + j), (i * 4) + j, 1, RW);
+            }
+
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCSSOP1_OFFSET)), sampleDcOperation >> (4*i), 4*i, 1, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCSSDC1_OFFSET)), sampleDcSelect >> (4*i), 4*i, 4, RW);
         }
+        
     }
 
     else if(sampleSequencer == (uint32_t)sampleSequencer::SS2)
     {
+        
+        //3. For each sample in the sample sequence, configure the corresponding input source in the ADCSSMUXn register.
         for(int i = 0; i < 4; i++)
         {
-            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + (ADCSSMUX0_OFFSET + (ssOffset * sampleSequencer)))), inputSource >> (i * 4), i * 4, 3 + 1, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + (ADCSSMUX0_OFFSET + (ssOffset * sampleSequencer)))), inputSource >> (i * 4), i * 4, 3 + 1, RW);
+        
+            /*
+            * 4. For each sample in the sample sequence, configure the sample control 
+            * bits in the corresponding nibble in the ADCSSCTLn register. When 
+            * programming the last nibble, ensure that the END bit is set. Failure to 
+            * set the END bit causes unpredictable behavior.
+            */
+            for(int j = 0; j < 4; j++)
+            {
+                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + (ADCSSCTL0_OFFSET + (ssOffset * sampleSequencer)))), sequencerControl >> ((i * 4) + j), (i * 4) + j, 1, RW);
+            }
+
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCSSOP2_OFFSET)), sampleDcOperation >> (4*i), 4*i, 1, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCSSDC2_OFFSET)), sampleDcSelect >> (4*i), 4*i, 4, RW);
+
         }
     }
 
     else if(sampleSequencer == (uint32_t)sampleSequencer::SS3)
     {
+        //3. For each sample in the sample sequence, configure the corresponding input source in the ADCSSMUXn register.
         for(int i = 0; i < 1; i++)
         {
-            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + (ADCSSMUX0_OFFSET + (ssOffset * sampleSequencer)))), inputSource >> (i * 4), i * 4, 3 + 1, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + (ADCSSMUX0_OFFSET + (ssOffset * sampleSequencer)))), inputSource >> (i * 4), i * 4, 3 + 1, RW);
+        
+            /*
+            * 4. For each sample in the sample sequence, configure the sample control 
+            * bits in the corresponding nibble in the ADCSSCTLn register. When 
+            * programming the last nibble, ensure that the END bit is set. Failure to
+            * set the END bit causes unpredictable behavior.
+            */
+            for(int j = 0; j < 4; j++)
+            {
+                Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + (ADCSSCTL0_OFFSET + (ssOffset * sampleSequencer)))), sequencerControl >> ((i * 4) + j), (i * 4) + j, 1, RW);
+            }
+
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCSSOP3_OFFSET)), sampleDcOperation, 0, 1, RW);
+            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCSSDC3_OFFSET)), sampleDcSelect, 0, 4, RW);
+        
         }
     }
 
-    /*
-     * 4. For each sample in the sample sequence, configure the sample control 
-     * bits in the corresponding nibble in the ADCSSCTLn register. When 
-     * programming the last nibble, ensure that the END bit is set. Failure to 
-     * set the END bit causes unpredictable behavior.
-     */
-    if(sampleSequencer == (uint32_t)sampleSequencer::SS0)
-    {
-        for(int i = 0; i < 32; i++)
-        {
-            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + (ADCSSCTL0_OFFSET + (ssOffset * sampleSequencer)))), sequencerControl >> i, i, 1, RW);
-        }
-    }
+    // /*
+    //  * 4. For each sample in the sample sequence, configure the sample control 
+    //  * bits in the corresponding nibble in the ADCSSCTLn register. When 
+    //  * programming the last nibble, ensure that the END bit is set. Failure to 
+    //  * set the END bit causes unpredictable behavior.
+    //  */
+    // if(sampleSequencer == (uint32_t)sampleSequencer::SS0)
+    // {
+    //     for(int i = 0; i < 32; i++)
+    //     {
+    //         Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + (ADCSSCTL0_OFFSET + (ssOffset * sampleSequencer)))), sequencerControl >> i, i, 1, RW);
+    //     }
+    // }
 
-    else if(sampleSequencer == (uint32_t)sampleSequencer::SS1)
-    {
-        for(int i = 0; i < 16; i++)
-        {
-            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + (ADCSSCTL0_OFFSET + (ssOffset * sampleSequencer)))), sequencerControl >> i, i, 1, RW);
-        }
-    }
+    // else if(sampleSequencer == (uint32_t)sampleSequencer::SS1)
+    // {
+    //     for(int i = 0; i < 16; i++)
+    //     {
+    //         Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + (ADCSSCTL0_OFFSET + (ssOffset * sampleSequencer)))), sequencerControl >> i, i, 1, RW);
+    //     }
+    // }
 
-    else if(sampleSequencer == (uint32_t)sampleSequencer::SS2)
-    {
-        for(int i = 0; i < 16; i++)
-        {
-            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + (ADCSSCTL0_OFFSET + (ssOffset * sampleSequencer)))), sequencerControl >> i, i, 1, RW);
-        }
-    }
+    // else if(sampleSequencer == (uint32_t)sampleSequencer::SS2)
+    // {
+    //     for(int i = 0; i < 16; i++)
+    //     {
+    //         Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + (ADCSSCTL0_OFFSET + (ssOffset * sampleSequencer)))), sequencerControl >> i, i, 1, RW);
+    //     }
+    // }
 
-    else if(sampleSequencer == (uint32_t)sampleSequencer::SS3)
-    {
-        for(int i = 0; i < 4; i++)
-        {
-            Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + (ADCSSCTL0_OFFSET + (ssOffset * sampleSequencer)))), sequencerControl >> i, i, 1, RW);
-        }
-    }
+    // else if(sampleSequencer == (uint32_t)sampleSequencer::SS3)
+    // {
+    //     for(int i = 0; i < 4; i++)
+    //     {
+    //         Register::setRegisterBitFieldStatus(((volatile uint32_t*)(baseAddress + (ADCSSCTL0_OFFSET + (ssOffset * sampleSequencer)))), sequencerControl >> i, i, 1, RW);
+    //     }
+    // }
 
+}
+
+/******************************************************************************/
+
+/**
+ * @brief Initializes the digital comparator
+ * 
+ * @param adcModule to init the DC for
+ * @param dc to be initialized
+ * @param dcControlBits settings to initialize the digital comparator
+ * @param highBand 
+ * @param lowBand
+ * 
+ */
+void AdcDigitalComparator::initializeDc(uint32_t adcModule, uint32_t dc, uint32_t dcControlBits, uint32_t highBand, uint32_t lowBand)
+{
+    this->adcModule = adcModule;
+
+    uint32_t CIM = 0; // Comparison Interrupt Mode bit
+    uint32_t CIC = 2; // Comparison Interrupt Condition bit
+    uint32_t CIE = 4; // Comparison Interrupt Enable bit
+    uint32_t CTM = 8; // Comparison Trigger Mode bit
+    uint32_t CTC = 10; // Comparison Trigger Condition bit
+    uint32_t CTE = 12; // Comparison Trigger Enable bit
+
+    
+    uint32_t dcCtlAddress = (this->adcModule + (ADCDCCTL0_OFFSET + dc*0x4));
+    uint32_t dcCmpAddress = (this->adcModule + (ADCDCCMP0_OFFSET + dc*0x4));
+
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), dcControlBits, CIM, 2, RW); // now setting Comparison Interrupt Mode
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), dcControlBits >> CIC, CIC, 2, RW); // now setting the Comparison Interrupt Condition
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), dcControlBits >> CIE, CIE, 1, RW); // now setting Comparison Interrupt Enable bit
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), dcControlBits >> CTM, CTM, 2, RW); // now setting Comparison Trigger Mode bit
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), dcControlBits >> CTC, CTC, 2, RW); // now setting the Comparison Trigger Condition
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCtlAddress), dcControlBits >> 12, 12, 1, RW); // now setting the Comparison Trigger Enable bit
+
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCmpAddress), lowBand, 0, 11 + 1, RW); // sets the low band value. 12 bit number max
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)dcCmpAddress), highBand, 16, 27 - 16 + 1, RW); //sets the high band value. 12 bit number max
+
+}
+
+
+uint32_t AdcDigitalComparator::getDcInterruptStatus(uint32_t digitalComparator)
+{
+    return(Register::getRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCDCISC_OFFSET)), digitalComparator, 1, RW1C));
+}
+
+void AdcDigitalComparator::clearDcInterrupt(uint32_t digitalComparator)
+{
+    Register::setRegisterBitFieldStatus(((volatile uint32_t*)(adcModule + ADCDCISC_OFFSET)), (uint32_t)setORClear::set , digitalComparator, 1, RW1C);
 }

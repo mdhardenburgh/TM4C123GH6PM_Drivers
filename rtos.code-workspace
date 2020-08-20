@@ -15,7 +15,9 @@
 			"system_error": "cpp",
 			"unordered_map": "cpp",
 			"vector": "cpp",
-			"bitset": "cpp"
-		}
+			"bitset": "cpp",
+			"type_traits": "cpp"
+		},
+		"files.autoSave": "afterDelay"
 	}
 }
