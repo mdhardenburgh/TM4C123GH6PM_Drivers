@@ -1,0 +1,8 @@
+sudo: enabled
+
+language: cpp
+
+os: linux
+
+script:
+    - make
