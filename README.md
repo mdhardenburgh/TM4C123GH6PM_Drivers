@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/github/mdhardenburgh/TM4C123GH6PM_Drivers)](https://travis-ci.com/github/mdhardenburgh/TM4C123GH6PM_Drivers)
+
 # TM4C123GH6PM Drivers
 Drivers for the Texas Instruments Tiva C ARM 4F TM4C123GH6PM microcontroller. 
 It is designed to be easy to use, similar to an arduino, however knowledge of 
